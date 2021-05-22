@@ -9,26 +9,29 @@ class ServiceDetailsMainCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.36,
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
       child: Card(
         elevation: 5,
         color: Color(0xff0F2735),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.4)),
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset('assets/Ellipse.png'),
+                SizedBox(
+                  height: 10,
+                ),
                 Center(
                   child: Text(
                     title,
                     style: TextStyle(
                         color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 29),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
                   ),
                 ),
                 Center(
