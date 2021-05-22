@@ -14,10 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(primaryColor: Color(0xff5D5FEF)),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(),
-        '/serviceDetails': (context) => ServiceDetailsScreen(),
+        // '/': (context) => LoginScreen(),
+        // '/serviceDetails': (context) => ServiceDetailsScreen(),
+        '/': (context) => ServiceDetailsScreen(),
         '/calanderScreen': (context) => CalanderScreen()
       },
     );
