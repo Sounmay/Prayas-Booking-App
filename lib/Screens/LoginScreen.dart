@@ -15,7 +15,8 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Column(
         children: [
           FlatButton(
-            child: Text('This is login screen'),
+            child: Text(
+                'This will login screen, please add routes and start working on your respective pages'),
             onPressed: () => Navigator.pushNamed(context, '/serviceDetails'),
           )
         ],
