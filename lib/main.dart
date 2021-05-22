@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Screens/LoginScreen.dart';
-
+import 'package:freelance_booking_app/Screens/Home.dart';
 import 'Screens/CalanderScreen.dart';
 import 'Screens/ServiceDetailsScreen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         // '/': (context) => LoginScreen(),
-        // '/serviceDetails': (context) => ServiceDetailsScreen(),
-        '/': (context) => ServiceDetailsScreen(),
+        '/': (context) => BottomNavBar(),
+        '/serviceDetails': (context) => ServiceDetailsScreen(),
         '/calanderScreen': (context) => CalanderScreen()
       },
     );
