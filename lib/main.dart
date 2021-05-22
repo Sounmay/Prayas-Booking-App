@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Screens/LoginScreen.dart';
 
-import 'Screens/ServiceDetails.dart';
+import 'Screens/CalanderScreen.dart';
+import 'Screens/ServiceDetailsScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginScreen(),
-        '/serviceDetails': (context) => ServiceDetails()
+        '/serviceDetails': (context) => ServiceDetailsScreen(),
+        '/calanderScreen': (context) => CalanderScreen()
       },
     );
   }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ServiceDetails extends StatefulWidget {
+class ServiceDetailsScreen extends StatefulWidget {
   @override
-  _ServiceDetailsState createState() => _ServiceDetailsState();
+  _ServiceDetailsScreenState createState() => _ServiceDetailsScreenState();
 }
 
-class _ServiceDetailsState extends State<ServiceDetails> {
+class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
