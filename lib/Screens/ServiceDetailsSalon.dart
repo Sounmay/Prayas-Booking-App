@@ -3,14 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsFacilityGrid.dart';
 
-class ServiceDetailsParlour extends StatelessWidget {
+class ServiceDetailsSalon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(68),
           child: AppBar(
-            title: Text('Parlour \nServices'),
+            title: Text('Salons \nServices'),
             actions: [
               Padding(
                   padding: EdgeInsets.only(right: 5, top: 5),
