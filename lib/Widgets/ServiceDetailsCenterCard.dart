@@ -5,8 +5,9 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.yellow)),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.yellow),
+      ),
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -23,8 +24,8 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
             flex: 11,
             child: Container(
               margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              height: 130,
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              height: MediaQuery.of(context).size.height * 0.16,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -45,9 +46,15 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
                       Text('Shri Clinic',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
-                      Text('\u{2B50} 4.0',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12))
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Color(0xff5D5FEF)),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Text('\u{2B50} 4.0',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12)),
+                      )
                     ],
                   ),
                   Divider(
