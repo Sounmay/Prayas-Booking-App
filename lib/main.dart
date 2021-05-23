@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: Color(0xff5D5FEF)),
       initialRoute: '/',
       routes: {
-        // '/': (context) => LoginScreen(),
         '/': (context) => BottomNavBar(),
         '/serviceDetails': (context) => ServiceDetailsScreen(),
         '/calanderScreen': (context) => CalanderScreen()
