@@ -18,8 +18,14 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
               title: Text('Medical Services'),
               actions: [
                 Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Image.asset('assets/Ellipse3.png'))
+                    padding: EdgeInsets.only(right: 5, top: 5),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFF0F2735),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: Image.asset('assets/doctor.png')))
               ],
             )),
         body: SingleChildScrollView(
