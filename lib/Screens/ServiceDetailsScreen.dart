@@ -12,16 +12,23 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Services Details'),
-        ),
+         appBar: PreferredSize(
+          preferredSize: Size.fromHeight(70),
+          child: AppBar(
+            title: Text('Medical Services'),
+            actions: [
+              Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Image.asset('assets/Ellipse3.png'))
+            ],
+          )),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ServiceDetailsMainCard(
                   'Dr. Mukund Dev', 'Speciality in Orthopedic'),
-              SizedBox(height: 15),
+              SizedBox(height: 8),
               ServiceCardDetailsCenterCard(),
               SizedBox(height: 10),
               Padding(

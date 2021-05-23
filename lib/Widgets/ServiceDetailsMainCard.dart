@@ -8,8 +8,8 @@ class ServiceDetailsMainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.36,
-      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      height: MediaQuery.of(context).size.height * 0.30,
+      margin: const EdgeInsets.symmetric(horizontal: 37, vertical: 37),
       child: Card(
         elevation: 5,
         color: Color(0xff0F2735),

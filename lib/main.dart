@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Screens/LoginScreen.dart';
+import 'package:freelance_booking_app/Screens/ServiceDetailsParlour.dart';
 
 import 'Screens/CalanderScreen.dart';
 import 'Screens/ServiceDetailsScreen.dart';
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       routes: {
         // '/': (context) => LoginScreen(),
         // '/serviceDetails': (context) => ServiceDetailsScreen(),
-        '/': (context) => ServiceDetailsScreen(),
+        // '/serviceDetailsParlour': (context) => ServiceDetailsParlour(),
+        '/': (context) => ServiceDetailsParlour(),
         '/calanderScreen': (context) => CalanderScreen()
       },
     );
