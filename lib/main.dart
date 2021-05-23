@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freelance_booking_app/Screens/LoginScreen.dart';
+import 'package:freelance_booking_app/Screens/Home.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsParlour.dart';
-
 import 'Screens/CalanderScreen.dart';
 import 'Screens/ServiceDetailsScreen.dart';
 
@@ -16,12 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Color(0xff5D5FEF)),
-      initialRoute: '/',
+      initialRoute: '/serviceDetailsParlour',
       routes: {
         // '/': (context) => LoginScreen(),
-        // '/serviceDetails': (context) => ServiceDetailsScreen(),
-        // '/serviceDetailsParlour': (context) => ServiceDetailsParlour(),
-        '/': (context) => ServiceDetailsParlour(),
+        '/': (context) => BottomNavBar(),
+        '/serviceDetails': (context) => ServiceDetailsScreen(),
+        '/serviceDetailsParlour': (context) => ServiceDetailsParlour(),
         '/calanderScreen': (context) => CalanderScreen()
       },
     );

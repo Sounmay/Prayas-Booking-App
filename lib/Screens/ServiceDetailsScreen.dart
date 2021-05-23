@@ -12,16 +12,16 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70),
-          child: AppBar(
-            title: Text('Medical Services'),
-            actions: [
-              Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Image.asset('assets/Ellipse3.png'))
-            ],
-          )),
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(70),
+            child: AppBar(
+              title: Text('Medical Services'),
+              actions: [
+                Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Image.asset('assets/Ellipse3.png'))
+              ],
+            )),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,14 +39,15 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   padding: EdgeInsets.only(left: 20), child: Text('Facility3')),
               ServiceDetailsFacilityGrid(),
               Center(
-                child: FlatButton(
+                child: TextButton(
                   child: Text(
                     'Book an appointment',
                     style: TextStyle(color: Colors.white),
                   ),
-                  color: Color(0xff5D5FEF),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Color(0xff5D5FEF),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5))),
                   onPressed: () {},
                 ),
               )
