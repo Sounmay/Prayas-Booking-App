@@ -29,65 +29,82 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Icon(
-                      Icons.edit_location,
-                      color: Colors.green,
-                    ),
-                    Text('Sec 19, near library',
-                        style: TextStyle(
+                  Flexible(
+                    flex: 1,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.edit_location,
                             color: Colors.green,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400))
-                  ]),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Shri Clinic',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16)),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xff5D5FEF)),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Text('\u{2B50} 4.0',
+                          ),
+                          Text('Sec 19, near library',
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400))
+                        ]),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Shri Clinic',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12)),
-                      )
-                    ],
+                                fontWeight: FontWeight.bold, fontSize: 16)),
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xff5D5FEF)),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Text('\u{2B50} 4.0',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 12)),
+                        )
+                      ],
+                    ),
                   ),
-                  Divider(
-                    thickness: 2,
-                    color: Colors.black87,
+                  Flexible(
+                    flex: 1,
+                    child: Divider(
+                      thickness: 2,
+                      color: Colors.black87,
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(children: [
-                        Icon(
-                          Icons.av_timer,
-                          color: Color(0xff5D5FEF),
-                        ),
-                        Text('Visiting hour')
-                      ]),
-                      Text('10:00 AM - 5:00PM',
-                          style: TextStyle(color: Color(0xff00A676)))
-                    ],
+                  Flexible(
+                    flex: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(children: [
+                          Icon(
+                            Icons.av_timer,
+                            color: Color(0xff5D5FEF),
+                          ),
+                          Text('Visiting hour')
+                        ]),
+                        Text('10:00 AM - 5:00PM',
+                            style: TextStyle(color: Color(0xff00A676)))
+                      ],
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(children: [
-                        Icon(
-                          Icons.wb_sunny,
-                          color: Color(0xff5D5FEF),
-                        ),
-                        Text('Days')
-                      ]),
-                      Text('MON-THU',
-                          style: TextStyle(color: Color(0xff00A676)))
-                    ],
+                  Flexible(
+                    flex: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(children: [
+                          Icon(
+                            Icons.wb_sunny,
+                            color: Color(0xff5D5FEF),
+                          ),
+                          Text('Days')
+                        ]),
+                        Text('MON-THU',
+                            style: TextStyle(color: Color(0xff00A676)))
+                      ],
+                    ),
                   ),
                 ],
               ),
