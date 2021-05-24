@@ -8,8 +8,8 @@ class ServiceDetailsMainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.36,
-      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      height: MediaQuery.of(context).size.height * 0.30,
+      margin: const EdgeInsets.symmetric(horizontal: 37, vertical: 37),
       child: Card(
         elevation: 5,
         color: Color(0xff0F2735),
@@ -21,26 +21,29 @@ class ServiceDetailsMainCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset('assets/Ellipse.png'),
-                SizedBox(
-                  height: 10,
-                ),
-                Center(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                Flexible(flex: 5, child: Image.asset('assets/Ellipse.png')),
+                Flexible(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ),
                   ),
                 ),
-                Center(
-                  child: Text(
-                    speciality,
-                    style: TextStyle(
-                        color: Color(0xff00A676),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16),
+                Flexible(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                      speciality,
+                      style: TextStyle(
+                          color: Color(0xff00A676),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16),
+                    ),
                   ),
                 )
               ]),
