@@ -3,19 +3,19 @@ import 'package:freelance_booking_app/Widgets/ServiceDetailsCenterCard.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsFacilityGrid.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsMainCard.dart';
 
-class ServiceDetailsScreen extends StatefulWidget {
+class ServiceDetailsMedical extends StatefulWidget {
   @override
-  _ServiceDetailsScreenState createState() => _ServiceDetailsScreenState();
+  _ServiceDetailsMedicalState createState() => _ServiceDetailsMedicalState();
 }
 
-class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
+class _ServiceDetailsMedicalState extends State<ServiceDetailsMedical> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(70),
             child: AppBar(
-              title: Text('Medical Services'),
+              title: Text('Medical \nServices'),
               actions: [
                 Padding(
                     padding: const EdgeInsets.only(right: 5, top: 5),
