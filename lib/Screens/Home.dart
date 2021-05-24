@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Parlour',
+                                  'Doctors',
                                   style: TextStyle(
                                       color: Color(0xFF5D5FEF),
                                       fontWeight: FontWeight.bold
@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Doctors',
+                                  'Parlour',
                                   style: TextStyle(
                                       color: Color(0xFF5D5FEF),
                                       fontWeight: FontWeight.bold
