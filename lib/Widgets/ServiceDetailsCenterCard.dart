@@ -54,7 +54,7 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16)),
                         Container(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               border: Border.all(color: Color(0xff5D5FEF)),
                               borderRadius: BorderRadius.circular(5)),

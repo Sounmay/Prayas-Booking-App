@@ -13,13 +13,13 @@ class ServiceDetailsParlour extends StatelessWidget {
             title: Text('Parlour \nServices'),
             actions: [
               Padding(
-                  padding: EdgeInsets.only(right: 5, top: 5),
+                  padding: const EdgeInsets.only(right: 5, top: 5),
                   child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Color(0xFF0F2735),
                       ),
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Image.asset('assets/parlour.png')))
             ],
           )),
@@ -30,8 +30,8 @@ class ServiceDetailsParlour extends StatelessWidget {
             height: 5,
           ),
           Container(
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             height: 70,
             child: TextFormField(
                 keyboardType: TextInputType.text,
@@ -93,7 +93,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                             fontWeight: FontWeight.w600, fontSize: 24)),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.14,
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                           border: Border.all(color: Color(0xff5D5FEF)),
                           borderRadius: BorderRadius.circular(5)),
@@ -110,13 +110,13 @@ class ServiceDetailsParlour extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(left: 20),
+                          padding: const EdgeInsets.only(left: 20),
                           child: Text('Facility1')),
                       Padding(
-                          padding: EdgeInsets.only(left: 20),
+                          padding: const EdgeInsets.only(left: 20),
                           child: Text('Facility2')),
                       Padding(
-                          padding: EdgeInsets.only(left: 20),
+                          padding: const EdgeInsets.only(left: 20),
                           child: Text('Facility3')),
                     ],
                   ),
