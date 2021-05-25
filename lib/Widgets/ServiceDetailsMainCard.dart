@@ -14,7 +14,7 @@ class ServiceDetailsMainCard extends StatelessWidget {
         elevation: 5,
         color: Color(0xff0F2735),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.4)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.4)),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(

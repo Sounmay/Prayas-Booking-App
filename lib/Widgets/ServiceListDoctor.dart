@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ServiceListMainCard extends StatelessWidget {
+class ServiceListDoctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
