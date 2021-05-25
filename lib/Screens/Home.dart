@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsScreen.dart';
 import 'package:freelance_booking_app/Screens/CalanderScreen.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
+import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
+import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
 
 
 class Home extends StatefulWidget {
@@ -212,9 +214,9 @@ class _HomeState extends State<Home> {
                   SizedBox(height: 20),
                   ServiceListDoctor(),
                   SizedBox(height: 15),
-                  ServiceListDoctor(),
+                  ServiceListParlour(),
                   SizedBox(height: 15),
-                  ServiceListDoctor(),
+                  ServiceListSalon(),
                   SizedBox(height: 20),
 
             ],

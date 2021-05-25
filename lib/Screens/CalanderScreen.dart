@@ -1,3 +1,4 @@
+import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +56,7 @@ class _CalanderScreenState extends State<CalanderScreen> {
                     child: Row(
                       children: [
                         Icon(
-                          Icons.access_alarm,
+                          CupertinoIcons.scissors,
                           color: Colors.black,
                         ),
                         SizedBox(
