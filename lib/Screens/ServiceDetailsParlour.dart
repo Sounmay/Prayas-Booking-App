@@ -58,7 +58,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.28,
                 child: Image.asset('assets/parlourTile.png')),
             Container(
-              height: MediaQuery.of(context).size.height * 0.26,
+              height: MediaQuery.of(context).size.height * 0.33,
               width: MediaQuery.of(context).size.width * 0.64,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -137,6 +137,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.5,
+                    height: MediaQuery.of(context).size.height * 0.1,
                     child: Column(
                       children: [
                         Row(
