@@ -33,7 +33,7 @@ class ServiceListParlour extends StatelessWidget {
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     Icon(
-                      Icons.edit_location,
+                      CupertinoIcons.location,
                       color: Colors.green,
                     ),
                     Text('Sec 19, near library',

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
 import 'package:freelance_booking_app/Screens/CalanderScreen.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,15 +18,25 @@ class _HomeState extends State<Home> {
   var pressed3 = false;
   int i = 0;
 
-
-  List<Widget> service = [
-    ServiceListDoctor(),
-    ServiceListParlour(),
-    ServiceListSalon()
+  List<Widget> serviceList = [
+    // ServiceListDoctor(),
+    // ServiceListParlourBuilder(),
+    // ServiceListSalonBuilder()
   ];
 
   @override
   Widget build(BuildContext context) {
+    final servicesList = Provider.of<MedicalServices>(context);
+    final services = servicesList.services;
+    Widget medicalListBuilder = Container(
+        height: 200,
+        child: ListView.builder(
+          itemCount: services.length,
+          itemBuilder: (ctx, j) => ServiceListDoctor(
+            clinicName: services[i].clinicName,
+          ),
+        ));
+    List<Widget> serviceWidget = [medicalListBuilder];
     return Scaffold(
         appBar: AppBar(
           title: Text('Home'),
@@ -219,7 +231,6 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 10.0,
                 ),
-                SizedBox(height: 30),
                 Container(
                   margin: new EdgeInsets.symmetric(horizontal: 20.0),
                   child: Align(
@@ -240,7 +251,7 @@ class _HomeState extends State<Home> {
                 // SizedBox(height: 15),
                 // ServiceListSalon(),
                 // SizedBox(height: 20),
-                service[i]
+                serviceWidget[i]
               ],
             ),
           ),
@@ -292,5 +303,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
         },
       ),
     );
+  }
+}
+
+class ServiceListDoctorBuilder extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final services = Provider.of<MedicalServices>(context).services;
+    print(services);
+    return ListView.builder(
+        itemCount: services.length,
+        itemBuilder: (ctx, i) => ServiceListDoctor());
   }
 }

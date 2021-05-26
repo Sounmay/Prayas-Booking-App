@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class ServiceListDoctor extends StatelessWidget {
+  final String clinicName;
+  ServiceListDoctor({this.clinicName});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +33,7 @@ class ServiceListDoctor extends StatelessWidget {
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     Icon(
-                      Icons.edit_location,
+                      CupertinoIcons.location,
                       color: Colors.green,
                     ),
                     Text('Sec 19, near library',

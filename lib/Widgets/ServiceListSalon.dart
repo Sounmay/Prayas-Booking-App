@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class ServiceListSalon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class ServiceListSalon extends StatelessWidget {
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     Icon(
-                      Icons.edit_location,
+                      CupertinoIcons.location,
                       color: Color(0xFF00E7A4),
                     ),
                     Text('Sec 19, near library',
@@ -48,10 +47,14 @@ class ServiceListSalon extends StatelessWidget {
                       //Icon(CupertinoIcons.scissors, color: Colors.white),
                       Text('Perfect Salon',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.white)),
                       Text('\u{2B50} 4.0',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white))
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                              color: Colors.white))
                     ],
                   ),
                   Divider(
@@ -66,7 +69,10 @@ class ServiceListSalon extends StatelessWidget {
                           CupertinoIcons.clock,
                           color: Color(0xff5D5FEF),
                         ),
-                        Text('Visiting hour', style: TextStyle(color: Colors.white),)
+                        Text(
+                          'Visiting hour',
+                          style: TextStyle(color: Colors.white),
+                        )
                       ]),
                       Text('10:00 AM - 5:00PM',
                           style: TextStyle(color: Colors.white))
@@ -80,7 +86,10 @@ class ServiceListSalon extends StatelessWidget {
                           Icons.wb_sunny,
                           color: Color(0xff5D5FEF),
                         ),
-                        Text('Days', style: TextStyle(color: Colors.white),)
+                        Text(
+                          'Days',
+                          style: TextStyle(color: Colors.white),
+                        )
                       ]),
                       Text('MON-THU',
                           style: TextStyle(color: Color(0xff00A676)))

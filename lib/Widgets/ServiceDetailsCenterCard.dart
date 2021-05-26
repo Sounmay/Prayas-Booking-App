@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ServiceCardDetailsCenterCard extends StatelessWidget {
@@ -35,7 +36,7 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Icon(
-                            Icons.edit_location,
+                            CupertinoIcons.location,
                             color: Colors.green,
                           ),
                           Text('Sec 19, near library',
