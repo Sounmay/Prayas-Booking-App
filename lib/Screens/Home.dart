@@ -63,7 +63,30 @@ class _HomeState extends State<Home> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 70.0,
+                  height: 10.0,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                  height: 70,
+                  child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          prefixIcon: new Icon(Icons.search),
+                          contentPadding: EdgeInsets.all(10),
+                          hintText: 'Search for a service',
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                              borderRadius: BorderRadius.circular(6)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black, width: 2.0),
+                              borderRadius: BorderRadius.circular(6))),
+                      onChanged: (val) {}),
+                ),
+                SizedBox(
+                  height: 20.0,
                 ),
                 Container(
                   child: Align(
@@ -100,7 +123,7 @@ class _HomeState extends State<Home> {
                             CircleAvatar(
                                 radius: 32,
                                 backgroundImage:
-                                    AssetImage('assets/doctor 3.png')),
+                                AssetImage('assets/doctor 3.png')),
                             SizedBox(
                               height: 10.0,
                             ),
@@ -117,7 +140,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               color:
-                                  pressed1 ? Color(0xFF5D5FEF) : Colors.white,
+                              pressed1 ? Color(0xFF5D5FEF) : Colors.white,
                               height: 25.0,
                               minWidth: 45.0,
                               shape: RoundedRectangleBorder(
@@ -152,7 +175,7 @@ class _HomeState extends State<Home> {
                             CircleAvatar(
                                 radius: 32,
                                 backgroundImage:
-                                    AssetImage('assets/Group 30.png')),
+                                AssetImage('assets/Group 30.png')),
                             SizedBox(
                               height: 10.0,
                             ),
@@ -169,7 +192,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               color:
-                                  pressed2 ? Color(0xFF5D5FEF) : Colors.white,
+                              pressed2 ? Color(0xFF5D5FEF) : Colors.white,
                               height: 25.0,
                               minWidth: 45.0,
                               shape: RoundedRectangleBorder(
@@ -204,7 +227,7 @@ class _HomeState extends State<Home> {
                             CircleAvatar(
                                 radius: 32,
                                 backgroundImage:
-                                    AssetImage('assets/Group 32.png')),
+                                AssetImage('assets/Group 32.png')),
                             SizedBox(
                               height: 10.0,
                             ),
@@ -221,7 +244,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               color:
-                                  pressed3 ? Color(0xFF5D5FEF) : Colors.white,
+                              pressed3 ? Color(0xFF5D5FEF) : Colors.white,
                               height: 25.0,
                               minWidth: 45.0,
                               shape: RoundedRectangleBorder(
