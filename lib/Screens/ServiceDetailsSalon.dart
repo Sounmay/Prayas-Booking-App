@@ -209,9 +209,11 @@ class ServiceDetailsSalon extends StatelessWidget {
                   ]),
             ),
             ServiceDetailsFacilityGrid(),
+            SizedBox(height: 20.0,),
             Center(
               child: Text('See Gallery'),
-            )
+            ),
+            SizedBox(height: 20.0,),
           ],
         ),
       )

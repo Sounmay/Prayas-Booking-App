@@ -49,7 +49,7 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
                         ]),
                   ),
                   Flexible(
-                    flex: 1,
+                    flex: 3,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

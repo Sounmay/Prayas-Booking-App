@@ -135,6 +135,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                       ],
                     ),
                   ),
+
                   Container(
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: MediaQuery.of(context).size.height * 0.1,
@@ -220,9 +221,11 @@ class ServiceDetailsParlour extends StatelessWidget {
                   ]),
             ),
             ServiceDetailsFacilityGrid(),
+            SizedBox(height: 20.0,),
             Center(
               child: Text('See Gallery'),
-            )
+            ),
+            SizedBox(height: 20.0,),
           ],
         ),
       ),
