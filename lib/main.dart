@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => BottomNavBar(),
-          '/serviceDetails': (context) => ServiceDetailsMedical(),
+          '/serviceDetailsMedical': (context) => ServiceDetailsMedical(),
           '/serviceDetailsParlour': (context) => ServiceDetailsParlour(),
           '/serviceDetailsSalon': (context) => ServiceDetailsSalon(),
           '/calanderScreen': (context) => CalanderScreen()

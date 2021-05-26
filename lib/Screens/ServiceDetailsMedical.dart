@@ -11,6 +11,9 @@ class ServiceDetailsMedical extends StatefulWidget {
 class _ServiceDetailsMedicalState extends State<ServiceDetailsMedical> {
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
+    final service = args['details'];
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(70),
@@ -32,10 +35,9 @@ class _ServiceDetailsMedicalState extends State<ServiceDetailsMedical> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ServiceDetailsMainCard(
-                  'Dr. Mukund Dev', 'Speciality in Orthopedic'),
+              ServiceDetailsMainCard(service.name, 'Speciality in Orthopedic'),
               SizedBox(height: 8),
-              ServiceCardDetailsCenterCard(),
+              ServiceCardDetailsCenterCard(service),
               SizedBox(height: 10),
               Padding(
                   padding: const EdgeInsets.only(left: 20),

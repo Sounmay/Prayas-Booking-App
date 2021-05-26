@@ -6,6 +6,9 @@ import 'package:freelance_booking_app/Widgets/ServiceDetailsFacilityGrid.dart';
 class ServiceDetailsSalon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+     final args =
+        ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
+    final service = args['details'];
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(68),
@@ -51,7 +54,7 @@ class ServiceDetailsSalon extends StatelessWidget {
           ),
           Container(
               height: MediaQuery.of(context).size.height * 0.28,
-              child: Image.asset('assets/Rectangle67.png')),
+              child: Image.asset(service.image)),
           Container(
             height: MediaQuery.of(context).size.height * 0.26,
             width: MediaQuery.of(context).size.width * 0.61,
@@ -73,7 +76,7 @@ class ServiceDetailsSalon extends StatelessWidget {
                           color: Colors.green,
                           size: 20,
                         ),
-                        Text('Sec 19, near library',
+                        Text(service.location,
                             style: TextStyle(
                                 color: Colors.green,
                                 fontSize: 15,
