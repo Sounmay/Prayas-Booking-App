@@ -2,28 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ServiceListSalon extends StatelessWidget {
+  final service;
+  ServiceListSalon({this.service});
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Color(0xFF0F2735),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.yellow)),
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+        image: DecorationImage(
+            image: AssetImage(service.image), fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Flexible(
-            flex: 5,
-            child: Image.asset(
-              'assets/Rectangle67.png',
-              width: 113,
-              height: 130,
-            ),
-          ),
+          Flexible(flex: 5, child: Container()),
           Flexible(
             flex: 11,
             child: Container(
+              decoration: BoxDecoration(
+                  color: Color(0xff0F2735),
+                  borderRadius: BorderRadius.circular(10)),
               margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               height: 130,
@@ -33,33 +32,39 @@ class ServiceListSalon extends StatelessWidget {
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     Icon(
                       CupertinoIcons.location,
-                      color: Color(0xFF00E7A4),
+                      color: Colors.green,
                     ),
-                    Text('Sec 19, near library',
+                    Text(service.location,
                         style: TextStyle(
-                            color: Color(0xFF00E7A4),
+                            color: Colors.green,
                             fontSize: 15,
                             fontWeight: FontWeight.w400))
                   ]),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      //Icon(CupertinoIcons.scissors, color: Colors.white),
-                      Text('Perfect Salon',
+                      Icon(
+                        CupertinoIcons.scissors,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                      Text(service.salonName,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white)),
-                      Text('\u{2B50} 4.0',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: Colors.white))
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18)),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.14,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Text('\u{2B50}   4.4',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12)),
+                      )
                     ],
-                  ),
-                  Divider(
-                    thickness: 2,
-                    color: Colors.white,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,13 +74,13 @@ class ServiceListSalon extends StatelessWidget {
                           CupertinoIcons.clock,
                           color: Color(0xff5D5FEF),
                         ),
-                        Text(
-                          'Visiting hour',
-                          style: TextStyle(color: Colors.white),
-                        )
+                        Text('Visiting hour',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ))
                       ]),
                       Text('10:00 AM - 5:00PM',
-                          style: TextStyle(color: Colors.white))
+                          style: TextStyle(color: Color(0xff00A676)))
                     ],
                   ),
                   Row(
@@ -86,10 +91,7 @@ class ServiceListSalon extends StatelessWidget {
                           Icons.wb_sunny,
                           color: Color(0xff5D5FEF),
                         ),
-                        Text(
-                          'Days',
-                          style: TextStyle(color: Colors.white),
-                        )
+                        Text('Days', style: TextStyle(color: Colors.white)),
                       ]),
                       Text('MON-THU',
                           style: TextStyle(color: Color(0xff00A676)))

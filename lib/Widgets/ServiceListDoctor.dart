@@ -2,24 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class ServiceListDoctor extends StatelessWidget {
-  final String clinicName;
-  ServiceListDoctor({this.clinicName});
+  final service;
+  ServiceListDoctor({this.service});
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.yellow)),
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
             flex: 5,
-            child: Image.asset(
-              'assets/Ellipse.png',
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: Color(0xff0F2735),
+                  borderRadius: BorderRadius.circular(5)),
               width: 113,
               height: 130,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(
+                      service.image,
+                      width: 60,
+                      height: 60,
+                    ),
+                    Text(
+                      service.name,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12),
+                    ),
+                    Text(
+                      "orthopedician",
+                      style: TextStyle(
+                          color: Color(0xff00A676),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 10),
+                    )
+                  ]),
             ),
           ),
           Flexible(
@@ -36,7 +62,7 @@ class ServiceListDoctor extends StatelessWidget {
                       CupertinoIcons.location,
                       color: Colors.green,
                     ),
-                    Text('Sec 19, near library',
+                    Text(service.location,
                         style: TextStyle(
                             color: Colors.green,
                             fontSize: 15,
@@ -45,7 +71,7 @@ class ServiceListDoctor extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Shri Clinic',
+                      Text(service.clinicName,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
                       Text('\u{2B50} 4.0',

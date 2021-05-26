@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Providers/medicalServices.dart';
+import 'package:freelance_booking_app/Providers/parlourServices.dart';
+import 'package:freelance_booking_app/Providers/salonServices.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
 import 'package:freelance_booking_app/Screens/CalanderScreen.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
@@ -13,30 +15,45 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var pressed1 = false;
+  var pressed1 = true;
   var pressed2 = false;
   var pressed3 = false;
   int i = 0;
 
-  List<Widget> serviceList = [
-    // ServiceListDoctor(),
-    // ServiceListParlourBuilder(),
-    // ServiceListSalonBuilder()
-  ];
-
   @override
   Widget build(BuildContext context) {
-    final servicesList = Provider.of<MedicalServices>(context);
-    final services = servicesList.services;
+    final medicalservicesList = Provider.of<MedicalServices>(context).services;
+    final parlourservicesList = Provider.of<ParlourServices>(context).services;
+    final serviceservicesList = Provider.of<SalonServices>(context).services;
     Widget medicalListBuilder = Container(
-        height: 200,
+        height: 300,
         child: ListView.builder(
-          itemCount: services.length,
+          itemCount: medicalservicesList.length,
           itemBuilder: (ctx, j) => ServiceListDoctor(
-            clinicName: services[i].clinicName,
+            service: medicalservicesList[j],
           ),
         ));
-    List<Widget> serviceWidget = [medicalListBuilder];
+    Widget parlourListBuilder = Container(
+        height: 300,
+        child: ListView.builder(
+          itemCount: medicalservicesList.length,
+          itemBuilder: (ctx, j) => ServiceListParlour(
+            service: parlourservicesList[j],
+          ),
+        ));
+    Widget salonListBuilder = Container(
+        height: 300,
+        child: ListView.builder(
+          itemCount: medicalservicesList.length,
+          itemBuilder: (ctx, j) => ServiceListSalon(
+            service: serviceservicesList[j],
+          ),
+        ));
+    List<Widget> serviceWidget = [
+      medicalListBuilder,
+      parlourListBuilder,
+      salonListBuilder
+    ];
     return Scaffold(
         appBar: AppBar(
           title: Text('Home'),
@@ -46,7 +63,7 @@ class _HomeState extends State<Home> {
             child: Column(
               children: <Widget>[
                 SizedBox(
-                  height: 100.0,
+                  height: 70.0,
                 ),
                 Container(
                   child: Align(
@@ -245,12 +262,6 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 SizedBox(height: 20),
-                // ServiceListDoctor(),
-                // SizedBox(height: 15),
-                // ServiceListParlour(),
-                // SizedBox(height: 15),
-                // ServiceListSalon(),
-                // SizedBox(height: 20),
                 serviceWidget[i]
               ],
             ),
@@ -303,16 +314,5 @@ class _BottomNavBarState extends State<BottomNavBar> {
         },
       ),
     );
-  }
-}
-
-class ServiceListDoctorBuilder extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final services = Provider.of<MedicalServices>(context).services;
-    print(services);
-    return ListView.builder(
-        itemCount: services.length,
-        itemBuilder: (ctx, i) => ServiceListDoctor());
   }
 }

@@ -1,17 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class Medical {
+class Salon {
   final String id;
-  final String clinicName;
-  final String name;
+  final String salonName;
   final String location;
   final String image;
 
-  Medical(
+  Salon(
       {@required this.id,
-      @required this.clinicName,
-      @required this.name,
+      @required this.salonName,
       @required this.location,
       @required this.image});
 }

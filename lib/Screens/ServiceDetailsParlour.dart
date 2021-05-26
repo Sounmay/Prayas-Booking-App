@@ -50,7 +50,7 @@ class ServiceDetailsParlour extends StatelessWidget {
           ),
           Container(
               height: MediaQuery.of(context).size.height * 0.28,
-              child: Image.asset('assets/Rectangle67.png')),
+              child: Image.asset('assets/parlourTile.png')),
           Container(
             height: MediaQuery.of(context).size.height * 0.26,
             width: MediaQuery.of(context).size.width * 0.61,
