@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var pressed1 = false;
+  var pressed1 = true;
   var pressed2 = false;
   var pressed3 = false;
   int i = 0;
