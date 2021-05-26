@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-class ServiceListMainCard extends StatelessWidget {
+
+
+class ServiceListParlour extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +17,7 @@ class ServiceListMainCard extends StatelessWidget {
           Flexible(
             flex: 5,
             child: Image.asset(
-              'assets/Ellipse.png',
+              'assets/Group 30.png',
               width: 113,
               height: 130,
             ),
@@ -42,7 +45,7 @@ class ServiceListMainCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Shri Clinic',
+                      Text('Shri Parlor',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
                       Text('\u{2B50} 4.0',
@@ -59,7 +62,7 @@ class ServiceListMainCard extends StatelessWidget {
                     children: [
                       Row(children: [
                         Icon(
-                          Icons.av_timer,
+                          CupertinoIcons.clock,
                           color: Color(0xff5D5FEF),
                         ),
                         Text('Visiting hour')
