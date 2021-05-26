@@ -218,7 +218,6 @@ class _HomeState extends State<Home> {
                   SizedBox(height: 15),
                   ServiceListSalon(),
                   SizedBox(height: 20),
-
             ],
           ),
         ),
