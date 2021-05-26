@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Color(0xff5D5FEF)),
-      initialRoute: '/serviceDetailsParlour',
+      initialRoute: '/',
       routes: {
         '/': (context) => BottomNavBar(),
         '/serviceDetails': (context) => ServiceDetailsMedical(),
