@@ -29,6 +29,7 @@ class ServiceDetailsSalon extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          
           SizedBox(
             height: 5,
           ),
