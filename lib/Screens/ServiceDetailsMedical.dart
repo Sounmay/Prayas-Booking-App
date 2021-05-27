@@ -3,19 +3,22 @@ import 'package:freelance_booking_app/Widgets/ServiceDetailsCenterCard.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsFacilityGrid.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsMainCard.dart';
 
-class ServiceDetailsScreen extends StatefulWidget {
+class ServiceDetailsMedical extends StatefulWidget {
   @override
-  _ServiceDetailsScreenState createState() => _ServiceDetailsScreenState();
+  _ServiceDetailsMedicalState createState() => _ServiceDetailsMedicalState();
 }
 
-class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
+class _ServiceDetailsMedicalState extends State<ServiceDetailsMedical> {
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
+    final service = args['details'];
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(70),
             child: AppBar(
-              title: Text('Medical Services'),
+              title: Text('Medical \nServices'),
               actions: [
                 Padding(
                     padding: const EdgeInsets.only(right: 5, top: 5),
@@ -32,10 +35,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ServiceDetailsMainCard(
-                  'Dr. Mukund Dev', 'Speciality in Orthopedic'),
+              ServiceDetailsMainCard(service.name, 'Speciality in Orthopedic'),
               SizedBox(height: 8),
-              ServiceCardDetailsCenterCard(),
+              ServiceCardDetailsCenterCard(service),
               SizedBox(height: 10),
               Padding(
                   padding: const EdgeInsets.only(left: 20),

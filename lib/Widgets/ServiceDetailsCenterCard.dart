@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ServiceCardDetailsCenterCard extends StatelessWidget {
+  final service;
+  ServiceCardDetailsCenterCard(this.service);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,10 +38,10 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Icon(
-                            Icons.edit_location,
+                            CupertinoIcons.location,
                             color: Colors.green,
                           ),
-                          Text('Sec 19, near library',
+                          Text(service.location,
                               style: TextStyle(
                                   color: Colors.green,
                                   fontSize: 15,
@@ -46,11 +49,11 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
                         ]),
                   ),
                   Flexible(
-                    flex: 1,
+                    flex: 3,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Shri Clinic',
+                        Text(service.clinicName,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16)),
                         Container(

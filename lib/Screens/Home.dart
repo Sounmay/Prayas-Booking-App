@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:freelance_booking_app/Screens/ServiceDetailsScreen.dart';
+import 'package:freelance_booking_app/Providers/medicalServices.dart';
+import 'package:freelance_booking_app/Providers/parlourServices.dart';
+import 'package:freelance_booking_app/Providers/salonServices.dart';
+import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
 import 'package:freelance_booking_app/Screens/CalanderScreen.dart';
-import 'package:freelance_booking_app/Widgets/ServiceDetailsCenterCard.dart';
-import 'package:freelance_booking_app/Widgets/ServiceListMainCard.dart';
-
-
-
+import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
+import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
+import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,159 +15,283 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var pressed1 = true;
+  var pressed2 = false;
+  var pressed3 = false;
+  int i = 0;
+
   @override
   Widget build(BuildContext context) {
+    final medicalservicesList = Provider.of<MedicalServices>(context).services;
+    final parlourservicesList = Provider.of<ParlourServices>(context).services;
+    final serviceservicesList = Provider.of<SalonServices>(context).services;
+    Widget medicalListBuilder = Container(
+        height: 300,
+        child: ListView.builder(
+          itemCount: medicalservicesList.length,
+          itemBuilder: (ctx, j) => ServiceListDoctor(
+            service: medicalservicesList[j],
+          ),
+        ));
+    Widget parlourListBuilder = Container(
+        height: 300,
+        child: ListView.builder(
+          itemCount: medicalservicesList.length,
+          itemBuilder: (ctx, j) => ServiceListParlour(
+            service: parlourservicesList[j],
+          ),
+        ));
+    Widget salonListBuilder = Container(
+        height: 300,
+        child: ListView.builder(
+          itemCount: medicalservicesList.length,
+          itemBuilder: (ctx, j) => ServiceListSalon(
+            service: serviceservicesList[j],
+          ),
+        ));
+    List<Widget> serviceWidget = [
+      medicalListBuilder,
+      parlourListBuilder,
+      salonListBuilder
+    ];
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: Container(
-        child: new SingleChildScrollView(
-          child:Column(
-            children: <Widget>[
-                  SizedBox(height: 100.0,),
-                  Container(
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Services Provided',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        )
-                    ),
-                  ),
-                  SizedBox(height: 20.0,),
-                  Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
+        appBar: AppBar(
+          title: Text('Home'),
+        ),
+        body: Container(
+          child: new SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 10.0,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                  height: 70,
+                  child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          prefixIcon: new Icon(Icons.search),
+                          contentPadding: EdgeInsets.all(10),
+                          hintText: 'Search for a service',
+                          fillColor: Colors.white,
+                          filled: true,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                              borderRadius: BorderRadius.circular(6)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black, width: 2.0),
+                              borderRadius: BorderRadius.circular(6))),
+                      onChanged: (val) {}),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Container(
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Services Provided',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Container(
+                  margin: new EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            pressed1 = true;
+                            pressed2 = false;
+                            pressed3 = false;
+                            i = 0;
+                          });
+                        },
+                        child: Column(
                           children: <Widget>[
                             CircleAvatar(
                                 radius: 32,
-                                backgroundImage: AssetImage('assets/doctor 3.png')
+                                backgroundImage:
+                                AssetImage('assets/doctor 3.png')),
+                            SizedBox(
+                              height: 10.0,
                             ),
-                            SizedBox(height: 10.0,),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                                border: Border.all(color: Color(0xFF5D5FEF)),
-                                color: Colors.white,
-                              ),
-                              height: 25.0,
-                              width: 65.0,
+                            FlatButton(
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
                                   'Doctors',
                                   style: TextStyle(
-                                      color: Color(0xFF5D5FEF),
-                                      fontWeight: FontWeight.bold
-                                  ),
+                                      color: pressed1
+                                          ? Colors.white
+                                          : Color(0xFF5D5FEF),
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
+                              color:
+                              pressed1 ? Color(0xFF5D5FEF) : Colors.white,
+                              height: 25.0,
+                              minWidth: 45.0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  side: BorderSide(
+                                      color: Color(0xFF5D5FEF),
+                                      width: 1,
+                                      style: BorderStyle.solid)),
+                              onPressed: () {
+                                setState(() {
+                                  pressed1 = true;
+                                  pressed2 = false;
+                                  pressed3 = false;
+                                  i = 0;
+                                });
+                              },
                             ),
                           ],
                         ),
-                        Column(
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            pressed1 = false;
+                            pressed2 = true;
+                            pressed3 = false;
+                            i = 1;
+                          });
+                        },
+                        child: Column(
                           children: <Widget>[
                             CircleAvatar(
                                 radius: 32,
-                                backgroundImage: AssetImage('assets/Group 30.png')
+                                backgroundImage:
+                                AssetImage('assets/Group 30.png')),
+                            SizedBox(
+                              height: 10.0,
                             ),
-                            SizedBox(height: 10.0,),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                                border: Border.all(color: Color(0xFF5D5FEF)),
-                                color: Colors.white,
-                              ),
-                              height: 25.0,
-                              width: 65.0,
+                            FlatButton(
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
                                   'Parlour',
                                   style: TextStyle(
-                                      color: Color(0xFF5D5FEF),
-                                      fontWeight: FontWeight.bold
-                                  ),
+                                      color: pressed2
+                                          ? Colors.white
+                                          : Color(0xFF5D5FEF),
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
+                              color:
+                              pressed2 ? Color(0xFF5D5FEF) : Colors.white,
+                              height: 25.0,
+                              minWidth: 45.0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  side: BorderSide(
+                                      color: Color(0xFF5D5FEF),
+                                      width: 1,
+                                      style: BorderStyle.solid)),
+                              onPressed: () {
+                                setState(() {
+                                  pressed1 = false;
+                                  pressed2 = true;
+                                  pressed3 = false;
+                                  i = 1;
+                                });
+                              },
                             ),
                           ],
                         ),
-                        Column(
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            pressed1 = false;
+                            pressed2 = false;
+                            pressed3 = true;
+                            i = 2;
+                          });
+                        },
+                        child: Column(
                           children: <Widget>[
                             CircleAvatar(
                                 radius: 32,
-                                backgroundImage: AssetImage('assets/Group 32.png')
+                                backgroundImage:
+                                AssetImage('assets/Group 32.png')),
+                            SizedBox(
+                              height: 10.0,
                             ),
-                            SizedBox(height: 10.0,),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                                border: Border.all(color: Color(0xFF5D5FEF)),
-                                color: Colors.white,
-                              ),
-                              height: 25.0,
-                              width: 65.0,
+                            FlatButton(
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
                                   'Salon',
                                   style: TextStyle(
-                                      color: Color(0xFF5D5FEF),
-                                      fontWeight: FontWeight.bold
-                                  ),
+                                      color: pressed3
+                                          ? Colors.white
+                                          : Color(0xFF5D5FEF),
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
+                              color:
+                              pressed3 ? Color(0xFF5D5FEF) : Colors.white,
+                              height: 25.0,
+                              minWidth: 45.0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  side: BorderSide(
+                                      color: Color(0xFF5D5FEF),
+                                      width: 1,
+                                      style: BorderStyle.solid)),
+                              onPressed: () {
+                                setState(() {
+                                  pressed1 = false;
+                                  pressed2 = false;
+                                  pressed3 = true;
+                                  i = 2;
+                                });
+                              },
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 10.0,),
-                  SizedBox(height: 30),
-                  Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Container(
+                  margin: new EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
                       'Services Near By',
                       style: TextStyle(
                           color: Color(0xFF5D5FEF),
                           fontWeight: FontWeight.bold,
-                          fontSize: 22.0
-                      ),
-                    ),
+                          fontSize: 22.0),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  ServiceListMainCard(),
-                  SizedBox(height: 15),
-                  ServiceListMainCard(),
-                  SizedBox(height: 15),
-                  ServiceListMainCard()
-            ],
+                ),
+                SizedBox(height: 20),
+                serviceWidget[i]
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
-
-
-
-
-
-
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -173,11 +299,10 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-
-  int _currentIndex=0;
-  final List<Widget> _children=[
+  int _currentIndex = 0;
+  final List<Widget> _children = [
     Home(),
-    ServiceDetailsScreen(),
+    ServiceDetailsMedical(),
     CalanderScreen()
   ];
 
@@ -205,13 +330,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
             title: Text('Bookings'),
           ),
         ],
-        onTap: (index){
+        onTap: (index) {
           setState(() {
-            _currentIndex=index;
+            _currentIndex = index;
           });
         },
       ),
     );
   }
 }
-
