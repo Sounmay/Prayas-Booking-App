@@ -55,7 +55,7 @@ class _CalanderScreenState extends State<CalanderScreen> {
                     child: Row(
                       children: [
                         Icon(
-                          Icons.access_alarm,
+                          Icons.alarm,
                           color: Colors.black,
                         ),
                         SizedBox(
