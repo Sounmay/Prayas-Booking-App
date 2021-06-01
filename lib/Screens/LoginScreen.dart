@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           FlatButton(
             child: Text('Calander Details'),
-            onPressed: () => Navigator.pushNamed(context, '/calanderScreen'),
+            onPressed: () => Navigator.pushNamed(context, '/bookAppointment'),
             color: Colors.red,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),

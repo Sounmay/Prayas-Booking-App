@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalanderScreen extends StatefulWidget {
+class BookAppointment extends StatefulWidget {
   @override
-  _CalanderScreenState createState() => _CalanderScreenState();
+  _BookAppointmentState createState() => _BookAppointmentState();
 }
 
-class _CalanderScreenState extends State<CalanderScreen> {
+class _BookAppointmentState extends State<BookAppointment> {
   int slt = 15;
 
   @override
@@ -18,22 +18,11 @@ class _CalanderScreenState extends State<CalanderScreen> {
           backgroundColor: Color(0xFF0F2735),
           title: Row(
             children: [
-              Icon(
-                Icons.arrow_back_rounded,
-                color: Colors.white,
-              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Book your',
-                        style: TextStyle(fontSize: 18.0, letterSpacing: 1.0)),
-                    Text('appointment',
-                        style: TextStyle(fontSize: 18.0, letterSpacing: 1.0))
-                  ],
-                ),
-              )
+                child: Text('Book your appointment',
+                    style: TextStyle(fontSize: 18.0, letterSpacing: 1.0)),
+              ),
             ],
           )),
       body: Container(
@@ -86,28 +75,6 @@ class _CalanderScreenState extends State<CalanderScreen> {
                 ),
               ),
               SizedBox(height: 10.0),
-              Container(
-                color: Color(0xFFFAFAFA),
-                child: TableCalendar(
-                  firstDay: DateTime.utc(2010, 10, 16),
-                  lastDay: DateTime.utc(2030, 3, 14),
-                  focusedDay: DateTime.now(),
-                  calendarFormat: CalendarFormat.week,
-                  calendarStyle: CalendarStyle(
-                      selectedDecoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Color(0xff5D5FEF)),
-                      ),
-                      todayDecoration: BoxDecoration(
-                        color: Color(0xffF2F2F2),
-                        border: Border.all(color: Color(0xff5D5FEF)),
-                      ),
-                      todayTextStyle: TextStyle(color: Colors.black),
-                      withinRangeDecoration:
-                          BoxDecoration(color: Colors.white)),
-                  headerStyle: HeaderStyle(formatButtonVisible: false),
-                ),
-              ),
               SizedBox(height: 10.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -229,7 +196,9 @@ class _CalanderScreenState extends State<CalanderScreen> {
                     color: Color(0xff02CF96),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/slotBooking');
+                    },
                   ),
                   SizedBox(
                     width: 10.0,

@@ -4,8 +4,9 @@ import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsParlour.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsSalon.dart';
+import 'package:freelance_booking_app/Screens/SlotBooking.dart';
 import 'package:freelance_booking_app/Widgets/NavigationWidget.dart';
-import 'Screens/CalanderScreen.dart';
+import 'Screens/BookAppointment.dart';
 import 'Screens/ServiceDetailsMedical.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
           '/serviceDetailsMedical': (context) => ServiceDetailsMedical(),
           '/serviceDetailsParlour': (context) => ServiceDetailsParlour(),
           '/serviceDetailsSalon': (context) => ServiceDetailsSalon(),
-          '/calanderScreen': (context) => CalanderScreen()
+          '/bookAppointment': (context) => BookAppointment(),
+          '/slotBooking' : (context) => SlotBooking()
         },
       ),
     );

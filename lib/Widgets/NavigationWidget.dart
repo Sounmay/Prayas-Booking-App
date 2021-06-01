@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelance_booking_app/Screens/CalanderScreen.dart';
+import 'package:freelance_booking_app/Screens/BookAppointment.dart';
 import 'package:freelance_booking_app/Screens/Home.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
 
@@ -13,7 +13,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _children = [
     Home(),
     ServiceDetailsMedical(),
-    CalanderScreen()
+    BookAppointment()
   ];
 
   @override

@@ -3,7 +3,7 @@ import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
-import 'package:freelance_booking_app/Screens/CalanderScreen.dart';
+import 'package:freelance_booking_app/Screens/BookAppointment.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
