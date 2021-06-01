@@ -67,7 +67,8 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                   height: 70,
                   child: TextFormField(
                       keyboardType: TextInputType.text,
@@ -78,10 +79,12 @@ class _HomeState extends State<Home> {
                           fillColor: Colors.white,
                           filled: true,
                           enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius: BorderRadius.circular(6)),
                           focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black, width: 2.0),
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 2.0),
                               borderRadius: BorderRadius.circular(6))),
                       onChanged: (val) {}),
                 ),
@@ -123,7 +126,7 @@ class _HomeState extends State<Home> {
                             CircleAvatar(
                                 radius: 32,
                                 backgroundImage:
-                                AssetImage('assets/doctor 3.png')),
+                                    AssetImage('assets/doctor 3.png')),
                             SizedBox(
                               height: 10.0,
                             ),
@@ -140,7 +143,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               color:
-                              pressed1 ? Color(0xFF5D5FEF) : Colors.white,
+                                  pressed1 ? Color(0xFF5D5FEF) : Colors.white,
                               height: 25.0,
                               minWidth: 45.0,
                               shape: RoundedRectangleBorder(
@@ -175,7 +178,7 @@ class _HomeState extends State<Home> {
                             CircleAvatar(
                                 radius: 32,
                                 backgroundImage:
-                                AssetImage('assets/Group 30.png')),
+                                    AssetImage('assets/Group 30.png')),
                             SizedBox(
                               height: 10.0,
                             ),
@@ -192,7 +195,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               color:
-                              pressed2 ? Color(0xFF5D5FEF) : Colors.white,
+                                  pressed2 ? Color(0xFF5D5FEF) : Colors.white,
                               height: 25.0,
                               minWidth: 45.0,
                               shape: RoundedRectangleBorder(
@@ -227,7 +230,7 @@ class _HomeState extends State<Home> {
                             CircleAvatar(
                                 radius: 32,
                                 backgroundImage:
-                                AssetImage('assets/Group 32.png')),
+                                    AssetImage('assets/Group 32.png')),
                             SizedBox(
                               height: 10.0,
                             ),
@@ -244,7 +247,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               color:
-                              pressed3 ? Color(0xFF5D5FEF) : Colors.white,
+                                  pressed3 ? Color(0xFF5D5FEF) : Colors.white,
                               height: 25.0,
                               minWidth: 45.0,
                               shape: RoundedRectangleBorder(
@@ -290,52 +293,5 @@ class _HomeState extends State<Home> {
             ),
           ),
         ));
-  }
-}
-
-class BottomNavBar extends StatefulWidget {
-  @override
-  _BottomNavBarState createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    Home(),
-    ServiceDetailsMedical(),
-    CalanderScreen()
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.white,
-        backgroundColor: Colors.blueAccent,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            title: Text('Services'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            title: Text('Bookings'),
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
-    );
   }
 }

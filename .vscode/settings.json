@@ -1,0 +1,11 @@
+{
+    "C_Cpp.autoAddFileAssociations": false,
+    "css.completion.completePropertyWithSemicolon": false,
+    "css.completion.triggerPropertyValueCompletion": false,
+    "django.showContributeNotification": false,
+    "liveSassCompile.settings.showOutputWindow": false,
+    "scss.completion.completePropertyWithSemicolon": false,
+    "scss.hover.documentation": false,
+    "javascript.autoClosingTags": false,
+    "javascript.format.insertSpaceAfterCommaDelimiter": false
+}
