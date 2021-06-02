@@ -382,7 +382,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                           Text(
                               service[id] != null &&
                                       service[id].subtotal != null
-                                  ? "₹ ${service[id].subtotal - gst1 - gst2}/-"
+                                  ? "₹ ${service[id].subtotal + gst1 + gst2}/-"
                                   : "0",
                               style: TextStyle(
                                   color: Color(0xff5D5FEF),
