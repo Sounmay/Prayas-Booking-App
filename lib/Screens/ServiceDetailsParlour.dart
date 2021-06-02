@@ -59,127 +59,139 @@ class ServiceDetailsParlour extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.28,
                 child: Image.asset('assets/parlourTile.png')),
             Container(
-              height: MediaQuery.of(context).size.height * 0.26,
+              height: MediaQuery.of(context).size.height * 0.28,
               width: MediaQuery.of(context).size.width * 0.64,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Color(0xFF0F2735),
+                  Flexible(
+                    flex: 4,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Color(0xFF0F2735),
+                      ),
+                      margin: const EdgeInsets.fromLTRB(40, 20, 40, 10),
+                      padding: const EdgeInsets.all(4),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(
+                              CupertinoIcons.location,
+                              color: Colors.green,
+                              size: 20,
+                            ),
+                            Text(service.location,
+                                style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400))
+                          ]),
                     ),
-                    margin: const EdgeInsets.fromLTRB(40, 20, 40, 10),
-                    padding: const EdgeInsets.all(4),
+                  ),
+                  Flexible(
+                    flex: 2,
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Icon(
-                            CupertinoIcons.location,
-                            color: Colors.green,
-                            size: 20,
-                          ),
-                          Text(service.location,
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400))
-                        ]),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Flexible(
-                        flex: 1,
-                        child: Icon(
-                          CupertinoIcons.scissors,
-                          size: 24,
-                        ),
-                      ),
-                      Flexible(
-                        flex: 6,
-                        child: Text(service.parlourName,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 24)),
-                      ),
-                      Flexible(
-                        flex: 2,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.14,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Color(0xff5D5FEF)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Text('\u{2B50}   4.4',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 12)),
-                        ),
-                      )
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text('Facility1')),
-                        Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text('Facility2')),
-                        Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text('Facility3')),
+                        Flexible(
+                          flex: 1,
+                          child: Icon(
+                            CupertinoIcons.scissors,
+                            size: 24,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 6,
+                          child: Text(service.parlourName,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 24)),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.14,
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xff5D5FEF)),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Text('\u{2B50}   4.4',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 12)),
+                          ),
+                        )
                       ],
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    // height: MediaQuery.of(context).size.height * 0.1,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(children: [
-                              Icon(
-                                CupertinoIcons.time,
-                                color: Color(0xff5D5FEF),
-                                size: 20,
-                              ),
-                              Text(
-                                'Visiting hour',
-                                style: TextStyle(fontSize: 12),
-                              )
-                            ]),
-                            Text('10:00 AM - 5:00PM',
-                                style: TextStyle(
-                                    color: Color(0xff00A676), fontSize: 12))
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(children: [
-                              Icon(
-                                CupertinoIcons.sun_min,
-                                color: Color(0xff5D5FEF),
-                                size: 23,
-                              ),
-                              Text(
-                                'Days',
-                                style: TextStyle(fontSize: 12),
-                              )
-                            ]),
-                            Text('MON-THU',
-                                style: TextStyle(
-                                    color: Color(0xff00A676), fontSize: 12))
-                          ],
-                        ),
-                      ],
+                  Flexible(
+                    flex: 4,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text('Facility1')),
+                          Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text('Facility2')),
+                          Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text('Facility3')),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 3,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      // height: MediaQuery.of(context).size.height * 0.05,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(children: [
+                                Icon(
+                                  CupertinoIcons.time,
+                                  color: Color(0xff5D5FEF),
+                                  size: 20,
+                                ),
+                                Text(
+                                  'Visiting hour',
+                                  style: TextStyle(fontSize: 12),
+                                )
+                              ]),
+                              Text('10:00 AM - 5:00PM',
+                                  style: TextStyle(
+                                      color: Color(0xff00A676), fontSize: 12))
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(children: [
+                                Icon(
+                                  CupertinoIcons.sun_min,
+                                  color: Color(0xff5D5FEF),
+                                  size: 23,
+                                ),
+                                Text(
+                                  'Days',
+                                  style: TextStyle(fontSize: 12),
+                                )
+                              ]),
+                              Text('MON-THU',
+                                  style: TextStyle(
+                                      color: Color(0xff00A676), fontSize: 12))
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],

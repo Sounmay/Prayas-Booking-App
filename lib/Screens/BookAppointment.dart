@@ -313,7 +313,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                     ),
               SizedBox(height: 10.0),
               Container(
-                height: height * 0.25,
+                height: height * 0.28,
                 color: Color(0xFFF7F7F7),
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: Column(
