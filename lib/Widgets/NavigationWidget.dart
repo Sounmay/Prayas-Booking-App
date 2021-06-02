@@ -10,11 +10,7 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    Home(),
-    ServiceDetailsMedical(),
-    BookAppointment()
-  ];
+  final List<Widget> _children = [Home(), Home()];
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +25,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            title: Text('Services'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            title: Text('Bookings'),
+            icon: Icon(
+              Icons.favorite_outline,
+            ),
+            label: 'Bookings',
           ),
         ],
         onTap: (index) {

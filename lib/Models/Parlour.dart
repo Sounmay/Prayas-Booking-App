@@ -6,10 +6,13 @@ class Parlour {
   final String parlourName;
   final String location;
   final String image;
+  List<Map<String, dynamic>> mostAvailservices;
 
   Parlour(
       {@required this.id,
       @required this.parlourName,
       @required this.location,
-      @required this.image});
+      @required this.image,
+      this.mostAvailservices = const []
+      });
 }

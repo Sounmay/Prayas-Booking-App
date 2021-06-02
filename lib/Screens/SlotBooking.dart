@@ -186,14 +186,16 @@ class _SlotBookingState extends State<SlotBooking> {
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.right,
                     ),
-                    FlatButton(
+                    TextButton(
                       child: Text(
                         'Check Catalogue',
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Color(0xff02CF96),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
+                      style: TextButton.styleFrom(
+                        backgroundColor: Color(0xff02CF96),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
                       onPressed: () {},
                     )
                   ],
@@ -203,7 +205,7 @@ class _SlotBookingState extends State<SlotBooking> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FlatButton(
+                  TextButton(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Text(
@@ -211,9 +213,11 @@ class _SlotBookingState extends State<SlotBooking> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    color: Color(0xff02CF96),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color(0xff02CF96),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                    ),
                     onPressed: () {},
                   )
                 ],

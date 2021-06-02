@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Screens/BookAppointment.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsFacilityGrid.dart';
 
 class ServiceDetailsParlour extends StatelessWidget {
@@ -214,7 +215,10 @@ class ServiceDetailsParlour extends StatelessWidget {
                             backgroundColor: Color(0xff5D5FEF),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/bookAppointment',
+                              arguments: {'id': service.id});
+                        },
                       ),
                     ),
                   ]),

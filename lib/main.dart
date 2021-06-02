@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
@@ -21,14 +22,17 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (cts) => MedicalServices(),
+          create: (ctx) => MedicalServices(),
         ),
         ChangeNotifierProvider(
-          create: (cts) => ParlourServices(),
+          create: (ctx) => ParlourServices(),
         ),
         ChangeNotifierProvider(
-          create: (cts) => SalonServices(),
+          create: (ctx) => SalonServices(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => CartService()
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
