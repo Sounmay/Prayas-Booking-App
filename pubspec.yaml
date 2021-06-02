@@ -33,6 +33,7 @@ dependencies:
   http: ^0.13.3
   firebase_core: ^1.2.0
   firebase_auth: ^1.2.0
+  google_maps_flutter: ^2.0.6
 
 
 

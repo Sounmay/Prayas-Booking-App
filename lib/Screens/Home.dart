@@ -8,6 +8,7 @@ import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
 import 'package:provider/provider.dart';
+import 'package:freelance_booking_app/Widgets/MapWidget.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -88,6 +89,10 @@ class _HomeState extends State<Home> {
                               borderRadius: BorderRadius.circular(6))),
                       onChanged: (val) {}),
                 ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                MapWidget(),
                 SizedBox(
                   height: 20.0,
                 ),
