@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -60,18 +62,27 @@ class _SlotBookingState extends State<SlotBooking> {
                       )),
                 ],
               ),
-              SizedBox(height: 10.0),
+              SizedBox(height: 20.0),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  'This week',
-                  style: TextStyle(
-                      color: Colors.indigo[400], fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.right,
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'This week',
+                      style: TextStyle(color: Colors.black, fontSize: 17.0),
+                      textAlign: TextAlign.right,
+                    ),
+                    Icon(
+                      Icons.calendar_today_outlined,
+                      color: Color(0xff5D5FEF),
+                    )
+                  ],
                 ),
               ),
               SizedBox(height: 10.0),
               Container(
+                padding: EdgeInsets.all(10.0),
                 color: Color(0xFFFAFAFA),
                 child: TableCalendar(
                   firstDay: DateTime.utc(2010, 10, 16),
@@ -84,137 +95,279 @@ class _SlotBookingState extends State<SlotBooking> {
                         border: Border.all(color: Color(0xff5D5FEF)),
                       ),
                       todayDecoration: BoxDecoration(
-                        color: Color(0xffF2F2F2),
-                        border: Border.all(color: Color(0xff5D5FEF)),
-                      ),
+                          color: Colors.white,
+                          border: Border.all(color: Color(0xff5D5FEF)),
+                          borderRadius: BorderRadius.circular(6.0)),
                       todayTextStyle: TextStyle(color: Colors.black),
                       withinRangeDecoration:
                           BoxDecoration(color: Colors.white)),
-                  headerStyle: HeaderStyle(formatButtonVisible: false),
+                  headerVisible: false,
                 ),
               ),
-              SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Card(
-                      elevation: 5.0,
-                      color: Color(0xFF0F2735),
-                      child: Container(
-                          padding: EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              Text('Slots Available : ',
-                                  style: TextStyle(
-                                      color: Colors.white, letterSpacing: 1.0)),
-                              Text('$slt',
-                                  style: TextStyle(
-                                      color: Colors.tealAccent[700],
-                                      letterSpacing: 1.0))
-                            ],
-                          ))),
-                ],
-              ),
-              SizedBox(height: 5.0),
+              SizedBox(height: 40.0),
               Padding(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Text(
-                  'Services provided',
-                  style: TextStyle(
-                      color: Colors.indigo[400], fontWeight: FontWeight.bold),
+                  'Select your slot ',
+                  style: TextStyle(color: Colors.black, fontSize: 17.0),
                   textAlign: TextAlign.right,
                 ),
               ),
-              SizedBox(height: 10.0),
+              SizedBox(height: 30.0),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Card(
-                      color: Color(0xFFFAFAFC),
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(25.0, 20, 25, 20),
-                          child: Text('Haircut',
-                              style: TextStyle(fontWeight: FontWeight.bold)))),
-                  Card(
-                      color: Color(0xFFFAFAFC),
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(25.0, 20, 25, 20),
-                          child: Text('Shaving',
-                              style: TextStyle(fontWeight: FontWeight.bold)))),
-                  Card(
-                      color: Color(0xFFFAFAFC),
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(25.0, 20, 25, 20),
-                          child: Text('Facial',
-                              style: TextStyle(fontWeight: FontWeight.bold)))),
-                ],
-              ),
-              SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Card(
-                      color: Color(0xFFFAFAFC),
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(25.0, 20, 25, 20),
-                          child: Text('Haircut',
-                              style: TextStyle(fontWeight: FontWeight.bold)))),
-                  Card(
-                      color: Color(0xFFFAFAFC),
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(25.0, 20, 25, 20),
-                          child: Text('Shaving',
-                              style: TextStyle(fontWeight: FontWeight.bold)))),
-                  Card(
-                      color: Color(0xFFFAFAFC),
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(25.0, 20, 25, 20),
-                          child: Text('Facial',
-                              style: TextStyle(fontWeight: FontWeight.bold)))),
-                ],
-              ),
-              SizedBox(height: 10.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Add Services',
-                      style: TextStyle(
-                          color: Colors.indigo[400],
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.right,
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(3.0),
+                      child: Row(
+                        children: [
+                          Text('10:00 AM - 11:00 AM ',
+                              style: TextStyle(
+                                  color: Color(0xff5D5FEF), fontSize: 12.0)),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                            ),
+                            color: Color(0xff00A676),
+                          )
+                        ],
+                      ),
                     ),
-                    TextButton(
-                      child: Text(
-                        'Check Catalogue',
-                        style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(width: 15.0),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(3.0),
+                      child: Row(
+                        children: [
+                          Text('10:00 AM - 11:00 AM ',
+                              style: TextStyle(
+                                  color: Color(0xff5D5FEF), fontSize: 12.0)),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                            ),
+                            color: Color(0xff00A676),
+                          )
+                        ],
                       ),
-                      style: TextButton.styleFrom(
-                        backgroundColor: Color(0xff02CF96),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                      ),
-                      onPressed: () {},
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                ],
               ),
-              Card(color: Colors.white, child: SizedBox(height: 40.0)),
+              SizedBox(height: 15.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(3.0),
+                      child: Row(
+                        children: [
+                          Text('10:00 AM - 11:00 AM ',
+                              style: TextStyle(
+                                  color: Color(0xff5D5FEF), fontSize: 12.0)),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                            ),
+                            color: Color(0xff00A676),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15.0),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(3.0),
+                      child: Row(
+                        children: [
+                          Text('10:00 AM - 11:00 AM ',
+                              style: TextStyle(
+                                  color: Color(0xff5D5FEF), fontSize: 12.0)),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                            ),
+                            color: Color(0xff00A676),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(3.0),
+                      child: Row(
+                        children: [
+                          Text('10:00 AM - 11:00 AM ',
+                              style: TextStyle(
+                                  color: Color(0xff5D5FEF), fontSize: 12.0)),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                            ),
+                            color: Color(0xff00A676),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15.0),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(3.0),
+                      child: Row(
+                        children: [
+                          Text('10:00 AM - 11:00 AM ',
+                              style: TextStyle(
+                                  color: Color(0xff5D5FEF), fontSize: 12.0)),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                            ),
+                            color: Color(0xff00A676),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(3.0),
+                      child: Row(
+                        children: [
+                          Text('10:00 AM - 11:00 AM ',
+                              style: TextStyle(
+                                  color: Color(0xff5D5FEF), fontSize: 12.0)),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                            ),
+                            color: Color(0xff00A676),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15.0),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(6.0)),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(3.0),
+                      child: Row(
+                        children: [
+                          Text('10:00 AM - 11:00 AM ',
+                              style: TextStyle(
+                                  color: Color(0xff5D5FEF), fontSize: 12.0)),
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '2',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12.0),
+                              ),
+                            ),
+                            color: Color(0xff00A676),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Text(
-                        'Proceed',
-                        style: TextStyle(color: Colors.white),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Proceed    ',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Icon(Icons.arrow_forward_ios_rounded,
+                              color: Colors.white, size: 15.0)
+                        ],
                       ),
                     ),
                     style: TextButton.styleFrom(
-                      backgroundColor: Color(0xff02CF96),
+                      backgroundColor: Color(0xff5D5FEF),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5)),
                     ),
