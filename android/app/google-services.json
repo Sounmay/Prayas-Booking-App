@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "294107082451",
+    "project_id": "freelance-booking-app",
+    "storage_bucket": "freelance-booking-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294107082451:android:249184931237b9a0432e26",
+        "android_client_info": {
+          "package_name": "com.sounmaymishra.freelance_booking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294107082451-5a0dfv6pvqnkhlihqg98adm7c905i9lb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlnqnzSpDyzddQeHwJ5cQ56rji_09W2Wc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294107082451-5a0dfv6pvqnkhlihqg98adm7c905i9lb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
