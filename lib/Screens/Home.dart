@@ -61,18 +61,18 @@ class _HomeState extends State<Home> {
       salonListBuilder
     ];
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Home'),
-          leading: InkWell(
-              onTap: () {
-                FirebaseAuth.instance.signOut();
-                // FirebaseFirestore.instance
-                //     .collection('users')
-                //     .doc("${user.uid}")
-                //     .set({"name": "imam"});
-              },
-              child: Icon(Icons.logout)),
-        ),
+//        appBar: AppBar(
+//          title: Text('Home'),
+//          leading: InkWell(
+//              onTap: () {
+//                FirebaseAuth.instance.signOut();
+//                // FirebaseFirestore.instance
+//                //     .collection('users')
+//                //     .doc("${user.uid}")
+//                //     .set({"name": "imam"});
+//              },
+//              child: Icon(Icons.logout)),
+//        ),
         body: Container(
           child: new SingleChildScrollView(
             child: Column(

@@ -43,22 +43,27 @@ class _LocationNameWidgetState extends State<LocationNameWidget> {
   Widget build(BuildContext context) {
     final locations = Provider.of<LocationProvider>(context).address;
     return Container(
-      height: 40,
+      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+      height: MediaQuery.of(context).size.width * 0.13,
       width: MediaQuery.of(context).size.width * 1,
       color: Colors.black,
       child: Row(
         children: [
           Icon(
             CupertinoIcons.location,
-            color: Colors.white,
+            color: Colors.blue,
           ),
-          Text(
-            locations != null && locations.length != 0
-                ? locations[0].address
-                : "",
-            style: TextStyle(color: Colors.white),
-            //return the variable address here
-          ),
+          SizedBox(width: 10,),
+          Center(
+            child: Text(
+              locations != null && locations.length != 0
+                  ? locations[0].address
+                  : "",
+              style: TextStyle(color: Colors.white,
+                  fontSize: 13),
+              //return the variable address here
+            ),
+          )
         ],
       ),
     );
