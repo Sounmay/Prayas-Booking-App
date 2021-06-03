@@ -9,8 +9,8 @@ class RequestAssistant{
 
     try{
       if(response.statusCode == 200){
-        String jSonData = response.body;
-        var decodeData=jsonDecode(jSonData);
+        String jsonData = response.body;
+        var decodeData=jsonDecode(jsonData);
         return decodeData;
       }
       else{

@@ -1,6 +1,5 @@
 import 'package:freelance_booking_app/Providers/requestAssistant.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
 
 class AssistantMethods{
   static Future<String> searchCoordinateAddress(Position position) async {
