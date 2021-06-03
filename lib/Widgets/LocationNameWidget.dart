@@ -49,15 +49,15 @@ class _LocationNameWidgetState extends State<LocationNameWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20,
+      height: 40,
       width: MediaQuery.of(context).size.width * 1,
       color: Colors.black,
       child: Row(
         children: [
-          Icon(CupertinoIcons.location),
-          Text(""
+          Icon(CupertinoIcons.location, color: Colors.white,),
+          Text("$location", style: TextStyle( color: Colors.white),
               //return the variable address here
-              )
+              ),
         ],
       ),
     );

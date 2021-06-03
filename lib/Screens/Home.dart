@@ -12,6 +12,7 @@ import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
 import 'package:provider/provider.dart';
 import 'package:freelance_booking_app/Widgets/MapWidget.dart';
+import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -76,6 +77,7 @@ class _HomeState extends State<Home> {
           child: new SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                LocationNameWidget(),
                 SizedBox(
                   height: 10.0,
                 ),
