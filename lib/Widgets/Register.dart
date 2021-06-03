@@ -29,7 +29,7 @@ class _RegisterState extends State<Register> {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               CircularProgressIndicator(
-                color: Colors.white,
+                backgroundColor: Colors.white,
               )
             ]),
           )

@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               CircularProgressIndicator(
-                color: Colors.white,
+                backgroundColor: Colors.white,
               )
             ]),
           )
