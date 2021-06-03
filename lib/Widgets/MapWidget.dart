@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Providers/assistantMethods.dart';
+import 'package:freelance_booking_app/Providers/locationProvider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:provider/provider.dart';
 
 class MapWidget extends StatelessWidget {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
@@ -11,20 +13,27 @@ class MapWidget extends StatelessWidget {
   Position currentPosition;
   var geoLocator = Geolocator();
 
-  void locatePosition() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    currentPosition = position;
+  Future locatePosition(BuildContext ctx) async {
+    try {
+      final locations = Provider.of<LocationProvider>(ctx, listen: false);
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      currentPosition = position;
 
-    LatLng latLngPosition = LatLng(position.latitude, position.longitude);
+      LatLng latLngPosition = LatLng(position.latitude, position.longitude);
 
-    CameraPosition cameraPosition =
-        new CameraPosition(target: latLngPosition, zoom: 14);
-    newGoogleMapController
-        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      CameraPosition cameraPosition =
+          new CameraPosition(target: latLngPosition, zoom: 14);
+      newGoogleMapController
+          .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      String address = await AssistantMethods.searchCoordinateAddress(position);
+      locations.addLocation(address);
+      print("hello");
+      print(address);
+    } catch (e) {
+      print(e.toString());
+    }
   }
-
-
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -43,11 +52,11 @@ class MapWidget extends StatelessWidget {
           myLocationButtonEnabled: true,
           zoomGesturesEnabled: true,
           zoomControlsEnabled: true,
-          onMapCreated: (GoogleMapController controller) {
+          onMapCreated: (GoogleMapController controller) async {
             _controllerGoogleMap.complete(controller);
             newGoogleMapController = controller;
 
-            locatePosition();
+            locatePosition(context);
           },
         ));
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/authProvider.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
+import 'package:freelance_booking_app/Providers/locationProvider.dart';
 import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
@@ -40,7 +41,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (ctx) => SalonServices(),
           ),
-          ChangeNotifierProvider(create: (ctx) => CartService())
+          ChangeNotifierProvider(create: (ctx) => CartService()),
+          ChangeNotifierProvider(create: (ctx) => LocationProvider())
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
