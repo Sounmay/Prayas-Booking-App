@@ -1,15 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
-import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
-import 'package:freelance_booking_app/Screens/BookAppointment.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
+import 'package:freelance_booking_app/Widgets/searchBar.dart';
 import 'package:provider/provider.dart';
 import 'package:freelance_booking_app/Widgets/MapWidget.dart';
 import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
@@ -81,29 +78,7 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 10.0,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                  height: 70,
-                  child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                          prefixIcon: new Icon(Icons.search),
-                          contentPadding: EdgeInsets.all(10),
-                          hintText: 'Search for a service',
-                          fillColor: Colors.white,
-                          filled: true,
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                              borderRadius: BorderRadius.circular(6)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 2.0),
-                              borderRadius: BorderRadius.circular(6))),
-                      onChanged: (val) {}),
-                ),
+                SearchBar(),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -292,7 +267,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 Container(
                   margin: new EdgeInsets.symmetric(horizontal: 20.0),
@@ -307,7 +282,6 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
                 serviceWidget[i]
               ],
             ),
