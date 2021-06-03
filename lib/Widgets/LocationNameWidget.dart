@@ -46,7 +46,7 @@ class _LocationNameWidgetState extends State<LocationNameWidget> {
       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
       height: MediaQuery.of(context).size.width * 0.13,
       width: MediaQuery.of(context).size.width * 1,
-      color: Colors.black,
+      color: Color(0xff0F2735),
       child: Row(
         children: [
           Icon(
