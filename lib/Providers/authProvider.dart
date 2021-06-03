@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freelance_booking_app/Models/User.dart';
 
@@ -18,6 +19,7 @@ class AuthProvider {
           email: (email), password: (password));
       User user = result.user;
 
+      
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -32,6 +34,10 @@ class AuthProvider {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: (numemail), password: (password));
       User user = result.user;
+
+      FirebaseFirestore.instance.collection('Users').doc("${user.uid}").set({
+        "name": name
+      });
 
       return _userFromFirebaseUser(user);
     } catch (e) {

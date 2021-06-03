@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
@@ -23,6 +26,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AppUser>(context);
     final medicalservicesList = Provider.of<MedicalServices>(context).services;
     final parlourservicesList = Provider.of<ParlourServices>(context).services;
     final serviceservicesList = Provider.of<SalonServices>(context).services;
@@ -58,6 +62,15 @@ class _HomeState extends State<Home> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Home'),
+          leading: InkWell(
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                // FirebaseFirestore.instance
+                //     .collection('users')
+                //     .doc("${user.uid}")
+                //     .set({"name": "imam"});
+              },
+              child: Icon(Icons.logout)),
         ),
         body: Container(
           child: new SingleChildScrollView(

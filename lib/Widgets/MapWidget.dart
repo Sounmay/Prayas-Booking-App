@@ -7,18 +7,21 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapWidget extends StatelessWidget {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
   GoogleMapController newGoogleMapController;
-  
-  Position currentPosition;
-  var geoLocator=Geolocator();
-  
-  void locatePosition() async{
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    currentPosition=position;
-    
-    LatLng latLngPosition=LatLng(position.latitude, position.longitude);
 
-    CameraPosition cameraPosition = new CameraPosition(target: latLngPosition, zoom: 14);
-    newGoogleMapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  Position currentPosition;
+  var geoLocator = Geolocator();
+
+  void locatePosition() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    currentPosition = position;
+
+    LatLng latLngPosition = LatLng(position.latitude, position.longitude);
+
+    CameraPosition cameraPosition =
+        new CameraPosition(target: latLngPosition, zoom: 14);
+    newGoogleMapController
+        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
 
   static final CameraPosition _kGooglePlex = CameraPosition(
@@ -31,20 +34,19 @@ class MapWidget extends StatelessWidget {
     return Container(
         height: MediaQuery.of(context).size.height * 0.3,
         width: MediaQuery.of(context).size.width * 0.9,
-      child: GoogleMap(
-        mapType: MapType.normal,
-        myLocationEnabled: true,
-        initialCameraPosition: _kGooglePlex,
-        myLocationButtonEnabled: true,
-        zoomGesturesEnabled: true,
-        zoomControlsEnabled: true,
-        onMapCreated: (GoogleMapController controller){
-          _controllerGoogleMap.complete(controller);
-          newGoogleMapController=controller;
+        child: GoogleMap(
+          mapType: MapType.normal,
+          myLocationEnabled: true,
+          initialCameraPosition: _kGooglePlex,
+          myLocationButtonEnabled: true,
+          zoomGesturesEnabled: true,
+          zoomControlsEnabled: true,
+          onMapCreated: (GoogleMapController controller) {
+            _controllerGoogleMap.complete(controller);
+            newGoogleMapController = controller;
 
-          locatePosition();
-        },
-      )
-    );
+            locatePosition();
+          },
+        ));
   }
 }

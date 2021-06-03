@@ -1,10 +1,8 @@
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:provider/provider.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class BookAppointment extends StatefulWidget {
   @override
@@ -28,7 +26,7 @@ class _BookAppointmentState extends State<BookAppointment> {
     final gst2 = service[id] != null ? service[id].subtotal * 0.08 ?? 0 : 0;
     final time = service[id] != null ? service[id].time : 0;
     final int minute = time % 60;
-    final int hours = (minute / 60).floor();
+    final int hours = (time / 60).floor();
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Color(0xFF0F2735),
