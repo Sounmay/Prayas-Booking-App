@@ -1,8 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 
 class MapWidget extends StatelessWidget {
   Completer<GoogleMapController> _controllerGoogleMap = Completer();
@@ -23,6 +23,8 @@ class MapWidget extends StatelessWidget {
     newGoogleMapController
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
+
+
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
