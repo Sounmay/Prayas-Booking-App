@@ -1,12 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Models/Medical.dart';
+import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/authProvider.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
+import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:freelance_booking_app/Providers/locationProvider.dart';
 import 'package:freelance_booking_app/Providers/medicalServices.dart';
+import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
+import 'package:freelance_booking_app/Screens/AllServices.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsParlour.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsSalon.dart';
 import 'package:freelance_booking_app/Screens/SlotBooking.dart';
@@ -42,7 +47,18 @@ class MyApp extends StatelessWidget {
             create: (ctx) => SalonServices(),
           ),
           ChangeNotifierProvider(create: (ctx) => CartService()),
-          ChangeNotifierProvider(create: (ctx) => LocationProvider())
+          ChangeNotifierProvider(create: (ctx) => LocationProvider()),
+          ChangeNotifierProvider(create: (ctx) => NavigationProvider()),
+          StreamProvider<List<Medical>>.value(
+            initialData: [],
+            value: DatabaseService().streamMedical(),
+            child: AllSerives(),
+          ),
+          StreamProvider<List<Parlour>>.value(
+            initialData: [],
+            value: DatabaseService().streamParlour(),
+            child: AllSerives(),
+          )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

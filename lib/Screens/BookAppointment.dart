@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:provider/provider.dart';
@@ -16,10 +17,7 @@ class _BookAppointmentState extends State<BookAppointment> {
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
-    var mostAvailed = Provider.of<ParlourServices>(context)
-        .findById(id)
-        .mostAvailservices
-        .toList();
+    final mostAvailed = args['mostAvailService'];
     final cart = Provider.of<CartService>(context);
     final service = Provider.of<CartService>(context).services;
     final gst1 = service[id] != null ? service[id].subtotal * 0.08 ?? 0 : 0;
@@ -127,7 +125,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            mostAvailed[i]["serviceName"],
+                                            mostAvailed[i]["service"],
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 16),

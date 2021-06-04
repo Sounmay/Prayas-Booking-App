@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Providers/navigationProvider.dart';
+import 'package:freelance_booking_app/Screens/AllServices.dart';
 import 'package:freelance_booking_app/Screens/BookAppointment.dart';
 import 'package:freelance_booking_app/Screens/Home.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
+import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -9,38 +12,14 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [Home(), Home(), Home()];
-
   @override
   Widget build(BuildContext context) {
+    final navigator = Provider.of<NavigationProvider>(context);
+    final widgetNavigator = navigator.widgetIndex;
+    final List<Widget> _children = [Home(), Home(), AllSerives()];
+
     return Scaffold(
-        body: _children[_currentIndex],
-        // bottomNavigationBar: BottomNavigationBar(
-        //   currentIndex: _currentIndex,
-        //   type: BottomNavigationBarType.fixed,
-        //   unselectedItemColor: Colors.black,
-        //   selectedItemColor: Colors.white,
-        //   backgroundColor: Colors.blueAccent,
-        //   items: [
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.home),
-        //       label: '',
-        //     ),
-        //     BottomNavigationBarItem(icon: Icon(Icons.note), label: ''),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(
-        //         Icons.favorite_outline,
-        //       ),
-        //       label: '',
-        //     ),
-        //   ],
-        //   onTap: (index) {
-        //     setState(() {
-        //       _currentIndex = index;
-        //     });
-        //   },
-        // ),
+        body: _children[widgetNavigator],
         bottomNavigationBar: Container(
           padding: EdgeInsets.all(0),
           color: Color(0xff5D5FEF),
@@ -65,18 +44,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     children: [
                       InkWell(
                         onTap: () {
-                          setState(() {
-                            _currentIndex = 0;
-                          });
+                          navigator.changeWidgetIndex(0);
                         },
                         child: Icon(Icons.home_outlined,
                             size: 30, color: Colors.white),
                       ),
                       InkWell(
                           onTap: () {
-                            setState(() {
-                              _currentIndex = 2;
-                            });
+                            navigator.changeWidgetIndex(2);
                           },
                           child: Icon(Icons.favorite_outline,
                               size: 30, color: Colors.white))
@@ -95,9 +70,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     child: FloatingActionButton(
                       backgroundColor: Color(0xFF0F2735),
                       onPressed: () {
-                        setState(() {
-                          _currentIndex = 0;
-                        });
+                        navigator.changeWidgetIndex(1);
                       },
                       child: Icon(Icons.calendar_today,
                           size: 30, color: Color(0xff5D5FEF)),

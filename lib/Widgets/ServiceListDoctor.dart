@@ -9,10 +9,7 @@ class ServiceListDoctor extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed('/serviceDetailsMedical',
-          arguments: {
-            'details': service
-          }
-        );
+            arguments: {'details': service});
       },
       child: Container(
         decoration: BoxDecoration(
@@ -34,7 +31,7 @@ class ServiceListDoctor extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
+                      Image.network(
                         service.image,
                         width: 60,
                         height: 60,

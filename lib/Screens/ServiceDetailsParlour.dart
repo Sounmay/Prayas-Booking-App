@@ -9,6 +9,7 @@ class ServiceDetailsParlour extends StatelessWidget {
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final service = args['details'];
+    print(service.mostAvailservices);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(68),
@@ -228,8 +229,12 @@ class ServiceDetailsParlour extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5))),
                         onPressed: () {
+                          print(service.mostAvailservices);
                           Navigator.pushNamed(context, '/bookAppointment',
-                              arguments: {'id': service.id});
+                              arguments: {
+                                'id': service.id,
+                                'mostAvailService': service.mostAvailservices
+                              });
                         },
                       ),
                     ),

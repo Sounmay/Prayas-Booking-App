@@ -14,7 +14,7 @@ class ServiceListParlour extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(service.image), fit: BoxFit.cover),
+              image: NetworkImage(service.image), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(10),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -27,7 +27,9 @@ class ServiceListParlour extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     color: Color(0xff0F2735),
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
                 margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

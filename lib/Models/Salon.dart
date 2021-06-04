@@ -6,10 +6,12 @@ class Salon {
   final String salonName;
   final String location;
   final String image;
+  List<Map<String, dynamic>> mostAvailservices;
 
   Salon(
-      {@required this.id,
-      @required this.salonName,
-      @required this.location,
-      @required this.image});
+      {this.id,
+      this.salonName,
+      this.location,
+      this.image,
+      this.mostAvailservices = const []});
 }

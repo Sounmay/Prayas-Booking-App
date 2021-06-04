@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +11,23 @@ class Medical {
   final String speciality;
 
   Medical(
-      {@required this.id,
-      @required this.clinicName,
-      @required this.name,
-      @required this.location,
-      @required this.image, 
-      @required this.speciality});
+      {this.id,
+      this.clinicName,
+      this.name,
+      this.location,
+      this.image,
+      this.speciality});
+
+  factory Medical.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data();
+
+    return Medical(
+      id: doc.id,
+      clinicName: data['clinicName'] ?? '',
+      name: data['name'] ?? '',
+      location: data['location'] ?? '',
+      image: data['image'] ?? '',
+      speciality: data['speciality'] ?? ''
+    );
+  }
 }

@@ -8,10 +8,10 @@ class ServiceListSalon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed('/serviceDetailsSalon',
-            arguments: {'details': service});
+        Navigator.of(context)
+            .pushNamed('/serviceDetailsSalon', arguments: {'details': service});
       },
-          child: Container(
+      child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(service.image), fit: BoxFit.cover),
@@ -27,9 +27,12 @@ class ServiceListSalon extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     color: Color(0xff0F2735),
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
                 margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 height: 130,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
