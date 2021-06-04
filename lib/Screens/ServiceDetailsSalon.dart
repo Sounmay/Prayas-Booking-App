@@ -1,4 +1,3 @@
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsFacilityGrid.dart';
@@ -42,7 +41,7 @@ class ServiceDetailsSalon extends StatelessWidget {
                     decoration: InputDecoration(
                         prefixIcon: new Icon(Icons.search),
                         contentPadding: EdgeInsets.all(10),
-                        hintText: 'Personal Number',
+                        hintText: 'Search for a service',
                         fillColor: Colors.white,
                         filled: true,
                         enabledBorder: OutlineInputBorder(
@@ -94,7 +93,7 @@ class ServiceDetailsSalon extends StatelessWidget {
                           CupertinoIcons.scissors,
                           size: 24,
                         ),
-                        Text('Perfect Salon',
+                        Text(service.salonName,
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 24)),
                         Container(

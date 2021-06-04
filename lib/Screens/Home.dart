@@ -1,17 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/User.dart';
-import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
-import 'package:freelance_booking_app/Providers/parlourServices.dart';
-import 'package:freelance_booking_app/Providers/salonServices.dart';
-import 'package:freelance_booking_app/Screens/AllServices.dart';
-import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
-import 'package:freelance_booking_app/Screens/BookAppointment.dart';
-import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
-import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
-import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
 import 'package:provider/provider.dart';
 import 'package:freelance_booking_app/Widgets/MapWidget.dart';
 import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
@@ -22,15 +11,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var pressed1 = true;
-  var pressed2 = true;
-  var pressed3 = true;
   int i = 0;
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<AppUser>(context);
-    final navigator = Provider.of<NavigationProvider>(context);
+    // final user = Provider.of<AppUser>(context, listen: false);
+    final navigator = Provider.of<NavigationProvider>(context, listen: false);
 
     return Scaffold(
         // appBar: AppBar(
