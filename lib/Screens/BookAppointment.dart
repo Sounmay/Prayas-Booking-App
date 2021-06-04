@@ -174,8 +174,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                                 onPressed: () {
                                                   cart.addServices(
                                                       id,
-                                                      mostAvailed[i]
-                                                          ["serviceName"],
+                                                      mostAvailed[i]["service"],
                                                       mostAvailed[i]["price"],
                                                       mostAvailed[i]["time"]);
                                                 },

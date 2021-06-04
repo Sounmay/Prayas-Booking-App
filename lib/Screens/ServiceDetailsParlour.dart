@@ -229,7 +229,6 @@ class ServiceDetailsParlour extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5))),
                         onPressed: () {
-                          print(service.mostAvailservices);
                           Navigator.pushNamed(context, '/bookAppointment',
                               arguments: {
                                 'id': service.id,

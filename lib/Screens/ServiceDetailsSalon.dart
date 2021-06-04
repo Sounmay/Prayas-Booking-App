@@ -205,7 +205,13 @@ class ServiceDetailsSalon extends StatelessWidget {
                               backgroundColor: Color(0xff5D5FEF),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5))),
-                          onPressed: () {},
+                          onPressed: () {
+                          Navigator.pushNamed(context, '/bookAppointment',
+                              arguments: {
+                                'id': service.id,
+                                'mostAvailService': service.mostAvailservices
+                              });
+                          },
                         ),
                       ),
                     ]),

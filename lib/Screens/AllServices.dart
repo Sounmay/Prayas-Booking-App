@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
+import 'package:freelance_booking_app/Models/Salon.dart';
 import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
@@ -33,6 +34,7 @@ class _AllSerivesState extends State<AllSerives> {
     final serviceservicesList = Provider.of<SalonServices>(context).services;
     final medicalFirebaseServiceList = Provider.of<List<Medical>>(context);
     final parlourFirebaseServiceList = Provider.of<List<Parlour>>(context);
+    final salonFirebaseServiceList = Provider.of<List<Salon>>(context);
     Widget medicalListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(
@@ -52,9 +54,9 @@ class _AllSerivesState extends State<AllSerives> {
     Widget salonListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(
-          itemCount: medicalservicesList.length,
+          itemCount: salonFirebaseServiceList.length,
           itemBuilder: (ctx, j) => ServiceListSalon(
-            service: serviceservicesList[j],
+            service: salonFirebaseServiceList[j],
           ),
         ));
     List<Widget> serviceWidget = [
