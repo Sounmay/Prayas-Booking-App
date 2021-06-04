@@ -80,17 +80,19 @@ class _HomeState extends State<Home> {
                 height: 20.0,
               ),
               Container(
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Services Provided',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    )),
+                padding: EdgeInsets.only(left: 20),
+                child: Row(children: [
+                  Text(
+                    'Services provided by us',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFF5D5FEF),
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ]),
               ),
               SizedBox(
                 height: 20.0,
@@ -225,11 +227,13 @@ class _HomeState extends State<Home> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Services Near By',
+                    'General Information',
                     style: TextStyle(
-                        color: Color(0xFF5D5FEF),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22.0),
+                      color: Color(0xFF5D5FEF),
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
