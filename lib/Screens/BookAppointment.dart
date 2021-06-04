@@ -147,7 +147,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                     ]),
                                     service[id] != null &&
                                             service[id].serviceName.contains(
-                                                mostAvailed[i]["serviceName"])
+                                                mostAvailed[i]["service"])
                                         ? SizedBox(
                                             height: 30,
                                             width: 60,
