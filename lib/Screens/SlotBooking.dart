@@ -24,19 +24,20 @@ class _SlotBookingState extends State<SlotBooking> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Color(0xFF0F2735),
-          title: Row(
-            children: [
-              Text('Slot Booking',
-                  style: TextStyle(fontSize: 18.0, letterSpacing: 1.0)),
-            ],
-          )),
-      body: Container(
-        color: Colors.white,
-        child: SingleChildScrollView(
-          child: Flexible(
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+      child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: Color(0xFF0F2735),
+            title: Row(
+              children: [
+                Text('Slot Booking',
+                    style: TextStyle(fontSize: 18.0, letterSpacing: 1.0)),
+              ],
+            )),
+        body: Container(
+          color: Colors.white,
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -46,13 +47,13 @@ class _SlotBookingState extends State<SlotBooking> {
                       alignment: Alignment.center,
                       child: Image.asset(
                         'assets/Rectangle67.png',
-                        height: 60,
+                        height: 110,
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
                     ),
                     Container(
-                        padding: EdgeInsets.fromLTRB(10.0, 30.0, 0.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(10.0, 70.0, 0.0, 0.0),
                         child: Row(
                           children: [
                             Icon(
@@ -96,7 +97,6 @@ class _SlotBookingState extends State<SlotBooking> {
                   padding: EdgeInsets.all(10.0),
                   color: Color(0xFFFAFAFA),
                   child: TableCalendar(
-                    pageJumpingEnabled: true,
                     firstDay: DateTime.utc(2010, 10, 16),
                     lastDay: DateTime.utc(2030, 3, 14),
                     focusedDay: DateTime.now(),
@@ -113,16 +113,16 @@ class _SlotBookingState extends State<SlotBooking> {
                     calendarFormat: CalendarFormat.week,
                     calendarStyle: CalendarStyle(
                         selectedDecoration: BoxDecoration(
-                            color: Color(0xFF0F2735),
-                            border: Border.all(color: Colors.black),
+                            color: Colors.white,
+                            border: Border.all(color: Color(0xff5D5FEF)),
                             borderRadius: BorderRadius.circular(6.0)),
-                        selectedTextStyle: TextStyle(color: Colors.white),
-                        todayDecoration: BoxDecoration(
-                            color: Colors.blue[100],
-                            borderRadius: BorderRadius.circular(6.0)),
+                        selectedTextStyle: TextStyle(color: Colors.black),
+                        todayDecoration:
+                            BoxDecoration(color: Color(0xFFFAFAFA)),
                         todayTextStyle: TextStyle(color: Colors.black),
                         withinRangeDecoration:
                             BoxDecoration(color: Colors.white)),
+                    headerVisible: false,
                   ),
                 ),
                 SizedBox(height: 40.0),

@@ -13,8 +13,9 @@ class ServiceListSalon extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
+          color: Colors.grey,
           image: DecorationImage(
-              image: AssetImage(service.image), fit: BoxFit.cover),
+              image: NetworkImage(service.image), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(10),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),

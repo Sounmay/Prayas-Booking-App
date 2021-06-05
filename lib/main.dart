@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
+import 'package:freelance_booking_app/Models/Salon.dart';
 import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/authProvider.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
@@ -57,6 +58,11 @@ class MyApp extends StatelessWidget {
           StreamProvider<List<Parlour>>.value(
             initialData: [],
             value: DatabaseService().streamParlour(),
+            child: AllSerives(),
+          ),
+          StreamProvider<List<Salon>>.value(
+            value: DatabaseService().streamSalon(),
+            initialData: [],
             child: AllSerives(),
           )
         ],
