@@ -143,7 +143,7 @@ class _LoginState extends State<Login> {
                                       backgroundColor: Color(0xFF0F2735),
                                     ),
                                     child: Text(
-                                      'Cotninue',
+                                      'Continue',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400,

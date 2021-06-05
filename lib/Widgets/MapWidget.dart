@@ -41,23 +41,116 @@ class MapWidget extends StatelessWidget {
   );
 
   @override
+  int ctr1=0,ctr2=0,ctr3=0;
   Widget build(BuildContext context) {
-    return Container(
-        height: MediaQuery.of(context).size.height * 0.3,
-        width: MediaQuery.of(context).size.width * 0.9,
-        child: GoogleMap(
-          mapType: MapType.normal,
-          myLocationEnabled: true,
-          initialCameraPosition: _kGooglePlex,
-          myLocationButtonEnabled: true,
-          zoomGesturesEnabled: true,
-          zoomControlsEnabled: true,
-          onMapCreated: (GoogleMapController controller) async {
-            _controllerGoogleMap.complete(controller);
-            newGoogleMapController = controller;
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.3,
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: GoogleMap(
+              mapType: MapType.normal,
+              myLocationEnabled: true,
+              initialCameraPosition: _kGooglePlex,
+              myLocationButtonEnabled: true,
+              zoomGesturesEnabled: true,
+              zoomControlsEnabled: true,
+              onMapCreated: (GoogleMapController controller) async {
+                _controllerGoogleMap.complete(controller);
+                newGoogleMapController = controller;
 
-            locatePosition(context);
-          },
-        ));
+                locatePosition(context);
+              },
+          )
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.15,
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.27,
+                decoration: BoxDecoration(
+                    color: Color(0xff80FFAA),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                child: Column(
+                  children: [
+                    Text("$ctr1",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Text("Doctors",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ],
+                )
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.27,
+                decoration: BoxDecoration(
+                    color: Color(0xff87D3FF),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                  child: Column(
+                    children: [
+                      Text("$ctr2",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      Text("Parlours",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  )
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.27,
+                decoration: BoxDecoration(
+                    color: Color(0xffB3C8FF),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                  child: Column(
+                    children: [
+                      Text("$ctr3",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      Text("Salons",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  )
+              ),
+            ],
+          ),
+        )
+      ],
+    );
   }
 }

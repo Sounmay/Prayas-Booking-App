@@ -4,6 +4,7 @@ import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:freelance_booking_app/Widgets/MapWidget.dart';
 import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
+import 'package:freelance_booking_app/Widgets/NoticeCarousel.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -224,6 +225,12 @@ class _HomeState extends State<Home> {
                 ),
               ),
               SizedBox(height: 20),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.3,
+                width: MediaQuery.of(context).size.width * 0.9,
+                margin: new EdgeInsets.symmetric(horizontal: 20.0),
+                child: NoticeCarousel(),
+              )
             ],
           ),
         ),
