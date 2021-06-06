@@ -88,118 +88,127 @@ class _HomeState extends State<Home> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        navigator.changeWidgetIndex(2);
-                        navigator.changeServiceIndex(0);
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          CircleAvatar(
-                              radius: 32,
-                              backgroundImage:
-                                  AssetImage('assets/doctor 3.png')),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          FlatButton(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Doctors',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                    Flexible(
+                      flex: 1,
+                      child: FlatButton(
+                        onPressed: () {
+                          navigator.changeWidgetIndex(2);
+                          navigator.changeServiceIndex(0);
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            CircleAvatar(
+                                radius: 32,
+                                backgroundImage:
+                                    AssetImage('assets/doctor 3.png')),
+                            SizedBox(
+                              height: 10.0,
                             ),
-                            color: Color(0xFF5D5FEF),
-                            height: 25.0,
-                            minWidth: 45.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                side: BorderSide(
-                                    color: Color(0xFF5D5FEF),
-                                    width: 1,
-                                    style: BorderStyle.solid)),
-                            onPressed: () {},
-                          ),
-                        ],
+                            FlatButton(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Doctors',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              color: Color(0xFF5D5FEF),
+                              height: 25.0,
+                              minWidth: 45.0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  side: BorderSide(
+                                      color: Color(0xFF5D5FEF),
+                                      width: 1,
+                                      style: BorderStyle.solid)),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        navigator.changeWidgetIndex(2);
-                        navigator.changeServiceIndex(1);
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          CircleAvatar(
-                              radius: 32,
-                              backgroundImage:
-                                  AssetImage('assets/Group 30.png')),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          FlatButton(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Parlour',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                    Flexible(
+                      flex: 1,
+                      child: FlatButton(
+                        onPressed: () {
+                          navigator.changeWidgetIndex(2);
+                          navigator.changeServiceIndex(1);
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            CircleAvatar(
+                                radius: 32,
+                                backgroundImage:
+                                    AssetImage('assets/Group 30.png')),
+                            SizedBox(
+                              height: 10.0,
                             ),
-                            color: Color(0xFF5D5FEF),
-                            height: 25.0,
-                            minWidth: 45.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                side: BorderSide(
-                                    color: Color(0xFF5D5FEF),
-                                    width: 1,
-                                    style: BorderStyle.solid)),
-                            onPressed: () {},
-                          ),
-                        ],
+                            FlatButton(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Parlour',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              color: Color(0xFF5D5FEF),
+                              height: 25.0,
+                              minWidth: 45.0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  side: BorderSide(
+                                      color: Color(0xFF5D5FEF),
+                                      width: 1,
+                                      style: BorderStyle.solid)),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        navigator.changeWidgetIndex(2);
-                        navigator.changeServiceIndex(2);
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          CircleAvatar(
-                              radius: 32,
-                              backgroundImage:
-                                  AssetImage('assets/Group 32.png')),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          FlatButton(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Salon',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                    Flexible(
+                      flex: 1,
+                      child: FlatButton(
+                        onPressed: () {
+                          navigator.changeWidgetIndex(2);
+                          navigator.changeServiceIndex(2);
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            CircleAvatar(
+                                radius: 32,
+                                backgroundImage:
+                                    AssetImage('assets/Group 32.png')),
+                            SizedBox(
+                              height: 10.0,
                             ),
-                            color: Color(0xFF5D5FEF),
-                            height: 25.0,
-                            minWidth: 45.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                side: BorderSide(
-                                    color: Color(0xFF5D5FEF),
-                                    width: 1,
-                                    style: BorderStyle.solid)),
-                            onPressed: () {},
-                          ),
-                        ],
+                            FlatButton(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Salon',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              color: Color(0xFF5D5FEF),
+                              height: 25.0,
+                              minWidth: 45.0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  side: BorderSide(
+                                      color: Color(0xFF5D5FEF),
+                                      width: 1,
+                                      style: BorderStyle.solid)),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],
