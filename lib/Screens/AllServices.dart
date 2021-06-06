@@ -29,9 +29,9 @@ class _AllSerivesState extends State<AllSerives> {
     final navigator = Provider.of<NavigationProvider>(context);
     final serviceNavigator =
         Provider.of<NavigationProvider>(context).serviceIndex;
-    final medicalservicesList = Provider.of<MedicalServices>(context).services;
-    final parlourservicesList = Provider.of<ParlourServices>(context).services;
-    final serviceservicesList = Provider.of<SalonServices>(context).services;
+    // final medicalservicesList = Provider.of<MedicalServices>(context).services;
+    // final parlourservicesList = Provider.of<ParlourServices>(context).services;
+    // final serviceservicesList = Provider.of<SalonServices>(context).services;
     final medicalFirebaseServiceList = Provider.of<List<Medical>>(context);
     final parlourFirebaseServiceList = Provider.of<List<Parlour>>(context);
     final salonFirebaseServiceList = Provider.of<List<Salon>>(context);

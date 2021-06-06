@@ -27,6 +27,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     // final user = Provider.of<AppUser>(context, listen: false);
+    final deviceWidth = MediaQuery.of(context).size.width;
     final navigator = Provider.of<NavigationProvider>(context, listen: false);
 
     return Scaffold(
@@ -49,48 +50,43 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 0),
-                        height: 70,
-                        width: 300,
-                        child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                                prefixIcon: new Icon(Icons.search),
-                                contentPadding: EdgeInsets.all(10),
-                                hintText: 'Search for a service',
-                                fillColor: Colors.white,
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.grey, width: 1.0),
-                                    borderRadius: BorderRadius.circular(6)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black, width: 2.0),
-                                    borderRadius: BorderRadius.circular(6))),
-                            onChanged: (val) {}),
-                      ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        child: FlatButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            padding: EdgeInsets.all(0),
-                            color: Color(0xFF5D5FEF),
-                            child: Icon(
-                              Icons.menu,
-                              color: Colors.white,
-                              size: 35,
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    height: 70,
+                    child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                            suffixIcon: SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: FlatButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: EdgeInsets.all(0),
+                                  color: Color(0xFF5D5FEF),
+                                  child: Icon(
+                                    Icons.menu,
+                                    color: Colors.white,
+                                    size: 35,
+                                  ),
+                                  onPressed: _openEndDrawer),
                             ),
-                            onPressed: _openEndDrawer),
-                      )
-                    ],
+                            prefixIcon: new Icon(Icons.search),
+                            contentPadding: EdgeInsets.all(10),
+                            hintText: 'Search for a service',
+                            fillColor: Colors.white,
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                                borderRadius: BorderRadius.circular(6)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 2.0),
+                                borderRadius: BorderRadius.circular(6))),
+                        onChanged: (val) {}),
                   ),
                   SizedBox(
                     height: 20.0,
