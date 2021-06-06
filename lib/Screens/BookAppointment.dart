@@ -434,7 +434,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                     borderRadius: BorderRadius.circular(5)),
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, '/slotBooking');
+                                Navigator.pushNamed(context, '/slotBooking', arguments: {'id': id});
                               },
                             ),
                             SizedBox(

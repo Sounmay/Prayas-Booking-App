@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Providers/cartServices.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SlotBooking extends StatefulWidget {
@@ -24,6 +26,16 @@ class _SlotBookingState extends State<SlotBooking> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final args =
+        ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
+    final id = args['id'];
+    final service = Provider.of<CartService>(context).services[id];
+    final gst1 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
+    final gst2 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
+    final time = service != null ? service.time : 0;
+    final int minute = time % 60;
+    final int hours = (time / 60).floor();
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
       child: Scaffold(
@@ -628,95 +640,143 @@ class _SlotBookingState extends State<SlotBooking> {
                 ),
                 SizedBox(height: 30),
                 Container(
+                  height: height * 0.28,
+                  color: Color(0xFFF7F7F7),
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                  color: Color(0xFFFAFAFA),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Subtotal Amount",
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 17,
-                              )),
-                          Text("0",
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 17,
-                              ))
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("GST 1 ( 8% )",
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 17,
-                              )),
-                          Text("0",
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 17,
-                              ))
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("GST 2 ( 8% )",
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 17,
-                              )),
-                          Text("0",
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 17,
-                              ))
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Net Amount :",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w500)),
-                          Text("0",
-                              style: TextStyle(
-                                  color: Color(0xff5D5FEF),
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w500))
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("For 3 services",
-                              style: TextStyle(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Subtotal Amount",
+                                style: TextStyle(
                                   color: Colors.grey[600],
                                   fontSize: 17,
-                                  fontWeight: FontWeight.w500)),
-                          Row(children: [
-                            Text("Duration : ",
+                                )),
+                            Text(service != null ? "${service.subtotal}" : "0",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 17,
+                                ))
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("GST 1 ( 8% )",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 17,
+                                )),
+                            Text(service != null ? "$gst1" : "0",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 17,
+                                ))
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("GST 2 ( 8% )",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 17,
+                                )),
+                            Text(
+                                service != null && service.subtotal != null
+                                    ? "$gst2"
+                                    : "0",
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 17,
+                                ))
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Net Amount",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500)),
+                            Text(
+                                service != null && service.subtotal != null
+                                    ? "₹ ${service.subtotal + gst1 + gst2}/-"
+                                    : "0",
+                                style: TextStyle(
+                                    color: Color(0xff5D5FEF),
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500))
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("For 3 services",
                                 style: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500)),
-                            Text("0",
-                                style: TextStyle(
-                                    color: Color(0xff5D5FEF),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500)),
-                          ])
-                        ],
-                      ),
-                    ],
-                  ),
+                            Row(children: [
+                              Text("Duration : ",
+                                  style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500)),
+                              Text(
+                                  service != null && service.time != null
+                                      ? "$hours hr $minute min"
+                                      : "0",
+                                  style: TextStyle(
+                                      color: Color(0xff5D5FEF),
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500)),
+                            ])
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: Text(
+                                  'Slot booking',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              style: TextButton.styleFrom(
+                                backgroundColor: Color(0xFF0F2735),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/slotBooking',
+                                    arguments: {'id': id});
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            TextButton(
+                              child: Text(
+                                'Emergency booking',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: TextButton.styleFrom(
+                                backgroundColor: Color(0xff5D5FEF),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                              ),
+                              onPressed: () {},
+                            )
+                          ],
+                        )
+                      ]),
                 ),
                 Container(
                   color: Color(0xFFFAFAFA),
