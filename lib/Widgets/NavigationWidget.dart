@@ -3,6 +3,7 @@ import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Screens/AllServices.dart';
 import 'package:freelance_booking_app/Screens/BookAppointment.dart';
 import 'package:freelance_booking_app/Screens/Home.dart';
+import 'package:freelance_booking_app/Screens/MyBookings.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     final navigator = Provider.of<NavigationProvider>(context);
     final widgetNavigator = navigator.widgetIndex;
-    final List<Widget> _children = [Home(), Home(), AllSerives()];
+    final List<Widget> _children = [Home(), MyBooking(), AllSerives()];
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
