@@ -154,3 +154,5 @@ class MapWidget extends StatelessWidget {
     );
   }
 }
+
+// need to find solution for geolocation problems

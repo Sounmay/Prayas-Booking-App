@@ -39,6 +39,7 @@ class _HomeState extends State<Home> {
         //       },
         //       child: Icon(Icons.logout)),
         // ),
+        // might need appbar later
         key: _scaffoldKey,
         endDrawer: Mydrawer(),
         body: SafeArea(
