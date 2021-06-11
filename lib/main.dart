@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
             '/serviceDetailsSalon': (context) => ServiceDetailsSalon(),
             '/bookAppointment': (context) => BookAppointment(),
             '/slotBooking': (context) => SlotBooking(),
-            '/myBookings': (context) => MyBooking()
+            '/myBookings': (context) => MyBooking(),
           },
         ),
       ),
