@@ -2,6 +2,8 @@ import 'package:freelance_booking_app/Providers/configmaps.dart';
 import 'package:freelance_booking_app/Providers/requestAssistant.dart';
 import 'package:geolocator/geolocator.dart';
 
+//reverse geolocation needs to identify location from pin
+
 class AssistantMethods{
   static Future<String> searchCoordinateAddress(Position position) async {
     String placeAddress = "";

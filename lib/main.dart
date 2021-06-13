@@ -14,11 +14,14 @@ import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
 import 'package:freelance_booking_app/Screens/AllServices.dart';
 import 'package:freelance_booking_app/Screens/SearchScreen.dart';
+import 'package:freelance_booking_app/Screens/MyBookings.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsParlour.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsSalon.dart';
 import 'package:freelance_booking_app/Screens/SlotBooking.dart';
 import 'package:freelance_booking_app/Screens/SplashScreen.dart';
 import 'package:freelance_booking_app/Screens/Wrapper.dart';
+import 'package:freelance_booking_app/Widgets/NavigationWidget.dart';
+import 'package:freelance_booking_app/Screens/MyBookings.dart';
 import 'Screens/BookAppointment.dart';
 import 'Screens/ServiceDetailsMedical.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +81,8 @@ class MyApp extends StatelessWidget {
             '/serviceDetailsSalon': (context) => ServiceDetailsSalon(),
             '/bookAppointment': (context) => BookAppointment(),
             '/slotBooking': (context) => SlotBooking(),
-            '/searchScreen': (context) => SearchScreen()
+            '/searchScreen': (context) => SearchScreen(),
+            '/myBookings': (context) => MyBooking(),
           },
         ),
       ),

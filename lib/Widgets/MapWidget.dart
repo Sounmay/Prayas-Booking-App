@@ -147,3 +147,5 @@ class _MapWidgetState extends State<MapWidget> {
     );
   }
 }
+
+// need to find solution for geolocation problems
