@@ -5,6 +5,7 @@ class Parlour {
   final String parlourName;
   final String location;
   final String image;
+  final String type;
   List<dynamic> mostAvailservices;
 
   Parlour(
@@ -12,12 +13,14 @@ class Parlour {
       this.parlourName,
       this.location,
       this.image,
+      this.type,
       this.mostAvailservices = const []});
 
   factory Parlour.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data();
 
     return Parlour(
+        type: 'parlour',
         id: doc.id,
         parlourName: data['parlourName'] ?? '',
         location: data['location'] ?? '',

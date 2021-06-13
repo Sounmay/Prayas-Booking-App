@@ -41,15 +41,15 @@ class MyApp extends StatelessWidget {
       value: AuthProvider().user,
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            create: (ctx) => MedicalServices(),
-          ),
-          ChangeNotifierProvider(
-            create: (ctx) => ParlourServices(),
-          ),
-          ChangeNotifierProvider(
-            create: (ctx) => SalonServices(),
-          ),
+          // ChangeNotifierProvider(
+          //   create: (ctx) => MedicalServices(),
+          // ),
+          // ChangeNotifierProvider(
+          //   create: (ctx) => ParlourServices(),
+          // ),
+          // ChangeNotifierProvider(
+          //   create: (ctx) => SalonServices(),
+          // ),
           ChangeNotifierProvider(create: (ctx) => CartService()),
           ChangeNotifierProvider(create: (ctx) => LocationProvider()),
           ChangeNotifierProvider(create: (ctx) => NavigationProvider()),

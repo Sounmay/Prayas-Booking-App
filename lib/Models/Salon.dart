@@ -7,6 +7,7 @@ class Salon {
   final String salonName;
   final String location;
   final String image;
+  final String type;
   List<dynamic> mostAvailservices;
 
   Salon(
@@ -14,17 +15,18 @@ class Salon {
       this.salonName,
       this.location,
       this.image,
+      this.type,
       this.mostAvailservices = const []});
 
   factory Salon.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data();
 
     return Salon(
-      id: doc.id,
-      salonName: data['salonName'] ?? '',
-      location: data['location'] ?? '',
-      image: data['image'] ?? '',
-      mostAvailservices: data['mostAvailservices']
-    );
+        type: 'salon',
+        id: doc.id,
+        salonName: data['salonName'] ?? '',
+        location: data['location'] ?? '',
+        image: data['image'] ?? '',
+        mostAvailservices: data['mostAvailservices']);
   }
 }

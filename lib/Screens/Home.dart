@@ -35,30 +35,6 @@ class Home extends StatelessWidget {
                     margin:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     child: Row(children: [
-                      // Container(
-                      //   width: deviceWidth * 0.7,
-                      //   child: TextFormField(
-                      //       keyboardType: TextInputType.text,
-                      //       decoration: InputDecoration(
-                      //           prefixIcon: new Icon(Icons.search),
-                      //           contentPadding: EdgeInsets.all(10),
-                      //           hintText: 'Search for a service',
-                      //           fillColor: Colors.white,
-                      //           filled: true,
-                      //           enabledBorder: OutlineInputBorder(
-                      //               borderSide: BorderSide(
-                      //                   color: Colors.grey, width: 1.0),
-                      //               borderRadius: BorderRadius.only(
-                      //                   topLeft: Radius.circular(6),
-                      //                   bottomLeft: Radius.circular(6))),
-                      //           focusedBorder: OutlineInputBorder(
-                      //               borderSide: BorderSide(
-                      //                   color: Colors.black, width: 2.0),
-                      //               borderRadius: BorderRadius.only(
-                      //                   topLeft: Radius.circular(6),
-                      //                   bottomLeft: Radius.circular(6)))),
-                      //       onChanged: (val) {}),
-                      // ),
                       InkWell(
                         onTap: () {
                           Navigator.pushNamed(context, '/searchScreen');
