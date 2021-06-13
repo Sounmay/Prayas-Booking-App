@@ -38,7 +38,7 @@ class _ServiceDetailsMedicalState extends State<ServiceDetailsMedical> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ServiceDetailsMainCard(
-                    service.name, 'Speciality in Orthopedic'),
+                    service.name, 'Speciality in Orthopedic', service.image),
                 SizedBox(height: 8),
                 ServiceCardDetailsCenterCard(service),
                 SizedBox(height: 10),

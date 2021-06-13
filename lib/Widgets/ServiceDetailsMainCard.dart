@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class ServiceDetailsMainCard extends StatelessWidget {
   final String title;
   final String speciality;
+  final String image;
 
-  ServiceDetailsMainCard(this.title, this.speciality);
+  ServiceDetailsMainCard(this.title, this.speciality, this.image);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,14 +15,14 @@ class ServiceDetailsMainCard extends StatelessWidget {
         elevation: 5,
         color: Color(0xff0F2735),
         shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.4)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.4)),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Flexible(flex: 5, child: Image.asset('assets/Ellipse.png')),
+                Flexible(flex: 5, child: Image(image: NetworkImage(image))),
                 Flexible(
                   flex: 1,
                   child: Center(
