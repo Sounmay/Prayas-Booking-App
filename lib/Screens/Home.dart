@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:freelance_booking_app/Widgets/MapWidget.dart';
@@ -7,39 +7,17 @@ import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
 import 'package:freelance_booking_app/Widgets/myDrawer.dart';
 import 'package:freelance_booking_app/Widgets/NoticeCarousel.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  int i = 0;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  void _openEndDrawer() {
-    _scaffoldKey.currentState.openEndDrawer();
-  }
-
-  void _closeEndDrawer() {
-    Navigator.of(context).pop();
-  }
+class Home extends StatelessWidget {
+  final Function openDrawer;
+  Home(this.openDrawer);
 
   @override
   Widget build(BuildContext context) {
-    // final user = Provider.of<AppUser>(context, listen: false);
     final deviceWidth = MediaQuery.of(context).size.width;
-    final navigator = Provider.of<NavigationProvider>(context, listen: false);
+    final deviceHeight = MediaQuery.of(context).size.height;
+    final navigator = Provider.of<NavigationProvider>(context);
 
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Home'),
-        //   leading: InkWell(
-        //       onTap: () {
-        //         FirebaseAuth.instance.signOut();
-        //       },
-        //       child: Icon(Icons.logout)),
-        // ),
-        key: _scaffoldKey,
         endDrawer: Mydrawer(),
         body: SafeArea(
           child: Container(
@@ -51,42 +29,76 @@ class _HomeState extends State<Home> {
                     height: 10.0,
                   ),
                   Container(
+                    width: deviceWidth * 0.9,
+                    height: deviceHeight * 0.1,
                     padding: const EdgeInsets.all(10),
                     margin:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    height: 70,
-                    child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                            suffixIcon: SizedBox(
-                              height: 50,
-                              width: 50,
-                              child: FlatButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  padding: EdgeInsets.all(0),
-                                  color: Color(0xFF5D5FEF),
-                                  child: Icon(
-                                    Icons.menu,
-                                    color: Colors.white,
-                                    size: 35,
-                                  ),
-                                  onPressed: _openEndDrawer),
+                    child: Row(children: [
+                      // Container(
+                      //   width: deviceWidth * 0.7,
+                      //   child: TextFormField(
+                      //       keyboardType: TextInputType.text,
+                      //       decoration: InputDecoration(
+                      //           prefixIcon: new Icon(Icons.search),
+                      //           contentPadding: EdgeInsets.all(10),
+                      //           hintText: 'Search for a service',
+                      //           fillColor: Colors.white,
+                      //           filled: true,
+                      //           enabledBorder: OutlineInputBorder(
+                      //               borderSide: BorderSide(
+                      //                   color: Colors.grey, width: 1.0),
+                      //               borderRadius: BorderRadius.only(
+                      //                   topLeft: Radius.circular(6),
+                      //                   bottomLeft: Radius.circular(6))),
+                      //           focusedBorder: OutlineInputBorder(
+                      //               borderSide: BorderSide(
+                      //                   color: Colors.black, width: 2.0),
+                      //               borderRadius: BorderRadius.only(
+                      //                   topLeft: Radius.circular(6),
+                      //                   bottomLeft: Radius.circular(6)))),
+                      //       onChanged: (val) {}),
+                      // ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/searchScreen');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(left: 10),
+                          width: deviceWidth * 0.72,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(10),
+                                  topLeft: Radius.circular(10))),
+                          child: Row(
+                            children: [
+                              Icon(CupertinoIcons.search),
+                              SizedBox(width: 4),
+                              Text('Search for a service')
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10))),
+                            padding: EdgeInsets.all(0),
+                            color: Color(0xFF5D5FEF),
+                            child: Icon(
+                              Icons.menu,
+                              color: Colors.white,
+                              size: 35,
                             ),
-                            prefixIcon: new Icon(Icons.search),
-                            contentPadding: EdgeInsets.all(10),
-                            hintText: 'Search for a service',
-                            fillColor: Colors.white,
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey, width: 1.0),
-                                borderRadius: BorderRadius.circular(6)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.black, width: 2.0),
-                                borderRadius: BorderRadius.circular(6))),
-                        onChanged: (val) {}),
+                            onPressed: () => openDrawer()),
+                      ),
+                    ]),
                   ),
                   SizedBox(
                     height: 20.0,
@@ -267,9 +279,9 @@ class _HomeState extends State<Home> {
         ));
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  // }
 }

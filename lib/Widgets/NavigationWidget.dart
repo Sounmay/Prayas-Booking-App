@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Screens/AllServices.dart';
-import 'package:freelance_booking_app/Screens/BookAppointment.dart';
 import 'package:freelance_booking_app/Screens/Home.dart';
-import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
+import 'package:freelance_booking_app/Widgets/myDrawer.dart';
 import 'package:provider/provider.dart';
 
-class BottomNavBar extends StatefulWidget {
-  @override
-  _BottomNavBarState createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
+class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final navigator = Provider.of<NavigationProvider>(context);
+      final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     final widgetNavigator = navigator.widgetIndex;
-    final List<Widget> _children = [Home(), Home(), AllSerives()];
+    void openthisEndDrawer() {
+      _scaffoldKey.currentState.openEndDrawer();
+    }
+    final List<Widget> _children = [Home(openthisEndDrawer), Home(openthisEndDrawer), AllSerives()];
+
+    // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
       child: Scaffold(
+        key: _scaffoldKey,
+          endDrawer: Mydrawer(),
           body: _children[widgetNavigator],
           bottomNavigationBar: Container(
             padding: EdgeInsets.all(0),
