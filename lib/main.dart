@@ -20,6 +20,7 @@ import 'package:freelance_booking_app/Screens/ServiceDetailsSalon.dart';
 import 'package:freelance_booking_app/Screens/SlotBooking.dart';
 import 'package:freelance_booking_app/Screens/SplashScreen.dart';
 import 'package:freelance_booking_app/Screens/Wrapper.dart';
+import 'package:freelance_booking_app/Screens/PaymentScreen.dart';
 import 'package:freelance_booking_app/Widgets/NavigationWidget.dart';
 import 'package:freelance_booking_app/Screens/MyBookings.dart';
 import 'Screens/BookAppointment.dart';
@@ -83,6 +84,7 @@ class MyApp extends StatelessWidget {
             '/slotBooking': (context) => SlotBooking(),
             '/searchScreen': (context) => SearchScreen(),
             '/myBookings': (context) => MyBooking(),
+            '/paymentScreen': (context) => PaymentScreen(),
           },
         ),
       ),

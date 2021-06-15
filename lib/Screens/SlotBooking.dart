@@ -802,7 +802,10 @@ class _SlotBookingState extends State<SlotBooking> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5)),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                            Navigator.pushNamed(context, '/paymentScreen',
+                            arguments: {'id':id,'total':service.subtotal + gst1 + gst2});
+                          },
                       )
                     ],
                   ),
