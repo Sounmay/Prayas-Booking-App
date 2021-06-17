@@ -6,7 +6,7 @@ class PaymentScreen extends StatefulWidget {
   _PaymentScreenState createState() => _PaymentScreenState();
 }
 
-//issue - need to add Razorpay
+//issue - need to add Razorpay API with account
 
 class _PaymentScreenState extends State<PaymentScreen> {
   @override
