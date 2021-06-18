@@ -28,12 +28,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
               )
           ),
           body: Container(
-            height: 40,
-            width: 100,
+            margin: EdgeInsets.all(10),
+            height: MediaQuery.of(context).size.height * 0.1,
+            width: MediaQuery.of(context).size.width * 0.9,
             color: Colors.black,
-            child: Text("$total",
-              style: TextStyle(
-                  color: Colors.white
+            child: Center(
+              child: Text("Amount to be paid : Rs "+" $total",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25
+                ),
               ),
             ),
           ),
