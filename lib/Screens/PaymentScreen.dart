@@ -34,7 +34,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     var options = {
       'key':'rzp_test_xH5sd6KM7P8uMT',
       'amount': total*100,
-      'name': 'DartLingo',
+      'name': 'Booking Application',
       'description' : 'Test Payment',
       'prefill' : {'contact' : '', 'email': ''},
       'external' : {
