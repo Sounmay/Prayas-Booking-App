@@ -103,6 +103,7 @@ class Home extends StatelessWidget {
                   ),
                   Container(
                     margin: new EdgeInsets.symmetric(horizontal: 20.0),
+                    width: MediaQuery.of(context).size.width * 0.9,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
