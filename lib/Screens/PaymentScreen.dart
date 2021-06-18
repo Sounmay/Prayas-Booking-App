@@ -11,7 +11,7 @@ class PaymentScreen extends StatefulWidget {
 //issue - need to add Razorpay API with account
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  int total=0;
+  int total=100;
   Razorpay _razorpay;
   @override
   void initState() {
@@ -30,9 +30,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
     _razorpay.clear();
   }
 
-  void openCheckOut() async{
+  void openCheckOut(total) async{
     var options = {
-      'key':'',
+      'key':'rzp_test_xH5sd6KM7P8uMT',
       'amount': total*100,
       'name': 'DartLingo',
       'description' : 'Test Payment',
@@ -78,7 +78,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               backgroundColor: Color(0xFF0F2735),
               title: Row(
                 children: [
-                  Text('Payment',
+                  Text('Complete your booking',
                       style: TextStyle(fontSize: 18.0, letterSpacing: 1.0)),
                 ],
               )
@@ -100,7 +100,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ),
               TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    openCheckOut(total);
+                  },
                   style: TextButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor: Colors.blueAccent
