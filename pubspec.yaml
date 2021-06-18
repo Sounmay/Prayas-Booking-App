@@ -38,6 +38,8 @@ dependencies:
   firebase_storage: ^8.1.0
   geolocator: ^7.0.3
   carousel_slider: ^3.0.0
+  razorpay_flutter: ^1.2.6
+  fluttertoast: ^8.0.7
 
 
 dev_dependencies:
