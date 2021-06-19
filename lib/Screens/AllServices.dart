@@ -12,6 +12,8 @@ import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/cupertino.dart';
+
 
 class AllSerives extends StatefulWidget {
   int serviceIndex;
@@ -71,27 +73,27 @@ class _AllSerivesState extends State<AllSerives> {
               SizedBox(
                 height: 10.0,
               ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                height: 70,
-                child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                        prefixIcon: new Icon(Icons.search),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: 'Search for a service',
-                        fillColor: Colors.white,
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.grey, width: 1.0),
-                            borderRadius: BorderRadius.circular(6)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black, width: 2.0),
-                            borderRadius: BorderRadius.circular(6))),
-                    onChanged: (val) {}),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, '/searchScreen');
+                },
+                child: Container(
+                  padding: EdgeInsets.only(left: 10),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topLeft: Radius.circular(10))),
+                  child: Row(
+                    children: [
+                      Icon(CupertinoIcons.search),
+                      SizedBox(width: 4),
+                      Text('Search for a service')
+                    ],
+                  ),
+                ),
               ),
               Container(
                 margin: new EdgeInsets.symmetric(horizontal: 20.0),
