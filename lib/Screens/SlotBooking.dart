@@ -1,10 +1,12 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:freelance_booking_app/Providers/authProvider.dart';
 
 class SlotBooking extends StatefulWidget {
   @override
@@ -12,7 +14,18 @@ class SlotBooking extends StatefulWidget {
 }
 
 class _SlotBookingState extends State<SlotBooking> {
+  final CollectionReference book =
+      FirebaseFirestore.instance.collection('Bookings');
+
+  Future<void> addbook(DateTime dt, String slooot, String useeer) {
+    // Call the user's CollectionReference to add a new user
+    return book.add({'Date': dt, 'Slot': slooot, 'User id': useeer});
+  }
+
+  String userId = '${FirebaseAuth.instance.currentUser.uid}';
+
   int slt = 15;
+  String sl;
   bool a1 = true,
       a2 = true,
       a3 = true,
@@ -23,6 +36,7 @@ class _SlotBookingState extends State<SlotBooking> {
       a8 = true;
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.utc(1989);
+  CalendarFormat _calendarFormat = CalendarFormat.week;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +125,7 @@ class _SlotBookingState extends State<SlotBooking> {
                   child: TableCalendar(
                     firstDay: DateTime.utc(2010, 10, 16),
                     lastDay: DateTime.utc(2030, 3, 14),
-                    focusedDay: DateTime.now(),
+                    focusedDay: _focusedDay,
                     selectedDayPredicate: (day) {
                       return isSameDay(_selectedDay, day);
                     },
@@ -122,19 +136,27 @@ class _SlotBookingState extends State<SlotBooking> {
                             focusedDay; // update `_focusedDay` here as well
                       });
                     },
-                    calendarFormat: CalendarFormat.week,
+                    onPageChanged: (focusedDay) {
+                      _focusedDay = focusedDay;
+                    },
+                    calendarFormat: _calendarFormat,
+                    onFormatChanged: (format) {
+                      setState(() {
+                        _calendarFormat = format;
+                      });
+                    },
                     calendarStyle: CalendarStyle(
                         selectedDecoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(color: Color(0xff5D5FEF)),
                             borderRadius: BorderRadius.circular(6.0)),
                         selectedTextStyle: TextStyle(color: Colors.black),
-                        todayDecoration:
-                            BoxDecoration(color: Color(0xFFFAFAFA)),
+                        todayDecoration: BoxDecoration(
+                            color: Colors.blue[100],
+                            borderRadius: BorderRadius.circular(6.0)),
                         todayTextStyle: TextStyle(color: Colors.black),
                         withinRangeDecoration:
                             BoxDecoration(color: Colors.white)),
-                    headerVisible: false,
                   ),
                 ),
                 SizedBox(height: 40.0),
@@ -158,8 +180,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             a1 = true;
                           else
                             a1 = !a1;
-                          if (a1 == false)
+                          if (a1 == false) {
                             a8 = a2 = a3 = a4 = a5 = a6 = a7 = true;
+                            sl = "10:00 AM - 11:00 AM ";
+                          }
                         });
                       },
                       child: a1
@@ -217,8 +241,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             a2 = true;
                           else
                             a2 = !a2;
-                          if (a2 == false)
+                          if (a2 == false) {
                             a1 = a8 = a3 = a4 = a5 = a6 = a7 = true;
+                            sl = "11:00 AM - 12:00 PM ";
+                          }
                         });
                       },
                       child: a2
@@ -281,8 +307,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             a3 = true;
                           else
                             a3 = !a3;
-                          if (a3 == false)
+                          if (a3 == false) {
                             a1 = a2 = a8 = a4 = a5 = a6 = a7 = true;
+                            sl = "12:00 PM - 01:00 PM ";
+                          }
                         });
                       },
                       child: a3
@@ -340,8 +368,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             a4 = true;
                           else
                             a4 = !a4;
-                          if (a4 == false)
+                          if (a4 == false) {
                             a1 = a2 = a3 = a8 = a5 = a6 = a7 = true;
+                            sl = "02:00 PM - 03:00 PM ";
+                          }
                         });
                       },
                       child: a4
@@ -404,8 +434,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             a5 = true;
                           else
                             a5 = !a5;
-                          if (a5 == false)
+                          if (a5 == false) {
                             a1 = a2 = a3 = a4 = a8 = a6 = a7 = true;
+                            sl = "03:00 PM - 04:00 PM ";
+                          }
                         });
                       },
                       child: a5
@@ -463,8 +495,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             a6 = true;
                           else
                             a6 = !a6;
-                          if (a6 == false)
+                          if (a6 == false) {
                             a1 = a2 = a3 = a4 = a5 = a8 = a7 = true;
+                            sl = "04:00 PM - 05:00 PM ";
+                          }
                         });
                       },
                       child: a6
@@ -527,8 +561,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             a7 = true;
                           else
                             a7 = !a7;
-                          if (a7 == false)
+                          if (a7 == false) {
                             a1 = a2 = a3 = a4 = a5 = a6 = a8 = true;
+                            sl = "05:00 PM - 06:00 PM ";
+                          }
                         });
                       },
                       child: a7
@@ -586,8 +622,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             a8 = true;
                           else
                             a8 = !a8;
-                          if (a8 == false)
+                          if (a8 == false) {
                             a1 = a2 = a3 = a4 = a5 = a6 = a7 = true;
+                            sl = "06:00 PM - 07:00 PM ";
+                          }
                         });
                       },
                       child: a8
@@ -803,9 +841,13 @@ class _SlotBookingState extends State<SlotBooking> {
                               borderRadius: BorderRadius.circular(5)),
                         ),
                         onPressed: () {
-                            Navigator.pushNamed(context, '/paymentScreen',
-                            arguments: {'id':id,'total':service.subtotal + gst1 + gst2});
-                          },
+                          addbook(_selectedDay, sl, userId);
+                          Navigator.pushNamed(context, '/paymentScreen',
+                              arguments: {
+                                'id': id,
+                                'total': service.subtotal + gst1 + gst2
+                              });
+                        },
                       )
                     ],
                   ),

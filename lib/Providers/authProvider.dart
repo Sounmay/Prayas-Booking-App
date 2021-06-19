@@ -19,7 +19,6 @@ class AuthProvider {
           email: (email), password: (password));
       User user = result.user;
 
-      
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -35,9 +34,10 @@ class AuthProvider {
           email: (numemail), password: (password));
       User user = result.user;
 
-      FirebaseFirestore.instance.collection('Users').doc("${user.uid}").set({
-        "name": name
-      });
+      FirebaseFirestore.instance
+          .collection('Users')
+          .doc("${user.uid}")
+          .set({"name": name});
 
       return _userFromFirebaseUser(user);
     } catch (e) {
