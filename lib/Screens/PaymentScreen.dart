@@ -52,14 +52,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response){
     Fluttertoast.showToast(msg: "SUCCESS: "+response.paymentId);
+    Navigator.pushNamed(context, '/wrapper');
   }
 
   void _handlePaymentError(PaymentFailureResponse response){
     Fluttertoast.showToast(msg: "ERROR: "+response.code.toString() + " . "+response.message);
+    Navigator.pushNamed(context, '/wrapper');
   }
   
   void _handleExternalWallet(ExternalWalletResponse response){
     Fluttertoast.showToast(msg: "EXTERNAL WALLET " + response.walletName);
+    Navigator.pushNamed(context, '/wrapper');
   }
 
 
