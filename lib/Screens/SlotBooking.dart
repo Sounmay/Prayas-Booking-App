@@ -227,13 +227,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                 children: [
                                   Text('10:00 AM - 11:00 AM ',
                                       style: TextStyle(
-<<<<<<< HEAD
                                           color: Colors.white, fontSize: 12.0)),
-=======
-                                          color: Colors.white,
-                                          fontSize: 12.0)
-                                  ),
->>>>>>> da6c9d3c2f2aad0929d08eb4181dbc159b2014cf
                                   Card(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),

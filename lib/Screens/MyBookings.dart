@@ -28,7 +28,6 @@ class _MyBookingState extends State<MyBooking> {
 
   @override
   Widget build(BuildContext context) {
-    
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -41,51 +40,35 @@ class _MyBookingState extends State<MyBooking> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          height: 50,
-                          width: 50,
-                          child: IconButton(
-                              icon: Icon(Icons.arrow_back),
-                              onPressed: () {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                              })),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 0, vertical: 0),
-                          height: 70,
-
-                          child: TextFormField(
-                              key: formKey,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                  prefixIcon: new Icon(Icons.search),
-                                  contentPadding: EdgeInsets.all(10),
-                                  hintText: 'Search for a service',
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.grey, width: 1.0),
-                                      borderRadius: BorderRadius.circular(6)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.black, width: 2.0),
-                                      borderRadius: BorderRadius.circular(6))),
-                              onChanged: (val) {}),
-                        ),
-                      ),
-                    ],
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    height: 70,
+                    child: TextFormField(
+                        key: formKey,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                            prefixIcon: new Icon(Icons.search),
+                            contentPadding: EdgeInsets.all(10),
+                            hintText: 'Search for a service',
+                            fillColor: Colors.white,
+                            filled: true,
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.grey, width: 1.0),
+                                borderRadius: BorderRadius.circular(6)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 2.0),
+                                borderRadius: BorderRadius.circular(6))),
+                        onChanged: (val) {}),
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -95,7 +78,10 @@ class _MyBookingState extends State<MyBooking> {
                               TextStyle(fontSize: 18, color: Color(0xFF0F2735)),
                         ),
                         FlatButton(
+                          padding: EdgeInsets.all(0),
                           child: Container(
+                              padding: EdgeInsets.all(0),
+                              margin: EdgeInsets.all(0),
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
@@ -107,7 +93,7 @@ class _MyBookingState extends State<MyBooking> {
                                       b1 ? Color(0xFF5D5FEF) : Colors.white)),
                           onPressed: () {
                             setState(() {
-                              b1=!b1;
+                              b1 = !b1;
                             });
                           },
                         )
@@ -119,7 +105,7 @@ class _MyBookingState extends State<MyBooking> {
                   ),
                   b1
                       ? Padding(
-                          padding: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.all(0),
                           child: Column(
                             children: [
                               FlatButton(
@@ -244,82 +230,82 @@ class _MyBookingState extends State<MyBooking> {
                                 SizedBox(height: 10),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 15),
-                                    child: Row(
-                                      children: [
-                                        FlatButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              c1 = !c1;
-                                            });
-                                          },
-                                          child: Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                color: c1
-                                                    ? Colors.white
-                                                    : Color(0xFF5D5FEF),
-                                                border: Border.all(
-                                                    color: Color(0xFF5D5FEF)),
-                                                borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                            child: (Text('Doctor',
-                                                style: TextStyle(
-                                                    color: c1
-                                                        ? Color(0xFF5D5FEF)
-                                                        : Colors.white,
-                                                    fontSize: 12.0))),
-                                          ),
+                                  child: Row(
+                                    children: [
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            c1 = !c1;
+                                          });
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: c1
+                                                  ? Colors.white
+                                                  : Color(0xFF5D5FEF),
+                                              border: Border.all(
+                                                  color: Color(0xFF5D5FEF)),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0)),
+                                          child: (Text('Doctor',
+                                              style: TextStyle(
+                                                  color: c1
+                                                      ? Color(0xFF5D5FEF)
+                                                      : Colors.white,
+                                                  fontSize: 12.0))),
                                         ),
-                                        FlatButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              c2 = !c2;
-                                            });
-                                          },
-                                          child: Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                color: c2
-                                                    ? Colors.white
-                                                    : Color(0xFF5D5FEF),
-                                                border: Border.all(
-                                                    color: Color(0xFF5D5FEF)),
-                                                borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                            child: (Text('Parlour',
-                                                style: TextStyle(
-                                                    color: c2
-                                                        ? Color(0xFF5D5FEF)
-                                                        : Colors.white,
-                                                    fontSize: 12.0))),
-                                          ),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            c2 = !c2;
+                                          });
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: c2
+                                                  ? Colors.white
+                                                  : Color(0xFF5D5FEF),
+                                              border: Border.all(
+                                                  color: Color(0xFF5D5FEF)),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0)),
+                                          child: (Text('Parlour',
+                                              style: TextStyle(
+                                                  color: c2
+                                                      ? Color(0xFF5D5FEF)
+                                                      : Colors.white,
+                                                  fontSize: 12.0))),
                                         ),
-                                        FlatButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              c3 = !c3;
-                                            });
-                                          },
-                                          child: Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                color: c3
-                                                    ? Colors.white
-                                                    : Color(0xFF5D5FEF),
-                                                border: Border.all(
-                                                    color: Color(0xFF5D5FEF)),
-                                                borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                            child: (Text('Salon',
-                                                style: TextStyle(
-                                                    color: c3
-                                                        ? Color(0xFF5D5FEF)
-                                                        : Colors.white,
-                                                    fontSize: 12.0))),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            c3 = !c3;
+                                          });
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: c3
+                                                  ? Colors.white
+                                                  : Color(0xFF5D5FEF),
+                                              border: Border.all(
+                                                  color: Color(0xFF5D5FEF)),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0)),
+                                          child: (Text('Salon',
+                                              style: TextStyle(
+                                                  color: c3
+                                                      ? Color(0xFF5D5FEF)
+                                                      : Colors.white,
+                                                  fontSize: 12.0))),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(height: 15),
                                 Padding(
@@ -349,7 +335,7 @@ class _MyBookingState extends State<MyBooking> {
                                               border: Border.all(
                                                   color: Color(0xFF5D5FEF)),
                                               borderRadius:
-                                              BorderRadius.circular(5.0)),
+                                                  BorderRadius.circular(5.0)),
                                           child: (Text('Booked',
                                               style: TextStyle(
                                                   color: c4
@@ -373,7 +359,7 @@ class _MyBookingState extends State<MyBooking> {
                                               border: Border.all(
                                                   color: Color(0xFF5D5FEF)),
                                               borderRadius:
-                                              BorderRadius.circular(5.0)),
+                                                  BorderRadius.circular(5.0)),
                                           child: (Text('Scheduled',
                                               style: TextStyle(
                                                   color: c5
@@ -397,7 +383,7 @@ class _MyBookingState extends State<MyBooking> {
                                               border: Border.all(
                                                   color: Color(0xFF5D5FEF)),
                                               borderRadius:
-                                              BorderRadius.circular(5.0)),
+                                                  BorderRadius.circular(5.0)),
                                           child: (Text('Failed',
                                               style: TextStyle(
                                                   color: c6
@@ -421,7 +407,7 @@ class _MyBookingState extends State<MyBooking> {
                                               border: Border.all(
                                                   color: Color(0xFF5D5FEF)),
                                               borderRadius:
-                                              BorderRadius.circular(5.0)),
+                                                  BorderRadius.circular(5.0)),
                                           child: (Text('Refund',
                                               style: TextStyle(
                                                   color: c7
