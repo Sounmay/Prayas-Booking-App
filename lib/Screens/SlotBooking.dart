@@ -146,15 +146,16 @@ class _SlotBookingState extends State<SlotBooking> {
                       });
                     },
                     calendarStyle: CalendarStyle(
-                        selectedDecoration: BoxDecoration(
+                        todayDecoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(color: Color(0xff5D5FEF)),
                             borderRadius: BorderRadius.circular(6.0)),
-                        selectedTextStyle: TextStyle(color: Colors.black),
-                        todayDecoration: BoxDecoration(
-                            color: Colors.blue[100],
-                            borderRadius: BorderRadius.circular(6.0)),
                         todayTextStyle: TextStyle(color: Colors.black),
+                        selectedTextStyle: TextStyle(color: Colors.black),
+                        selectedDecoration: BoxDecoration(
+                            color: Colors.blue[100],
+                            border: Border.all(color: Colors.blue[100]),
+                            borderRadius: BorderRadius.circular(6.0)),
                         withinRangeDecoration:
                             BoxDecoration(color: Colors.white)),
                   ),
@@ -224,10 +225,21 @@ class _SlotBookingState extends State<SlotBooking> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  (Text('10:00 AM - 11:00 AM ',
+                                  Text('10:00 AM - 11:00 AM ',
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.0))),
+                                          color: Colors.white, fontSize: 12.0)),
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                            color: Color(0xff00A676),
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  )
                                 ],
                               ),
                             ),
@@ -289,6 +301,18 @@ class _SlotBookingState extends State<SlotBooking> {
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12.0))),
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                            color: Color(0xff00A676),
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  )
                                 ],
                               ),
                             ),
@@ -355,6 +379,18 @@ class _SlotBookingState extends State<SlotBooking> {
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12.0))),
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                            color: Color(0xff00A676),
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  )
                                 ],
                               ),
                             ),
@@ -416,6 +452,18 @@ class _SlotBookingState extends State<SlotBooking> {
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12.0))),
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                            color: Color(0xff00A676),
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  )
                                 ],
                               ),
                             ),
@@ -482,6 +530,18 @@ class _SlotBookingState extends State<SlotBooking> {
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12.0))),
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                            color: Color(0xff00A676),
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  )
                                 ],
                               ),
                             ),
@@ -543,6 +603,18 @@ class _SlotBookingState extends State<SlotBooking> {
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12.0))),
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                            color: Color(0xff00A676),
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  )
                                 ],
                               ),
                             ),
@@ -609,6 +681,18 @@ class _SlotBookingState extends State<SlotBooking> {
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12.0))),
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                            color: Color(0xff00A676),
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  )
                                 ],
                               ),
                             ),
@@ -670,6 +754,18 @@ class _SlotBookingState extends State<SlotBooking> {
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 12.0))),
+                                  Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                            color: Color(0xff00A676),
+                                            fontSize: 12.0),
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  )
                                 ],
                               ),
                             ),
@@ -678,7 +774,7 @@ class _SlotBookingState extends State<SlotBooking> {
                 ),
                 SizedBox(height: 30),
                 Container(
-                  height: height * 0.28,
+                  height: MediaQuery.of(context).size.height * 0.25,
                   color: Color(0xFFF7F7F7),
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                   child: Column(
@@ -775,45 +871,45 @@ class _SlotBookingState extends State<SlotBooking> {
                             ])
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0),
-                                child: Text(
-                                  'Slot booking',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              style: TextButton.styleFrom(
-                                backgroundColor: Color(0xFF0F2735),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)),
-                              ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/slotBooking',
-                                    arguments: {'id': id});
-                              },
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            TextButton(
-                              child: Text(
-                                'Emergency booking',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: TextButton.styleFrom(
-                                backgroundColor: Color(0xff5D5FEF),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)),
-                              ),
-                              onPressed: () {},
-                            )
-                          ],
-                        )
+//                        Row(
+//                          mainAxisAlignment: MainAxisAlignment.center,
+//                          children: [
+//                            TextButton(
+//                              child: Padding(
+//                                padding: const EdgeInsets.symmetric(
+//                                    horizontal: 20.0),
+//                                child: Text(
+//                                  'Slot booking',
+//                                  style: TextStyle(color: Colors.white),
+//                                ),
+//                              ),
+//                              style: TextButton.styleFrom(
+//                                backgroundColor: Color(0xFF0F2735),
+//                                shape: RoundedRectangleBorder(
+//                                    borderRadius: BorderRadius.circular(5)),
+//                              ),
+//                              onPressed: () {
+//                                Navigator.pushNamed(context, '/slotBooking',
+//                                    arguments: {'id': id});
+//                              },
+//                            ),
+//                            SizedBox(
+//                              width: 10.0,
+//                            ),
+//                            TextButton(
+//                              child: Text(
+//                                'Emergency booking',
+//                                style: TextStyle(color: Colors.white),
+//                              ),
+//                              style: TextButton.styleFrom(
+//                                backgroundColor: Color(0xff5D5FEF),
+//                                shape: RoundedRectangleBorder(
+//                                    borderRadius: BorderRadius.circular(5)),
+//                              ),
+//                              onPressed: () {},
+//                            )
+//                          ],
+//                        )
                       ]),
                 ),
                 Container(
