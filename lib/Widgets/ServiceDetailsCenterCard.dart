@@ -85,10 +85,10 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
                             Icons.av_timer,
                             color: Color(0xff5D5FEF),
                           ),
-                          Text('Visiting hour')
+                          Text('Visiting hour', style: TextStyle(fontSize: 12),)
                         ]),
                         Text('10:00 AM - 5:00PM',
-                            style: TextStyle(color: Color(0xff00A676)))
+                            style: TextStyle(color: Color(0xff00A676),fontSize: 12))
                       ],
                     ),
                   ),
@@ -102,10 +102,10 @@ class ServiceCardDetailsCenterCard extends StatelessWidget {
                             Icons.wb_sunny,
                             color: Color(0xff5D5FEF),
                           ),
-                          Text('Days')
+                          Text('Days', style: TextStyle(fontSize: 12),)
                         ]),
                         Text('MON-THU',
-                            style: TextStyle(color: Color(0xff00A676)))
+                            style: TextStyle(color: Color(0xff00A676),fontSize: 12))
                       ],
                     ),
                   ),
