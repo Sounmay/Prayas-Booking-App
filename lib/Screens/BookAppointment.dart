@@ -51,13 +51,13 @@ class _BookAppointmentState extends State<BookAppointment> {
                       alignment: Alignment.center,
                       child: Image.asset(
                         'assets/croppedParlour.png',
-                        height: 60,
+                        height: 110,
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
                     ),
                     Container(
-                        padding: EdgeInsets.fromLTRB(10.0, 25.0, 0.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(10.0, 70.0, 0.0, 0.0),
                         child: Row(
                           children: [
                             Icon(
@@ -72,7 +72,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 24.0),
+                                  fontSize: 22.0),
                             ),
                           ],
                         )),
@@ -313,7 +313,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                       ),
                 SizedBox(height: 10.0),
                 Container(
-                  height: height * 0.28,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   color: Color(0xFFF7F7F7),
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                   child: Column(
@@ -456,6 +456,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                         )
                       ]),
                 ),
+                SizedBox(height: 20.0)
               ],
             ),
           ),
