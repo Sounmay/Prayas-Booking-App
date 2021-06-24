@@ -64,7 +64,7 @@ class ServiceListSalon extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18)),
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.14,
+                          width: MediaQuery.of(context).size.width * 0.15,
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -85,11 +85,12 @@ class ServiceListSalon extends StatelessWidget {
                           ),
                           Text('Visiting hour',
                               style: TextStyle(
-                                color: Colors.white,
+                                  color: Colors.white,
+                                  fontSize: 12
                               ))
                         ]),
                         Text('10:00 AM - 5:00PM',
-                            style: TextStyle(color: Color(0xff00A676)))
+                            style: TextStyle(color: Color(0xff00A676),fontSize: 12))
                       ],
                     ),
                     Row(
@@ -100,10 +101,10 @@ class ServiceListSalon extends StatelessWidget {
                             Icons.wb_sunny,
                             color: Color(0xff5D5FEF),
                           ),
-                          Text('Days', style: TextStyle(color: Colors.white)),
+                          Text('Days', style: TextStyle(color: Colors.white,fontSize: 12)),
                         ]),
                         Text('MON-THU',
-                            style: TextStyle(color: Color(0xff00A676)))
+                            style: TextStyle(color: Color(0xff00A676),fontSize: 12))
                       ],
                     ),
                   ],

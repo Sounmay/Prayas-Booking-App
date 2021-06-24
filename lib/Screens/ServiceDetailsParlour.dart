@@ -115,7 +115,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                           Flexible(
                             flex: 2,
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 0.14,
+                              width: MediaQuery.of(context).size.width * 0.15,
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                   border: Border.all(color: Color(0xff5D5FEF)),
@@ -202,7 +202,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.8,
+                width: MediaQuery.of(context).size.width * 0.9,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -221,7 +221,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.37,
+                        width: MediaQuery.of(context).size.width * 0.43,
                         child: TextButton(
                           child: Text(
                             'Book an appointment',

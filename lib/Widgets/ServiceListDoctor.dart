@@ -26,7 +26,7 @@ class ServiceListDoctor extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Color(0xff0F2735),
                     borderRadius: BorderRadius.circular(5)),
-                width: 120,
+                width: MediaQuery.of(context).size.width*0.9,
                 height: 130,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -97,10 +97,11 @@ class ServiceListDoctor extends StatelessWidget {
                             CupertinoIcons.clock,
                             color: Color(0xff5D5FEF),
                           ),
-                          Text('Visiting hour')
+                          Text('Visiting hour',style: TextStyle(
+                              fontSize: 12)),
                         ]),
                         Text('10:00 AM - 5:00PM',
-                            style: TextStyle(color: Color(0xff00A676)))
+                            style: TextStyle(color: Color(0xff00A676), fontSize: 12))
                       ],
                     ),
                     Row(
@@ -111,10 +112,11 @@ class ServiceListDoctor extends StatelessWidget {
                             Icons.wb_sunny,
                             color: Color(0xff5D5FEF),
                           ),
-                          Text('Days')
+                          Text('Days',style: TextStyle(
+                              fontSize: 12))
                         ]),
                         Text('MON-THU',
-                            style: TextStyle(color: Color(0xff00A676)))
+                            style: TextStyle(color: Color(0xff00A676), fontSize: 12))
                       ],
                     ),
                   ],

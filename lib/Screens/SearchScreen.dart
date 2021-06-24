@@ -133,7 +133,8 @@ class _SearchScreenState extends State<SearchScreen> {
                               if (!thisFocusnode.hasFocus) {
                                 Navigator.pop(context);
                               }
-                            })),
+                            })
+                    ),
                     Expanded(
                         child: Container(
                       padding: const EdgeInsets.all(10),
