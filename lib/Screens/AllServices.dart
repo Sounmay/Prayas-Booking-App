@@ -96,7 +96,7 @@ class _AllSerivesState extends State<AllSerives> {
                 ),
               ),
               Container(
-                margin: new EdgeInsets.symmetric(horizontal: 20.0),
+                margin: new EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -107,6 +107,7 @@ class _AllSerivesState extends State<AllSerives> {
                             ? Color(0xFF5D5FEF)
                             : Color(0xFFE5E5E5),
                         height: 25.0,
+                        minWidth: 1.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0),
                         ),

@@ -28,7 +28,7 @@ class _MydrawerState extends State<Mydrawer> {
                         children: [
                           CircleAvatar(
                             radius: 32,
-                            foregroundImage: AssetImage('assets/profilepic.png'),
+                            foregroundImage: AssetImage('assets/doctor.png'),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10.0),
