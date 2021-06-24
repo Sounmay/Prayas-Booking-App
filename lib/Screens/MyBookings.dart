@@ -58,6 +58,7 @@ class _MyBookingState extends State<MyBooking> {
                           margin: const EdgeInsets.symmetric(
                               horizontal: 0, vertical: 0),
                           height: 70,
+
                           child: TextFormField(
                               key: formKey,
                               keyboardType: TextInputType.text,
@@ -84,7 +85,7 @@ class _MyBookingState extends State<MyBooking> {
                     height: 20.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -106,7 +107,7 @@ class _MyBookingState extends State<MyBooking> {
                                       b1 ? Color(0xFF5D5FEF) : Colors.white)),
                           onPressed: () {
                             setState(() {
-                              b1 = false;
+                              b1=!b1;
                             });
                           },
                         )
@@ -221,7 +222,7 @@ class _MyBookingState extends State<MyBooking> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.all(15.0),
                                       child: Text('Service',
                                           style: TextStyle(
                                               color: Color(0xFF0F2735))),
@@ -241,81 +242,84 @@ class _MyBookingState extends State<MyBooking> {
                                   ],
                                 ),
                                 SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    FlatButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          c1 = !c1;
-                                        });
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: c1
-                                                ? Colors.white
-                                                : Color(0xFF5D5FEF),
-                                            border: Border.all(
-                                                color: Color(0xFF5D5FEF)),
-                                            borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                        child: (Text('Doctor',
-                                            style: TextStyle(
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 15),
+                                    child: Row(
+                                      children: [
+                                        FlatButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              c1 = !c1;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
                                                 color: c1
-                                                    ? Color(0xFF5D5FEF)
-                                                    : Colors.white,
-                                                fontSize: 12.0))),
-                                      ),
-                                    ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          c2 = !c2;
-                                        });
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: c2
-                                                ? Colors.white
-                                                : Color(0xFF5D5FEF),
-                                            border: Border.all(
-                                                color: Color(0xFF5D5FEF)),
-                                            borderRadius:
+                                                    ? Colors.white
+                                                    : Color(0xFF5D5FEF),
+                                                border: Border.all(
+                                                    color: Color(0xFF5D5FEF)),
+                                                borderRadius:
                                                 BorderRadius.circular(5.0)),
-                                        child: (Text('Parlour',
-                                            style: TextStyle(
+                                            child: (Text('Doctor',
+                                                style: TextStyle(
+                                                    color: c1
+                                                        ? Color(0xFF5D5FEF)
+                                                        : Colors.white,
+                                                    fontSize: 12.0))),
+                                          ),
+                                        ),
+                                        FlatButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              c2 = !c2;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
                                                 color: c2
-                                                    ? Color(0xFF5D5FEF)
-                                                    : Colors.white,
-                                                fontSize: 12.0))),
-                                      ),
-                                    ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          c3 = !c3;
-                                        });
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: c3
-                                                ? Colors.white
-                                                : Color(0xFF5D5FEF),
-                                            border: Border.all(
-                                                color: Color(0xFF5D5FEF)),
-                                            borderRadius:
+                                                    ? Colors.white
+                                                    : Color(0xFF5D5FEF),
+                                                border: Border.all(
+                                                    color: Color(0xFF5D5FEF)),
+                                                borderRadius:
                                                 BorderRadius.circular(5.0)),
-                                        child: (Text('Salon',
-                                            style: TextStyle(
+                                            child: (Text('Parlour',
+                                                style: TextStyle(
+                                                    color: c2
+                                                        ? Color(0xFF5D5FEF)
+                                                        : Colors.white,
+                                                    fontSize: 12.0))),
+                                          ),
+                                        ),
+                                        FlatButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              c3 = !c3;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
                                                 color: c3
-                                                    ? Color(0xFF5D5FEF)
-                                                    : Colors.white,
-                                                fontSize: 12.0))),
-                                      ),
-                                    )
-                                  ],
+                                                    ? Colors.white
+                                                    : Color(0xFF5D5FEF),
+                                                border: Border.all(
+                                                    color: Color(0xFF5D5FEF)),
+                                                borderRadius:
+                                                BorderRadius.circular(5.0)),
+                                            child: (Text('Salon',
+                                                style: TextStyle(
+                                                    color: c3
+                                                        ? Color(0xFF5D5FEF)
+                                                        : Colors.white,
+                                                    fontSize: 12.0))),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                 ),
                                 SizedBox(height: 15),
                                 Padding(
@@ -326,105 +330,108 @@ class _MyBookingState extends State<MyBooking> {
                                   ),
                                 ),
                                 SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    FlatButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          c4 = !c4;
-                                        });
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: c4
-                                                ? Colors.white
-                                                : Color(0xFF5D5FEF),
-                                            border: Border.all(
-                                                color: Color(0xFF5D5FEF)),
-                                            borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                        child: (Text('Booked',
-                                            style: TextStyle(
-                                                color: c4
-                                                    ? Color(0xFF5D5FEF)
-                                                    : Colors.white,
-                                                fontSize: 12.0))),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 15),
+                                  child: Row(
+                                    children: [
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            c4 = !c4;
+                                          });
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: c4
+                                                  ? Colors.white
+                                                  : Color(0xFF5D5FEF),
+                                              border: Border.all(
+                                                  color: Color(0xFF5D5FEF)),
+                                              borderRadius:
+                                              BorderRadius.circular(5.0)),
+                                          child: (Text('Booked',
+                                              style: TextStyle(
+                                                  color: c4
+                                                      ? Color(0xFF5D5FEF)
+                                                      : Colors.white,
+                                                  fontSize: 12.0))),
+                                        ),
                                       ),
-                                    ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          c5 = !c5;
-                                        });
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: c5
-                                                ? Colors.white
-                                                : Color(0xFF5D5FEF),
-                                            border: Border.all(
-                                                color: Color(0xFF5D5FEF)),
-                                            borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                        child: (Text('Scheduled',
-                                            style: TextStyle(
-                                                color: c5
-                                                    ? Color(0xFF5D5FEF)
-                                                    : Colors.white,
-                                                fontSize: 12.0))),
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            c5 = !c5;
+                                          });
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: c5
+                                                  ? Colors.white
+                                                  : Color(0xFF5D5FEF),
+                                              border: Border.all(
+                                                  color: Color(0xFF5D5FEF)),
+                                              borderRadius:
+                                              BorderRadius.circular(5.0)),
+                                          child: (Text('Scheduled',
+                                              style: TextStyle(
+                                                  color: c5
+                                                      ? Color(0xFF5D5FEF)
+                                                      : Colors.white,
+                                                  fontSize: 12.0))),
+                                        ),
                                       ),
-                                    ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          c6 = !c6;
-                                        });
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: c6
-                                                ? Colors.white
-                                                : Color(0xFF5D5FEF),
-                                            border: Border.all(
-                                                color: Color(0xFF5D5FEF)),
-                                            borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                        child: (Text('Failed',
-                                            style: TextStyle(
-                                                color: c6
-                                                    ? Color(0xFF5D5FEF)
-                                                    : Colors.white,
-                                                fontSize: 12.0))),
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            c6 = !c6;
+                                          });
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: c6
+                                                  ? Colors.white
+                                                  : Color(0xFF5D5FEF),
+                                              border: Border.all(
+                                                  color: Color(0xFF5D5FEF)),
+                                              borderRadius:
+                                              BorderRadius.circular(5.0)),
+                                          child: (Text('Failed',
+                                              style: TextStyle(
+                                                  color: c6
+                                                      ? Color(0xFF5D5FEF)
+                                                      : Colors.white,
+                                                  fontSize: 12.0))),
+                                        ),
                                       ),
-                                    ),
-                                    FlatButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          c7 = !c7;
-                                        });
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            color: c7
-                                                ? Colors.white
-                                                : Color(0xFF5D5FEF),
-                                            border: Border.all(
-                                                color: Color(0xFF5D5FEF)),
-                                            borderRadius:
-                                                BorderRadius.circular(5.0)),
-                                        child: (Text('Refund',
-                                            style: TextStyle(
-                                                color: c7
-                                                    ? Color(0xFF5D5FEF)
-                                                    : Colors.white,
-                                                fontSize: 12.0))),
-                                      ),
-                                    )
-                                  ],
+                                      FlatButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            c7 = !c7;
+                                          });
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              color: c7
+                                                  ? Colors.white
+                                                  : Color(0xFF5D5FEF),
+                                              border: Border.all(
+                                                  color: Color(0xFF5D5FEF)),
+                                              borderRadius:
+                                              BorderRadius.circular(5.0)),
+                                          child: (Text('Refund',
+                                              style: TextStyle(
+                                                  color: c7
+                                                      ? Color(0xFF5D5FEF)
+                                                      : Colors.white,
+                                                  fontSize: 12.0))),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(height: 15),
                                 Row(
