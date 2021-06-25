@@ -80,10 +80,6 @@ class _MyBookingState extends State<MyBooking> {
                         FlatButton(
                           padding: EdgeInsets.all(0),
                           child: Container(
-                              padding: EdgeInsets.all(0),
-                              margin: EdgeInsets.all(0),
-                              height: 40,
-                              width: 40,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: b1 ? Colors.white : Color(0xFF5D5FEF)),
