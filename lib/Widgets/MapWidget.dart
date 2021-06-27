@@ -51,23 +51,45 @@ class _MapWidgetState extends State<MapWidget> {
     final deviceWidth = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        Container(
-            height: deviceHeight * 0.3,
-            width: deviceWidth * 0.9,
-            child: GoogleMap(
-              mapType: MapType.normal,
-              myLocationEnabled: true,
-              initialCameraPosition: MapWidget._kGooglePlex,
-              myLocationButtonEnabled: true,
-              zoomGesturesEnabled: true,
-              zoomControlsEnabled: true,
-              onMapCreated: (GoogleMapController controller) async {
-                _controllerGoogleMap.complete(controller);
-                newGoogleMapController = controller;
+        Stack(
+          children: [
+            Container(
+                height: deviceHeight * 0.3,
+                width: deviceWidth * 0.9,
+                child: GoogleMap(
+                  mapType: MapType.normal,
+                  myLocationEnabled: true,
+                  initialCameraPosition: MapWidget._kGooglePlex,
+                  myLocationButtonEnabled: false,
+                  zoomGesturesEnabled: true,
+                  zoomControlsEnabled: true,
+                  onMapCreated: (GoogleMapController controller) async {
+                    _controllerGoogleMap.complete(controller);
+                    newGoogleMapController = controller;
 
-                await locatePosition(context);
-              },
-            )),
+                    await locatePosition(context);
+                  },
+                )
+            ),
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.0),
+                color: Colors.blue,
+              ),
+              margin: EdgeInsets.only(left: deviceWidth * 0.78, top: deviceWidth * 0.03),
+              child: Center(
+                child: IconButton(
+                    onPressed: (){
+
+                    },
+                    icon: Icon(Icons.expand, color: Colors.white,)
+                ),
+              )
+            )
+          ],
+        ),
         Container(
           height: MediaQuery.of(context).size.height * 0.15,
           width: MediaQuery.of(context).size.width * 0.9,

@@ -77,6 +77,24 @@ class Home extends StatelessWidget {
                     ]),
                   ),
                   SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Row(children: [
+                      Text(
+                        'Services near you (5 km radius)',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xFF5D5FEF),
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ]),
+                  ),
+                  SizedBox(
                     height: 20.0,
                   ),
                   MapWidget(),
