@@ -16,6 +16,7 @@ class Home extends StatelessWidget {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     final navigator = Provider.of<NavigationProvider>(context);
+    bool expanded=false;
 
     return Scaffold(
         endDrawer: Mydrawer(),
@@ -271,7 +272,8 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        )
+    );
   }
 
   // @override

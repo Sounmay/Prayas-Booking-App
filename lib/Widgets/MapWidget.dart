@@ -47,6 +47,7 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    bool expanded=false;
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
     return Column(
@@ -82,7 +83,7 @@ class _MapWidgetState extends State<MapWidget> {
               child: Center(
                 child: IconButton(
                     onPressed: (){
-
+                        expanded=true; // use this variable to maximise map
                     },
                     icon: Icon(Icons.expand, color: Colors.white,)
                 ),
