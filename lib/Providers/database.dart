@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Models/Salon.dart';
@@ -26,5 +27,12 @@ class DatabaseService {
     return ref
         .snapshots()
         .map((event) => event.docs.map((e) => Salon.fromFirestore(e)).toList());
+  }
+
+  Future changeUserAvatar(String imgUrl) async {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .update({"image": imgUrl});
   }
 }
