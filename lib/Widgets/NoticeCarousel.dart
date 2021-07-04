@@ -16,7 +16,6 @@ final List<Widget> imageSliders = imgList.map((item) => Container(
     child: Stack(
       children: [
         Container(
-          width: 40,
           color: Color(0xff0F2735),
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
