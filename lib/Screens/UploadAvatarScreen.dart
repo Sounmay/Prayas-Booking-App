@@ -28,7 +28,7 @@ class _UploadAvatarState extends State<UploadAvatar> {
             children: [
               TextButton(onPressed: selectFile, child: Text('Select Image')),
               Text(fileName),
-              TextButton(onPressed: uploadFile, child: Text('Select Image'))
+              TextButton(onPressed: uploadFile, child: Text('Upload Image'))
             ],
           ),
         ),
