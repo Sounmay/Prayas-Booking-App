@@ -28,6 +28,7 @@ import 'package:freelance_booking_app/Screens/MyBookings.dart';
 import 'Screens/BookAppointment.dart';
 import 'Screens/ServiceDetailsMedical.dart';
 import 'package:provider/provider.dart';
+import 'package:freelance_booking_app/Widgets/ExpandedMap.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -88,6 +89,7 @@ class MyApp extends StatelessWidget {
             '/myBookings': (context) => MyBooking(),
             '/paymentScreen': (context) => PaymentScreen(),
             '/login': (context) => Login(),
+            'expandedmap' : (context) => ExpandedMap()
           },
         ),
       ),

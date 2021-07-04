@@ -11,58 +11,62 @@ final List<String> imgList = [
 
 
 final List<Widget> imageSliders = imgList.map((item) => Container(
-  child: Stack(
-    children: [
-      Container(
-        color: Color(0xff0F2735),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                      'assets/parlourThumbnail.png'),
-                  alignment: Alignment.topRight,
-                  fit: BoxFit.fill
+  child: Container(
+    color: Color(0xff0F2735),
+    child: Stack(
+      children: [
+        Container(
+          width: 40,
+          color: Color(0xff0F2735),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                          'assets/parlourThumbnail.png'),
+                      alignment: Alignment.topRight,
+                      fit: BoxFit.fill
+                  ),
+                  borderRadius: BorderRadius.horizontal(
+                      left: Radius.elliptical(200, 200)
+                  )
               ),
-              borderRadius: BorderRadius.horizontal(
-                left: Radius.elliptical(200, 200)
-              )
             ),
           ),
         ),
-      ),
-      Container(
-          margin: EdgeInsets.all(15.0),
-          padding: EdgeInsets.all(4.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
-            color: Color(0xff5D5FEF),
-          ),
-          width: 250,
-          height: 25,
-          child: Row(
-            children: [
-              Icon(Icons.location_on, color: Colors.white, size: 15.0,),
-              SizedBox(width: 2.0),
-              Text("Location of Clinic shown here",
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
-          )
-      ),
-      Container(
-        margin: EdgeInsets.fromLTRB(15, 60, 0, 0),
-        child: Text(
-          'Clinic Name',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
-          ),
+        Container(
+            margin: EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(4.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Color(0xff5D5FEF),
+            ),
+            width: 250,
+            height: 25,
+            child: Row(
+              children: [
+                Icon(Icons.location_on, color: Colors.white, size: 15.0,),
+                SizedBox(width: 2.0),
+                Text("Location of Clinic shown here",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            )
         ),
-      )
-    ],
+        Container(
+          margin: EdgeInsets.fromLTRB(15, 60, 0, 0),
+          child: Text(
+            'Clinic Name',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
+      ],
+    ),
   )
 )).toList();
 
@@ -76,6 +80,7 @@ class _NoticeCarouselState extends State<NoticeCarousel> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+          color: Colors.blueGrey.withOpacity(0.1),
           height: MediaQuery.of(context).size.height*0.5,
           width: MediaQuery.of(context).size.width * 0.9,
           child: CarouselSlider(
