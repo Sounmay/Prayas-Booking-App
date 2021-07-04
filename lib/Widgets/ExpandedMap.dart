@@ -85,28 +85,38 @@ class _ExpandedMapState extends State<ExpandedMap> {
                         children: [
                           LocationNameWidget(),
                           SizedBox(height: 10,),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/searchScreen');
-                            },
-                            child: Container(
-                              padding: EdgeInsets.only(left: 10),
-                              width: deviceWidth * 0.9,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10),
-                                      topLeft: Radius.circular(10))),
-                              child: Row(
-                                children: [
-                                  Icon(CupertinoIcons.search),
-                                  SizedBox(width: 4),
-                                  Text('Search for a service')
-                                ],
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: (){
+                                    Navigator.pushNamed(context, '/'); // use this variable to maximise map
+                                  },
+                                  icon: Icon(Icons.arrow_back, color: Colors.black,)
                               ),
-                            ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/searchScreen');
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 10),
+                                  width: deviceWidth * 0.8,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white),
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          topLeft: Radius.circular(10))),
+                                  child: Row(
+                                    children: [
+                                      Icon(CupertinoIcons.search),
+                                      SizedBox(width: 4),
+                                      Text('Search for a service')
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height * 0.15,

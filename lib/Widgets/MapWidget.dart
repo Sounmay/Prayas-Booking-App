@@ -83,7 +83,7 @@ class _MapWidgetState extends State<MapWidget> {
               child: Center(
                 child: IconButton(
                     onPressed: (){
-                        Navigator.pushNamed(context, 'expandedmap'); // use this variable to maximise map
+                        Navigator.pushNamed(context, '/expandedmap'); // use this variable to maximise map
                     },
                     icon: Icon(Icons.expand, color: Colors.white,)
                 ),

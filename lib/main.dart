@@ -13,6 +13,7 @@ import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
 import 'package:freelance_booking_app/Screens/AllServices.dart';
+import 'package:freelance_booking_app/Screens/Home.dart';
 import 'package:freelance_booking_app/Screens/LoginScreen.dart';
 import 'package:freelance_booking_app/Screens/SearchScreen.dart';
 import 'package:freelance_booking_app/Screens/MyBookings.dart';
@@ -89,7 +90,7 @@ class MyApp extends StatelessWidget {
             '/myBookings': (context) => MyBooking(),
             '/paymentScreen': (context) => PaymentScreen(),
             '/login': (context) => Login(),
-            'expandedmap' : (context) => ExpandedMap()
+            '/expandedmap' : (context) => ExpandedMap()
           },
         ),
       ),
