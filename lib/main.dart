@@ -25,6 +25,8 @@ import 'Screens/ServiceDetailsMedical.dart';
 import 'package:provider/provider.dart';
 import 'package:freelance_booking_app/Widgets/ExpandedMap.dart';
 
+// check push comment
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -76,7 +78,7 @@ class MyApp extends StatelessWidget {
             '/paymentScreen': (context) => PaymentScreen(),
             '/login': (context) => Login(),
             '/uploadAvatar': (context) => UploadAvatar(),
-            'expandedmap': (context) => ExpandedMap()
+            '/expandedmap': (context) => ExpandedMap()
           },
         ),
       ),
