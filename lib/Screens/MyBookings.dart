@@ -1,5 +1,6 @@
 import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:random_string/random_string.dart';
 
 class MyBooking extends StatefulWidget {
   MyBooking({Key key}) : super(key: key);
@@ -19,6 +20,8 @@ class _MyBookingState extends State<MyBooking> {
       c7 = true;
 
   static final formKey = GlobalKey<FormState>();
+
+  String otp = randomAlphaNumeric(6);
 
   @override
   void initState() {
@@ -120,7 +123,7 @@ class _MyBookingState extends State<MyBooking> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            '#pop56',
+                                            'OTP : $otp',
                                             style: TextStyle(
                                                 color: Color(0xFF5D5FEF)),
                                             textAlign: TextAlign.left,
