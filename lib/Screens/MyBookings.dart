@@ -108,6 +108,9 @@ class _MyBookingState extends State<MyBooking> {
                           child: Column(
                             children: [
                               FlatButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/invi');
+                                },
                                 child: Container(
                                     child: Row(
                                   children: [
