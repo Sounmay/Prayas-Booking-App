@@ -13,11 +13,125 @@ class _InvoiceState extends State<Invoice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Color(0xFF5D5FEF),
+          title: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text('INVOICE',
+                    style: TextStyle(fontSize: 30.0, letterSpacing: 1.0)),
+              ),
+            ],
+          )),
       body: Container(
         child: SingleChildScrollView(
             child: Column(
           children: [
-            Container(height: 80, color: Color(0xff5D5FEF)),
+            Stack(
+              children: <Widget>[
+                Container(
+                    height: 80,
+                    color: Color(0xff5D5FEF),
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Receipt Number ',
+                                  style: TextStyle(color: Colors.white)),
+                              SizedBox(height: 10),
+                              Text('Date',
+                                  style: TextStyle(color: Colors.white))
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('  :  ',
+                                  style: TextStyle(color: Colors.white)),
+                              SizedBox(height: 10),
+                              Text('  :  ',
+                                  style: TextStyle(color: Colors.white))
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('#23456',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                              SizedBox(height: 10),
+                              Text('20/05/2021',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))
+                            ],
+                          )
+                        ],
+                      ),
+                    )),
+                Container(
+                    padding: EdgeInsets.only(top: 68),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                            height: 24,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff5D5FEF))),
+                        Container(
+                            height: 24,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff5D5FEF))),
+                        Container(
+                            height: 24,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff5D5FEF))),
+                        Container(
+                            height: 24,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff5D5FEF))),
+                        Container(
+                            height: 24,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff5D5FEF))),
+                        Container(
+                            height: 24,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff5D5FEF))),
+                        Container(
+                            height: 24,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff5D5FEF))),
+                        Container(
+                            height: 24,
+                            width: 25,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff5D5FEF)))
+                      ],
+                    ))
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Column(
@@ -251,7 +365,84 @@ class _InvoiceState extends State<Invoice> {
                 ],
               ),
             ),
-            Container(height: 80, color: Color(0xff5D5FEF))
+            Stack(
+              children: [
+                Column(
+                  children: [
+                    SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 90,
+                            color: Color(0xff5D5FEF),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text("😊", style: TextStyle(fontSize: 23.0)),
+                                SizedBox(height: 5),
+                                Text('Thank You!',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 30.0,
+                                        letterSpacing: 1.0)),
+                                SizedBox(height: 8)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Container(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                        height: 24,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xff5D5FEF))),
+                    Container(
+                        height: 24,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xff5D5FEF))),
+                    Container(
+                        height: 24,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xff5D5FEF))),
+                    Container(
+                        height: 24,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xff5D5FEF))),
+                    Container(
+                        height: 24,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xff5D5FEF))),
+                    Container(
+                        height: 24,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xff5D5FEF))),
+                    Container(
+                        height: 24,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xff5D5FEF))),
+                    Container(
+                        height: 24,
+                        width: 25,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xff5D5FEF)))
+                  ],
+                ))
+              ],
+            ),
           ],
         )),
       ),
