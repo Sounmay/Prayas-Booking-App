@@ -22,9 +22,9 @@ class Parlour {
     return Parlour(
         type: 'parlour',
         id: doc.id,
-        parlourName: data['parlourName'] ?? '',
-        location: data['location'] ?? '',
-        image: data['image'] ?? '',
+        parlourName: data['location']['name'] ?? '',
+        location: data['location']['address'] ?? '',
+        image: data['location']['image'] ?? '',
         mostAvailservices: data['mostAvailServices'] ?? []);
   }
 }
