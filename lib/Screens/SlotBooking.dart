@@ -148,18 +148,24 @@ class _SlotBookingState extends State<SlotBooking> {
                       });
                     },
                     calendarStyle: CalendarStyle(
-                        todayDecoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Color(0xff5D5FEF)),
-                            borderRadius: BorderRadius.circular(6.0)),
-                        todayTextStyle: TextStyle(color: Colors.black),
-                        selectedTextStyle: TextStyle(color: Colors.black),
-                        selectedDecoration: BoxDecoration(
-                            color: Colors.blue[100],
-                            border: Border.all(color: Colors.blue[100]),
-                            borderRadius: BorderRadius.circular(6.0)),
-                        withinRangeDecoration:
-                            BoxDecoration(color: Colors.white)),
+                      defaultDecoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(6.0)),
+                      todayDecoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.white,
+                          border: Border.all(color: Color(0xff5D5FEF)),
+                          borderRadius: BorderRadius.circular(6.0)),
+                      todayTextStyle: TextStyle(color: Colors.black),
+                      selectedTextStyle: TextStyle(color: Colors.black),
+                      defaultTextStyle: TextStyle(color: Colors.black),
+                      selectedDecoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.blue[100],
+                          border: Border.all(color: Colors.blue[100]),
+                          borderRadius: BorderRadius.circular(6.0)),
+                      withinRangeDecoration: BoxDecoration(color: Colors.white),
+                    ),
                   ),
                 ),
                 SizedBox(height: 40.0),
