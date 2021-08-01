@@ -4,7 +4,6 @@ import 'package:freelance_booking_app/Screens/AllServices.dart';
 import 'package:freelance_booking_app/Screens/Home.dart';
 import 'package:freelance_booking_app/Widgets/myDrawer.dart';
 import 'package:freelance_booking_app/Screens/MyBookings.dart';
-import 'package:freelance_booking_app/Screens/ServiceDetailsMedical.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatelessWidget {

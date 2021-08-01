@@ -6,6 +6,7 @@ class Cart {
   final List<String> serviceName;
   final List<int> price;
   final List<int> timeList;
+  String timeSlot;
   int subtotal;
   int time;
 
@@ -15,7 +16,13 @@ class Cart {
       @required this.price,
       @required this.timeList,
       this.subtotal = 0,
+      this.timeSlot,
       this.time = 0});
+
+  Cart addSlot(String slot) {
+    this.timeSlot = slot;
+    return this;
+  }
 
   Cart addService(String service, int price, int min) {
     if (!this.serviceName.contains(service)) {
