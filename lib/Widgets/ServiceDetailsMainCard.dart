@@ -5,6 +5,7 @@ class ServiceDetailsMainCard extends StatelessWidget {
   final String speciality;
   final String image;
 
+
   ServiceDetailsMainCard(this.title, this.speciality, this.image);
   @override
   Widget build(BuildContext context) {

@@ -170,7 +170,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                                     style: TextStyle(fontSize: 12),
                                   )
                                 ]),
-                                Text('10:00 AM - 5:00PM',
+                                Text(service.time,
                                     style: TextStyle(
                                         color: Color(0xff00A676), fontSize: 12))
                               ],
@@ -189,7 +189,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                                     style: TextStyle(fontSize: 12),
                                   )
                                 ]),
-                                Text('MON-THU',
+                                Text(service.week,
                                     style: TextStyle(
                                         color: Color(0xff00A676), fontSize: 12))
                               ],
