@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 import 'package:freelance_booking_app/Screens/BookAppointment.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsFacilityGrid.dart';
 
@@ -88,7 +89,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                               Text(service.location,
                                   style: TextStyle(
                                       color: Colors.green,
-                                      fontSize: 15,
+                                      fontSize: MediaQuery.of(context).size.width * 0.03,
                                       fontWeight: FontWeight.w400))
                             ]),
                       ),
@@ -152,7 +153,7 @@ class ServiceDetailsParlour extends StatelessWidget {
                     Flexible(
                       flex: 3,
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.5,
+                        width: MediaQuery.of(context).size.width * 0.8,
                         // height: MediaQuery.of(context).size.height * 0.05,
                         child: Column(
                           children: [

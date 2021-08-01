@@ -29,7 +29,7 @@ class Parlour {
         image: data['details']['parlourImage'] ?? '',
         mostAvailservices: data['mostAvailServices'] ?? [],
         week : data['slotList'][0]['weekRange'] ?? '',
-        time : data['slotList'][0]['fromHr'] + ':' + data['slotList'][0]['fromMin'] +' AM - ' + data['slotList'][0]['toHr'] + ':' + data['slotList'][0]['toMin'] + ' PM - ',
+        time : data['slotList'][0]['fromHr'] + ':' + data['slotList'][0]['fromMin'] +' AM - ' + data['slotList'][0]['toHr'] + ':' + data['slotList'][0]['toMin'] + ' PM',
     );
   }
 }
