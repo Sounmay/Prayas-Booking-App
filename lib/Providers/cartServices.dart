@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Cart.dart';
@@ -11,21 +12,25 @@ class CartService with ChangeNotifier {
 
   void addServices(String serviceId, String serviceName, int price, int min) {
     if (_services.containsKey(serviceId)) {
-      _services.update(
-          serviceId, (existing) => existing.addService(serviceName, price, min));
+      _services.update(serviceId,
+          (existing) => existing.addService(serviceName, price, min));
     } else {
       _services.putIfAbsent(
         serviceId,
         () => Cart(
-            id: DateTime.now().toString(),
+            id: FirebaseAuth.instance.currentUser.uid,
             serviceName: ["$serviceName"],
             price: [price],
             timeList: [min],
             subtotal: price,
-            time: min
-            ),
+            time: min),
       );
     }
+    notifyListeners();
+  }
+
+  void updateTimeSlot(String serviceId, String slot) {
+    _services.update(serviceId, (value) => value.addSlot(slot));
     notifyListeners();
   }
 

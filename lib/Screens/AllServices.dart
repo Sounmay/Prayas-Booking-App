@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
@@ -14,7 +15,6 @@ import 'package:freelance_booking_app/Widgets/ServiceListSalon.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class AllSerives extends StatefulWidget {
   int serviceIndex;
   AllSerives({this.serviceIndex});
@@ -24,6 +24,15 @@ class AllSerives extends StatefulWidget {
 
 class _AllSerivesState extends State<AllSerives> {
   bool initalState = true;
+
+ 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _loadDatafromFirestore('Hujooxxby0bFjpKbf9DQQHQWhFh2');
+  }
 
   @override
   Widget build(BuildContext context) {
