@@ -44,6 +44,8 @@ dependencies:
   file_picker: ^3.0.3
   random_string: ^2.3.1
   marquee: ^2.2.0
+  cached_network_image: ^3.1.0
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -44,6 +45,7 @@ class _SlotBookingState extends State<SlotBooking> {
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
+    List<ParlourSlotDetails> slots = args['slots'];
     final service = Provider.of<CartService>(context).services[id];
     final gst1 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
     final gst2 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
@@ -146,18 +148,24 @@ class _SlotBookingState extends State<SlotBooking> {
                       });
                     },
                     calendarStyle: CalendarStyle(
-                        todayDecoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Color(0xff5D5FEF)),
-                            borderRadius: BorderRadius.circular(6.0)),
-                        todayTextStyle: TextStyle(color: Colors.black),
-                        selectedTextStyle: TextStyle(color: Colors.black),
-                        selectedDecoration: BoxDecoration(
-                            color: Colors.blue[100],
-                            border: Border.all(color: Colors.blue[100]),
-                            borderRadius: BorderRadius.circular(6.0)),
-                        withinRangeDecoration:
-                            BoxDecoration(color: Colors.white)),
+                      defaultDecoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(6.0)),
+                      todayDecoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.white,
+                          border: Border.all(color: Color(0xff5D5FEF)),
+                          borderRadius: BorderRadius.circular(6.0)),
+                      todayTextStyle: TextStyle(color: Colors.black),
+                      selectedTextStyle: TextStyle(color: Colors.black),
+                      defaultTextStyle: TextStyle(color: Colors.black),
+                      selectedDecoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.blue[100],
+                          border: Border.all(color: Colors.blue[100]),
+                          borderRadius: BorderRadius.circular(6.0)),
+                      withinRangeDecoration: BoxDecoration(color: Colors.white),
+                    ),
                   ),
                 ),
                 SizedBox(height: 40.0),
@@ -169,608 +177,88 @@ class _SlotBookingState extends State<SlotBooking> {
                     textAlign: TextAlign.right,
                   ),
                 ),
-                SizedBox(height: 30.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FlatButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedDay == DateTime.utc(1989))
-                            a1 = true;
-                          else
-                            a1 = !a1;
-                          if (a1 == false) {
-                            a8 = a2 = a3 = a4 = a5 = a6 = a7 = true;
-                            sl = "10:00 AM - 11:00 AM ";
-                          }
-                        });
-                      },
-                      child: a1
-                          ? Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              child: (Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('10:00 AM - 11:00 AM ',
-                                      style: TextStyle(
-                                          color: Color(0xff5D5FEF),
-                                          fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Color(0xff00A676),
-                                  )
-                                ],
-                              )),
-                            )
-                          : Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Color(0xff00A676)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('10:00 AM - 11:00 AM ',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                            color: Color(0xff00A676),
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                    ),
-                    SizedBox(width: 15.0),
-                    FlatButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedDay == DateTime.utc(1989))
-                            a2 = true;
-                          else
-                            a2 = !a2;
-                          if (a2 == false) {
-                            a1 = a8 = a3 = a4 = a5 = a6 = a7 = true;
-                            sl = "11:00 AM - 12:00 PM ";
-                          }
-                        });
-                      },
-                      child: a2
-                          ? Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              child: (Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('11:00 AM - 12:00 PM ',
-                                      style: TextStyle(
-                                          color: Color(0xff5D5FEF),
-                                          fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Color(0xff00A676),
-                                  )
-                                ],
-                              )),
-                            )
-                          : Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Color(0xff00A676)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  (Text('11:00 AM - 12:00 PM',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.0))),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                            color: Color(0xff00A676),
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                    ),
-                  ],
-                ),
                 SizedBox(height: 15.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FlatButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedDay == DateTime.utc(1989))
-                            a3 = true;
-                          else
-                            a3 = !a3;
-                          if (a3 == false) {
-                            a1 = a2 = a8 = a4 = a5 = a6 = a7 = true;
-                            sl = "12:00 PM - 01:00 PM ";
-                          }
-                        });
-                      },
-                      child: a3
-                          ? Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              child: (Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('12:00 PM - 01:00 PM ',
-                                      style: TextStyle(
-                                          color: Color(0xff5D5FEF),
-                                          fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Color(0xff00A676),
-                                  )
-                                ],
-                              )),
-                            )
-                          : Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Color(0xff00A676)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  (Text('12:00 PM - 01:00 PM',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.0))),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                            color: Color(0xff00A676),
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                    ),
-                    SizedBox(width: 15.0),
-                    FlatButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedDay == DateTime.utc(1989))
-                            a4 = true;
-                          else
-                            a4 = !a4;
-                          if (a4 == false) {
-                            a1 = a2 = a3 = a8 = a5 = a6 = a7 = true;
-                            sl = "02:00 PM - 03:00 PM ";
-                          }
-                        });
-                      },
-                      child: a4
-                          ? Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              child: (Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('02:00 PM - 03:00 PM ',
-                                      style: TextStyle(
-                                          color: Color(0xff5D5FEF),
-                                          fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Color(0xff00A676),
-                                  )
-                                ],
-                              )),
-                            )
-                          : Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Color(0xff00A676)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  (Text('02:00 PM - 03:00 PM ',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.0))),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                            color: Color(0xff00A676),
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 15.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FlatButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedDay == DateTime.utc(1989))
-                            a5 = true;
-                          else
-                            a5 = !a5;
-                          if (a5 == false) {
-                            a1 = a2 = a3 = a4 = a8 = a6 = a7 = true;
-                            sl = "03:00 PM - 04:00 PM ";
-                          }
-                        });
-                      },
-                      child: a5
-                          ? Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              child: (Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('03:00 PM - 04:00 PM ',
-                                      style: TextStyle(
-                                          color: Color(0xff5D5FEF),
-                                          fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Color(0xff00A676),
-                                  )
-                                ],
-                              )),
-                            )
-                          : Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Color(0xff00A676)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  (Text('03:00 PM - 04:00 PM',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.0))),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                            color: Color(0xff00A676),
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                    ),
-                    SizedBox(width: 15.0),
-                    FlatButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedDay == DateTime.utc(1989))
-                            a6 = true;
-                          else
-                            a6 = !a6;
-                          if (a6 == false) {
-                            a1 = a2 = a3 = a4 = a5 = a8 = a7 = true;
-                            sl = "04:00 PM - 05:00 PM ";
-                          }
-                        });
-                      },
-                      child: a6
-                          ? Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              child: (Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('04:00 PM - 05:00 PM ',
-                                      style: TextStyle(
-                                          color: Color(0xff5D5FEF),
-                                          fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Color(0xff00A676),
-                                  )
-                                ],
-                              )),
-                            )
-                          : Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Color(0xff00A676)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  (Text('04:00 PM - 05:00 PM ',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.0))),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                            color: Color(0xff00A676),
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 15.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FlatButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedDay == DateTime.utc(1989))
-                            a7 = true;
-                          else
-                            a7 = !a7;
-                          if (a7 == false) {
-                            a1 = a2 = a3 = a4 = a5 = a6 = a8 = true;
-                            sl = "05:00 PM - 06:00 PM ";
-                          }
-                        });
-                      },
-                      child: a7
-                          ? Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              child: (Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('05:00 PM - 06:00 PM ',
-                                      style: TextStyle(
-                                          color: Color(0xff5D5FEF),
-                                          fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Color(0xff00A676),
-                                  )
-                                ],
-                              )),
-                            )
-                          : Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Color(0xff00A676)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  (Text('05:00 PM - 06:00 PM',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.0))),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                            color: Color(0xff00A676),
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                    ),
-                    SizedBox(width: 15.0),
-                    FlatButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: () {
-                        setState(() {
-                          if (_selectedDay == DateTime.utc(1989))
-                            a8 = true;
-                          else
-                            a8 = !a8;
-                          if (a8 == false) {
-                            a1 = a2 = a3 = a4 = a5 = a6 = a7 = true;
-                            sl = "06:00 PM - 07:00 PM ";
-                          }
-                        });
-                      },
-                      child: a8
-                          ? Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(6.0)),
-                              child: (Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('06:00 PM - 07:00 PM ',
-                                      style: TextStyle(
-                                          color: Color(0xff5D5FEF),
-                                          fontSize: 12.0)),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Color(0xff00A676),
-                                  )
-                                ],
-                              )),
-                            )
-                          : Container(
-                              height: 50,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  color: Color(0xff00A676)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  (Text('06:00 PM - 07:00 PM',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12.0))),
-                                  Card(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                            color: Color(0xff00A676),
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Wrap(
+                    children: [
+                      ...List.generate(
+                        slots.length,
+                        (index) => FlatButton(
+                          padding: EdgeInsets.all(0.0),
+                          onPressed: () {
+                            setState(() {
+                              if (_selectedDay == DateTime.utc(1989))
+                                a7 = true;
+                              else
+                                a7 = !a7;
+                              if (a7 == false) {
+                                a1 = a2 = a3 = a4 = a5 = a6 = a8 = true;
+                                sl = "05:00 PM - 06:00 PM ";
+                              }
+                            });
+                          },
+                          child: a7
+                              ? Container(
+                                  height: 50,
+                                  width: 160,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.blue),
+                                      borderRadius: BorderRadius.circular(6.0)),
+                                  child: (Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('05:00 PM - 06:00 PM ',
+                                          style: TextStyle(
+                                              color: Color(0xff5D5FEF),
+                                              fontSize: 12.0)),
+                                      Card(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            '2',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12.0),
+                                          ),
+                                        ),
+                                        color: Color(0xff00A676),
+                                      )
+                                    ],
+                                  )),
+                                )
+                              : Container(
+                                  height: 50,
+                                  width: 160,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: Color(0xff00A676)),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      (Text('05:00 PM - 06:00 PM',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12.0))),
+                                      Card(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            '1',
+                                            style: TextStyle(
+                                                color: Color(0xff00A676),
+                                                fontSize: 12.0),
+                                          ),
+                                        ),
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(height: 30),
                 Container(

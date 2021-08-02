@@ -14,10 +14,12 @@ class _BookAppointmentState extends State<BookAppointment> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
-    final mostAvailed = args['mostAvailService'];
+    final slots = args['slots'];
+    List<ParlourServiceDetails> mostAvailed = args['mostAvailService'];
     final cart = Provider.of<CartService>(context);
     final service = Provider.of<CartService>(context).services;
     final gst1 = service[id] != null ? service[id].subtotal * 0.08 ?? 0 : 0;
@@ -105,91 +107,95 @@ class _BookAppointmentState extends State<BookAppointment> {
                         height: height * 0.26,
                         child: ListView.builder(
                             itemCount: mostAvailed.length,
-                            itemBuilder: (ctx, i) => Container(
-                                  height: 40,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(children: [
-                                        Container(
-                                          height: 30,
-                                          width: 2.3,
-                                          color: Color(0xff5D5FEF),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              mostAvailed[i]["service"],
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 16),
-                                            ),
-                                            SizedBox(
-                                              height: 3,
-                                            ),
-                                            Text(
-                                              "₹ " +
-                                                  "${mostAvailed[i]["price"]}" +
-                                                  " | " +
-                                                  "${mostAvailed[i]["time"]}" +
-                                                  "min",
-                                              style: TextStyle(
-                                                  color: Color(0xFF606572)),
-                                            )
-                                          ],
-                                        ),
-                                      ]),
-                                      service[id] != null &&
-                                              service[id].serviceName.contains(
-                                                  mostAvailed[i]["service"])
-                                          ? SizedBox(
-                                              height: 30,
-                                              width: 60,
-                                              child: TextButton(
-                                                  style: TextButton.styleFrom(
-                                                    backgroundColor:
-                                                        Color(0xff02CF96),
-                                                  ),
-                                                  onPressed: () {},
-                                                  child: Text(
-                                                    "Added",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )),
-                                            )
-                                          : SizedBox(
-                                              height: 30,
-                                              width: 50,
-                                              child: TextButton(
-                                                  style: TextButton.styleFrom(
-                                                    backgroundColor:
-                                                        Color(0xff5D5FEF),
-                                                  ),
-                                                  onPressed: () {
-                                                    cart.addServices(
-                                                        id,
-                                                        mostAvailed[i]
-                                                            ["service"],
-                                                        mostAvailed[i]["price"],
-                                                        mostAvailed[i]["time"]);
-                                                  },
-                                                  child: Text(
-                                                    "Add",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  )),
-                                            )
-                                    ],
-                                  ),
-                                )))
+                            itemBuilder: (ctx, i) {
+                              int hr = int.parse(mostAvailed[i].hour);
+                              int min = int.parse(mostAvailed[i].minute);
+                              return Container(
+                                height: 40,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(children: [
+                                      Container(
+                                        height: 30,
+                                        width: 2.3,
+                                        color: Color(0xff5D5FEF),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            mostAvailed[i].name,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 16),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          Text(
+                                            "₹ " +
+                                                "${mostAvailed[i].price}" +
+                                                " | " +
+                                                "${mostAvailed[i].hour} Hr ${mostAvailed[i].minute} Min",
+                                            style: TextStyle(
+                                                color: Color(0xFF606572)),
+                                          )
+                                        ],
+                                      ),
+                                    ]),
+                                    service[id] != null &&
+                                            service[id]
+                                                .serviceName
+                                                .contains(mostAvailed[i].name)
+                                        ? SizedBox(
+                                            height: 30,
+                                            width: 60,
+                                            child: TextButton(
+                                                style: TextButton.styleFrom(
+                                                  backgroundColor:
+                                                      Color(0xff02CF96),
+                                                ),
+                                                onPressed: () {},
+                                                child: Text(
+                                                  "Added",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
+                                          )
+                                        : SizedBox(
+                                            height: 30,
+                                            width: 50,
+                                            child: TextButton(
+                                                style: TextButton.styleFrom(
+                                                  backgroundColor:
+                                                      Color(0xff5D5FEF),
+                                                ),
+                                                onPressed: () {
+                                                  cart.addServices(
+                                                      id,
+                                                      mostAvailed[i].name,
+                                                      int.parse(
+                                                          mostAvailed[i].price),
+                                                      hr * 60 + min);
+                                                },
+                                                child: Text(
+                                                  "Add",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
+                                          )
+                                  ],
+                                ),
+                              );
+                            }))
                     : Container(
                         height: height * 0.2,
                         child: Center(child: CircularProgressIndicator())),
@@ -224,87 +230,31 @@ class _BookAppointmentState extends State<BookAppointment> {
                     ? Container(
                         margin: EdgeInsets.symmetric(horizontal: 15),
                         height: height * 0.12,
+                        width: width,
                         color: Color(0xFFF7F7F7),
-                        child: GridView.builder(
-                          padding: const EdgeInsets.all(15),
-                          itemCount: service[id].serviceName.length,
-                          itemBuilder: (ctx, i) => Container(
-                              height: 20,
-                              decoration: BoxDecoration(
-                                  color: Color(0xff5D5FEF),
-                                  borderRadius: BorderRadius.circular(5)),
-                              padding: const EdgeInsets.all(5),
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Flexible(
-                                      flex: 3,
-                                      child: Text(service[id].serviceName[i],
-                                          style:
-                                              TextStyle(color: Colors.white)),
-                                    ),
-                                    Flexible(
-                                      flex: 1,
-                                      child: Container(
-                                        height: 30,
-                                        width: 1.5,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Flexible(
-                                      flex: 3,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Flexible(
-                                            flex: 2,
-                                            child: Text(
-                                                "₹ ${service[id].price[i]}",
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ),
-                                          Flexible(
-                                            flex: 1,
-                                            child: IconButton(
-                                              padding: EdgeInsets.all(0),
-                                              onPressed: () {
-                                                cart.removeServices(
-                                                  id,
-                                                  service[id].serviceName[i],
-                                                );
-                                              },
-                                              icon: Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100),
-                                                    border: Border.all(
-                                                        width: 2,
-                                                        color: Colors.white)),
-                                                child: Icon(
-                                                  Icons.close_outlined,
-                                                  size: 15,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ])),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 10,
-                                  crossAxisSpacing: 10,
-                                  childAspectRatio: 6),
-                        ),
-                      )
+                        child: Wrap(
+                          children: [
+                            ...List.generate(
+                              service[id].serviceName.length,
+                              (i) => Container(
+                                margin: EdgeInsets.symmetric(horizontal: 4),
+                                child: Chip(
+                                  backgroundColor: Color(0xff5D5FEF),
+                                  label: Text(
+                                      '${service[id].serviceName[i]} | ${service[id].price[i]}',
+                                      style: TextStyle(color: Colors.white)),
+                                  deleteIconColor: Colors.white,
+                                  onDeleted: () {
+                                    cart.removeServices(
+                                      id,
+                                      service[id].serviceName[i],
+                                    );
+                                  },
+                                ),
+                              ),
+                            )
+                          ],
+                        ))
                     : Container(
                         margin: EdgeInsets.symmetric(horizontal: 15),
                         color: Color(0xFFF7F7F7),
@@ -434,7 +384,8 @@ class _BookAppointmentState extends State<BookAppointment> {
                                     borderRadius: BorderRadius.circular(5)),
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, '/slotBooking', arguments: {'id': id});
+                                Navigator.pushNamed(context, '/slotBooking',
+                                    arguments: {'id': id, 'slots': slots});
                               },
                             ),
                             SizedBox(
