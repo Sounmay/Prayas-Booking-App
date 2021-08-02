@@ -7,11 +7,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 class MapWidget extends StatefulWidget {
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
   @override
   _MapWidgetState createState() => _MapWidgetState();
 }
@@ -24,6 +19,11 @@ class _MapWidgetState extends State<MapWidget> {
   Position currentPosition;
 
   var geoLocator = Geolocator();
+
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
 
   Future locatePosition(BuildContext ctx) async {
     try {
@@ -47,7 +47,7 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool expanded=false;
+    bool expanded = false;
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
     return Column(
@@ -60,7 +60,7 @@ class _MapWidgetState extends State<MapWidget> {
                 child: GoogleMap(
                   mapType: MapType.normal,
                   myLocationEnabled: true,
-                  initialCameraPosition: MapWidget._kGooglePlex,
+                  initialCameraPosition: _kGooglePlex,
                   myLocationButtonEnabled: false,
                   zoomGesturesEnabled: true,
                   zoomControlsEnabled: true,
@@ -70,25 +70,27 @@ class _MapWidgetState extends State<MapWidget> {
 
                     await locatePosition(context);
                   },
-                )
-            ),
+                )),
             Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.blue,
-              ),
-              margin: EdgeInsets.only(left: deviceWidth * 0.78, top: deviceWidth * 0.03),
-              child: Center(
-                child: IconButton(
-                    onPressed: (){
-                        Navigator.pushNamed(context, '/expandedmap'); // use this variable to maximise map
-                    },
-                    icon: Icon(Icons.expand, color: Colors.white,)
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.blue,
                 ),
-              )
-            )
+                margin: EdgeInsets.only(
+                    left: deviceWidth * 0.78, top: deviceWidth * 0.03),
+                child: Center(
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context,
+                            '/expandedmap'); // use this variable to maximise map
+                      },
+                      icon: Icon(
+                        Icons.expand,
+                        color: Colors.white,
+                      )),
+                ))
           ],
         ),
         Container(
