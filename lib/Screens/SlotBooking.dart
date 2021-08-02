@@ -8,9 +8,7 @@ import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:freelance_booking_app/Providers/authProvider.dart';
 import 'dart:developer' as developer;
 
 class SlotBooking extends StatefulWidget {
@@ -19,15 +17,10 @@ class SlotBooking extends StatefulWidget {
 }
 
 class _SlotBookingState extends State<SlotBooking> {
-  final CollectionReference book =
-      FirebaseFirestore.instance.collection('events');
-
+ 
   final _db = DatabaseService();
 
-  Future<void> addbook(DateTime dt, String slooot, String useeer) {
-    // Call the user's CollectionReference to add a new user
-    return book.add({'Date': dt, 'Slot': slooot, 'User id': useeer});
-  }
+  
 
   String userId = '${FirebaseAuth.instance.currentUser.uid}';
 
