@@ -7,22 +7,15 @@ import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
 import 'package:freelance_booking_app/Widgets/myDrawer.dart';
 import 'package:freelance_booking_app/Widgets/NoticeCarousel.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   final Function openDrawer;
   Home(this.openDrawer);
-
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     final navigator = Provider.of<NavigationProvider>(context);
     bool expanded = false;
-    super.build(context);
     return Scaffold(
         endDrawer: Mydrawer(),
         body: SafeArea(
@@ -78,7 +71,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                               color: Colors.white,
                               size: 35,
                             ),
-                            onPressed: () => widget.openDrawer()),
+                            onPressed: () => openDrawer()),
                       ),
                     ]),
                   ),

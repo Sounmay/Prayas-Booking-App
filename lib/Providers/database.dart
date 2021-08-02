@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:freelance_booking_app/Models/Cart.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Models/Salon.dart';
@@ -34,5 +35,23 @@ class DatabaseService {
         .collection('Users')
         .doc(FirebaseAuth.instance.currentUser.uid)
         .update({"image": imgUrl});
+  }
+
+  Future addBookingofCustomer(Cart service, String serviceId) async {
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(service.id)
+        .update({
+      "bookings": FieldValue.arrayUnion([service.toJson(serviceId)])
+    });
+  }
+
+  Future addCustomerBookingToServiceProvider(Cart service, String uid) async {
+    await FirebaseFirestore.instance
+        .collection('ServiceProviders')
+        .doc(uid)
+        .update({
+      "event": FieldValue.arrayUnion([service.toJson(uid)])
+    });
   }
 }

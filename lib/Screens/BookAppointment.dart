@@ -222,7 +222,10 @@ class _BookAppointmentState extends State<BookAppointment> {
                               borderRadius: BorderRadius.circular(5)),
                         ),
                         onPressed: () {
-                          
+                          Navigator.pushNamed(context, '/cat', arguments: {
+                            'id': id,
+                            'mostAvailed': mostAvailed
+                          });
                         },
                       )
                     ],

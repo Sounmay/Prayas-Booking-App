@@ -1,13 +1,17 @@
+import 'dart:convert';
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
+import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freelance_booking_app/Providers/authProvider.dart';
+import 'dart:developer' as developer;
 
 class SlotBooking extends StatefulWidget {
   @override
@@ -16,7 +20,9 @@ class SlotBooking extends StatefulWidget {
 
 class _SlotBookingState extends State<SlotBooking> {
   final CollectionReference book =
-      FirebaseFirestore.instance.collection('Bookings');
+      FirebaseFirestore.instance.collection('events');
+
+  final _db = DatabaseService();
 
   Future<void> addbook(DateTime dt, String slooot, String useeer) {
     // Call the user's CollectionReference to add a new user
@@ -47,6 +53,7 @@ class _SlotBookingState extends State<SlotBooking> {
     final id = args['id'];
     List<ParlourSlotDetails> slots = args['slots'];
     final service = Provider.of<CartService>(context).services[id];
+    final servic = Provider.of<CartService>(context); //.services[id];
     final gst1 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
     final gst2 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
     final time = service != null ? service.time : 0;
@@ -137,6 +144,8 @@ class _SlotBookingState extends State<SlotBooking> {
                         _focusedDay =
                             focusedDay; // update `_focusedDay` here as well
                       });
+                      servic.updateDay(id, _selectedDay);
+                      print(service);
                     },
                     onPageChanged: (focusedDay) {
                       _focusedDay = focusedDay;
@@ -182,9 +191,11 @@ class _SlotBookingState extends State<SlotBooking> {
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Wrap(
                     children: [
-                      ...List.generate(
-                        slots.length,
-                        (index) => FlatButton(
+                      ...List.generate(slots.length, (index) {
+                        final firstIndex = slots[0];
+                        final _timeslot =
+                            "${firstIndex.fromHr}:${firstIndex.fromMin}AM - ${firstIndex.toHr}:${firstIndex.toMin} PM";
+                        return FlatButton(
                           padding: EdgeInsets.all(0.0),
                           onPressed: () {
                             setState(() {
@@ -194,9 +205,10 @@ class _SlotBookingState extends State<SlotBooking> {
                                 a7 = !a7;
                               if (a7 == false) {
                                 a1 = a2 = a3 = a4 = a5 = a6 = a8 = true;
-                                sl = "05:00 PM - 06:00 PM ";
+                                sl = _timeslot;
                               }
                             });
+                            servic.updateTimeSlot(id, _timeslot);
                           },
                           child: a7
                               ? Container(
@@ -208,7 +220,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                   child: (Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text('05:00 PM - 06:00 PM ',
+                                      Text(_timeslot,
                                           style: TextStyle(
                                               color: Color(0xff5D5FEF),
                                               fontSize: 12.0)),
@@ -236,7 +248,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      (Text('05:00 PM - 06:00 PM',
+                                      (Text(_timeslot,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 12.0))),
@@ -255,8 +267,8 @@ class _SlotBookingState extends State<SlotBooking> {
                                     ],
                                   ),
                                 ),
-                        ),
-                      )
+                        );
+                      })
                     ],
                   ),
                 ),
@@ -424,13 +436,16 @@ class _SlotBookingState extends State<SlotBooking> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5)),
                         ),
-                        onPressed: () {
-                          addbook(_selectedDay, sl, userId);
-                          Navigator.pushNamed(context, '/paymentScreen',
-                              arguments: {
-                                'id': id,
-                                'total': service.subtotal + gst1 + gst2
-                              });
+                        onPressed: () async {
+                          // addbook(_selectedDay, sl, userId);
+                          // Navigator.pushNamed(context, '/paymentScreen',
+                          //     arguments: {
+                          //       'id': id,
+                          //       'total': service.subtotal + gst1 + gst2
+                          //     });
+                          // developer.log(service.toJson()));
+                          _db.addBookingofCustomer(service, id);
+                          _db.addCustomerBookingToServiceProvider(service, id);
                         },
                       )
                     ],
