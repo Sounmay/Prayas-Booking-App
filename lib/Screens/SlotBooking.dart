@@ -47,6 +47,7 @@ class _SlotBookingState extends State<SlotBooking> {
     final id = args['id'];
     List<ParlourSlotDetails> slots = args['slots'];
     final service = Provider.of<CartService>(context).services[id];
+    final servic = Provider.of<CartService>(context); //.services[id];
     final gst1 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
     final gst2 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
     final time = service != null ? service.time : 0;
@@ -137,6 +138,8 @@ class _SlotBookingState extends State<SlotBooking> {
                         _focusedDay =
                             focusedDay; // update `_focusedDay` here as well
                       });
+                      servic.updateDay(id, _selectedDay);
+                      print(service.day);
                     },
                     onPageChanged: (focusedDay) {
                       _focusedDay = focusedDay;

@@ -29,6 +29,11 @@ class CartService with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateDay(String serviceId, DateTime day) {
+    _services.update(serviceId, (value) => value.addDay(day));
+    notifyListeners();
+  }
+
   void updateTimeSlot(String serviceId, String slot) {
     _services.update(serviceId, (value) => value.addSlot(slot));
     notifyListeners();

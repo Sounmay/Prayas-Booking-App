@@ -6,6 +6,7 @@ class Cart {
   final List<String> serviceName;
   final List<int> price;
   final List<int> timeList;
+  DateTime day;
   String timeSlot;
   int subtotal;
   int time;
@@ -14,13 +15,18 @@ class Cart {
       {@required this.id,
       @required this.serviceName,
       @required this.price,
-      @required this.timeList,
+      @required this.timeList, this.day,
       this.subtotal = 0,
       this.timeSlot,
       this.time = 0});
 
   Cart addSlot(String slot) {
     this.timeSlot = slot;
+    return this;
+  }
+
+  Cart addDay(DateTime day) {
+    this.day = day;
     return this;
   }
 
