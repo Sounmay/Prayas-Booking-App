@@ -221,7 +221,12 @@ class _BookAppointmentState extends State<BookAppointment> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5)),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/cat', arguments: {
+                            'id': id,
+                            'mostAvailed': mostAvailed
+                          });
+                        },
                       )
                     ],
                   ),
