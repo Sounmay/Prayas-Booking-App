@@ -15,7 +15,7 @@ class SlotBooking extends StatefulWidget {
 
 class _SlotBookingState extends State<SlotBooking> {
   final CollectionReference book =
-      FirebaseFirestore.instance.collection('Bookings');
+      FirebaseFirestore.instance.collection('events');
 
   Future<void> addbook(DateTime dt, String slooot, String useeer) {
     // Call the user's CollectionReference to add a new user

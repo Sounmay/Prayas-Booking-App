@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Cart.dart';
 
 class CartService with ChangeNotifier {
-  Map<String, Cart> _services = {};
+  Map<String, Cart> _services = {}; // change this
 
   Map<String, Cart> get services {
     return {..._services};
