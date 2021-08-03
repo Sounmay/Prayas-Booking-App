@@ -11,9 +11,10 @@ import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:provider/provider.dart';
 
 class PaymentScreen extends StatefulWidget {
+  final double total;
   final Cart cart;
   final String id;
-  PaymentScreen({this.cart, this.id});
+  PaymentScreen({this.total, this.cart, this.id});
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
@@ -21,7 +22,7 @@ class PaymentScreen extends StatefulWidget {
 //issue - need to add Razorpay API with account verified
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  int total = 100;
+//  final int total;
   Razorpay _razorpay;
   @override
   void initState() {
@@ -65,10 +66,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId);
     String otp = randomAlphaNumeric(6);
     widget.cart.addOtp(otp);
-    // FirebaseFirestore.instance.collection('successPayments').doc().set({
-    //   "paymentId": response.paymentId,
-    //   "cart": widget.cart.toJson(widget.id)
-    // });
+    widget.cart.addGST(widget.total.toInt());
+    FirebaseFirestore.instance.collection('successPayments').doc().set({
+      "paymentId": response.paymentId,
+      "cart": widget.cart.toJson(widget.id)
+    });
     _db.addBookingofCustomer(widget.cart, widget.id);
     _db.addCustomerBookingToServiceProvider(widget.cart, widget.id);
     showCupertinoDialog(
@@ -76,12 +78,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
         builder: (context) {
           final navigator = Provider.of<NavigationProvider>(context);
           return CupertinoAlertDialog(
-            title: Text("Processing your payment..."),
+            title: Text("Payment Successful!"),
             content: Container(
               height: 50,
               width: 50,
               child: Center(
-                child: CircularProgressIndicator(color: Colors.white),
+                child: Text("Your payment was completed sucessfully and the order has been created.")
               ),
             ),
             actions: [
@@ -92,52 +94,45 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     Navigator.of(context)
                         .popUntil(ModalRoute.withName("/wrapper"));
                   },
-                  child: Text('Ok'))
+                  style: TextButton.styleFrom(
+                    primary: Color(0xff5D5FEF),
+                  ),
+                  child: Text('Ok', style: TextStyle(color: Colors.black),))
             ],
           );
         });
-//     AlertDialog(
-//       title: Text('Payment Successful'),
-//       content: SingleChildScrollView(
-//         child: ListBody(
-//           children: [Text('Your order has been confirmed')],
-//         ),
-//       ),
-//       actions: [
-//         TextButton(
-//             onPressed: () {
-
-// //              Navigator.pushNamed(context, '/myBookings', arguments: {'otp': otp, 'pid': pid});
-// //              _cartservice.
-//             },
-//             child: Text('OK'))
-//       ],
-//     );
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     Fluttertoast.showToast(
         msg: "ERROR: " + response.code.toString() + " . " + response.message);
-    Navigator.pushNamed(context, '/wrapper');
-    AlertDialog(
-      title: Text('Payment Failure'),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: [
-            Text(
-                'Due to some reason, your payment has not been completed successfully. Please try again.')
-          ],
-        ),
-      ),
-      actions: [
-        TextButton(
-            onPressed: () {
-              // Navigator.pushNamed(context, '/wrapper');
-              Navigator.pop(context, null);
-            },
-            child: Text('OK'))
-      ],
-    );
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          final navigator = Provider.of<NavigationProvider>(context);
+          return CupertinoAlertDialog(
+            title: Text("Payment Failed"),
+            content: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                  child: Text("Your payment failed due to some reason. Please try again.")
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    navigator.changeWidgetIndex(1);
+                    Navigator.of(context)
+                        .popUntil(ModalRoute.withName("/wrapper"));
+                  },
+                  style: TextButton.styleFrom(
+                    primary: Color(0xff5D5FEF),
+                  ),
+                  child: Text('Ok', style: TextStyle(color: Colors.black),))
+            ],
+          );
+        });
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -172,14 +167,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   color: Colors.black,
                   child: Center(
                     child: Text(
-                      "Amount to be paid : Rs " + " $total",
+                      "Amount to be paid : Rs " +  "${widget.total}",
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
                 ),
                 TextButton(
                     onPressed: () {
-                      openCheckOut(total);
+                      openCheckOut(widget.total);
                     },
                     style: TextButton.styleFrom(
                         primary: Colors.white,
