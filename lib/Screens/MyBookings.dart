@@ -220,7 +220,7 @@ class _MyBookingState extends State<MyBooking> {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Text('Perfect Salon',
+                                                          Text('Asli Parlour',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
