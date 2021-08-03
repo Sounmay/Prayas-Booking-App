@@ -441,8 +441,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                     cart: service, id: id.toString())),
                           );
 //                           developer.log(service.toJson()));
-                          // _db.addBookingofCustomer(service, id);
-                          // _db.addCustomerBookingToServiceProvider(service, id);
+                        
                         },
                       )
                     ],

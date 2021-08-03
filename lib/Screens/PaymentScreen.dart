@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Cart.dart';
+import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -58,15 +59,18 @@ class _PaymentScreenState extends State<PaymentScreen> {
     }
   }
 
+  final _db = DatabaseService();
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     String pid = response.paymentId;
     Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId);
     String otp = randomAlphaNumeric(6);
     widget.cart.addOtp(otp);
-    FirebaseFirestore.instance.collection('successPayments').doc().set({
-      "paymentId": response.paymentId,
-      "cart": widget.cart.toJson(widget.id)
-    });
+    // FirebaseFirestore.instance.collection('successPayments').doc().set({
+    //   "paymentId": response.paymentId,
+    //   "cart": widget.cart.toJson(widget.id)
+    // });
+    _db.addBookingofCustomer(widget.cart, widget.id);
+    _db.addCustomerBookingToServiceProvider(widget.cart, widget.id);
     showCupertinoDialog(
         context: context,
         builder: (context) {
