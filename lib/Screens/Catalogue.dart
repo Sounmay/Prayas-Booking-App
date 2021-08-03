@@ -20,6 +20,7 @@ class _CatalogueState extends State<Catalogue> {
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
+    final getCatalogue = args['getCatalogue'];
     List<ParlourServiceDetails> mostAvailed = args['mostAvailed'];
     final cart = Provider.of<CartService>(context);
     final service = Provider.of<CartService>(context).services;
@@ -91,47 +92,51 @@ class _CatalogueState extends State<Catalogue> {
                                         ],
                                       ),
                                     ]),
-                                    service[id] != null &&
-                                            service[id]
-                                                .serviceName
-                                                .contains(mostAvailed[i].name)
-                                        ? SizedBox(
-                                            height: 30,
-                                            width: 60,
-                                            child: TextButton(
-                                                style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                      Color(0xff02CF96),
-                                                ),
-                                                onPressed: () {},
-                                                child: Text(
-                                                  "Added",
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                )),
-                                          )
-                                        : SizedBox(
-                                            height: 30,
-                                            width: 50,
-                                            child: TextButton(
-                                                style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                      Color(0xff5D5FEF),
-                                                ),
-                                                onPressed: () {
-                                                  cart.addServices(
-                                                      id,
-                                                      mostAvailed[i].name,
-                                                      int.parse(
-                                                          mostAvailed[i].price),
-                                                      hr * 60 + min);
-                                                },
-                                                child: Text(
-                                                  "Add",
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                )),
-                                          )
+                                    getCatalogue == 2
+                                        ? service[id] != null &&
+                                                service[id]
+                                                    .serviceName
+                                                    .contains(
+                                                        mostAvailed[i].name)
+                                            ? SizedBox(
+                                                height: 30,
+                                                width: 60,
+                                                child: TextButton(
+                                                    style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Color(0xff02CF96),
+                                                    ),
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                      "Added",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
+                                              )
+                                            : SizedBox(
+                                                height: 30,
+                                                width: 50,
+                                                child: TextButton(
+                                                    style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Color(0xff5D5FEF),
+                                                    ),
+                                                    onPressed: () {
+                                                      cart.addServices(
+                                                          id,
+                                                          mostAvailed[i].name,
+                                                          int.parse(
+                                                              mostAvailed[i]
+                                                                  .price),
+                                                          hr * 60 + min);
+                                                    },
+                                                    child: Text(
+                                                      "Add",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
+                                              )
+                                        : SizedBox()
                                   ],
                                 ),
                               );

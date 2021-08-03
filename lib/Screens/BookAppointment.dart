@@ -11,6 +11,7 @@ class BookAppointment extends StatefulWidget {
 }
 
 class _BookAppointmentState extends State<BookAppointment> {
+  int getCatalogue = 2;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -224,7 +225,8 @@ class _BookAppointmentState extends State<BookAppointment> {
                         onPressed: () {
                           Navigator.pushNamed(context, '/cat', arguments: {
                             'id': id,
-                            'mostAvailed': mostAvailed
+                            'mostAvailed': mostAvailed,
+                            'getCatalogue': getCatalogue
                           });
                         },
                       )
