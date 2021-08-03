@@ -10,9 +10,10 @@ import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:provider/provider.dart';
 
 class PaymentScreen extends StatefulWidget {
+  final int total;
   final Cart cart;
   final String id;
-  PaymentScreen({this.cart, this.id});
+  PaymentScreen({this.total, this.cart, this.id});
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
@@ -20,7 +21,7 @@ class PaymentScreen extends StatefulWidget {
 //issue - need to add Razorpay API with account verified
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  int total = 100;
+//  final int total;
   Razorpay _razorpay;
   @override
   void initState() {
@@ -63,6 +64,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId);
     String otp = randomAlphaNumeric(6);
     widget.cart.addOtp(otp);
+    widget.cart.addGST(widget.total);
     FirebaseFirestore.instance.collection('successPayments').doc().set({
       "paymentId": response.paymentId,
       "cart": widget.cart.toJson(widget.id)
