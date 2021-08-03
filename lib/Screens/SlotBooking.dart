@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/database.dart';
+import 'package:freelance_booking_app/Screens/PaymentScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,10 +18,7 @@ class SlotBooking extends StatefulWidget {
 }
 
 class _SlotBookingState extends State<SlotBooking> {
- 
   final _db = DatabaseService();
-
-  
 
   String userId = '${FirebaseAuth.instance.currentUser.uid}';
 
@@ -431,14 +429,20 @@ class _SlotBookingState extends State<SlotBooking> {
                         ),
                         onPressed: () async {
 //                           addbook(_selectedDay, sl, userId);
-                           Navigator.pushNamed(context, '/paymentScreen',
-                               arguments: {
-                                 'id': id,
-                                 'total': service.subtotal + gst1 + gst2
-                               });
+                          // Navigator.pushNamed(context, '/paymentScreen',
+                          //     arguments: {
+                          //       'id': id,
+                          //       'total': service.subtotal + gst1 + gst2
+                          //     });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PaymentScreen(
+                                    cart: service, id: id.toString())),
+                          );
 //                           developer.log(service.toJson()));
-                          _db.addBookingofCustomer(service, id);
-                          _db.addCustomerBookingToServiceProvider(service, id);
+                          // _db.addBookingofCustomer(service, id);
+                          // _db.addCustomerBookingToServiceProvider(service, id);
                         },
                       )
                     ],
