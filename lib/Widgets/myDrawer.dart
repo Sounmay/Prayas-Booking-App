@@ -1,6 +1,8 @@
 import 'dart:ui';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Mydrawer extends StatefulWidget {
   Mydrawer({Key key}) : super(key: key);
@@ -10,8 +12,28 @@ class Mydrawer extends StatefulWidget {
 }
 
 class _MydrawerState extends State<Mydrawer> {
+  bool load = true;
+  String name = '';
+
+  String userId = '${FirebaseAuth.instance.currentUser.uid}';
+  name1(String uid) async {
+    try {
+      final data =
+          await FirebaseFirestore.instance.collection('Users').doc(uid).get();
+      setState(() {
+        name = data['name'];
+        load = false;
+      });
+    } catch (e) {
+      e.toString();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (load) {
+      name1(userId);
+    }
     return SafeArea(
       child: Container(
         width: 200,
@@ -37,12 +59,21 @@ class _MydrawerState extends State<Mydrawer> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text(
-                          'Lokesh Jain',
-                          style: TextStyle(color: Colors.white, fontSize: 15),
-                        ),
-                      )
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child:
+                              /* load == false
+                            ? */
+                              Text(
+                            name,
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          )
+                          /* : Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [CircularProgressIndicator()],
+                                ),
+                              )*/
+                          )
                     ],
                   ),
                 ),
