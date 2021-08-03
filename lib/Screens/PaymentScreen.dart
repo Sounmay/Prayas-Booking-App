@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Cart.dart';
+import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:random_string/random_string.dart';
@@ -67,25 +68,30 @@ class _PaymentScreenState extends State<PaymentScreen> {
       "cart": widget.cart.toJson(widget.id)
     });
     showCupertinoDialog(
-      context: context,
-      builder: (context) => CupertinoAlertDialog(
-        title: Text("Processing your payment..."),
-        content: Container(
-          height: 50,
-          width: 50,
-          child: Center(
-            child: CircularProgressIndicator(color: Colors.white),
-          ),
-        ),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Ok'))
-        ],
-      ),
-    );
+        context: context,
+        builder: (context) {
+          final navigator = Provider.of<NavigationProvider>(context);
+          return CupertinoAlertDialog(
+            title: Text("Processing your payment..."),
+            content: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    // Navigator.pop(context);
+                    navigator.changeWidgetIndex(1);
+                    Navigator.of(context)
+                        .popUntil(ModalRoute.withName("/wrapper"));
+                  },
+                  child: Text('Ok'))
+            ],
+          );
+        });
 //     AlertDialog(
 //       title: Text('Payment Successful'),
 //       content: SingleChildScrollView(

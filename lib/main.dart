@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (context) => SplashScreen(),
-            '/wrapper': (context) => Wrapper(),
+            '/wrapper': (context) => Wrapper(), 
             '/serviceDetailsMedical': (context) => ServiceDetailsMedical(),
             '/serviceDetailsParlour': (context) => ServiceDetailsParlour(),
             '/serviceDetailsSalon': (context) => ServiceDetailsSalon(),
