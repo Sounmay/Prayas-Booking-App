@@ -438,11 +438,10 @@ class _SlotBookingState extends State<SlotBooking> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PaymentScreen(
-                                    total: service.subtotal+gst1+gst2, cart: service, id: id.toString())),
+                                    total: service.subtotal.toDouble()+gst1+gst2, cart: service, id: id.toString())),
                             );
 //                           developer.log(service.toJson()));
-                          // _db.addBookingofCustomer(service, id);
-                          // _db.addCustomerBookingToServiceProvider(service, id);
+                        
                         },
                       )
                     ],
