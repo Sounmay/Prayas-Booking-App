@@ -100,7 +100,7 @@ class _MyBookingState extends State<MyBooking> {
                         onChanged: (val) {}),
                   ),
                   SizedBox(
-                    height: 20.0,
+                    height: 10.0,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
@@ -143,7 +143,7 @@ class _MyBookingState extends State<MyBooking> {
                               ),
                             )
                           : Container(
-                              height: MediaQuery.of(context).size.height * 0.26,
+                              height: MediaQuery.of(context).size.height * 0.5,
                               child: ListView.builder(
                                   itemCount: bookingDetails.length,
                                   itemBuilder: (ctx, i) {
@@ -157,8 +157,8 @@ class _MyBookingState extends State<MyBooking> {
                                         children: [
                                           FlatButton(
                                             onPressed: () {
-                                              Navigator.pushNamed(
-                                                  context, '/invi');
+//                                              Navigator.pushNamed(
+//                                                  context, '/invi');
                                             },
                                             child: Container(
                                                 child: Row(
@@ -220,7 +220,7 @@ class _MyBookingState extends State<MyBooking> {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Text('Perfect Salon',
+                                                          Text('Asli Parlour',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -255,7 +255,7 @@ class _MyBookingState extends State<MyBooking> {
                                                                     )),
                                                               ],
                                                             ),
-                                                          )
+                                                          ),
                                                         ],
                                                       )
                                                     ],
@@ -264,6 +264,7 @@ class _MyBookingState extends State<MyBooking> {
                                               ],
                                             )),
                                           ),
+                                          SizedBox(height: 30.0,),
                                         ],
                                       ),
                                     );
