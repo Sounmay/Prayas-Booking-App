@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:random_string/random_string.dart';
+import 'package:freelance_booking_app/Providers/cartServices.dart';
+import 'package:provider/provider.dart';
 
 class PaymentScreen extends StatefulWidget {
   @override
@@ -51,13 +53,51 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response){
+    String pid=response.paymentId;
     Fluttertoast.showToast(msg: "SUCCESS: "+response.paymentId);
-    Navigator.pushNamed(context, '/wrapper');
+    AlertDialog(
+      title: Text('Payment Successful'),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            Text('Your order has been confirmed')
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+            onPressed: (){
+              String otp = randomAlphaNumeric(6);
+//              Navigator.pushNamed(context, '/myBookings', arguments: {'otp': otp, 'pid': pid});
+//              _cartservice.
+            },
+            child: Text('OK')
+        )
+      ],
+    );
   }
 
   void _handlePaymentError(PaymentFailureResponse response){
     Fluttertoast.showToast(msg: "ERROR: "+response.code.toString() + " . "+response.message);
     Navigator.pushNamed(context, '/wrapper');
+    AlertDialog(
+      title: Text('Payment Failure'),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: [
+            Text('Due to some reason, your payment has not been completed successfully. Please try again.')
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+            onPressed: (){
+              Navigator.pushNamed(context, '/wrapper');
+            },
+            child: Text('OK')
+        )
+      ],
+    );
   }
   
   void _handleExternalWallet(ExternalWalletResponse response){
@@ -69,11 +109,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _cartservice = Provider.of<CartService>(context);
     final args =
     ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
     final total=args['total'];
-//    int totalamount=num.parse(total);
     return MediaQuery(
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
         child: Scaffold(

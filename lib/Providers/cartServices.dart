@@ -29,6 +29,11 @@ class CartService with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateOtp(String serviceId, String otp){
+    _services.update(serviceId, (value) => value.addOtp(otp));
+    notifyListeners();
+  }
+
   void updateDay(String serviceId, DateTime day) {
     _services.update(serviceId, (value) => value.addDay(day));
     notifyListeners();

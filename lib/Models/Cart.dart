@@ -9,6 +9,7 @@ class Cart {
   DateTime day;
   String timeSlot;
   int subtotal;
+  String otp;
   int time;
 
   Cart(
@@ -19,6 +20,7 @@ class Cart {
       this.day,
       this.subtotal = 0,
       this.timeSlot,
+        this.otp,
       this.time = 0});
 
   Map<String, dynamic> toJson(String uid) => {
@@ -32,7 +34,8 @@ class Cart {
         "date": day,
         "timeslot": timeSlot,
         "amount": subtotal,
-        "serviceTime": time
+        "serviceTime": time,
+        "otp":otp,
       };
 
   Cart addSlot(String slot) {
@@ -42,6 +45,11 @@ class Cart {
 
   Cart addDay(DateTime day) {
     this.day = day;
+    return this;
+  }
+
+  Cart addOtp(String otp){
+    this.otp=otp;
     return this;
   }
 

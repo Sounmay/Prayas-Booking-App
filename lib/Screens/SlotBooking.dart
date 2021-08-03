@@ -430,13 +430,13 @@ class _SlotBookingState extends State<SlotBooking> {
                               borderRadius: BorderRadius.circular(5)),
                         ),
                         onPressed: () async {
-                          // addbook(_selectedDay, sl, userId);
-                          // Navigator.pushNamed(context, '/paymentScreen',
-                          //     arguments: {
-                          //       'id': id,
-                          //       'total': service.subtotal + gst1 + gst2
-                          //     });
-                          // developer.log(service.toJson()));
+//                           addbook(_selectedDay, sl, userId);
+                           Navigator.pushNamed(context, '/paymentScreen',
+                               arguments: {
+                                 'id': id,
+                                 'total': service.subtotal + gst1 + gst2
+                               });
+//                           developer.log(service.toJson()));
                           _db.addBookingofCustomer(service, id);
                           _db.addCustomerBookingToServiceProvider(service, id);
                         },
