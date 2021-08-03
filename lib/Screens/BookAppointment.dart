@@ -13,6 +13,7 @@ class BookAppointment extends StatefulWidget {
 class _BookAppointmentState extends State<BookAppointment> {
   @override
   Widget build(BuildContext context) {
+    bool serviceAdded=false;
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final args =
@@ -185,6 +186,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                                       int.parse(
                                                           mostAvailed[i].price),
                                                       hr * 60 + min);
+                                                  serviceAdded=true;
                                                 },
                                                 child: Text(
                                                   "Add",
