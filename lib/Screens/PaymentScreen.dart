@@ -65,10 +65,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId);
     String otp = randomAlphaNumeric(6);
     widget.cart.addOtp(otp);
-    // FirebaseFirestore.instance.collection('successPayments').doc().set({
-    //   "paymentId": response.paymentId,
-    //   "cart": widget.cart.toJson(widget.id)
-    // });
     _db.addBookingofCustomer(widget.cart, widget.id);
     _db.addCustomerBookingToServiceProvider(widget.cart, widget.id);
     showCupertinoDialog(
