@@ -1,5 +1,6 @@
 import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:random_string/random_string.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freelance_booking_app/Models/Bookings.dart';
@@ -30,10 +31,12 @@ class _MyBookingState extends State<MyBooking> {
   bool firstLoad = true;
   List<BookingsDetails> bookingDetails;
 
-  Future _loadDatafromFirestore(String uid) async {
+  Future _loadDatafromFirestore() async {
     try {
-      final data =
-          await FirebaseFirestore.instance.collection('Users').doc(uid).get();
+      final data = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .get();
       setState(() {
         final ds = data.data()['bookings'];
         print(ds);
@@ -47,16 +50,19 @@ class _MyBookingState extends State<MyBooking> {
     } catch (e) {
       print(e.toString());
     }
+    _refreshController.refreshCompleted();
   }
 
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   String otp = randomAlphaNumeric(6);
-  String userId = '${FirebaseAuth.instance.currentUser.uid}';
+  // String userId = '${FirebaseAuth.instance.currentUser.uid}';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _loadDatafromFirestore(userId);
+    _loadDatafromFirestore();
   }
 
   @override
@@ -142,135 +148,156 @@ class _MyBookingState extends State<MyBooking> {
                             )
                           : Container(
                               height: MediaQuery.of(context).size.height * 0.5,
-                              child: ListView.builder(
-                                  itemCount: bookingDetails.length,
-                                  itemBuilder: (ctx, i) {
-                                    DateTime date1 =
-                                        bookingDetails[i].date.toDate();
-                                    date2 = formatDate(
-                                        date1, [d, ' ', MM, ', ', DD]);
-                                    return Padding(
-                                      padding: const EdgeInsets.all(0),
-                                      child: Column(
-                                        children: [
-                                          FlatButton(
-                                            onPressed: () {
-//                                              Navigator.pushNamed(
-//                                                  context, '/invi');
-                                            },
-                                            child: Container(
-                                                child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 60,
-                                                  width: 4,
-                                                  color: Color(0xFF3AD48A),
-                                                ),
-                                                SizedBox(width: 10),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'OTP : ${bookingDetails[i].otp}',
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xFF5D5FEF)),
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(date2,
-                                                              style: TextStyle(
-                                                                  color: Color(
-                                                                      0xFF5D5FEF))),
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    5),
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
+                              child: SmartRefresher(
+                                controller: _refreshController,
+                                enablePullDown: true,
+                                enablePullUp: false,
+                                header: ClassicHeader(
+                                  completeIcon:
+                                      Icon(Icons.done, color: Colors.green),
+                                  refreshingIcon: SizedBox(
+                                    width: 25,
+                                    height: 25,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.0,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                                onRefresh: () => _loadDatafromFirestore(),
+                                child: ListView.builder(
+                                    itemCount: bookingDetails.length,
+                                    itemBuilder: (ctx, i) {
+                                      DateTime date1 =
+                                          bookingDetails[i].date.toDate();
+                                      date2 = formatDate(
+                                          date1, [d, ' ', MM, ', ', DD]);
+                                      return Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: Column(
+                                          children: [
+                                            FlatButton(
+                                              onPressed: () {
+                                                //                                              Navigator.pushNamed(
+                                                //                                                  context, '/invi');
+                                              },
+                                              child: Container(
+                                                  child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 60,
+                                                    width: 4,
+                                                    color: Color(0xFF3AD48A),
+                                                  ),
+                                                  SizedBox(width: 10),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          'OTP : ${bookingDetails[i].otp}',
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xFF5D5FEF)),
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(date2,
+                                                                style: TextStyle(
                                                                     color: Color(
-                                                                        0xFF5D5FEF)),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5.0)),
-                                                            child: (Text(
-                                                                '${bookingDetails[i].timeslot}',
+                                                                        0xFF5D5FEF))),
+                                                            Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(5),
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Color(
+                                                                          0xFF5D5FEF)),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5.0)),
+                                                              child: (Text(
+                                                                  '${bookingDetails[i].timeslot}',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          12.0))),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        SizedBox(height: 5),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                                bookingDetails[
+                                                                        i]
+                                                                    .shopName,
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .black,
                                                                     fontSize:
-                                                                        12.0))),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      SizedBox(height: 5),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                              bookingDetails[i]
-                                                                  .shopName,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      20)),
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    4),
-                                                            decoration: BoxDecoration(
-                                                                color: Color(bookingDetails[
-                                                                            i]
-                                                                        .isApproved
-                                                                    ? 0xFF3AD48A
-                                                                    : 0xff545454),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5.0)),
-                                                            child: Row(
-                                                              children: [
-                                                                Icon(
-                                                                    Icons.check,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    size: 20),
-                                                                Text('  Booked',
-                                                                    style:
-                                                                        TextStyle(
+                                                                        20)),
+                                                            Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(4),
+                                                              decoration: BoxDecoration(
+                                                                  color: Color(bookingDetails[
+                                                                              i]
+                                                                          .isApproved
+                                                                      ? 0xFF3AD48A
+                                                                      : 0xff545454),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5.0)),
+                                                              child: Row(
+                                                                children: [
+                                                                  Icon(
+                                                                      Icons
+                                                                          .check,
                                                                       color: Colors
                                                                           .white,
-                                                                    )),
-                                                              ],
+                                                                      size: 20),
+                                                                  Text(
+                                                                      '  Booked',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                      )),
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            )),
-                                          ),
-                                          SizedBox(
-                                            height: 30.0,
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              )),
+                                            ),
+                                            SizedBox(
+                                              height: 30.0,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                              ),
                             )
                       //next element
                       : Padding(
