@@ -11,6 +11,7 @@ class ServiceListParlour extends StatelessWidget {
   ServiceListParlour({this.service});
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
         // print(service.id);
@@ -94,18 +95,29 @@ class ServiceListParlour extends StatelessWidget {
                           ]),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            CupertinoIcons.scissors,
-                            size: 20,
-                            color: Colors.white,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                CupertinoIcons.scissors,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: width * 0.02,
+                              ),
+                              Text(
+                                service.parlourName,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
                           ),
-                          Text(service.parlourName,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16)),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
                             padding: const EdgeInsets.all(5),
@@ -130,7 +142,7 @@ class ServiceListParlour extends StatelessWidget {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12))
                           ]),
-                          Text('10:00 AM - 5:00PM',
+                          Text(service.time,
                               style: TextStyle(
                                   color: Color(0xff00A676), fontSize: 12))
                         ],
@@ -147,7 +159,7 @@ class ServiceListParlour extends StatelessWidget {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12)),
                           ]),
-                          Text('MON-THU',
+                          Text(service.week,
                               style: TextStyle(
                                   color: Color(0xff00A676), fontSize: 12))
                         ],

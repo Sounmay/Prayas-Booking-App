@@ -7,7 +7,7 @@ class Cart {
   final List<int> price;
   final List<int> timeList;
   DateTime day;
-  String timeSlot, shopName;
+  String timeSlot, shopName, name;
   int subtotal;
   String otp;
   int time;
@@ -17,6 +17,7 @@ class Cart {
       @required this.serviceName,
       @required this.price,
       @required this.timeList,
+      this.name,
       this.shopName,
       this.day,
       this.subtotal = 0,
@@ -28,7 +29,7 @@ class Cart {
         "serviceId": uid,
         "isApproved": false,
         "id": id,
-        "name": "naiyar",
+        "name": name,
         "shopName": shopName,
         "serviceName": serviceName,
         "price": price,

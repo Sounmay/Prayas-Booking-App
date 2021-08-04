@@ -56,13 +56,11 @@ class _MyBookingState extends State<MyBooking> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _loadDatafromFirestore(userId);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (firstLoad) {
-      _loadDatafromFirestore(userId);
-    }
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -220,7 +218,9 @@ class _MyBookingState extends State<MyBooking> {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Text('Asli Parlour',
+                                                          Text(
+                                                              bookingDetails[i]
+                                                                  .shopName,
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,
@@ -264,7 +264,9 @@ class _MyBookingState extends State<MyBooking> {
                                               ],
                                             )),
                                           ),
-                                          SizedBox(height: 30.0,),
+                                          SizedBox(
+                                            height: 30.0,
+                                          ),
                                         ],
                                       ),
                                     );

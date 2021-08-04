@@ -325,6 +325,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                   Navigator.pushNamed(context, '/cat',
                                       arguments: {
                                         'id': service.id,
+                                        'shopName': service.parlourName,
                                         'mostAvailed': parlourServiceDetails,
                                         'getCatalogue': getCatalogue
                                       });
@@ -347,6 +348,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                   Navigator.pushNamed(
                                       context, '/bookAppointment', arguments: {
                                     'id': service.id,
+                                    'shopName': service.parlourName,
                                     'mostAvailService': parlourServiceDetails,
                                     'slots': slotList
                                   });
