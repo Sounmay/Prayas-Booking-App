@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:marquee/marquee.dart';
 
 class ServiceListParlour extends StatelessWidget {
   final Parlour service;
@@ -108,14 +109,25 @@ class ServiceListParlour extends StatelessWidget {
                               SizedBox(
                                 width: width * 0.02,
                               ),
-                              Text(
-                                service.parlourName,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16),
-                                textAlign: TextAlign.left,
-                              ),
+//                              Text(
+//                                service.parlourName,
+//                                style: TextStyle(
+//                                    color: Colors.white,
+//                                    fontWeight: FontWeight.w600,
+//                                    fontSize: 16),
+//                                textAlign: TextAlign.left,
+//                              ),
+                              SizedBox(
+                                width: 100,
+                                child: Marquee(
+                                    velocity: 20,
+                                    text: service.parlourName,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16),
+                                ),
+                              )
                             ],
                           ),
                           Container(
