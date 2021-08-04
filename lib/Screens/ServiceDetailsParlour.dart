@@ -176,7 +176,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                       size: 20,
                                     ),
                                     SizedBox(
-                                      width: 100,
+                                      width: MediaQuery.of(context).size.width*0.3,
                                       child: Marquee(
                                           velocity: 20,
                                           text: location.address,
@@ -209,7 +209,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                   child: Text(service.parlourName,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 24)),
+                                          fontSize: 20)),
                                 ),
                                 Flexible(
                                   flex: 2,
