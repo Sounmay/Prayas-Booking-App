@@ -9,6 +9,7 @@ import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:freelance_booking_app/Screens/PaymentScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as developer;
 
@@ -24,6 +25,8 @@ class _SlotBookingState extends State<SlotBooking> {
 
   int slt = 15;
   String sl;
+  bool dateSelected=false;
+  bool slotSelected=false;
   bool a1 = true,
       a2 = true,
       a3 = true,
@@ -130,6 +133,7 @@ class _SlotBookingState extends State<SlotBooking> {
                       return isSameDay(_selectedDay, day);
                     },
                     onDaySelected: (selectedDay, focusedDay) {
+                      dateSelected=true;
                       setState(() {
                         _selectedDay = selectedDay;
                         _focusedDay =
@@ -189,11 +193,15 @@ class _SlotBookingState extends State<SlotBooking> {
                         return FlatButton(
                           padding: EdgeInsets.all(0.0),
                           onPressed: () {
+                            if(dateSelected==false)
+                                Fluttertoast.showToast(msg: 'Please select a date',backgroundColor: Color(0xff5D5FEF),textColor: Colors.white, toastLength: Toast.LENGTH_LONG);
                             setState(() {
+                              slotSelected=!slotSelected;
                               if (_selectedDay == DateTime.utc(1989))
                                 a7 = true;
-                              else
+                              else {
                                 a7 = !a7;
+                              }
                               if (a7 == false) {
                                 a1 = a2 = a3 = a4 = a5 = a6 = a8 = true;
                                 sl = _timeslot;
@@ -362,45 +370,6 @@ class _SlotBookingState extends State<SlotBooking> {
                             ])
                           ],
                         ),
-//                        Row(
-//                          mainAxisAlignment: MainAxisAlignment.center,
-//                          children: [
-//                            TextButton(
-//                              child: Padding(
-//                                padding: const EdgeInsets.symmetric(
-//                                    horizontal: 20.0),
-//                                child: Text(
-//                                  'Slot booking',
-//                                  style: TextStyle(color: Colors.white),
-//                                ),
-//                              ),
-//                              style: TextButton.styleFrom(
-//                                backgroundColor: Color(0xFF0F2735),
-//                                shape: RoundedRectangleBorder(
-//                                    borderRadius: BorderRadius.circular(5)),
-//                              ),
-//                              onPressed: () {
-//                                Navigator.pushNamed(context, '/slotBooking',
-//                                    arguments: {'id': id});
-//                              },
-//                            ),
-//                            SizedBox(
-//                              width: 10.0,
-//                            ),
-//                            TextButton(
-//                              child: Text(
-//                                'Emergency booking',
-//                                style: TextStyle(color: Colors.white),
-//                              ),
-//                              style: TextButton.styleFrom(
-//                                backgroundColor: Color(0xff5D5FEF),
-//                                shape: RoundedRectangleBorder(
-//                                    borderRadius: BorderRadius.circular(5)),
-//                              ),
-//                              onPressed: () {},
-//                            )
-//                          ],
-//                        )
                       ]),
                 ),
                 Container(
@@ -428,20 +397,17 @@ class _SlotBookingState extends State<SlotBooking> {
                               borderRadius: BorderRadius.circular(5)),
                         ),
                         onPressed: () async {
-//                           addbook(_selectedDay, sl, userId);
-                          // Navigator.pushNamed(context, '/paymentScreen',
-                          //     arguments: {
-                          //       'id': id,
-                          //       'total': service.subtotal + gst1 + gst2
-                          //     });
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PaymentScreen(
-                                    cart: service, id: id.toString())),
-                          );
-//                           developer.log(service.toJson()));
-                        
+                          if(dateSelected==true&&slotSelected==true){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentScreen(
+                                      total: service.subtotal.toDouble()+gst1+gst2, cart: service, id: id.toString())),
+                            );
+                          }
+                          else{
+                            Fluttertoast.showToast(msg: 'Please select a date and slot for booking',backgroundColor: Color(0xff5D5FEF),textColor: Colors.white, toastLength: Toast.LENGTH_LONG);
+                          }
                         },
                       )
                     ],

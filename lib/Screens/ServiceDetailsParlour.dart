@@ -21,6 +21,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
   List<EmployeeDetailList> employeeDetailList;
   List<ParlourServiceDetails> parlourServiceDetails;
   List<ParlourSlotDetails> slotList;
+  int getCatalogue = 1;
 
   Future _loadDatafromFirestore(String uid) async {
     try {
@@ -320,7 +321,14 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5))),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/cat',
+                                      arguments: {
+                                        'id': service.id,
+                                        'mostAvailed': parlourServiceDetails,
+                                        'getCatalogue': getCatalogue
+                                      });
+                                },
                               ),
                             ),
                             Container(
@@ -339,9 +347,8 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                   Navigator.pushNamed(
                                       context, '/bookAppointment', arguments: {
                                     'id': service.id,
-                                    'mostAvailService':
-                                        parlourServiceDetails,
-                                        'slots': slotList
+                                    'mostAvailService': parlourServiceDetails,
+                                    'slots': slotList
                                   });
                                 },
                               ),

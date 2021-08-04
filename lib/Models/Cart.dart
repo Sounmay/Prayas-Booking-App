@@ -55,6 +55,11 @@ class Cart {
     return this;
   }
 
+  Cart addGST(int total){
+    this.subtotal=total;
+    return this;
+  }
+
   Cart addService(String service, int price, int min) {
     if (!this.serviceName.contains(service)) {
       this.subtotal += price;

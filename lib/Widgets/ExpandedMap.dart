@@ -89,13 +89,13 @@ class _ExpandedMapState extends State<ExpandedMap> {
                             children: [
                               IconButton(
                                   onPressed: (){
-                                    Navigator.pushNamed(context, '/'); // use this variable to maximise map
+                                    Navigator.pop(context); // use this variable to maximise map
                                   },
                                   icon: Icon(Icons.arrow_back, color: Colors.black,)
                               ),
                               InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/searchScreen');
+                                  Navigator.popAndPushNamed(context, '/searchScreen');
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(left: 10),
