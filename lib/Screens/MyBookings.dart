@@ -166,6 +166,7 @@ class _MyBookingState extends State<MyBooking> {
                                 ),
                                 onRefresh: () => _loadDatafromFirestore(),
                                 child: ListView.builder(
+                                    physics: BouncingScrollPhysics(),
                                     itemCount: bookingDetails.length,
                                     itemBuilder: (ctx, i) {
                                       DateTime date1 =
