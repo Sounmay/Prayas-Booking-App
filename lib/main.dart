@@ -22,6 +22,7 @@ import 'package:freelance_booking_app/Screens/UploadAvatarScreen.dart';
 import 'package:freelance_booking_app/Screens/Wrapper.dart';
 import 'package:freelance_booking_app/Screens/PaymentScreen.dart';
 import 'package:freelance_booking_app/Widgets/Login.dart';
+import 'Screens/Authenticate.dart';
 import 'Screens/BookAppointment.dart';
 import 'Screens/ServiceDetailsMedical.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (context) => SplashScreen(),
-            '/wrapper': (context) => Wrapper(), 
+            '/wrapper': (context) => Wrapper(),
             '/serviceDetailsMedical': (context) => ServiceDetailsMedical(),
             '/serviceDetailsParlour': (context) => ServiceDetailsParlour(),
             '/serviceDetailsSalon': (context) => ServiceDetailsSalon(),

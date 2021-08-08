@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class Mydrawer extends StatefulWidget {
 class _MydrawerState extends State<Mydrawer> {
   bool load = true;
   String name = '';
+  File _image;
 
   String userId = '${FirebaseAuth.instance.currentUser.uid}';
   name1(String uid) async {
@@ -29,6 +31,14 @@ class _MydrawerState extends State<Mydrawer> {
     } catch (e) {
       e.toString();
     }
+  }
+
+  Future _getImage() async {
+    var image = await ImagePicker().pickImage(source: ImageSource.camera);
+    setState(() {
+      _image = File(image.path);
+      print('_image: $_image');
+    });
   }
 
   @override
@@ -51,9 +61,10 @@ class _MydrawerState extends State<Mydrawer> {
                       child: Row(
                         children: [
                           InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/uploadAvatar');
-                            },
+                            onTap: _getImage,
+//                            onTap: () {
+//                              Navigator.pushNamed(context, '/uploadAvatar');
+//                            },
                             child: CircleAvatar(
                               radius: 32,
 //                              foregroundImage: NetworkImage(
@@ -123,7 +134,7 @@ class _MydrawerState extends State<Mydrawer> {
                 ),
                 FlatButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/login');
+                      FirebaseAuth.instance.signOut();
                     },
                     child: Container(
                       height: 40,
