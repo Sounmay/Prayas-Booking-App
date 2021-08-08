@@ -40,7 +40,7 @@ dependencies:
   carousel_slider: ^3.0.0
   razorpay_flutter: ^1.2.6
   fluttertoast: ^8.0.7
-  # image_picker: ^0.8.0+3
+  image_picker: ^0.8.3+1
   file_picker: ^3.0.3
   random_string: ^2.3.1
   marquee: ^2.2.0

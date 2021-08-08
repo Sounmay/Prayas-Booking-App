@@ -182,10 +182,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                           text: location.address,
                                           style: TextStyle(
                                               color: Colors.green,
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.03,
+                                              fontSize: MediaQuery.of(context).size.width * 0.03,
                                               fontWeight: FontWeight.w400)),
                                     )
                                   ]),
