@@ -69,7 +69,7 @@ class _MydrawerState extends State<Mydrawer> {
                               radius: 32,
 //                              foregroundImage: NetworkImage(
 //                                  'https://firebasestorage.googleapis.com/v0/b/freelance-booking-app.appspot.com/o/userImage%2FIMG_20170128_065337.jpg?alt=media&token=41f944c7-bc56-4c4e-b360-def099555c80'),
-                              backgroundColor: Colors.black,
+                              foregroundImage: _image==null ? AssetImage('assets/doctor.png') : FileImage(_image),
                             ),
                           ),
                           Padding(
@@ -119,17 +119,18 @@ class _MydrawerState extends State<Mydrawer> {
                     ),
                     FlatButton(
                         child: Container(
-                      height: 40,
-                      child: Row(
-                        children: [
-                          Text(' \u20B9',
-                              style: TextStyle(
-                                  color: Color(0xFF5D5FEF), fontSize: 20)),
-                          Text(' Cashback',
-                              style: TextStyle(color: Color(0xFF5D5FEF)))
-                        ],
-                      ),
-                    ))
+                          height: 40,
+                          child: Row(
+                            children: [
+                              Text(' \u20B9',
+                                  style: TextStyle(
+                                      color: Color(0xFF5D5FEF), fontSize: 20)),
+                              Text(' Cashback',
+                                  style: TextStyle(color: Color(0xFF5D5FEF)))
+                            ],
+                          ),
+                        )
+                    )
                   ],
                 ),
                 FlatButton(
