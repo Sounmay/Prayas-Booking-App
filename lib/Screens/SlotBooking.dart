@@ -45,6 +45,8 @@ class _SlotBookingState extends State<SlotBooking> {
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
+    final shopName = args['shopName'];
+    final address = args['address'];
     List<ParlourSlotDetails> slots = args['slots'];
     final service = Provider.of<CartService>(context).services[id];
     final servic = Provider.of<CartService>(context); //.services[id];
@@ -94,7 +96,7 @@ class _SlotBookingState extends State<SlotBooking> {
                               width: 10.0,
                             ),
                             Text(
-                              'Perfect Salon',
+                              shopName,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,

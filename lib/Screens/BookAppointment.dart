@@ -41,6 +41,7 @@ class _BookAppointmentState extends State<BookAppointment> {
     final id = args['id'];
     final slots = args['slots'];
     final shopName = args['shopName'];
+    final address = args['address'];
     List<ParlourServiceDetails> mostAvailed = args['mostAvailService'];
     final cart = Provider.of<CartService>(context);
     final service = Provider.of<CartService>(context).services;
@@ -110,7 +111,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Most available services",
+                              "Most availed services",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
@@ -418,7 +419,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                               ),
                               onPressed: () {
                                 Navigator.pushNamed(context, '/slotBooking',
-                                    arguments: {'id': id, 'slots': slots});
+                                    arguments: {'id': id, 'slots': slots, 'shopName': shopName, 'address': address});
                               },
                             ),
                             SizedBox(

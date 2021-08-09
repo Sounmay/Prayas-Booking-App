@@ -347,7 +347,8 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                     'id': service.id,
                                     'shopName': service.parlourName,
                                     'mostAvailService': parlourServiceDetails,
-                                    'slots': slotList
+                                    'slots': slotList,
+                                    'address' : service.location,
                                   });
                                 },
                               ),
