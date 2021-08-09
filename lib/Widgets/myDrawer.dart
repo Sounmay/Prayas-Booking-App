@@ -61,15 +61,15 @@ class _MydrawerState extends State<Mydrawer> {
                       child: Row(
                         children: [
                           InkWell(
-                            onTap: _getImage,
-//                            onTap: () {
-//                              Navigator.pushNamed(context, '/uploadAvatar');
-//                            },
+//                            onTap: _getImage,
+                            onTap: () {
+                              Navigator.pushNamed(context, '/uploadAvatar');
+                            },
                             child: CircleAvatar(
                               radius: 32,
 //                              foregroundImage: NetworkImage(
 //                                  'https://firebasestorage.googleapis.com/v0/b/freelance-booking-app.appspot.com/o/userImage%2FIMG_20170128_065337.jpg?alt=media&token=41f944c7-bc56-4c4e-b360-def099555c80'),
-                              foregroundImage: _image==null ? AssetImage('assets/doctor.png') : FileImage(_image),
+                              foregroundImage: AssetImage('assets/doctor.png'),
                             ),
                           ),
                           Padding(
