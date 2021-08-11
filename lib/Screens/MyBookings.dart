@@ -145,6 +145,7 @@ class _MyBookingState extends State<MyBooking> {
                           : Container(
                               height: MediaQuery.of(context).size.height * 0.5,
                               child: ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
                                   itemCount: bookingDetails.length,
                                   itemBuilder: (ctx, i) {
                                     DateTime date1 =
@@ -264,7 +265,9 @@ class _MyBookingState extends State<MyBooking> {
                                               ],
                                             )),
                                           ),
-                                          SizedBox(height: 30.0,),
+                                          SizedBox(
+                                            height: 30.0,
+                                          ),
                                         ],
                                       ),
                                     );
