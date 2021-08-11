@@ -259,31 +259,30 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                   itemCount: employeeDetailList.length,
                                   itemBuilder: (BuildContext ctx, index) {
                                     return Container(
+                                      padding: EdgeInsets.only(bottom: 10),
                                       margin:
                                           EdgeInsets.symmetric(horizontal: 1),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          new Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.1,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.1,
-                                              margin:
-                                                  EdgeInsets.only(bottom: 0),
-                                              decoration: new BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: new DecorationImage(
-                                                      fit: BoxFit.fill,
-                                                      image: new NetworkImage(
-                                                          employeeDetailList[
-                                                                  index]
-                                                              .imagefile)))),
+                                          CircleAvatar(
+                                            foregroundImage: new NetworkImage(
+                                                employeeDetailList[index]
+                                                    .imagefile),
+                                            backgroundColor: Colors.grey[200],
+                                            /*child: new Container(
+                                                margin:
+                                                    EdgeInsets.only(bottom: 0),
+                                                decoration: new BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: new DecorationImage(
+                                                        fit: BoxFit.fill,
+                                                        image: new NetworkImage(
+                                                            employeeDetailList[
+                                                                    index]
+                                                                .imagefile))))*/
+                                          ),
                                           new Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
