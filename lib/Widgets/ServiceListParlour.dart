@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:marquee/marquee.dart';
 
 class ServiceListParlour extends StatelessWidget {
   final Parlour service;
   ServiceListParlour({this.service});
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
         // print(service.id);
@@ -60,7 +62,7 @@ class ServiceListParlour extends StatelessWidget {
                       ),
                     ),
                     errorWidget: (context, url, error) =>
-                        new Image.asset('assets/parlourTile.png'),
+                    new Image.asset('assets/parlourTile.png'),
                   ),
                 ),
               ),
@@ -74,7 +76,7 @@ class ServiceListParlour extends StatelessWidget {
                           bottomRight: Radius.circular(10))),
                   // margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                   padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   height: 130,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,26 +88,48 @@ class ServiceListParlour extends StatelessWidget {
                               CupertinoIcons.location,
                               color: Colors.green,
                             ),
-                            Text(service.location,
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400))
+//                            Text(service.location,
+//                                style: TextStyle(
+//                                    color: Colors.green,
+//                                    fontSize: 15,
+//                                    fontWeight: FontWeight.w400)),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width*0.5,
+                              height: 20,
+                              child: Marquee(
+                                  velocity: 20,
+                                  text: service.location,
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400)),
+                            )
                           ]),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            CupertinoIcons.scissors,
-                            size: 20,
-                            color: Colors.white,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                CupertinoIcons.scissors,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: width * 0.02,
+                              ),
+                              Text(
+                                service.parlourName,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
                           ),
-                          Text(service.parlourName,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16)),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
                             padding: const EdgeInsets.all(5),
@@ -130,7 +154,7 @@ class ServiceListParlour extends StatelessWidget {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12))
                           ]),
-                          Text('10:00 AM - 5:00PM',
+                          Text(service.time,
                               style: TextStyle(
                                   color: Color(0xff00A676), fontSize: 12))
                         ],
@@ -147,7 +171,7 @@ class ServiceListParlour extends StatelessWidget {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12)),
                           ]),
-                          Text('MON-THU',
+                          Text(service.week,
                               style: TextStyle(
                                   color: Color(0xff00A676), fontSize: 12))
                         ],

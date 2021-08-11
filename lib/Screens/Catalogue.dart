@@ -21,6 +21,8 @@ class _CatalogueState extends State<Catalogue> {
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
     final getCatalogue = args['getCatalogue'];
+    final shopName = args['shopName'];
+    final userName = args['userName'];
     List<ParlourServiceDetails> mostAvailed = args['mostAvailed'];
     final cart = Provider.of<CartService>(context);
     final service = Provider.of<CartService>(context).services;
@@ -128,7 +130,9 @@ class _CatalogueState extends State<Catalogue> {
                                                           int.parse(
                                                               mostAvailed[i]
                                                                   .price),
-                                                          hr * 60 + min);
+                                                          hr * 60 + min,
+                                                          shopName,
+                                                          userName);
                                                     },
                                                     child: Text(
                                                       "Add",

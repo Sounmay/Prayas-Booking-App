@@ -176,16 +176,13 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                       size: 20,
                                     ),
                                     SizedBox(
-                                      width: 100,
+                                      width: MediaQuery.of(context).size.width*0.3,
                                       child: Marquee(
                                           velocity: 20,
                                           text: location.address,
                                           style: TextStyle(
                                               color: Colors.green,
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.03,
+                                              fontSize: MediaQuery.of(context).size.width * 0.03,
                                               fontWeight: FontWeight.w400)),
                                     )
                                   ]),
@@ -209,7 +206,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                   child: Text(service.parlourName,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 24)),
+                                          fontSize: 20)),
                                 ),
                                 Flexible(
                                   flex: 2,
@@ -325,6 +322,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                   Navigator.pushNamed(context, '/cat',
                                       arguments: {
                                         'id': service.id,
+                                        'shopName': service.parlourName,
                                         'mostAvailed': parlourServiceDetails,
                                         'getCatalogue': getCatalogue
                                       });
@@ -347,8 +345,10 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                   Navigator.pushNamed(
                                       context, '/bookAppointment', arguments: {
                                     'id': service.id,
+                                    'shopName': service.parlourName,
                                     'mostAvailService': parlourServiceDetails,
-                                    'slots': slotList
+                                    'slots': slotList,
+                                    'address' : service.location,
                                   });
                                 },
                               ),

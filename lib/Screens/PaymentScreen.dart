@@ -14,7 +14,7 @@ class PaymentScreen extends StatefulWidget {
   final double total;
   final Cart cart;
   final String id;
-  PaymentScreen({this.total, this.cart, this.id});
+  PaymentScreen({this.total, this.cart, this.id, add});
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
@@ -161,6 +161,55 @@ class _PaymentScreenState extends State<PaymentScreen> {
             body: Column(
               children: [
                 Container(
+                  margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0),
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  width: MediaQuery.of(context).size.width * 1,
+                  child: Text(
+                    "Services Availed",
+                    style: TextStyle(color: Colors.black, fontSize: 25),
+                  ),
+                ),
+                Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
+                  padding: EdgeInsets.all(20.0),
+                  height: MediaQuery.of(context).size.height * 0.12,
+                  width: MediaQuery.of(context).size.width * 1,
+                  decoration: BoxDecoration(
+                    border: Border.all( color: Colors.grey)
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              widget.cart.shopName,
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                            ),
+                            Text(
+                              'Sector-19, Rourkela',
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              widget.cart.day.day.toString() + '/' + widget.cart.day.month.toString() + '/' + widget.cart.day.year.toString(),
+                              style: TextStyle(color: Color(0xFF0F2735), fontSize: 15),
+                            ),
+                            Text(
+                              widget.cart.timeSlot,
+                              style: TextStyle(color: Color(0xFF0F2735), fontSize: 15),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ),
+                Container(
                   margin: EdgeInsets.all(10),
                   height: MediaQuery.of(context).size.height * 0.1,
                   width: MediaQuery.of(context).size.width * 0.9,
@@ -172,6 +221,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20.0,),
+
                 TextButton(
                     onPressed: () {
                       openCheckOut(widget.total);

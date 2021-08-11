@@ -10,7 +10,8 @@ class CartService with ChangeNotifier {
     return {..._services};
   }
 
-  void addServices(String serviceId, String serviceName, int price, int min) {
+  void addServices(String serviceId, String serviceName, int price, int min,
+      String shopName, String customerName) {
     if (_services.containsKey(serviceId)) {
       _services.update(serviceId,
           (existing) => existing.addService(serviceName, price, min));
@@ -23,13 +24,15 @@ class CartService with ChangeNotifier {
             price: [price],
             timeList: [min],
             subtotal: price,
+            name: customerName,
+            shopName: shopName,
             time: min),
       );
     }
     notifyListeners();
   }
 
-  void updateOtp(String serviceId, String otp){
+  void updateOtp(String serviceId, String otp) {
     _services.update(serviceId, (value) => value.addOtp(otp));
     notifyListeners();
   }

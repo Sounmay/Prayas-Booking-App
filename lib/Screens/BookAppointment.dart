@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
+import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:provider/provider.dart';
@@ -11,16 +14,34 @@ class BookAppointment extends StatefulWidget {
 }
 
 class _BookAppointmentState extends State<BookAppointment> {
+  String userName = '';
+
+  _loadData() async {
+    final data = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get();
+    userName = data['name'];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
   int getCatalogue = 2;
+  bool serviceAdded = false;
   @override
   Widget build(BuildContext context) {
-    bool serviceAdded=false;
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
     final slots = args['slots'];
+    final shopName = args['shopName'];
+    final address = args['address'];
     List<ParlourServiceDetails> mostAvailed = args['mostAvailService'];
     final cart = Provider.of<CartService>(context);
     final service = Provider.of<CartService>(context).services;
@@ -72,7 +93,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                               width: 10.0,
                             ),
                             Text(
-                              'Perfect Salon',
+                              shopName ?? "Perfect Salon",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -90,7 +111,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Most available services",
+                              "Most availed services",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
@@ -110,8 +131,8 @@ class _BookAppointmentState extends State<BookAppointment> {
                         child: ListView.builder(
                             itemCount: mostAvailed.length,
                             itemBuilder: (ctx, i) {
-                              int hr = int.parse(mostAvailed[i].hour);
-                              int min = int.parse(mostAvailed[i].minute);
+                              int hr = int.parse(mostAvailed[i]?.hour) ?? 0;
+                              int min = int.parse(mostAvailed[i]?.minute) ?? 0;
                               return Container(
                                 height: 40,
                                 padding:
@@ -186,8 +207,10 @@ class _BookAppointmentState extends State<BookAppointment> {
                                                       mostAvailed[i].name,
                                                       int.parse(
                                                           mostAvailed[i].price),
-                                                      hr * 60 + min);
-                                                  serviceAdded=true;
+                                                      hr * 60 + min,
+                                                      shopName,
+                                                      userName);
+                                                  serviceAdded = true;
                                                 },
                                                 child: Text(
                                                   "Add",
@@ -227,6 +250,8 @@ class _BookAppointmentState extends State<BookAppointment> {
                         onPressed: () {
                           Navigator.pushNamed(context, '/cat', arguments: {
                             'id': id,
+                            'shopName': shopName,
+                            'userName': userName,
                             'mostAvailed': mostAvailed,
                             'getCatalogue': getCatalogue
                           });
@@ -394,7 +419,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                               ),
                               onPressed: () {
                                 Navigator.pushNamed(context, '/slotBooking',
-                                    arguments: {'id': id, 'slots': slots});
+                                    arguments: {'id': id, 'slots': slots, 'shopName': shopName, 'address': address});
                               },
                             ),
                             SizedBox(

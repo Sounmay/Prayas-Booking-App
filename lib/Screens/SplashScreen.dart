@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
           children: [
             Center(
                 child: Image.asset(
-              'assets/splashLogo.png',
+              'assets/ps logo 300x300.png',
               height: 100,
               width: 100,
             )),

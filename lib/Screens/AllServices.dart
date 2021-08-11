@@ -25,8 +25,6 @@ class AllSerives extends StatefulWidget {
 class _AllSerivesState extends State<AllSerives> {
   bool initalState = true;
 
- 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -46,6 +44,7 @@ class _AllSerivesState extends State<AllSerives> {
     Widget medicalListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemCount: medicalFirebaseServiceList.length,
           itemBuilder: (ctx, j) => ServiceListDoctor(
             service: medicalFirebaseServiceList[j],
@@ -54,6 +53,7 @@ class _AllSerivesState extends State<AllSerives> {
     Widget parlourListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemCount: parlourFirebaseServiceList.length,
           itemBuilder: (ctx, j) => ServiceListParlour(
             service: parlourFirebaseServiceList[j],
@@ -62,6 +62,7 @@ class _AllSerivesState extends State<AllSerives> {
     Widget salonListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemCount: salonFirebaseServiceList.length,
           itemBuilder: (ctx, j) => ServiceListSalon(
             service: salonFirebaseServiceList[j],

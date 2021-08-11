@@ -25,8 +25,8 @@ class _SlotBookingState extends State<SlotBooking> {
 
   int slt = 15;
   String sl;
-  bool dateSelected=false;
-  bool slotSelected=false;
+  bool dateSelected = false;
+  bool slotSelected = false;
   bool a1 = true,
       a2 = true,
       a3 = true,
@@ -45,14 +45,17 @@ class _SlotBookingState extends State<SlotBooking> {
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     final id = args['id'];
+    final shopName = args['shopName'];
+    final address = args['address'];
     List<ParlourSlotDetails> slots = args['slots'];
     final service = Provider.of<CartService>(context).services[id];
     final servic = Provider.of<CartService>(context); //.services[id];
-    final gst1 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
-    final gst2 = service != null ? service.subtotal * 0.08 ?? 0 : 0;
+    final gst1 = service != null ? service.subtotal * 0.08 ?? 0.0 : 0.0;
+    final gst2 = service != null ? service.subtotal * 0.08 ?? 0.0 : 0.0;
     final time = service != null ? service.time : 0;
     final int minute = time % 60;
     final int hours = (time / 60).floor();
+    double paymentValue = service.subtotal.toDouble() + gst1 + gst2;
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
       child: Scaffold(
@@ -93,7 +96,7 @@ class _SlotBookingState extends State<SlotBooking> {
                               width: 10.0,
                             ),
                             Text(
-                              'Perfect Salon',
+                              shopName,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -133,7 +136,7 @@ class _SlotBookingState extends State<SlotBooking> {
                       return isSameDay(_selectedDay, day);
                     },
                     onDaySelected: (selectedDay, focusedDay) {
-                      dateSelected=true;
+                      dateSelected = true;
                       setState(() {
                         _selectedDay = selectedDay;
                         _focusedDay =
@@ -193,10 +196,14 @@ class _SlotBookingState extends State<SlotBooking> {
                         return FlatButton(
                           padding: EdgeInsets.all(0.0),
                           onPressed: () {
-                            if(dateSelected==false)
-                                Fluttertoast.showToast(msg: 'Please select a date',backgroundColor: Color(0xff5D5FEF),textColor: Colors.white, toastLength: Toast.LENGTH_LONG);
+                            if (dateSelected == false)
+                              Fluttertoast.showToast(
+                                  msg: 'Please select a date',
+                                  backgroundColor: Color(0xff5D5FEF),
+                                  textColor: Colors.white,
+                                  toastLength: Toast.LENGTH_LONG);
                             setState(() {
-                              slotSelected=!slotSelected;
+                              slotSelected = !slotSelected;
                               if (_selectedDay == DateTime.utc(1989))
                                 a7 = true;
                               else {
@@ -397,16 +404,23 @@ class _SlotBookingState extends State<SlotBooking> {
                               borderRadius: BorderRadius.circular(5)),
                         ),
                         onPressed: () async {
-                          if(dateSelected==true&&slotSelected==true){
+                          if (dateSelected == true && slotSelected == true) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => PaymentScreen(
-                                      total: service.subtotal.toDouble()+gst1+gst2, cart: service, id: id.toString())),
+                                      total: double.parse(
+                                          paymentValue.toStringAsFixed(2)),
+                                      cart: service,
+                                      id: id.toString())),
                             );
-                          }
-                          else{
-                            Fluttertoast.showToast(msg: 'Please select a date and slot for booking',backgroundColor: Color(0xff5D5FEF),textColor: Colors.white, toastLength: Toast.LENGTH_LONG);
+                          } else {
+                            Fluttertoast.showToast(
+                                msg:
+                                    'Please select a date and slot for booking',
+                                backgroundColor: Color(0xff5D5FEF),
+                                textColor: Colors.white,
+                                toastLength: Toast.LENGTH_LONG);
                           }
                         },
                       )
