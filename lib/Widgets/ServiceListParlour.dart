@@ -62,7 +62,7 @@ class ServiceListParlour extends StatelessWidget {
                       ),
                     ),
                     errorWidget: (context, url, error) =>
-                    new Image.asset('assets/parlourTile.png'),
+                        new Image.asset('assets/parlourTile.png'),
                   ),
                 ),
               ),
@@ -76,7 +76,7 @@ class ServiceListParlour extends StatelessWidget {
                           bottomRight: Radius.circular(10))),
                   // margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                   padding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   height: 130,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,15 +88,11 @@ class ServiceListParlour extends StatelessWidget {
                               CupertinoIcons.location,
                               color: Colors.green,
                             ),
-//                            Text(service.location,
-//                                style: TextStyle(
-//                                    color: Colors.green,
-//                                    fontSize: 15,
-//                                    fontWeight: FontWeight.w400)),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width*0.5,
+                              width: MediaQuery.of(context).size.width * 0.5,
                               height: 20,
                               child: Marquee(
+                                  blankSpace: 20,
                                   velocity: 20,
                                   text: service.location,
                                   style: TextStyle(
@@ -120,14 +116,27 @@ class ServiceListParlour extends StatelessWidget {
                               SizedBox(
                                 width: width * 0.02,
                               ),
-                              Text(
-                                service.parlourName,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16),
-                                textAlign: TextAlign.left,
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.33,
+                                height: 20,
+                                child: Marquee(
+                                  blankSpace: 10,
+                                  velocity: 20,
+                                  text: service.parlourName,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16),
+                                ),
                               ),
+                              // Text(
+                              //   service.parlourName,
+                              //   style: TextStyle(
+                              //       color: Colors.white,
+                              //       fontWeight: FontWeight.w600,
+                              //       fontSize: 16),
+                              //   textAlign: TextAlign.left,
+                              // ),
                             ],
                           ),
                           Container(

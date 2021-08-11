@@ -161,207 +161,188 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.64,
-                            child: Flexible(
-                              flex: 4,
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.05,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: Color(0xFF0F2735),
-                                ),
-                                margin:
-                                    const EdgeInsets.fromLTRB(40, 20, 40, 10),
-                                padding: const EdgeInsets.all(4),
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Icon(
-                                        CupertinoIcons.location,
-                                        color: Colors.green,
-                                        size: 20,
-                                      ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.3,
-                                        child: Marquee(
-                                            velocity: 20,
-                                            text: location.address,
-                                            style: TextStyle(
-                                                color: Colors.green,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.03,
-                                                fontWeight: FontWeight.w400)),
-                                      )
-                                    ]),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Color(0xFF0F2735),
                               ),
+                              margin: const EdgeInsets.fromLTRB(40, 20, 40, 10),
+                              padding: const EdgeInsets.all(4),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Icon(
+                                      CupertinoIcons.location,
+                                      color: Colors.green,
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Marquee(
+                                          velocity: 20,
+                                          text: location.address,
+                                          style: TextStyle(
+                                              color: Colors.green,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.03,
+                                              fontWeight: FontWeight.w400)),
+                                    )
+                                  ]),
                             ),
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.64,
-                            child: Flexible(
-                              flex: 2,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Flexible(
-                                    flex: 1,
-                                    child: Icon(
-                                      CupertinoIcons.scissors,
-                                      size: 24,
-                                    ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: Icon(
+                                    CupertinoIcons.scissors,
+                                    size: 24,
                                   ),
-                                  Flexible(
-                                    flex: 6,
-                                    child: Text(service.parlourName,
+                                ),
+                                Flexible(
+                                  flex: 6,
+                                  child: Text(service.parlourName,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20)),
+                                ),
+                                Flexible(
+                                  flex: 2,
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Color(0xff5D5FEF)),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Text('\u{2B50} 4.4',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 20)),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12)),
                                   ),
-                                  Flexible(
-                                    flex: 2,
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
-                                      padding: const EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Color(0xff5D5FEF)),
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: Text('\u{2B50} 4.4',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12)),
-                                    ),
-                                  )
-                                ],
-                              ),
+                                )
+                              ],
                             ),
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.5,
-                            child: Flexible(
-                              flex: 4,
-                              child: Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 0),
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: employeeDetailList.length,
-                                  itemBuilder: (BuildContext ctx, index) {
-                                    return Container(
-                                      padding: EdgeInsets.only(bottom: 10),
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 1),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CircleAvatar(
-                                            foregroundImage: new NetworkImage(
-                                                employeeDetailList[index]
-                                                    .imagefile),
-                                            backgroundColor: Colors.grey[200],
-                                            /*child: new Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 0),
-                                                decoration: new BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    image: new DecorationImage(
-                                                        fit: BoxFit.fill,
-                                                        image: new NetworkImage(
-                                                            employeeDetailList[
-                                                                    index]
-                                                                .imagefile))))*/
-                                          ),
-                                          new Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              new Text(
-                                                employeeDetailList[index].name,
-                                              ),
-                                              new Text(
-                                                employeeDetailList[index]
-                                                    .number,
-                                                style: TextStyle(
-                                                    color: Color(0xff5D5FEF),
-                                                    fontSize: 12),
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 0),
+                              child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: employeeDetailList.length,
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return Container(
+                                    padding: EdgeInsets.only(bottom: 10),
+                                    margin: EdgeInsets.symmetric(horizontal: 1),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CircleAvatar(
+                                          foregroundImage: new NetworkImage(
+                                              employeeDetailList[index]
+                                                  .imagefile),
+                                          backgroundColor: Colors.grey[200],
+                                          /*child: new Container(
+                                              margin:
+                                                  EdgeInsets.only(bottom: 0),
+                                              decoration: new BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: new DecorationImage(
+                                                      fit: BoxFit.fill,
+                                                      image: new NetworkImage(
+                                                          employeeDetailList[
+                                                                  index]
+                                                              .imagefile))))*/
+                                        ),
+                                        new Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            new Text(
+                                              employeeDetailList[index].name,
+                                            ),
+                                            new Text(
+                                              employeeDetailList[index].number,
+                                              style: TextStyle(
+                                                  color: Color(0xff5D5FEF),
+                                                  fontSize: 12),
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.64,
-                            child: Flexible(
-                              flex: 3,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.8,
-                                // height: MediaQuery.of(context).size.height * 0.05,
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(children: [
-                                          Icon(
-                                            CupertinoIcons.time,
-                                            color: Color(0xff5D5FEF),
-                                            size: 20,
-                                          ),
-                                          Text(
-                                            'Visiting hour',
-                                            style: TextStyle(fontSize: 12),
-                                          )
-                                        ]),
-                                        Text(service.time,
-                                            style: TextStyle(
-                                                color: Color(0xff00A676),
-                                                fontSize: 12))
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(children: [
-                                          Icon(
-                                            CupertinoIcons.sun_min,
-                                            color: Color(0xff5D5FEF),
-                                            size: 23,
-                                          ),
-                                          Text(
-                                            'Days',
-                                            style: TextStyle(fontSize: 12),
-                                          )
-                                        ]),
-                                        Text(slotList[0].weekRange,
-                                            style: TextStyle(
-                                                color: Color(0xff00A676),
-                                                fontSize: 12))
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              // height: MediaQuery.of(context).size.height * 0.05,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(children: [
+                                        Icon(
+                                          CupertinoIcons.time,
+                                          color: Color(0xff5D5FEF),
+                                          size: 20,
+                                        ),
+                                        Text(
+                                          'Visiting hour',
+                                          style: TextStyle(fontSize: 12),
+                                        )
+                                      ]),
+                                      Text(service.time,
+                                          style: TextStyle(
+                                              color: Color(0xff00A676),
+                                              fontSize: 12))
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(children: [
+                                        Icon(
+                                          CupertinoIcons.sun_min,
+                                          color: Color(0xff5D5FEF),
+                                          size: 23,
+                                        ),
+                                        Text(
+                                          'Days',
+                                          style: TextStyle(fontSize: 12),
+                                        )
+                                      ]),
+                                      Text(slotList[0].weekRange,
+                                          style: TextStyle(
+                                              color: Color(0xff00A676),
+                                              fontSize: 12))
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ),
