@@ -210,19 +210,27 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   )
                 ),
                 Container(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0),
                   height: MediaQuery.of(context).size.height * 0.1,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  color: Colors.black,
-                  child: Center(
-                    child: Text(
-                      "Amount to be paid : Rs " +  "${widget.total}",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
+                  width: MediaQuery.of(context).size.width * 1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Net Amount :",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500)),
+                      Text(
+                          "Rs "+"${widget.total}"+"/-",
+                          style: TextStyle(
+                              color: Color(0xff5D5FEF),
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500))
+                    ],
                   ),
                 ),
                 SizedBox(height: 20.0,),
-
                 TextButton(
                     onPressed: () {
                       openCheckOut(widget.total);
