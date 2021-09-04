@@ -23,27 +23,41 @@ class _SlotBookingState extends State<SlotBooking> {
 
   String userId = '${FirebaseAuth.instance.currentUser.uid}';
 
-  int slt = 15;
   String sl;
   bool dateSelected = false;
   bool slotSelected = false;
-  bool a1 = true,
-      a2 = true,
-      a3 = true,
-      a4 = true,
-      a5 = true,
-      a6 = true,
-      a7 = true,
-      a8 = true;
+
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.utc(1989);
   CalendarFormat _calendarFormat = CalendarFormat.week;
+  int intervalDuration = 10;
+  int slotDuration = 30;
+  int count = 0;
+  int Min1 = 0,
+      Hr1 = 0,
+      Min2 = 0,
+      Hr2 = 0,
+      Min3 = 0,
+      Hr3 = 0,
+      Min4 = 0,
+      Hr4 = 0;
+  List<bool> slotButtons = List.filled(30, false, growable: false);
+  var am_pm1 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
+  var am_pm2 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
+  var am_pm3 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
+  var am_pm4 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
+  String lessMins1 = '', lessMins2 = '', lessMins3 = '', lessMins4 = '';
+
+  bool pm = false;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
+    final int employeeNumbers = args['employeeNumbers'];
+    /*print(employeeNumbers);*/
+
     final id = args['id'];
     final shopName = args['shopName'];
     final address = args['address'];
@@ -56,6 +70,18 @@ class _SlotBookingState extends State<SlotBooking> {
     final int minute = time % 60;
     final int hours = (time / 60).floor();
     double paymentValue = service.subtotal.toDouble() + gst1 + gst2;
+    final startHr = int.tryParse(slots[0].fromHr);
+    final startMin = int.tryParse(slots[0].fromMin);
+    final endHr = int.tryParse(slots[0].toHr);
+    final endMin = int.tryParse(slots[0].toMin);
+
+    setState(() {
+      int totalDuration = slotDuration + intervalDuration;
+      int openTime =
+          endMin + (endHr * 60) + ((12 - startHr) * 60) + 60 - startMin;
+      count = (openTime / totalDuration).floor();
+    });
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
       child: Scaffold(
@@ -187,9 +213,298 @@ class _SlotBookingState extends State<SlotBooking> {
                 SizedBox(height: 15.0),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Wrap(
-                    children: [
-                      ...List.generate(slots.length, (index) {
+                  child: Container(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: (count / 2).floor() - 1,
+                          itemBuilder: (ctx, i) {
+                            if (i == 0) {
+                              Min1 = startMin;
+                              Hr1 = startHr;
+                              pm = false;
+                            } else {
+                              Min1 = Min4 + intervalDuration;
+                              Hr1 = Hr4 + (Min1 / 60).floor();
+                              Min1 = Min1 % 60;
+                              if (Hr1 == 12 || Hr1 > 12 || pm == true) {
+                                am_pm1[i] = 'PM';
+                                am_pm2[i] = 'PM';
+                                am_pm3[i] = 'PM';
+                                am_pm4[i] = 'PM';
+                              }
+                              if (Hr1 > 12) {
+                                Hr1 = Hr1 - 12;
+                              }
+                            }
+
+                            Min2 = Min1 + slotDuration;
+                            Hr2 = Hr1 + (Min2 / 60).floor();
+                            Min2 = Min2 % 60;
+                            if (Hr2 == 12 || Hr2 > 12 || pm == true) {
+                              pm = true;
+                              am_pm2[i] = 'PM';
+                              am_pm3[i] = 'PM';
+                              am_pm4[i] = 'PM';
+                            }
+                            if (Hr2 > 12) {
+                              Hr2 = Hr2 - 12;
+                            }
+                            if (Min1 < 10)
+                              lessMins1 = '0';
+                            else
+                              lessMins1 = '';
+                            if (Min2 < 10)
+                              lessMins2 = '0';
+                            else
+                              lessMins2 = '';
+                            final _timeslot =
+                                "$Hr1:$lessMins1$Min1 ${am_pm1[i]} - $Hr2:$lessMins2$Min2 ${am_pm2[i]}";
+
+                            Min3 = Min2 + intervalDuration;
+                            Hr3 = Hr2 + (Min3 / 60).floor();
+                            Min3 = Min3 % 60;
+                            if (Hr3 == 12 || Hr3 > 12 || pm == true) {
+                              pm = true;
+
+                              am_pm3[i] = 'PM';
+                              am_pm4[i] = 'PM';
+                            }
+                            if (Hr3 > 12) {
+                              Hr3 = Hr3 - 12;
+                            }
+
+                            Min4 = Min3 + slotDuration;
+                            Hr4 = Hr3 + (Min4 / 60).floor();
+                            Min4 = Min4 % 60;
+                            if (Hr4 == 12 || Hr4 > 12 || pm == true) {
+                              pm = true;
+
+                              am_pm4[i] = 'PM';
+                            }
+                            if (Hr4 > 12) {
+                              Hr4 = Hr4 - 12;
+                            }
+                            if (Min3 < 10)
+                              lessMins3 = '0';
+                            else
+                              lessMins3 = '';
+                            if (Min4 < 10)
+                              lessMins4 = '0';
+                            else
+                              lessMins4 = '';
+
+                            final _timeslot1 =
+                                "$Hr3:$lessMins3$Min3 ${am_pm3[i]} - $Hr4:$lessMins4$Min4 ${am_pm4[i]}";
+                            final indx1 = i * 2;
+                            final indx2 = i * 2 + 1;
+                            final int newEmployeeNumber = employeeNumbers - 1;
+
+                            return Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: FlatButton(
+                                    padding: EdgeInsets.all(0.0),
+                                    onPressed: () {
+                                      if (dateSelected == false)
+                                        Fluttertoast.showToast(
+                                            msg: 'Please select a date',
+                                            backgroundColor: Color(0xff5D5FEF),
+                                            textColor: Colors.white,
+                                            toastLength: Toast.LENGTH_LONG);
+                                      setState(() {
+                                        slotSelected = !slotSelected;
+                                        if (_selectedDay == DateTime.utc(1989))
+                                          slotButtons[indx1] = false;
+                                        else {
+                                          slotButtons[indx1] =
+                                              !slotButtons[indx1];
+                                        }
+                                        if (slotButtons[indx1] == true) {
+                                          for (int x = 0; x < count; x++) {
+                                            if (x != indx1)
+                                              slotButtons[x] = false;
+                                          }
+                                          sl = _timeslot;
+                                        }
+                                      });
+                                      servic.updateTimeSlot(id, _timeslot);
+                                    },
+                                    child: slotButtons[indx1] == false
+                                        ? Container(
+                                            height: 50,
+                                            width: 160,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.blue),
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0)),
+                                            child: (Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(_timeslot,
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xff5D5FEF),
+                                                        fontSize: 12.0)),
+                                                Card(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      '$employeeNumbers',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12.0),
+                                                    ),
+                                                  ),
+                                                  color: Color(0xff00A676),
+                                                )
+                                              ],
+                                            )),
+                                          )
+                                        : Container(
+                                            height: 50,
+                                            width: 160,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                color: Color(0xff00A676)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                (Text(_timeslot,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.0))),
+                                                Card(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      '$newEmployeeNumber',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xff00A676),
+                                                          fontSize: 12.0),
+                                                    ),
+                                                  ),
+                                                  color: Colors.white,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: FlatButton(
+                                    padding: EdgeInsets.all(0.0),
+                                    onPressed: () {
+                                      if (dateSelected == false)
+                                        Fluttertoast.showToast(
+                                            msg: 'Please select a date',
+                                            backgroundColor: Color(0xff5D5FEF),
+                                            textColor: Colors.white,
+                                            toastLength: Toast.LENGTH_LONG);
+                                      setState(() {
+                                        slotSelected = !slotSelected;
+                                        if (_selectedDay == DateTime.utc(1989))
+                                          slotButtons[indx2] = false;
+                                        else {
+                                          slotButtons[indx2] =
+                                              !slotButtons[indx2];
+                                        }
+                                        if (slotButtons[indx2] == true) {
+                                          for (int x = 0; x < count; x++) {
+                                            if (x != indx2)
+                                              slotButtons[x] = false;
+                                          }
+
+                                          sl = _timeslot1;
+                                        }
+                                      });
+                                      servic.updateTimeSlot(id, _timeslot1);
+                                    },
+                                    child: slotButtons[indx2] == false
+                                        ? Container(
+                                            height: 50,
+                                            width: 160,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.blue),
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0)),
+                                            child: (Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(_timeslot1,
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xff5D5FEF),
+                                                        fontSize: 12.0)),
+                                                Card(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      '$employeeNumbers',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12.0),
+                                                    ),
+                                                  ),
+                                                  color: Color(0xff00A676),
+                                                )
+                                              ],
+                                            )),
+                                          )
+                                        : Container(
+                                            height: 50,
+                                            width: 160,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                color: Color(0xff00A676)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                (Text(_timeslot1,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.0))),
+                                                Card(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                      '$newEmployeeNumber',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xff00A676),
+                                                          fontSize: 12.0),
+                                                    ),
+                                                  ),
+                                                  color: Colors.white,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                  ),
+                                )
+                              ],
+                            );
+                          })
+                      /*...List.generate(slots.length, (index) {
                         final firstIndex = slots[0];
                         final _timeslot =
                             "${firstIndex.fromHr}:${firstIndex.fromMin}AM - ${firstIndex.toHr}:${firstIndex.toMin} PM";
@@ -274,9 +589,9 @@ class _SlotBookingState extends State<SlotBooking> {
                                   ),
                                 ),
                         );
-                      })
-                    ],
-                  ),
+                      })*/
+
+                      ),
                 ),
                 SizedBox(height: 30),
                 Container(

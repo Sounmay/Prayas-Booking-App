@@ -38,6 +38,8 @@ class _BookAppointmentState extends State<BookAppointment> {
     final width = MediaQuery.of(context).size.width;
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
+    final int employeeNumbers = args['employeeNumbers'];
+    print(employeeNumbers);
     final id = args['id'];
     final slots = args['slots'];
     final shopName = args['shopName'];
@@ -419,7 +421,13 @@ class _BookAppointmentState extends State<BookAppointment> {
                               ),
                               onPressed: () {
                                 Navigator.pushNamed(context, '/slotBooking',
-                                    arguments: {'id': id, 'slots': slots, 'shopName': shopName, 'address': address});
+                                    arguments: {
+                                      'employeeNumbers': employeeNumbers,
+                                      'id': id,
+                                      'slots': slots,
+                                      'shopName': shopName,
+                                      'address': address
+                                    });
                               },
                             ),
                             SizedBox(

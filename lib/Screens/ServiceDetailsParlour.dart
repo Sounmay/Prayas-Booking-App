@@ -59,6 +59,10 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     Parlour service = args['details'];
+
+    final int employeeNumbers = employeeDetailList.length;
+    /*print(employeeNumbers);*/
+
     if (firstLoad) {
       _loadDatafromFirestore(service.id);
     }
@@ -395,6 +399,8 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                         Navigator.pushNamed(
                                             context, '/bookAppointment',
                                             arguments: {
+                                              'employeeNumbers':
+                                                  employeeNumbers,
                                               'id': service.id,
                                               'shopName': service.parlourName,
                                               'mostAvailService':
