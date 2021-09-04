@@ -30,9 +30,9 @@ class _SlotBookingState extends State<SlotBooking> {
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.utc(1989);
   CalendarFormat _calendarFormat = CalendarFormat.week;
-  int intervalDuration = 10;
-  int slotDuration = 30;
-  int count = 0;
+  int intervalDuration = 15;
+  int slotDuration = 35;
+  int count = 0, tempCount = 0;
   int Min1 = 0,
       Hr1 = 0,
       Min2 = 0,
@@ -48,7 +48,7 @@ class _SlotBookingState extends State<SlotBooking> {
   var am_pm4 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
   String lessMins1 = '', lessMins2 = '', lessMins3 = '', lessMins4 = '';
 
-  bool pm = false;
+  bool pm = false, stop1 = false, stop2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +77,10 @@ class _SlotBookingState extends State<SlotBooking> {
 
     setState(() {
       int totalDuration = slotDuration + intervalDuration;
-      int openTime =
-          endMin + (endHr * 60) + ((12 - startHr) * 60) + 60 - startMin;
+      int openTime = endMin + (endHr * 60) + ((12 - startHr) * 60) - startMin;
       count = (openTime / totalDuration).floor();
+      int reminder = openTime % totalDuration;
+      if (reminder >= slotDuration) count++;
     });
 
     return MediaQuery(
@@ -217,7 +218,7 @@ class _SlotBookingState extends State<SlotBooking> {
                       child: ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: (count / 2).floor() - 1,
+                          itemCount: (count ~/ 2) + 1,
                           itemBuilder: (ctx, i) {
                             if (i == 0) {
                               Min1 = startMin;
@@ -260,6 +261,11 @@ class _SlotBookingState extends State<SlotBooking> {
                               lessMins2 = '';
                             final _timeslot =
                                 "$Hr1:$lessMins1$Min1 ${am_pm1[i]} - $Hr2:$lessMins2$Min2 ${am_pm2[i]}";
+                            tempCount++;
+                            if (tempCount > count) {
+                              stop1 = true;
+                              stop2 = true;
+                            }
 
                             Min3 = Min2 + intervalDuration;
                             Hr3 = Hr2 + (Min3 / 60).floor();
@@ -296,211 +302,245 @@ class _SlotBookingState extends State<SlotBooking> {
 
                             final _timeslot1 =
                                 "$Hr3:$lessMins3$Min3 ${am_pm3[i]} - $Hr4:$lessMins4$Min4 ${am_pm4[i]}";
+
+                            tempCount++;
+                            if (tempCount > count) stop2 = true;
+
                             final indx1 = i * 2;
                             final indx2 = i * 2 + 1;
                             final int newEmployeeNumber = employeeNumbers - 1;
 
                             return Row(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: FlatButton(
-                                    padding: EdgeInsets.all(0.0),
-                                    onPressed: () {
-                                      if (dateSelected == false)
-                                        Fluttertoast.showToast(
-                                            msg: 'Please select a date',
-                                            backgroundColor: Color(0xff5D5FEF),
-                                            textColor: Colors.white,
-                                            toastLength: Toast.LENGTH_LONG);
-                                      setState(() {
-                                        slotSelected = !slotSelected;
-                                        if (_selectedDay == DateTime.utc(1989))
-                                          slotButtons[indx1] = false;
-                                        else {
-                                          slotButtons[indx1] =
-                                              !slotButtons[indx1];
-                                        }
-                                        if (slotButtons[indx1] == true) {
-                                          for (int x = 0; x < count; x++) {
-                                            if (x != indx1)
-                                              slotButtons[x] = false;
-                                          }
-                                          sl = _timeslot;
-                                        }
-                                      });
-                                      servic.updateTimeSlot(id, _timeslot);
-                                    },
-                                    child: slotButtons[indx1] == false
-                                        ? Container(
-                                            height: 50,
-                                            width: 160,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.blue),
-                                                borderRadius:
-                                                    BorderRadius.circular(6.0)),
-                                            child: (Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(_timeslot,
-                                                    style: TextStyle(
+                                stop1
+                                    ? SizedBox(width: 10)
+                                    : Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: FlatButton(
+                                          padding: EdgeInsets.all(0.0),
+                                          onPressed: () {
+                                            if (dateSelected == false)
+                                              Fluttertoast.showToast(
+                                                  msg: 'Please select a date',
+                                                  backgroundColor:
+                                                      Color(0xff5D5FEF),
+                                                  textColor: Colors.white,
+                                                  toastLength:
+                                                      Toast.LENGTH_LONG);
+                                            setState(() {
+                                              slotSelected = !slotSelected;
+                                              if (_selectedDay ==
+                                                  DateTime.utc(1989))
+                                                slotButtons[indx1] = false;
+                                              else {
+                                                slotButtons[indx1] =
+                                                    !slotButtons[indx1];
+                                              }
+                                              if (slotButtons[indx1] == true) {
+                                                for (int x = 0;
+                                                    x < count;
+                                                    x++) {
+                                                  if (x != indx1)
+                                                    slotButtons[x] = false;
+                                                }
+                                                sl = _timeslot;
+                                              }
+                                            });
+                                            servic.updateTimeSlot(
+                                                id, _timeslot);
+                                          },
+                                          child: slotButtons[indx1] == false
+                                              ? Container(
+                                                  height: 50,
+                                                  width: 160,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Colors.blue),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6.0)),
+                                                  child: (Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(_timeslot,
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff5D5FEF),
+                                                              fontSize: 12.0)),
+                                                      Card(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            '$employeeNumbers',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12.0),
+                                                          ),
+                                                        ),
                                                         color:
-                                                            Color(0xff5D5FEF),
-                                                        fontSize: 12.0)),
-                                                Card(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      '$employeeNumbers',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12.0),
-                                                    ),
-                                                  ),
-                                                  color: Color(0xff00A676),
+                                                            Color(0xff00A676),
+                                                      )
+                                                    ],
+                                                  )),
                                                 )
-                                              ],
-                                            )),
-                                          )
-                                        : Container(
-                                            height: 50,
-                                            width: 160,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                                color: Color(0xff00A676)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                (Text(_timeslot,
-                                                    style: TextStyle(
+                                              : Container(
+                                                  height: 50,
+                                                  width: 160,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                      color: Color(0xff00A676)),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      (Text(_timeslot,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12.0))),
+                                                      Card(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            '$newEmployeeNumber',
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xff00A676),
+                                                                fontSize: 12.0),
+                                                          ),
+                                                        ),
                                                         color: Colors.white,
-                                                        fontSize: 12.0))),
-                                                Card(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      '$newEmployeeNumber',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xff00A676),
-                                                          fontSize: 12.0),
-                                                    ),
+                                                      )
+                                                    ],
                                                   ),
-                                                  color: Colors.white,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: FlatButton(
-                                    padding: EdgeInsets.all(0.0),
-                                    onPressed: () {
-                                      if (dateSelected == false)
-                                        Fluttertoast.showToast(
-                                            msg: 'Please select a date',
-                                            backgroundColor: Color(0xff5D5FEF),
-                                            textColor: Colors.white,
-                                            toastLength: Toast.LENGTH_LONG);
-                                      setState(() {
-                                        slotSelected = !slotSelected;
-                                        if (_selectedDay == DateTime.utc(1989))
-                                          slotButtons[indx2] = false;
-                                        else {
-                                          slotButtons[indx2] =
-                                              !slotButtons[indx2];
-                                        }
-                                        if (slotButtons[indx2] == true) {
-                                          for (int x = 0; x < count; x++) {
-                                            if (x != indx2)
-                                              slotButtons[x] = false;
-                                          }
+                                                ),
+                                        ),
+                                      ),
+                                stop2
+                                    ? SizedBox(width: 10)
+                                    : Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: FlatButton(
+                                          padding: EdgeInsets.all(0.0),
+                                          onPressed: () {
+                                            if (dateSelected == false)
+                                              Fluttertoast.showToast(
+                                                  msg: 'Please select a date',
+                                                  backgroundColor:
+                                                      Color(0xff5D5FEF),
+                                                  textColor: Colors.white,
+                                                  toastLength:
+                                                      Toast.LENGTH_LONG);
+                                            setState(() {
+                                              slotSelected = !slotSelected;
+                                              if (_selectedDay ==
+                                                  DateTime.utc(1989))
+                                                slotButtons[indx2] = false;
+                                              else {
+                                                slotButtons[indx2] =
+                                                    !slotButtons[indx2];
+                                              }
+                                              if (slotButtons[indx2] == true) {
+                                                for (int x = 0;
+                                                    x < count;
+                                                    x++) {
+                                                  if (x != indx2)
+                                                    slotButtons[x] = false;
+                                                }
 
-                                          sl = _timeslot1;
-                                        }
-                                      });
-                                      servic.updateTimeSlot(id, _timeslot1);
-                                    },
-                                    child: slotButtons[indx2] == false
-                                        ? Container(
-                                            height: 50,
-                                            width: 160,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.blue),
-                                                borderRadius:
-                                                    BorderRadius.circular(6.0)),
-                                            child: (Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(_timeslot1,
-                                                    style: TextStyle(
+                                                sl = _timeslot1;
+                                              }
+                                            });
+                                            servic.updateTimeSlot(
+                                                id, _timeslot1);
+                                          },
+                                          child: slotButtons[indx2] == false
+                                              ? Container(
+                                                  height: 50,
+                                                  width: 160,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Colors.blue),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6.0)),
+                                                  child: (Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(_timeslot1,
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xff5D5FEF),
+                                                              fontSize: 12.0)),
+                                                      Card(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            '$employeeNumbers',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12.0),
+                                                          ),
+                                                        ),
                                                         color:
-                                                            Color(0xff5D5FEF),
-                                                        fontSize: 12.0)),
-                                                Card(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      '$employeeNumbers',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12.0),
-                                                    ),
-                                                  ),
-                                                  color: Color(0xff00A676),
+                                                            Color(0xff00A676),
+                                                      )
+                                                    ],
+                                                  )),
                                                 )
-                                              ],
-                                            )),
-                                          )
-                                        : Container(
-                                            height: 50,
-                                            width: 160,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                                color: Color(0xff00A676)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                (Text(_timeslot1,
-                                                    style: TextStyle(
+                                              : Container(
+                                                  height: 50,
+                                                  width: 160,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                      color: Color(0xff00A676)),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      (Text(_timeslot1,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12.0))),
+                                                      Card(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
+                                                            '$newEmployeeNumber',
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xff00A676),
+                                                                fontSize: 12.0),
+                                                          ),
+                                                        ),
                                                         color: Colors.white,
-                                                        fontSize: 12.0))),
-                                                Card(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      '$newEmployeeNumber',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xff00A676),
-                                                          fontSize: 12.0),
-                                                    ),
+                                                      )
+                                                    ],
                                                   ),
-                                                  color: Colors.white,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                  ),
-                                )
+                                                ),
+                                        ),
+                                      )
                               ],
                             );
                           })
