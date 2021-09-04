@@ -22,7 +22,7 @@ class Cart {
       this.day,
       this.subtotal = 0,
       this.timeSlot,
-        this.otp,
+      this.otp,
       this.time = 0});
 
   Map<String, dynamic> toJson(String uid) => {

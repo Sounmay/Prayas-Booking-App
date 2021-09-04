@@ -119,18 +119,6 @@ class _LoginState extends State<Login> {
                                     onChanged: (val) {
                                       setState(() => password = val);
                                     }),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 5),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Text(
-                                            "Forgot Password?",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          )
-                                        ])),
                                 SizedBox(height: 20.0),
                                 SizedBox(
                                   width:

@@ -30,7 +30,7 @@ class _SlotBookingState extends State<SlotBooking> {
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.utc(1989);
   CalendarFormat _calendarFormat = CalendarFormat.week;
-  int intervalDuration = 10;
+  int intervalDuration = 30;
   int slotDuration = 30;
   int count = 0;
   int Min1 = 0,

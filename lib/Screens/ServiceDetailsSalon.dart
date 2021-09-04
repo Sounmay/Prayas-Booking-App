@@ -344,7 +344,15 @@ class _ServiceDetailsSalonState extends State<ServiceDetailsSalon> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5))),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/cat',
+                                      arguments: {
+                                        'id': service.id,
+                                        'shopName': service.salonName,
+                                        'mostAvailed': salonServiceDetails,
+                                        'getCatalogue': getCatalogue
+                                      });
+                                },
                               ),
                             ),
                             Container(
@@ -361,11 +369,14 @@ class _ServiceDetailsSalonState extends State<ServiceDetailsSalon> {
                                             BorderRadius.circular(5))),
                                 onPressed: () {
                                   Navigator.pushNamed(
-                                      context, '/bookAppointment', arguments: {
-                                    'id': service.id,
-                                    'mostAvailService':
-                                        service.mostAvailservices
-                                  });
+                                      context, '/bookAppointment',
+                                      arguments: {
+                                        'id': service.id,
+                                        'shopName': service.salonName,
+                                        'mostAvailService': salonServiceDetails,
+                                        'slots': slotList,
+                                        'address': service.location,
+                                      });
                                 },
                               ),
                             ),

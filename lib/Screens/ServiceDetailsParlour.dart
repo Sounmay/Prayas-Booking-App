@@ -60,7 +60,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     Parlour service = args['details'];
 
-    final int employeeNumbers = employeeDetailList.length;
+    final int employeeNumbers = employeeDetailList?.length ?? 0;
     /*print(employeeNumbers);*/
 
     if (firstLoad) {
