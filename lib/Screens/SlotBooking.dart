@@ -30,8 +30,8 @@ class _SlotBookingState extends State<SlotBooking> {
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.utc(1989);
   CalendarFormat _calendarFormat = CalendarFormat.week;
-  int intervalDuration = 10;
-  int slotDuration = 35;
+  int intervalDuration = 0;
+  int slotDuration = 60;
   int count = 0, tempCount = 0;
   int Min1 = 0,
       Hr1 = 0,
@@ -365,20 +365,20 @@ class _SlotBookingState extends State<SlotBooking> {
                                                         color:
                                                             Color(0xff5D5FEF),
                                                         fontSize: 12.0)),
-                                                Card(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      '$employeeNumbers',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12.0),
-                                                    ),
-                                                  ),
-                                                  color: Color(0xff00A676),
-                                                )
+                                                // Card(
+                                                //   child: Padding(
+                                                //     padding:
+                                                //         const EdgeInsets.all(
+                                                //             8.0),
+                                                //     child: Text(
+                                                //       '$employeeNumbers',
+                                                //       style: TextStyle(
+                                                //           color: Colors.white,
+                                                //           fontSize: 12.0),
+                                                //     ),
+                                                //   ),
+                                                //   color: Color(0xff00A676),
+                                                // )
                                               ],
                                             )),
                                           )
@@ -397,21 +397,21 @@ class _SlotBookingState extends State<SlotBooking> {
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 12.0))),
-                                                Card(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      '$newEmployeeNumber',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xff00A676),
-                                                          fontSize: 12.0),
-                                                    ),
-                                                  ),
-                                                  color: Colors.white,
-                                                )
+                                                // Card(
+                                                //   child: Padding(
+                                                //     padding:
+                                                //         const EdgeInsets.all(
+                                                //             8.0),
+                                                //     child: Text(
+                                                //       '$newEmployeeNumber',
+                                                //       style: TextStyle(
+                                                //           color:
+                                                //               Color(0xff00A676),
+                                                //           fontSize: 12.0),
+                                                //     ),
+                                                //   ),
+                                                //   color: Colors.white,
+                                                // )
                                               ],
                                             ),
                                           ),
@@ -475,22 +475,22 @@ class _SlotBookingState extends State<SlotBooking> {
                                                               color: Color(
                                                                   0xff5D5FEF),
                                                               fontSize: 12.0)),
-                                                      Card(
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                            '$employeeNumbers',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 12.0),
-                                                          ),
-                                                        ),
-                                                        color:
-                                                            Color(0xff00A676),
-                                                      )
+                                                      // Card(
+                                                      //   child: Padding(
+                                                      //     padding:
+                                                      //         const EdgeInsets
+                                                      //             .all(8.0),
+                                                      //     child: Text(
+                                                      //       '$employeeNumbers',
+                                                      //       style: TextStyle(
+                                                      //           color: Colors
+                                                      //               .white,
+                                                      //           fontSize: 12.0),
+                                                      //     ),
+                                                      //   ),
+                                                      //   color:
+                                                      //       Color(0xff00A676),
+                                                      // )
                                                     ],
                                                   )),
                                                 )
@@ -512,21 +512,21 @@ class _SlotBookingState extends State<SlotBooking> {
                                                               color:
                                                                   Colors.white,
                                                               fontSize: 12.0))),
-                                                      Card(
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                            '$newEmployeeNumber',
-                                                            style: TextStyle(
-                                                                color: Color(
-                                                                    0xff00A676),
-                                                                fontSize: 12.0),
-                                                          ),
-                                                        ),
-                                                        color: Colors.white,
-                                                      )
+                                                      // Card(
+                                                      //   child: Padding(
+                                                      //     padding:
+                                                      //         const EdgeInsets
+                                                      //             .all(8.0),
+                                                      //     child: Text(
+                                                      //       '$newEmployeeNumber',
+                                                      //       style: TextStyle(
+                                                      //           color: Color(
+                                                      //               0xff00A676),
+                                                      //           fontSize: 12.0),
+                                                      //     ),
+                                                      //   ),
+                                                      //   color: Colors.white,
+                                                      // )
                                                     ],
                                                   ),
                                                 ),

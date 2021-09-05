@@ -16,7 +16,7 @@ class Mydrawer extends StatefulWidget {
 
 class _MydrawerState extends State<Mydrawer> {
   bool load = true;
-  String name = '';
+  String name;
   File _image;
 
   String userId = '${FirebaseAuth.instance.currentUser.uid}';
@@ -42,10 +42,14 @@ class _MydrawerState extends State<Mydrawer> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    name1(FirebaseAuth.instance.currentUser.uid);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (load) {
-      name1(userId);
-    }
     return SafeArea(
       child: Container(
         width: 200,
@@ -75,17 +79,18 @@ class _MydrawerState extends State<Mydrawer> {
                       Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child:
-//                              Text(
-//                                name,
-//                                style: TextStyle(color: Colors.white, fontSize: 15),
-//                              )
+                              // Text(
+                              //   name,
+                              //   style: TextStyle(color: Colors.white, fontSize: 15),
+                              // )
                               SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.2,
                                   height: 20,
                                   child: Marquee(
                                     velocity: 20,
-                                    text: name ?? "",
+                                    blankSpace: 10,
+                                    text: name ?? "...",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
                                   )))
