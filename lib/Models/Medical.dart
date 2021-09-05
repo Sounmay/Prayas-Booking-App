@@ -22,12 +22,13 @@ class Medical {
     Map data = doc.data();
 
     return Medical(
-        type: 'medical',
-        id: doc.id,
-        clinicName: data['clinicName'] ?? '',
-        name: data['name'] ?? '',
-        location: data['location'] ?? '',
-        image: data['image'] ?? '',
-        speciality: data['speciality'] ?? '');
+      type: "medical",
+      id: data["location"]["serviceUid"],
+      clinicName: data["location"]["clinicName"] ?? "",
+      name: data[""]["name"] ?? "",
+      location: data["location"]["address"] ?? "",
+      image: data["location"]["clinicImage"] ?? "",
+      // speciality: data["speciality"] ?? ""
+    );
   }
 }
