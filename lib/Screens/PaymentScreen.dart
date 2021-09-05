@@ -65,6 +65,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     String pid = response.paymentId;
     Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId);
     String otp = randomAlphaNumeric(6);
+    final cart = Provider.of<CartService>(context);
     widget.cart.addOtp(otp);
     widget.cart.addGST(widget.total.toInt());
     FirebaseFirestore.instance.collection('successPayments').doc().set({
@@ -171,7 +172,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 Container(
                     margin: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
                   height: MediaQuery.of(context).size.height * 0.12,
                   width: MediaQuery.of(context).size.width * 1,
                   decoration: BoxDecoration(
@@ -181,6 +182,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Container(
+                          width: 50.0,
+                          height: 50.0,
+                          child: Image.asset(
+                            'assets/Rectangle67.png',
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
                         Column(
                           children: [
                             Text(
@@ -188,7 +197,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               style: TextStyle(color: Colors.black, fontSize: 15),
                             ),
                             Text(
-                              'Sector-19, Rourkela',
+                              'Sector-19, Rourkela', //need to change
                               style: TextStyle(color: Colors.black, fontSize: 15),
                             ),
                           ],
@@ -197,17 +206,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           children: [
                             Text(
                               widget.cart.day.day.toString() + '/' + widget.cart.day.month.toString() + '/' + widget.cart.day.year.toString(),
-                              style: TextStyle(color: Color(0xFF0F2735), fontSize: 15),
+                              style: TextStyle(color: Color(0xff5D5FEF), fontSize: 15),
                             ),
                             Text(
                               widget.cart.timeSlot,
-                              style: TextStyle(color: Color(0xFF0F2735), fontSize: 15),
+                              style: TextStyle(color: Color(0xff5D5FEF), fontSize: 15),
                             ),
                           ],
                         )
                       ],
                     ),
                   )
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.26,
+                  child: ListView.builder(
+                    //add here
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 0),
