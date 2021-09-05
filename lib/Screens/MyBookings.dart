@@ -15,21 +15,26 @@ class MyBooking extends StatefulWidget {
 }
 
 class _MyBookingState extends State<MyBooking> {
-  bool b1 = true,
-      c1 = true,
-      c2 = true,
-      c3 = true,
-      c4 = true,
-      c5 = true,
-      c6 = true,
-      c7 = true;
+  bool filterButton = true,
+      doctorFilter = true,
+      parlourFilter = true,
+      salonFilter = true,
+      bookedFilter = true,
+      scheduledFilter = true,
+      failedFilter = true,
+      refundFilter = true;
 
   String date2;
+  int countBooked = 0;
+  int countScheduled = 0;
 
   static final formKey = GlobalKey<FormState>();
   bool isLoading = true;
   bool firstLoad = true;
   List<BookingsDetails> bookingDetails;
+  List<BookingsDetails> finalList;
+  List<BookingsDetails> bookedList;
+  List<BookingsDetails> scheduledList;
 
   Future _loadDatafromFirestore() async {
     try {
@@ -43,6 +48,11 @@ class _MyBookingState extends State<MyBooking> {
 
         bookingDetails = List.from(
             data.data()['bookings'].map((e) => BookingsDetails.fromJson(e)));
+        finalList = bookingDetails;
+
+        bookedList = bookingDetails.where((i) => i.isApproved).toList();
+        scheduledList =
+            bookingDetails.where((i) => i.isApproved == false).toList();
 
         isLoading = false;
         firstLoad = false;
@@ -121,14 +131,17 @@ class _MyBookingState extends State<MyBooking> {
                           child: Container(
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: b1 ? Colors.white : Color(0xFF5D5FEF)),
+                                  color: filterButton
+                                      ? Colors.white
+                                      : Color(0xFF5D5FEF)),
                               child: Icon(Icons.filter_alt_outlined,
                                   size: 30,
-                                  color:
-                                      b1 ? Color(0xFF5D5FEF) : Colors.white)),
+                                  color: filterButton
+                                      ? Color(0xFF5D5FEF)
+                                      : Colors.white)),
                           onPressed: () {
                             setState(() {
-                              b1 = !b1;
+                              filterButton = !filterButton;
                             });
                           },
                         )
@@ -138,7 +151,7 @@ class _MyBookingState extends State<MyBooking> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  b1
+                  filterButton
                       ? isLoading == true
                           ? Center(
                               child: Column(
@@ -164,15 +177,25 @@ class _MyBookingState extends State<MyBooking> {
                                     ),
                                   ),
                                 ),
-                                onRefresh: () => _loadDatafromFirestore(),
+                                onRefresh: () {
+                                  _loadDatafromFirestore();
+                                  finalList = (bookedFilter == true &&
+                                          scheduledFilter == false)
+                                      ? bookedList
+                                      : (bookedFilter == false &&
+                                              scheduledFilter == true)
+                                          ? scheduledList
+                                          : bookingDetails;
+                                },
                                 child: ListView.builder(
                                     physics: BouncingScrollPhysics(),
-                                    itemCount: bookingDetails.length,
+                                    itemCount: finalList.length,
                                     itemBuilder: (ctx, i) {
                                       DateTime date1 =
-                                          bookingDetails[i].date.toDate();
+                                          finalList[i].date.toDate();
                                       date2 = formatDate(
                                           date1, [d, ' ', MM, ', ', DD]);
+
                                       return Padding(
                                         padding: const EdgeInsets.all(0),
                                         child: Column(
@@ -198,7 +221,7 @@ class _MyBookingState extends State<MyBooking> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'OTP : ${bookingDetails[i].otp}',
+                                                          'OTP : ${finalList[i].otp}',
                                                           style: TextStyle(
                                                               color: Color(
                                                                   0xFF5D5FEF)),
@@ -227,7 +250,7 @@ class _MyBookingState extends State<MyBooking> {
                                                                           .circular(
                                                                               5.0)),
                                                               child: (Text(
-                                                                  '${bookingDetails[i].timeslot}',
+                                                                  '${finalList[i].timeslot}',
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black,
@@ -243,8 +266,7 @@ class _MyBookingState extends State<MyBooking> {
                                                                   .spaceBetween,
                                                           children: [
                                                             Text(
-                                                                bookingDetails[
-                                                                        i]
+                                                                finalList[i]
                                                                     .shopName,
                                                                 style: TextStyle(
                                                                     color: Colors
@@ -256,7 +278,7 @@ class _MyBookingState extends State<MyBooking> {
                                                                   EdgeInsets
                                                                       .all(4),
                                                               decoration: BoxDecoration(
-                                                                  color: Color(bookingDetails[
+                                                                  color: Color(finalList[
                                                                               i]
                                                                           .isApproved
                                                                       ? 0xFF3AD48A
@@ -267,19 +289,28 @@ class _MyBookingState extends State<MyBooking> {
                                                                               5.0)),
                                                               child: Row(
                                                                 children: [
-                                                                  Icon(
-                                                                      Icons
-                                                                          .check,
-                                                                      color: Colors
-                                                                          .white,
-                                                                      size: 20),
-                                                                  Text(
-                                                                      '  Booked',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                      )),
+                                                                  finalList[i]
+                                                                          .isApproved
+                                                                      ? [
+                                                                          Icon(
+                                                                              Icons.check,
+                                                                              color: Colors.white,
+                                                                              size: 20),
+                                                                          Text(
+                                                                              '  Booked',
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                              ))
+                                                                        ]
+                                                                      : Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.symmetric(horizontal: 8.0),
+                                                                          child: Text(
+                                                                              'Scheduled',
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                              )),
+                                                                        )
                                                                 ],
                                                               ),
                                                             ),
@@ -323,8 +354,11 @@ class _MyBookingState extends State<MyBooking> {
                                     TextButton(
                                         onPressed: () {
                                           setState(() {
-                                            c1 = c2 =
-                                                c3 = c4 = c5 = c6 = c7 = true;
+                                            doctorFilter = parlourFilter =
+                                                salonFilter = bookedFilter =
+                                                    scheduledFilter =
+                                                        failedFilter =
+                                                            refundFilter = true;
                                           });
                                         },
                                         child: Text(
@@ -342,13 +376,13 @@ class _MyBookingState extends State<MyBooking> {
                                       FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            c1 = !c1;
+                                            doctorFilter = !doctorFilter;
                                           });
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
-                                              color: c1
+                                              color: doctorFilter
                                                   ? Colors.white
                                                   : Color(0xFF5D5FEF),
                                               border: Border.all(
@@ -357,7 +391,7 @@ class _MyBookingState extends State<MyBooking> {
                                                   BorderRadius.circular(5.0)),
                                           child: (Text('Doctor',
                                               style: TextStyle(
-                                                  color: c1
+                                                  color: doctorFilter
                                                       ? Color(0xFF5D5FEF)
                                                       : Colors.white,
                                                   fontSize: 12.0))),
@@ -366,13 +400,13 @@ class _MyBookingState extends State<MyBooking> {
                                       FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            c2 = !c2;
+                                            parlourFilter = !parlourFilter;
                                           });
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
-                                              color: c2
+                                              color: parlourFilter
                                                   ? Colors.white
                                                   : Color(0xFF5D5FEF),
                                               border: Border.all(
@@ -381,7 +415,7 @@ class _MyBookingState extends State<MyBooking> {
                                                   BorderRadius.circular(5.0)),
                                           child: (Text('Parlour',
                                               style: TextStyle(
-                                                  color: c2
+                                                  color: parlourFilter
                                                       ? Color(0xFF5D5FEF)
                                                       : Colors.white,
                                                   fontSize: 12.0))),
@@ -390,13 +424,13 @@ class _MyBookingState extends State<MyBooking> {
                                       FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            c3 = !c3;
+                                            salonFilter = !salonFilter;
                                           });
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
-                                              color: c3
+                                              color: salonFilter
                                                   ? Colors.white
                                                   : Color(0xFF5D5FEF),
                                               border: Border.all(
@@ -405,7 +439,7 @@ class _MyBookingState extends State<MyBooking> {
                                                   BorderRadius.circular(5.0)),
                                           child: (Text('Salon',
                                               style: TextStyle(
-                                                  color: c3
+                                                  color: salonFilter
                                                       ? Color(0xFF5D5FEF)
                                                       : Colors.white,
                                                   fontSize: 12.0))),
@@ -430,13 +464,13 @@ class _MyBookingState extends State<MyBooking> {
                                       FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            c4 = !c4;
+                                            bookedFilter = !bookedFilter;
                                           });
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
-                                              color: c4
+                                              color: bookedFilter
                                                   ? Colors.white
                                                   : Color(0xFF5D5FEF),
                                               border: Border.all(
@@ -445,7 +479,7 @@ class _MyBookingState extends State<MyBooking> {
                                                   BorderRadius.circular(5.0)),
                                           child: (Text('Booked',
                                               style: TextStyle(
-                                                  color: c4
+                                                  color: bookedFilter
                                                       ? Color(0xFF5D5FEF)
                                                       : Colors.white,
                                                   fontSize: 12.0))),
@@ -454,13 +488,13 @@ class _MyBookingState extends State<MyBooking> {
                                       FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            c5 = !c5;
+                                            scheduledFilter = !scheduledFilter;
                                           });
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
-                                              color: c5
+                                              color: scheduledFilter
                                                   ? Colors.white
                                                   : Color(0xFF5D5FEF),
                                               border: Border.all(
@@ -469,7 +503,7 @@ class _MyBookingState extends State<MyBooking> {
                                                   BorderRadius.circular(5.0)),
                                           child: (Text('Scheduled',
                                               style: TextStyle(
-                                                  color: c5
+                                                  color: scheduledFilter
                                                       ? Color(0xFF5D5FEF)
                                                       : Colors.white,
                                                   fontSize: 12.0))),
@@ -478,13 +512,13 @@ class _MyBookingState extends State<MyBooking> {
                                       FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            c6 = !c6;
+                                            failedFilter = !failedFilter;
                                           });
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
-                                              color: c6
+                                              color: failedFilter
                                                   ? Colors.white
                                                   : Color(0xFF5D5FEF),
                                               border: Border.all(
@@ -493,7 +527,7 @@ class _MyBookingState extends State<MyBooking> {
                                                   BorderRadius.circular(5.0)),
                                           child: (Text('Failed',
                                               style: TextStyle(
-                                                  color: c6
+                                                  color: failedFilter
                                                       ? Color(0xFF5D5FEF)
                                                       : Colors.white,
                                                   fontSize: 12.0))),
@@ -502,13 +536,13 @@ class _MyBookingState extends State<MyBooking> {
                                       FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            c7 = !c7;
+                                            refundFilter = !refundFilter;
                                           });
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
-                                              color: c7
+                                              color: refundFilter
                                                   ? Colors.white
                                                   : Color(0xFF5D5FEF),
                                               border: Border.all(
@@ -517,7 +551,7 @@ class _MyBookingState extends State<MyBooking> {
                                                   BorderRadius.circular(5.0)),
                                           child: (Text('Refund',
                                               style: TextStyle(
-                                                  color: c7
+                                                  color: refundFilter
                                                       ? Color(0xFF5D5FEF)
                                                       : Colors.white,
                                                   fontSize: 12.0))),
@@ -533,7 +567,18 @@ class _MyBookingState extends State<MyBooking> {
                                     FlatButton(
                                       onPressed: () {
                                         setState(() {
-                                          b1 = true;
+                                          filterButton = true;
+                                          if (bookedFilter == false &&
+                                              scheduledFilter == true)
+                                            finalList = bookedList;
+                                          if (scheduledFilter == false &&
+                                              bookedFilter == true)
+                                            finalList = scheduledList;
+                                          if ((bookedFilter == true &&
+                                                  scheduledFilter == true) ||
+                                              (bookedFilter == false &&
+                                                  scheduledFilter == false))
+                                            finalList = bookingDetails;
                                         });
                                       },
                                       child: Container(
