@@ -8,6 +8,7 @@ import 'package:freelance_booking_app/Providers/medicalServices.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Providers/parlourServices.dart';
 import 'package:freelance_booking_app/Providers/salonServices.dart';
+import 'package:freelance_booking_app/Widgets/ClinicListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
@@ -44,12 +45,14 @@ class _AllSerivesState extends State<AllSerives> {
     Widget medicalListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(
-          physics: BouncingScrollPhysics(),
-          itemCount: medicalFirebaseServiceList.length,
-          itemBuilder: (ctx, j) => ServiceListDoctor(
-            service: medicalFirebaseServiceList[j],
-          ),
-        ));
+            physics: BouncingScrollPhysics(),
+            itemCount: medicalFirebaseServiceList.length,
+            itemBuilder: (ctx, j) =>
+                ClinicListDoctor(service: medicalFirebaseServiceList[j])
+            // ServiceListDoctor(
+            //   service: medicalFirebaseServiceList[j],
+            // ),
+            ));
     Widget parlourListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(

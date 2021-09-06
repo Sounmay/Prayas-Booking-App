@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Models/Salon.dart';
+import 'package:freelance_booking_app/Widgets/ClinicListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListDoctor.dart';
 import 'package:freelance_booking_app/Widgets/ServiceListParlour.dart';
@@ -133,8 +134,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               if (!thisFocusnode.hasFocus) {
                                 Navigator.pop(context);
                               }
-                            })
-                    ),
+                            })),
                     Expanded(
                         child: Container(
                       padding: const EdgeInsets.all(10),
@@ -187,7 +187,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               service: filtereList[index],
                             );
                           }
-                          return ServiceListDoctor(
+                          return ClinicListDoctor(
                             service: filtereList[index],
                           );
                         },

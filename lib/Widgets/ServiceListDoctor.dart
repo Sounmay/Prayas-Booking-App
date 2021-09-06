@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:freelance_booking_app/Models/Medical.dart';
+import 'package:freelance_booking_app/Screens/IndividualDoctorPage.dart';
 
 class ServiceListDoctor extends StatelessWidget {
-  final service;
-  ServiceListDoctor({this.service});
+  final DoctorDetails service;
+  final ClinicLocationAndDoctor clinicDetails;
+  final String location;
+  ServiceListDoctor({this.service, this.location, this.clinicDetails});
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed('/serviceDetailsMedical',
-            arguments: {'details': service});
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => IndividualDoctorPage(
+                  doctorDetail: service,
+                  clinicLocationAndDoctor: clinicDetails
+                )));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -26,15 +33,16 @@ class ServiceListDoctor extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Color(0xff0F2735),
                     borderRadius: BorderRadius.circular(5)),
-                width: MediaQuery.of(context).size.width*0.9,
+                width: MediaQuery.of(context).size.width * 0.9,
                 height: 130,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.network(
-                        service.image,
-                        width: 60,
-                        height: 60,
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundImage: NetworkImage(
+                          service.imagefile,
+                        ),
                       ),
                       Text(
                         service.name,
@@ -44,7 +52,7 @@ class ServiceListDoctor extends StatelessWidget {
                             fontSize: 12),
                       ),
                       Text(
-                        "Speciality in " + service.speciality,
+                        "Speciality in " + service.specialization,
                         style: TextStyle(
                             color: Color(0xff00A676),
                             fontWeight: FontWeight.w400,
@@ -63,28 +71,35 @@ class ServiceListDoctor extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Icon(
-                        CupertinoIcons.location,
-                        color: Colors.green,
-                      ),
-                      Text(service.location,
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400))
-                    ]),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(service.clinicName,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
-                        Text('\u{2B50} 4.0',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12))
-                      ],
-                    ),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  CupertinoIcons.location,
+                                  color: Colors.green,
+                                ),
+                                Text(location,
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w400))
+                              ]),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Text(service.clinicName,
+                              //     style: TextStyle(
+                              //         fontWeight: FontWeight.bold, fontSize: 16)),
+                              Text('\u{2B50} 4.0',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12))
+                            ],
+                          ),
+                        ]),
                     Divider(
                       thickness: 2,
                       color: Colors.black87,
@@ -97,11 +112,11 @@ class ServiceListDoctor extends StatelessWidget {
                             CupertinoIcons.clock,
                             color: Color(0xff5D5FEF),
                           ),
-                          Text('Visiting hour',style: TextStyle(
-                              fontSize: 12)),
+                          Text('Visiting hour', style: TextStyle(fontSize: 12)),
                         ]),
                         Text('10:00 AM - 5:00PM',
-                            style: TextStyle(color: Color(0xff00A676), fontSize: 12))
+                            style: TextStyle(
+                                color: Color(0xff00A676), fontSize: 12))
                       ],
                     ),
                     Row(
@@ -112,11 +127,11 @@ class ServiceListDoctor extends StatelessWidget {
                             Icons.wb_sunny,
                             color: Color(0xff5D5FEF),
                           ),
-                          Text('Days',style: TextStyle(
-                              fontSize: 12))
+                          Text('Days', style: TextStyle(fontSize: 12))
                         ]),
                         Text('MON-THU',
-                            style: TextStyle(color: Color(0xff00A676), fontSize: 12))
+                            style: TextStyle(
+                                color: Color(0xff00A676), fontSize: 12))
                       ],
                     ),
                   ],
