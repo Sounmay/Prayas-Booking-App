@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Screens/DoctorBookinAppointmentpage.dart';
 import 'package:marquee/marquee.dart';
+import 'package:marquee_text/marquee_text.dart';
 import 'package:shimmer/shimmer.dart';
 
 class IndividualDoctorPage extends StatelessWidget {
@@ -34,66 +35,98 @@ class IndividualDoctorPage extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            flex: 1,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Icon(
-                                Icons.arrow_back,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Column(children: [
-                              CircleAvatar(
-                                radius: 40,
-                                backgroundImage: NetworkImage(
-                                  doctorDetail?.imagefile,
+                    child: Column(children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
                                 ),
                               ),
-                              SizedBox(height: 15.0),
-                              Text(doctorDetail.name,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25)),
-                              SizedBox(height: 15.0),
-                              Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.05,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffC4C4C4).withOpacity(0.2),
-                                      border:
-                                          Border.all(color: Color(0xff5D5FEF)),
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  child: Center(
-                                    child: Text(
-                                      doctorDetail.specialization,
-                                      style:
-                                          TextStyle(color: Color(0xff00E7A4)),
-                                    ),
-                                  )),
-                              SizedBox(height: 5),
-                              Text(
-                                'Experience',
-                                style: TextStyle(color: Color(0xffFFC700)),
-                              ),
-                              Text(
-                                '${doctorDetail.yearsOfExperience}+ years',
-                                style: TextStyle(color: Color(0xffFFFFFF)),
-                              ),
-                            ]),
-                          ),
-                          Flexible(flex: 1, child: Container(child: Text('')))
-                        ]),
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Column(children: [
+                                CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage: NetworkImage(
+                                    doctorDetail?.imagefile,
+                                  ),
+                                ),
+                                // SizedBox(height: 15.0),
+                                // Text(doctorDetail.name,
+                                //     style: TextStyle(
+                                //         color: Colors.white, fontSize: 25)),
+                                // SizedBox(height: 15.0),
+                                // Container(
+                                //     width: MediaQuery.of(context).size.width *
+                                //         0.3,
+                                //     height:
+                                //         MediaQuery.of(context).size.height *
+                                //             0.05,
+                                //     decoration: BoxDecoration(
+                                //         color: Color(0xffC4C4C4)
+                                //             .withOpacity(0.2),
+                                //         border: Border.all(
+                                //             color: Color(0xff5D5FEF)),
+                                //         borderRadius:
+                                //             BorderRadius.circular(5.0)),
+                                //     child: Center(
+                                //       child: Text(
+                                //         doctorDetail.specialization,
+                                //         style: TextStyle(
+                                //             color: Color(0xff00E7A4)),
+                                //       ),
+                                //     )),
+                                // SizedBox(height: 5),
+                                // Text(
+                                //   'Experience',
+                                //   style: TextStyle(color: Color(0xffFFC700)),
+                                // ),
+                                // Text(
+                                //   '${doctorDetail.yearsOfExperience}+ years',
+                                //   style: TextStyle(color: Color(0xffFFFFFF)),
+                                // ),
+                              ]),
+                            ),
+                            Flexible(flex: 1, child: Container(child: Text('')))
+                          ]),
+                      SizedBox(height: 15.0),
+                      Text(doctorDetail.name,
+                          style: TextStyle(color: Colors.white, fontSize: 25)),
+                      SizedBox(height: 15.0),
+                      Container(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          decoration: BoxDecoration(
+                              color: Color(0xffC4C4C4).withOpacity(0.2),
+                              border: Border.all(color: Color(0xff5D5FEF)),
+                              borderRadius: BorderRadius.circular(5.0)),
+                          child: Center(
+                            child: MarqueeText(
+                              text: doctorDetail.specialization,
+                              speed: 5,
+                              style: TextStyle(color: Color(0xff00E7A4)),
+                            ),
+                          )),
+                      SizedBox(height: 5),
+                      Text(
+                        'Experience',
+                        style: TextStyle(color: Color(0xffFFC700)),
+                      ),
+                      Text(
+                        '${doctorDetail.yearsOfExperience}+ years',
+                        style: TextStyle(color: Color(0xffFFFFFF)),
+                      ),
+                    ]),
                   ),
                 ],
               )),

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Screens/IndividualDoctorPage.dart';
 import 'package:marquee/marquee.dart';
+import 'package:marquee_text/marquee_text.dart';
 
 class ServiceListDoctor extends StatelessWidget {
   final DoctorDetails service;
@@ -44,15 +45,15 @@ class ServiceListDoctor extends StatelessWidget {
                           service.imagefile,
                         ),
                       ),
-                      Text(
-                        service.name,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12),
-                      ),
+                      Text(service.name,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12),
+                          textAlign: TextAlign.center),
                       Text(
                         "Speciality in " + service.specialization,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color(0xff00A676),
                             fontWeight: FontWeight.w400,
@@ -85,8 +86,8 @@ class ServiceListDoctor extends StatelessWidget {
                                   height: 20,
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,
-                                  child: Marquee(
-                                      velocity: 10,
+                                  child: MarqueeText(
+                                      speed: 5,
                                       text: location,
                                       style: TextStyle(
                                           color: Colors.green,
