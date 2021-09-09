@@ -331,7 +331,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                   color: Colors.grey[600],
                                   fontSize: 17,
                                 )),
-                            Text(service[id] != null ? "$gst1" : "0",
+                            Text(service[id] != null ? "${gst1.toStringAsFixed(2)}" : "0",
                                 style: TextStyle(
                                   color: Colors.grey[600],
                                   fontSize: 17,
@@ -349,7 +349,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                             Text(
                                 service[id] != null &&
                                         service[id].subtotal != null
-                                    ? "$gst2"
+                                    ? "${gst2.toStringAsFixed(2)}"
                                     : "0",
                                 style: TextStyle(
                                   color: Colors.grey[600],
@@ -368,7 +368,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                             Text(
                                 service[id] != null &&
                                         service[id].subtotal != null
-                                    ? "₹ ${service[id].subtotal + gst1 + gst2}/-"
+                                    ? "₹ ${(service[id].subtotal + gst1 + gst2).toStringAsFixed(2)}/-"
                                     : "0",
                                 style: TextStyle(
                                     color: Color(0xff5D5FEF),
