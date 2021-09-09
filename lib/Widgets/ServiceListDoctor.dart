@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Screens/IndividualDoctorPage.dart';
+import 'package:marquee/marquee.dart';
 
 class ServiceListDoctor extends StatelessWidget {
   final DoctorDetails service;
@@ -14,9 +15,8 @@ class ServiceListDoctor extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => IndividualDoctorPage(
-                  doctorDetail: service,
-                  clinicLocationAndDoctor: clinicDetails
-                )));
+                doctorDetail: service,
+                clinicLocationAndDoctor: clinicDetails)));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -81,11 +81,18 @@ class ServiceListDoctor extends StatelessWidget {
                                   CupertinoIcons.location,
                                   color: Colors.green,
                                 ),
-                                Text(location,
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400))
+                                SizedBox(
+                                  height: 20,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.4,
+                                  child: Marquee(
+                                      velocity: 10,
+                                      text: location,
+                                      style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400)),
+                                )
                               ]),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
