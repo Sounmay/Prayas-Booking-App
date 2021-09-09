@@ -42,10 +42,94 @@ class _SlotBookingState extends State<SlotBooking> {
       Min4 = 0,
       Hr4 = 0;
   List<bool> slotButtons = List.filled(30, false, growable: false);
-  var  am_pm1 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
-  var am_pm2 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
-  var am_pm3 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
-  var am_pm4 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
+  var am_pm1 = [
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'
+  ];
+  var am_pm2 = [
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'
+  ];
+  var am_pm3 = [
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'
+  ];
+  var am_pm4 = [
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'
+  ];
   String lessMins1 = '', lessMins2 = '', lessMins3 = '', lessMins4 = '';
 
   bool pm = false, stop1 = false, stop2 = false;
@@ -655,7 +739,10 @@ class _SlotBookingState extends State<SlotBooking> {
                                   color: Colors.grey[600],
                                   fontSize: 17,
                                 )),
-                            Text(service != null ? "${gst1.toStringAsFixed(1)}" : "0",
+                            Text(
+                                service != null
+                                    ? "${gst1.toStringAsFixed(1)}"
+                                    : "0",
                                 style: TextStyle(
                                   color: Colors.grey[600],
                                   fontSize: 17,
@@ -690,7 +777,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                     fontWeight: FontWeight.w500)),
                             Text(
                                 service != null && service.subtotal != null
-                                    ? "₹ ${service.subtotal + gst1 + gst2}/-"
+                                    ? "₹ ${(service.subtotal + gst1 + gst2).toStringAsFixed(2)}/-"
                                     : "0",
                                 style: TextStyle(
                                     color: Color(0xff5D5FEF),
