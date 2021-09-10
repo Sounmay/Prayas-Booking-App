@@ -65,7 +65,7 @@ class _DoctorBookingAppointmentPageState
             Container(
                 height: height * 0.26,
                 child: ListView.builder(
-                    itemCount: 4,
+                    itemCount: widget.doctorDetail.serviceList.length,
                     itemBuilder: (ctx, i) {
                       // int hr = int.parse(mostAvailed[i]?.hour) ?? 0;
                       // int min = int.parse(mostAvailed[i]?.minute) ?? 0;
@@ -89,7 +89,9 @@ class _DoctorBookingAppointmentPageState
                                 children: [
                                   Text(
                                     // mostAvailed[i].name,
-                                    "dfd",
+                                    widget?.doctorDetail?.serviceList[i]
+                                            ?.name ??
+                                        "",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 16),
