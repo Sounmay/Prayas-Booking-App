@@ -331,7 +331,10 @@ class _BookAppointmentState extends State<BookAppointment> {
                                   color: Colors.grey[600],
                                   fontSize: 17,
                                 )),
-                            Text(service[id] != null ? "${gst1.toStringAsFixed(2)}" : "0",
+                            Text(
+                                service[id] != null
+                                    ? "${gst1.toStringAsFixed(2)}"
+                                    : "0",
                                 style: TextStyle(
                                   color: Colors.grey[600],
                                   fontSize: 17,

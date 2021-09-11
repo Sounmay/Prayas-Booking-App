@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
@@ -30,11 +32,24 @@ class _DoctorBookingAppointmentPageState
             )));
   }
 
+  bool serviceAdded = false;
+
+  String userName = '';
+
+  _loadData() async {
+    final data = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get();
+    userName = data['name'];
+  }
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartService>(context);
     final service = Provider.of<CartService>(context).services;
-    final id = widget.clinicLocationAndDoctor.serviceUid;
+    final id =
+        widget.clinicLocationAndDoctor.serviceUid + widget.doctorDetail.name;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -60,6 +75,14 @@ class _DoctorBookingAppointmentPageState
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w500),
                         ),
+                        TextButton(
+                            onPressed: () {
+                              cart.removeAllServices(id);
+                            },
+                            child: Text(
+                              "Clear",
+                              style: TextStyle(color: Colors.grey),
+                            ))
                       ]),
                 )),
             Container(
@@ -67,8 +90,12 @@ class _DoctorBookingAppointmentPageState
                 child: ListView.builder(
                     itemCount: widget.doctorDetail.serviceList.length,
                     itemBuilder: (ctx, i) {
-                      // int hr = int.parse(mostAvailed[i]?.hour) ?? 0;
-                      // int min = int.parse(mostAvailed[i]?.minute) ?? 0;
+                      int hr =
+                          int.parse(widget.doctorDetail.serviceList[i]?.hour) ??
+                              0;
+                      int min = int.parse(
+                              widget.doctorDetail.serviceList[i]?.minute) ??
+                          0;
                       return Container(
                         height: 40,
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -100,18 +127,19 @@ class _DoctorBookingAppointmentPageState
                                     height: 3,
                                   ),
                                   Text(
-                                    // "₹ " +
-                                    //     "${mostAvailed[i].price}" +
-                                    //     " | " +
-                                    //     "${mostAvailed[i].hour} Hr ${mostAvailed[i].minute} Min",
-                                    "₹ 40",
+                                    "₹ " +
+                                        "${widget.doctorDetail.serviceList[i].price}" +
+                                        " | " +
+                                        "${widget.doctorDetail.serviceList[i].hour} Hr ${widget.doctorDetail.serviceList[i].minute} Min",
+                                    // "₹ 40",
                                     style: TextStyle(color: Color(0xFF606572)),
                                   )
                                 ],
                               ),
                             ]),
                             service[id] != null &&
-                                    service[id].serviceName.contains("df")
+                                    service[id].serviceName.contains(
+                                        widget.doctorDetail.serviceList[i].name)
                                 // .contains(mostAvailed[i].name)
                                 ? SizedBox(
                                     height: 30,
@@ -134,15 +162,19 @@ class _DoctorBookingAppointmentPageState
                                           backgroundColor: Color(0xff5D5FEF),
                                         ),
                                         onPressed: () {
-                                          // cart.addServices(
-                                          //     id,
-                                          //     mostAvailed[i].name,
-                                          //     int.parse(
-                                          //         mostAvailed[i].price),
-                                          //     hr * 60 + min,
-                                          //     shopName,
-                                          //     userName);
-                                          // serviceAdded = true;
+                                          cart.addServices(
+                                              id,
+                                              widget.doctorDetail.serviceList[i]
+                                                  .name,
+                                              int.parse(widget.doctorDetail
+                                                  .serviceList[i].price),
+                                              hr * 60 + min,
+                                              widget.clinicLocationAndDoctor
+                                                  .clinicName,
+                                              userName);
+                                          serviceAdded = true;
+                                          // print(widget.clinicLocationAndDoctor
+                                          //     .serviceUid);
                                         },
                                         child: Text(
                                           "Add",
@@ -157,7 +189,7 @@ class _DoctorBookingAppointmentPageState
         ),
       ),
       bottomNavigationBar: LowerCardServiceTotal(
-        id: widget.clinicLocationAndDoctor.serviceUid,
+        id: id,
         onSlotBooking: _onSlotBookint,
       ),
     );
