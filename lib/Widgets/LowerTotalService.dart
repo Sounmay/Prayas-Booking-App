@@ -15,8 +15,8 @@ class LowerCardServiceTotal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final service = Provider.of<CartService>(context).services;
-    final gst1 = service[id] != null ? service[id].subtotal * 0.08 ?? 0 : 0;
-    final gst2 = service[id] != null ? service[id].subtotal * 0.08 ?? 0 : 0;
+    // final gst1 = service[id] != null ? service[id].subtotal * 0.08 ?? 0 : 0;
+    // final gst2 = service[id] != null ? service[id].subtotal * 0.08 ?? 0 : 0;
     final time = service[id] != null ? service[id].time : 0;
 
     final int minute = time % 60;
@@ -27,54 +27,54 @@ class LowerCardServiceTotal extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
       child:
           Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Subtotal Amount",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 17,
-                )),
-            Text(service[id] != null ? "${service[id].subtotal}" : "0",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 17,
-                ))
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("GST 1 ( 8% )",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 17,
-                )),
-            Text(service[id] != null ? "$gst1" : "0",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 17,
-                ))
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("GST 2 ( 8% )",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 17,
-                )),
-            Text(
-                service[id] != null && service[id].subtotal != null
-                    ? "$gst2"
-                    : "0",
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 17,
-                ))
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     Text("Subtotal Amount",
+        //         style: TextStyle(
+        //           color: Colors.grey[600],
+        //           fontSize: 17,
+        //         )),
+        //     Text(service[id] != null ? "${service[id].subtotal}" : "0",
+        //         style: TextStyle(
+        //           color: Colors.grey[600],
+        //           fontSize: 17,
+        //         ))
+        //   ],
+        // ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     Text("GST 1 ( 8% )",
+        //         style: TextStyle(
+        //           color: Colors.grey[600],
+        //           fontSize: 17,
+        //         )),
+        //     Text(service[id] != null ? "$gst1" : "0",
+        //         style: TextStyle(
+        //           color: Colors.grey[600],
+        //           fontSize: 17,
+        //         ))
+        //   ],
+        // ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     Text("GST 2 ( 8% )",
+        //         style: TextStyle(
+        //           color: Colors.grey[600],
+        //           fontSize: 17,
+        //         )),
+        //     Text(
+        //         service[id] != null && service[id].subtotal != null
+        //             ? "$gst2"
+        //             : "0",
+        //         style: TextStyle(
+        //           color: Colors.grey[600],
+        //           fontSize: 17,
+        //         ))
+        //   ],
+        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -85,7 +85,7 @@ class LowerCardServiceTotal extends StatelessWidget {
                     fontWeight: FontWeight.w500)),
             Text(
                 service[id] != null && service[id].subtotal != null
-                    ? "₹ ${service[id].subtotal + gst1 + gst2}/-"
+                    ? "₹ ${service[id].subtotal}/-"
                     : "0",
                 style: TextStyle(
                     color: Color(0xff5D5FEF),

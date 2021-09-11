@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:marquee/marquee.dart';
+import 'package:marquee_text/marquee_text.dart';
 import 'package:shimmer/shimmer.dart';
 
 class UpperCardDoctorBooking extends StatelessWidget {
@@ -93,9 +94,8 @@ class UpperCardDoctorBooking extends StatelessWidget {
                             child: SizedBox(
                               width: width * 0.14,
                               height: 20,
-                              child: Marquee(
-                                blankSpace: 30,
-                                velocity: 15,
+                              child: MarqueeText(
+                                speed: 10,
                                 text: clinic?.clinicName ?? "",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
@@ -121,9 +121,8 @@ class UpperCardDoctorBooking extends StatelessWidget {
                                       width: MediaQuery.of(context).size.width *
                                           0.2,
                                       height: 20,
-                                      child: Marquee(
-                                          blankSpace: 20,
-                                          velocity: 20,
+                                      child: MarqueeText(
+                                          speed: 10,
                                           text: clinic?.address ?? "",
                                           style: TextStyle(
                                               color: Colors.green,
@@ -139,7 +138,9 @@ class UpperCardDoctorBooking extends StatelessWidget {
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w500)),
-                    Text(doctor?.specialization ?? "",
+                    MarqueeText(
+                        text: doctor?.specialization ?? "",
+                        speed: 7,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,

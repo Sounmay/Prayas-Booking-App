@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Screens/ClinicDoctorsListPage.dart';
 import 'package:marquee/marquee.dart';
+import 'package:marquee_text/marquee_text.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ClinicListDoctor extends StatelessWidget {
@@ -20,7 +21,12 @@ class ClinicListDoctor extends StatelessWidget {
         // print(service.id);
         // Navigator.of(context).pushNamed('/serviceDetailsParlour',
         //     arguments: {'details': service});
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ClinicDoctorListPage(clinicDetails: service,)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ClinicDoctorListPage(
+                      clinicDetails: service,
+                    )));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -28,7 +34,7 @@ class ClinicListDoctor extends StatelessWidget {
         ),
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         child: SizedBox(
-          height: 130,
+          height: 100,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -41,10 +47,10 @@ class ClinicListDoctor extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: service.image,
                     fit: BoxFit.fill,
-                    height: 130,
+                    height: 100,
                     width: double.infinity,
                     placeholder: (context, url) => new SizedBox(
-                      height: 200,
+                      height: 100,
                       child: Shimmer.fromColors(
                         baseColor: Colors.grey,
                         highlightColor: Colors.white,
@@ -80,7 +86,7 @@ class ClinicListDoctor extends StatelessWidget {
                   // margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  height: 130,
+                  height: 100,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -92,133 +98,60 @@ class ClinicListDoctor extends StatelessWidget {
                               child: SizedBox(
                                 width: width * 0.14,
                                 height: 20,
-                                child: Marquee(
-                                  blankSpace: 30,
-                                  velocity: 15,
+                                child: MarqueeText(
+                                  speed: 10,
                                   text: service.clinicName,
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 ),
                               ),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                height: 25,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        CupertinoIcons.location,
-                                        color: Colors.green,
-                                      ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.2,
-                                        height: 20,
-                                        child: Marquee(
-                                            blankSpace: 20,
-                                            velocity: 20,
-                                            text: service.location,
-                                            style: TextStyle(
-                                                color: Colors.green,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w400)),
-                                      )
-                                    ]),
-                              ),
-                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Text('\u{2B50}   4.4',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12)),
+                            )
                           ]),
-
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              // Icon(
-                              //   CupertinoIcons.scissors,
-                              //   size: 20,
-                              //   color: Colors.white,
-                              // ),
-                              // SizedBox(
-                              //   width: width * 0.02,
-                              // ),
-                              // SizedBox(
-                              //   width: MediaQuery.of(context).size.width * 0.33,
-                              //   height: 20,
-                              //   child: Marquee(
-                              //     blankSpace: 10,
-                              //     velocity: 20,
-                              //     text: service.clinicName,
-                              //     style: TextStyle(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.w600,
-                              //         fontSize: 16),
-                              //   ),
-                              // ),
-                              // Text(
-                              //   service.parlourName,
-                              //   style: TextStyle(
-                              //       color: Colors.white,
-                              //       fontWeight: FontWeight.w600,
-                              //       fontSize: 16),
-                              //   textAlign: TextAlign.left,
-                              // ),
-                            ],
-                          ),
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.15,
-                            padding: const EdgeInsets.all(5),
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: 25,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(5)),
-                            child: Text('\u{2B50}   4.4',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 12)),
-                          )
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.location,
+                                    color: Colors.green,
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    height: 20,
+                                    child: MarqueeText(
+                                        speed: 10,
+                                        alwaysScroll: false,
+                                        text: service.location,
+                                        style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400)),
+                                  )
+                                ]),
+                          ),
                         ],
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Row(children: [
-                      //       Icon(
-                      //         CupertinoIcons.clock,
-                      //         color: Color(0xff5D5FEF),
-                      //       ),
-                      //       Text('Visiting hour',
-                      //           style: TextStyle(
-                      //               color: Colors.white, fontSize: 12))
-                      //     ]),
-                      //     Text(service.,
-                      //         style: TextStyle(
-                      //             color: Color(0xff00A676), fontSize: 12))
-                      //   ],
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Row(children: [
-                      //       Icon(
-                      //         Icons.wb_sunny,
-                      //         color: Color(0xff5D5FEF),
-                      //       ),
-                      //       Text('Days',
-                      //           style: TextStyle(
-                      //               color: Colors.white, fontSize: 12)),
-                      //     ]),
-                      //     Text(service.week,
-                      //         style: TextStyle(
-                      //             color: Color(0xff00A676), fontSize: 12))
-                      //   ],
-                      // ),
                     ],
                   ),
                 ),

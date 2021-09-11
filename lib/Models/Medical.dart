@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freelance_booking_app/Models/Parlour.dart';
 
 class Medical {
   final String id;
@@ -49,31 +50,21 @@ class ClinicLocationAndDoctor {
   String clinicName;
   String shopNo;
   String address;
-  String doctorImage;
   String clinicImage;
-  String doctorName;
-  String doctorExperience;
-  String doctorNumber;
   String speciality;
   String aboutClinic;
   String latitude;
-  String aboutDoctor;
   String longitude;
 
   ClinicLocationAndDoctor(
       {this.clinicName,
       this.serviceUid,
-      this.doctorExperience,
       this.clinicImage,
       this.latitude,
       this.longitude,
       this.shopNo,
       this.address,
-      this.doctorImage,
       this.speciality,
-      this.doctorName,
-      this.doctorNumber,
-      this.aboutDoctor,
       this.aboutClinic});
 
   ClinicLocationAndDoctor.fromJson(Map<String, dynamic> json) {
@@ -83,13 +74,8 @@ class ClinicLocationAndDoctor {
     latitude = json['latitude'];
     longitude = json['longitude'];
     serviceUid = json['serviceUid'];
-    doctorImage = json['doctorImage'];
     clinicImage = json['clinicImage'];
-    doctorExperience = json['doctorExperience'];
-    doctorName = json['doctorName'];
-    doctorNumber = json['doctorNumber'];
     aboutClinic = json['aboutClinic'];
-    aboutDoctor = json['aboutDoctor'];
   }
 
   Map<String, dynamic> toJson() {
@@ -97,15 +83,10 @@ class ClinicLocationAndDoctor {
     data['clinicName'] = this.clinicName;
     data['shopNo'] = this.shopNo;
     data['address'] = this.address;
-    data['doctorImage'] = this.doctorImage;
     data['clinicImage'] = this.clinicImage;
-    data['doctorExperience'] = this.doctorExperience;
     data['longitude'] = this.longitude;
     data['latitude'] = this.latitude;
-    data['doctorName'] = this.doctorName;
-    data['doctorNumber'] = this.doctorNumber;
     data['aboutClinic'] = this.aboutClinic;
-    data['aboutDoctor'] = this.aboutDoctor;
     data['serviceUid'] = this.serviceUid;
     return data;
   }
@@ -144,12 +125,16 @@ class DoctorDetails {
   String yearsOfExperience;
   String aboutDoctor;
   String workingDays;
+  List<ParlourServiceDetails> serviceList;
+  List<ParlourSlotDetails> slots;
 
   DoctorDetails(
       {this.name,
       this.specialization,
       this.workingDays = "",
       this.aboutDoctor,
+      this.serviceList,
+      this.slots,
       this.yearsOfExperience,
       this.number,
       this.imagefile});
@@ -162,6 +147,10 @@ class DoctorDetails {
     aboutDoctor = json['aboutDoctor'];
     yearsOfExperience = json['yearsOfExperience'];
     workingDays = json['workingDays'];
+    serviceList = List<ParlourServiceDetails>.from(
+        json["serviceList"].map((x) => ParlourServiceDetails.fromJson(x)));
+    slots = List<ParlourSlotDetails>.from(
+        json['slot'].map((x) => ParlourSlotDetails.fromJson(x)));
   }
 
   Map<String, dynamic> toJson() {
@@ -173,6 +162,8 @@ class DoctorDetails {
     data['aboutDoctor'] = this.aboutDoctor;
     data['yearsOfExperience'] = this.yearsOfExperience;
     data['workingDays'] = this.workingDays;
+    data['slot'] = this.slots;
+    data['serviceList'] = this.serviceList;
     return data;
   }
 }
