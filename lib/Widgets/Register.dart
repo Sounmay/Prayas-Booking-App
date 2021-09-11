@@ -47,7 +47,7 @@ class _RegisterState extends State<Register> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'assets/splashLogo.png',
+                            'assets/ps logo 300x300.png',
                             height: 120,
                             width: 120,
                           ),

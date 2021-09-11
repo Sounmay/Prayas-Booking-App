@@ -1,13 +1,17 @@
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Models/Cart.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/database.dart';
+import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Screens/PaymentScreen.dart';
 import 'package:provider/provider.dart';
+import 'package:random_string/random_string.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -135,6 +139,23 @@ class _SlotBookingState extends State<SlotBooking> {
   bool pm = false, stop1 = false, stop2 = false;
   int rim = 0;
 
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Colors.red;
+  }
+
+  bool isChecked = false;
+
+
+  @override
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -159,6 +180,7 @@ class _SlotBookingState extends State<SlotBooking> {
     final startMin = int.tryParse(slots[0].fromMin);
     final endHr = int.tryParse(slots[0].toHr);
     final endMin = int.tryParse(slots[0].toMin);
+    final cart = Provider.of<CartService>(context);
 
     setState(() {
       int totalDuration = slotDuration + intervalDuration;
@@ -813,6 +835,25 @@ class _SlotBookingState extends State<SlotBooking> {
                       ]),
                 ),
                 Container(
+                  margin: EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        checkColor: Colors.white,
+                        activeColor: Color(0xff5D5FEF),
+                        value: isChecked,
+                        onChanged: (bool value) {
+                          setState(() {
+                            isChecked = value;
+                          });
+                        },
+                      ),
+                      SizedBox(width: 10.0,),
+                      Text('Pay by cash after service is over.')
+                    ],
+                  ),
+                ),
+                Container(
                   color: Color(0xFFFAFAFA),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -824,29 +865,69 @@ class _SlotBookingState extends State<SlotBooking> {
                             children: [
                               Text(
                                 'Proceed    ',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: (isChecked==true)?Colors.white:Colors.grey),
                               ),
                               Icon(Icons.arrow_forward_ios_rounded,
-                                  color: Colors.white, size: 15.0)
+                                  color: (isChecked==true)?Colors.white:Colors.grey, size: 15.0)
                             ],
                           ),
                         ),
                         style: TextButton.styleFrom(
-                          backgroundColor: Color(0xff5D5FEF),
+                          backgroundColor: (isChecked==true)?Color(0xff5D5FEF):Colors.black45,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5)),
                         ),
                         onPressed: () async {
-                          if (dateSelected == true && slotSelected == true) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PaymentScreen(
-                                      total: double.parse(
-                                          paymentValue.toStringAsFixed(2)),
-                                      cart: service,
-                                      id: id.toString())),
-                            );
+                          if (dateSelected == true && slotSelected == true && isChecked == true) {
+//                            Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (context) => PaymentScreen(
+//                                      total: double.parse(
+//                                          paymentValue.toStringAsFixed(2)),
+//                                      cart: service,
+//                                      id: id.toString())),
+                            String otp = randomAlphaNumeric(6);
+                            final cart = Provider.of<CartService>(context);
+                            service.addOtp(otp);
+                            service.addGST(service.subtotal.toInt());
+                            _db.addBookingofCustomer(service, service.id);
+                            _db.addCustomerBookingToServiceProvider(service, service.id);
+                            showCupertinoDialog(
+                                context: context,
+                                builder: (context) {
+                                  final navigator = Provider.of<NavigationProvider>(context);
+                                  return CupertinoAlertDialog(
+                                    title: Text("Payment Successful!"),
+                                    content: Container(
+                                      height: 50,
+                                      width: 50,
+                                      child: Center(
+                                          child: Text("Your payment was completed sucessfully and the order has been created.")
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            // Navigator.pop(context);
+                                            navigator.changeWidgetIndex(1);
+                                            Navigator.of(context)
+                                                .popUntil(ModalRoute.withName("/wrapper"));
+                                          },
+                                          style: TextButton.styleFrom(
+                                            primary: Color(0xff5D5FEF),
+                                          ),
+                                          child: Text('Ok', style: TextStyle(color: Colors.black),))
+                                    ],
+                                  );
+                                });
+                          } else if(isChecked==false){
+                            Fluttertoast.showToast(
+                                msg:
+                                'Please select the chckbox',
+                                backgroundColor: Color(0xff5D5FEF),
+                                textColor: Colors.white,
+                                toastLength: Toast.LENGTH_LONG);
                           } else {
                             Fluttertoast.showToast(
                                 msg:
