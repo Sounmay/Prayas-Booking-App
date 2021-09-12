@@ -1,11 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:freelance_booking_app/Models/Cart.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
+import 'package:freelance_booking_app/Providers/database.dart';
+import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Widgets/LowerTotalService.dart';
 import 'package:freelance_booking_app/Widgets/UpperCardDoctorBooking.dart';
 import 'package:provider/provider.dart';
+import 'package:random_string/random_string.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DoctorSlotBooking extends StatefulWidget {
@@ -40,19 +45,118 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
       Hr4 = 0;
 
   List<bool> slotButtons = List.filled(30, false, growable: false);
-  var am_pm1 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
-  var am_pm2 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
-  var am_pm3 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
-  var am_pm4 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM'];
+  var am_pm1 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM','AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'];
+  var am_pm2 = ['AM',
+   'AM',
+    'AM',
+     'AM',
+      'AM',
+       'AM',
+        'AM','AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'];
+  var am_pm3 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM','AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'];
+  var am_pm4 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM','AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'];
+
+    setIsChecked(bool val) {
+      setState(() {
+        
+      isChecked = val;
+      });
+    }
+
+      bool isChecked = false;
+
   String lessMins1 = '', lessMins2 = '', lessMins3 = '', lessMins4 = '';
 
   bool pm = false, stop1 = false, stop2 = false;
   int rim = 0;
 
+    final _db = DatabaseService();
+
+
+  confirmBooking(Cart _service, String id) async {
+     String otp = randomAlphaNumeric(6);
+                            // final cart = Provider.of<CartService>(context);
+                            _service.addOtp(otp);
+                            _service.addGST(_service.subtotal.toInt());
+                            _db.addBookingofCustomer(_service, id.toString());
+                            _db.addCustomerBookingToServiceProvider(
+                                _service, id.toString());
+                            showCupertinoDialog(
+                                context: context,
+                                builder: (context) {
+                                  final navigator =
+                                      Provider.of<NavigationProvider>(context);
+                                  return CupertinoAlertDialog(
+                                    title: Text("Payment Successful!"),
+                                    content: Container(
+                                      height: 50,
+                                      width: 50,
+                                      child: Center(
+                                          child: Text(
+                                              "Your payment was completed sucessfully and the order has been created.")),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            // Navigator.pop(context);
+                                            navigator.changeWidgetIndex(1);
+                                            Navigator.of(context).popUntil(
+                                                ModalRoute.withName(
+                                                    "/wrapper"));
+                                          },
+                                          style: TextButton.styleFrom(
+                                            primary: Color(0xff5D5FEF),
+                                          ),
+                                          child: Text(
+                                            'Ok',
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ))
+                                    ],
+                                  );
+                                });
+  }
+
   @override
   Widget build(BuildContext context) {
     final int employeeNumbers = 2;
-    final id = widget.clinicLocationAndDoctor.serviceUid;
+    final id = widget.clinicLocationAndDoctor.serviceUid+widget.doctorDetail.name;
     final service = Provider.of<CartService>(context).services[id];
     final servic = Provider.of<CartService>(context);
     List<ParlourSlotDetails> slots = [];
@@ -414,7 +518,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
                           ],
                         );
                       }))),
-                      LowerCardServiceTotal(id: id, isSlotPage: true)
+                      LowerCardServiceTotal(service: service, id: id,clinicId: widget.clinicLocationAndDoctor.serviceUid, bookingConfirm: confirmBooking,dateSelected: dateSelected, slotSelected: slotSelected, isChecked: isChecked, isSlotPage: true, showCheckBox: true, setIsChecked: setIsChecked)
         ]),
       ),
     );
