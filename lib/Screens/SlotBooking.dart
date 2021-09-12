@@ -153,9 +153,6 @@ class _SlotBookingState extends State<SlotBooking> {
 
   bool isChecked = false;
 
-
-  @override
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -924,7 +921,7 @@ class _SlotBookingState extends State<SlotBooking> {
                           } else if(isChecked==false){
                             Fluttertoast.showToast(
                                 msg:
-                                'Please select the chckbox',
+                                'Please select the checkbox',
                                 backgroundColor: Color(0xff5D5FEF),
                                 textColor: Colors.white,
                                 toastLength: Toast.LENGTH_LONG);
