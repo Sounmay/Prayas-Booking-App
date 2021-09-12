@@ -845,7 +845,9 @@ class _SlotBookingState extends State<SlotBooking> {
                           });
                         },
                       ),
-                      SizedBox(width: 10.0,),
+                      SizedBox(
+                        width: 10.0,
+                      ),
                       Text('Pay by cash after service is over.')
                     ],
                   ),
@@ -862,20 +864,30 @@ class _SlotBookingState extends State<SlotBooking> {
                             children: [
                               Text(
                                 'Proceed    ',
-                                style: TextStyle(color: (isChecked==true)?Colors.white:Colors.grey),
+                                style: TextStyle(
+                                    color: (isChecked == true)
+                                        ? Colors.white
+                                        : Colors.grey),
                               ),
                               Icon(Icons.arrow_forward_ios_rounded,
-                                  color: (isChecked==true)?Colors.white:Colors.grey, size: 15.0)
+                                  color: (isChecked == true)
+                                      ? Colors.white
+                                      : Colors.grey,
+                                  size: 15.0)
                             ],
                           ),
                         ),
                         style: TextButton.styleFrom(
-                          backgroundColor: (isChecked==true)?Color(0xff5D5FEF):Colors.black45,
+                          backgroundColor: (isChecked == true)
+                              ? Color(0xff5D5FEF)
+                              : Colors.black45,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5)),
                         ),
                         onPressed: () async {
-                          if (dateSelected == true && slotSelected == true && isChecked == true) {
+                          if (dateSelected == true &&
+                              slotSelected == true &&
+                              isChecked == true) {
 //                            Navigator.push(
 //                              context,
 //                              MaterialPageRoute(
@@ -885,43 +897,49 @@ class _SlotBookingState extends State<SlotBooking> {
 //                                      cart: service,
 //                                      id: id.toString())),
                             String otp = randomAlphaNumeric(6);
-                            final cart = Provider.of<CartService>(context);
+                            // final cart = Provider.of<CartService>(context);
                             service.addOtp(otp);
                             service.addGST(service.subtotal.toInt());
-                            _db.addBookingofCustomer(service, service.id);
-                            _db.addCustomerBookingToServiceProvider(service, service.id);
+                            _db.addBookingofCustomer(service, id.toString());
+                            _db.addCustomerBookingToServiceProvider(
+                                service, id.toString());
                             showCupertinoDialog(
                                 context: context,
                                 builder: (context) {
-                                  final navigator = Provider.of<NavigationProvider>(context);
+                                  final navigator =
+                                      Provider.of<NavigationProvider>(context);
                                   return CupertinoAlertDialog(
                                     title: Text("Payment Successful!"),
                                     content: Container(
                                       height: 50,
                                       width: 50,
                                       child: Center(
-                                          child: Text("Your payment was completed sucessfully and the order has been created.")
-                                      ),
+                                          child: Text(
+                                              "Your payment was completed sucessfully and the order has been created.")),
                                     ),
                                     actions: [
                                       TextButton(
                                           onPressed: () {
                                             // Navigator.pop(context);
                                             navigator.changeWidgetIndex(1);
-                                            Navigator.of(context)
-                                                .popUntil(ModalRoute.withName("/wrapper"));
+                                            Navigator.of(context).popUntil(
+                                                ModalRoute.withName(
+                                                    "/wrapper"));
                                           },
                                           style: TextButton.styleFrom(
                                             primary: Color(0xff5D5FEF),
                                           ),
-                                          child: Text('Ok', style: TextStyle(color: Colors.black),))
+                                          child: Text(
+                                            'Ok',
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ))
                                     ],
                                   );
                                 });
-                          } else if(isChecked==false){
+                          } else if (isChecked == false) {
                             Fluttertoast.showToast(
-                                msg:
-                                'Please select the checkbox',
+                                msg: 'Please select the chckbox',
                                 backgroundColor: Color(0xff5D5FEF),
                                 textColor: Colors.white,
                                 toastLength: Toast.LENGTH_LONG);
