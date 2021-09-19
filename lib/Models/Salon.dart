@@ -24,6 +24,12 @@ class Salon {
 
   factory Salon.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data();
+    int fromHr = int.parse(data['slotList'][0]['fromHr']);
+    int toHr = int.parse(data['slotList'][0]['toHr']);
+    int finalFromHr = fromHr > 12 ? fromHr - 12 : fromHr;
+    int finalToHr = toHr > 12 ? toHr - 12 : toHr;
+    String startAmPm = fromHr < 12 ? " AM - " : " PM - ";
+    String endAmPm = toHr < 12 ? " AM" : " PM";
 
     return Salon(
       type: 'parlour',
@@ -33,14 +39,14 @@ class Salon {
       image: data['details']['parlourImage'] ?? '',
       mostAvailservices: data['mostAvailServices'] ?? [],
       week: data['slotList'][0]['weekRange'] ?? '',
-      time: data['slotList'][0]['fromHr'] +
+      time: finalFromHr.toString() +
           ':' +
           data['slotList'][0]['fromMin'] +
-          ' AM - ' +
-          data['slotList'][0]['toHr'] +
+          startAmPm +
+          finalToHr.toString() +
           ':' +
           data['slotList'][0]['toMin'] +
-          ' PM',
+          endAmPm,
     );
   }
 }

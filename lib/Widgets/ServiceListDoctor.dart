@@ -122,7 +122,7 @@ class ServiceListDoctor extends StatelessWidget {
                           ),
                           Text('Visiting hour', style: TextStyle(fontSize: 12)),
                         ]),
-                        Text('10:00 AM - 5:00PM',
+                        Text(service.slots[0].fromHr,
                             style: TextStyle(
                                 color: Color(0xff00A676), fontSize: 12))
                       ],

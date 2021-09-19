@@ -125,6 +125,7 @@ class DoctorDetails {
   String yearsOfExperience;
   String aboutDoctor;
   String workingDays;
+  String time;
   List<ParlourServiceDetails> serviceList;
   List<ParlourSlotDetails> slots;
 
@@ -151,6 +152,7 @@ class DoctorDetails {
         json["serviceList"].map((x) => ParlourServiceDetails.fromJson(x)));
     slots = List<ParlourSlotDetails>.from(
         json['slot'].map((x) => ParlourSlotDetails.fromJson(x)));
+        
   }
 
   Map<String, dynamic> toJson() {
