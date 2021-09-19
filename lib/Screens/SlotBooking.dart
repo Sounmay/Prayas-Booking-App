@@ -233,8 +233,7 @@ class _SlotBookingState extends State<SlotBooking> {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 22.0
-                              ),
+                                  fontSize: 22.0),
                             ),
                           ],
                         )),
