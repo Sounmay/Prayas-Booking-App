@@ -45,7 +45,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
       Hr4 = 0;
 
   List<bool> slotButtons = List.filled(30, false, growable: false);
-  var am_pm1 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM','AM',
+  var am_pm1 = [
     'AM',
     'AM',
     'AM',
@@ -54,14 +54,6 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
     'AM',
     'AM',
     'AM',
-    'AM'];
-  var am_pm2 = ['AM',
-   'AM',
-    'AM',
-     'AM',
-      'AM',
-       'AM',
-        'AM','AM',
     'AM',
     'AM',
     'AM',
@@ -70,8 +62,9 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
     'AM',
     'AM',
     'AM',
-    'AM'];
-  var am_pm3 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM','AM',
+    'AM'
+  ];
+  var am_pm2 = [
     'AM',
     'AM',
     'AM',
@@ -80,8 +73,6 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
     'AM',
     'AM',
     'AM',
-    'AM'];
-  var am_pm4 = ['AM', 'AM', 'AM', 'AM', 'AM', 'AM', 'AM','AM',
     'AM',
     'AM',
     'AM',
@@ -90,73 +81,107 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
     'AM',
     'AM',
     'AM',
-    'AM'];
+    'AM'
+  ];
+  var am_pm3 = [
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'
+  ];
+  var am_pm4 = [
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM',
+    'AM'
+  ];
 
-    setIsChecked(bool val) {
-      setState(() {
-        
+  setIsChecked(bool val) {
+    setState(() {
       isChecked = val;
-      });
-    }
+    });
+  }
 
-      bool isChecked = false;
+  bool isChecked = false;
 
   String lessMins1 = '', lessMins2 = '', lessMins3 = '', lessMins4 = '';
 
   bool pm = false, stop1 = false, stop2 = false;
   int rim = 0;
 
-    final _db = DatabaseService();
-
+  final _db = DatabaseService();
 
   confirmBooking(Cart _service, String id) async {
-     String otp = randomAlphaNumeric(6);
-                            // final cart = Provider.of<CartService>(context);
-                            _service.addOtp(otp);
-                            _service.addGST(_service.subtotal.toInt());
-                            _db.addBookingofCustomer(_service, id.toString());
-                            _db.addCustomerBookingToServiceProvider(
-                                _service, id.toString());
-                            showCupertinoDialog(
-                                context: context,
-                                builder: (context) {
-                                  final navigator =
-                                      Provider.of<NavigationProvider>(context);
-                                  return CupertinoAlertDialog(
-                                    title: Text("Payment Successful!"),
-                                    content: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                          child: Text(
-                                              "Your payment was completed sucessfully and the order has been created.")),
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () {
-                                            // Navigator.pop(context);
-                                            navigator.changeWidgetIndex(1);
-                                            Navigator.of(context).popUntil(
-                                                ModalRoute.withName(
-                                                    "/wrapper"));
-                                          },
-                                          style: TextButton.styleFrom(
-                                            primary: Color(0xff5D5FEF),
-                                          ),
-                                          child: Text(
-                                            'Ok',
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ))
-                                    ],
-                                  );
-                                });
+    String otp = randomAlphaNumeric(6);
+    // final cart = Provider.of<CartService>(context);
+    _service.addOtp(otp);
+    _service.addGST(_service.subtotal.toInt());
+    _db.addBookingofCustomer(_service, id.toString());
+    _db.addCustomerBookingToServiceProvider(_service, id.toString());
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          final navigator = Provider.of<NavigationProvider>(context);
+          return CupertinoAlertDialog(
+            title: Text("Payment Successful!"),
+            content: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                  child: Text(
+                      "Your payment was completed sucessfully and the order has been created.")),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    // Navigator.pop(context);
+                    navigator.changeWidgetIndex(1);
+                    Navigator.of(context)
+                        .popUntil(ModalRoute.withName("/wrapper"));
+                  },
+                  style: TextButton.styleFrom(
+                    primary: Color(0xff5D5FEF),
+                  ),
+                  child: Text(
+                    'Ok',
+                    style: TextStyle(color: Colors.black),
+                  ))
+            ],
+          );
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     final int employeeNumbers = 2;
-    final id = widget.clinicLocationAndDoctor.serviceUid+widget.doctorDetail.name;
+    final id =
+        widget.clinicLocationAndDoctor.serviceUid + widget.doctorDetail.name;
     final service = Provider.of<CartService>(context).services[id];
     final servic = Provider.of<CartService>(context);
     List<ParlourSlotDetails> slots = [];
@@ -279,9 +304,10 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
                       itemBuilder: (ctx, i) {
                         if (i == 0) {
                           Min1 = startMin;
-                          Hr1 = startHr;
-                          pm = false;
+                          Hr1 = startHr > 12 ? startHr - 12 : startHr;
+                          pm = startHr > 12 ? true : false;
                           tempCount = 0;
+                          am_pm1[i] = startHr > 12 ? 'PM' : 'AM';
                         } else {
                           Min1 = Min4 + intervalDuration;
                           Hr1 = Hr4 + (Min1 / 60).floor();
@@ -518,7 +544,17 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
                           ],
                         );
                       }))),
-                      LowerCardServiceTotal(service: service, id: id,clinicId: widget.clinicLocationAndDoctor.serviceUid, bookingConfirm: confirmBooking,dateSelected: dateSelected, slotSelected: slotSelected, isChecked: isChecked, isSlotPage: true, showCheckBox: true, setIsChecked: setIsChecked)
+          LowerCardServiceTotal(
+              service: service,
+              id: id,
+              clinicId: widget.clinicLocationAndDoctor.serviceUid,
+              bookingConfirm: confirmBooking,
+              dateSelected: dateSelected,
+              slotSelected: slotSelected,
+              isChecked: isChecked,
+              isSlotPage: true,
+              showCheckBox: true,
+              setIsChecked: setIsChecked)
         ]),
       ),
     );
