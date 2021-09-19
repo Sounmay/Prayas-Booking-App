@@ -181,7 +181,7 @@ class _SlotBookingState extends State<SlotBooking> {
 
     setState(() {
       int totalDuration = slotDuration + intervalDuration;
-      int openTime = endMin + (endHr  - startHr) * 60 - startMin;
+      int openTime = endMin + (endHr - startHr) * 60 - startMin;
       count = (openTime / totalDuration).floor();
       int reminder = openTime % totalDuration;
       if (reminder >= slotDuration) count++;
@@ -328,9 +328,10 @@ class _SlotBookingState extends State<SlotBooking> {
                           itemBuilder: (ctx, i) {
                             if (i == 0) {
                               Min1 = startMin;
-                              Hr1= startHr>=12?startHr-12:startHr;
-                              pm = false;
+                              Hr1 = startHr > 12 ? startHr - 12 : startHr;
+                              pm = startHr > 12 ? true : false;
                               tempCount = 0;
+                              am_pm1[i] = startHr > 12 ? 'PM' : 'AM';
                             } else {
                               Min1 = Min4 + intervalDuration;
                               Hr1 = Hr4 + (Min1 / 60).floor();
@@ -796,7 +797,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                     fontWeight: FontWeight.w500)),
                             Text(
                                 service != null && service.subtotal != null
-                                    ? "₹ ${(service?.subtotal??0 + gst1 + gst2).toStringAsFixed(2)}/-"
+                                    ? "₹ ${(service?.subtotal ?? 0 + gst1 + gst2).toStringAsFixed(2)}/-"
                                     : "0",
                                 style: TextStyle(
                                     color: Color(0xff5D5FEF),
@@ -807,7 +808,8 @@ class _SlotBookingState extends State<SlotBooking> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("For ${service?.serviceName?.length??"0"} services",
+                            Text(
+                                "For ${service?.serviceName?.length ?? "0"} services",
                                 style: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 17,
