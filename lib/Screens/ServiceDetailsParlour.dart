@@ -322,7 +322,9 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                       Text(service.time,
                                           style: TextStyle(
                                               color: Color(0xff00A676),
-                                              fontSize: 12))
+                                              fontSize: 12
+                                          )
+                                      )
                                     ],
                                   ),
                                   Row(

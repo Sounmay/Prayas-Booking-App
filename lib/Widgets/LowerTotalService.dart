@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:freelance_booking_app/Models/Cart.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Screens/PaymentScreen.dart';
 import 'package:provider/provider.dart';
 
 class LowerCardServiceTotal extends StatelessWidget {
   final id;
-  final bool isSlotPage;
-  final Function onSlotBooking;
+  final String clinicId;
+  final Cart service;
+  final bool isSlotPage, showCheckBox, isChecked, dateSelected, slotSelected;
+  final Function onSlotBooking, setIsChecked, bookingConfirm;
   const LowerCardServiceTotal(
-      {Key key, this.isSlotPage = false, this.id, this.onSlotBooking})
+      {Key key,this.service,this.clinicId, this.isSlotPage = false,this.bookingConfirm,this.isChecked,this.dateSelected, this.slotSelected,this.setIsChecked, this.showCheckBox=false, this.id, this.onSlotBooking})
       : super(key: key);
 
   @override
@@ -27,54 +30,6 @@ class LowerCardServiceTotal extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
       child:
           Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     Text("Subtotal Amount",
-        //         style: TextStyle(
-        //           color: Colors.grey[600],
-        //           fontSize: 17,
-        //         )),
-        //     Text(service[id] != null ? "${service[id].subtotal}" : "0",
-        //         style: TextStyle(
-        //           color: Colors.grey[600],
-        //           fontSize: 17,
-        //         ))
-        //   ],
-        // ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     Text("GST 1 ( 8% )",
-        //         style: TextStyle(
-        //           color: Colors.grey[600],
-        //           fontSize: 17,
-        //         )),
-        //     Text(service[id] != null ? "$gst1" : "0",
-        //         style: TextStyle(
-        //           color: Colors.grey[600],
-        //           fontSize: 17,
-        //         ))
-        //   ],
-        // ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     Text("GST 2 ( 8% )",
-        //         style: TextStyle(
-        //           color: Colors.grey[600],
-        //           fontSize: 17,
-        //         )),
-        //     Text(
-        //         service[id] != null && service[id].subtotal != null
-        //             ? "$gst2"
-        //             : "0",
-        //         style: TextStyle(
-        //           color: Colors.grey[600],
-        //           fontSize: 17,
-        //         ))
-        //   ],
-        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -96,7 +51,7 @@ class LowerCardServiceTotal extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("For 3 services",
+            Text("For ${service[id]?.serviceName?.length??"0"} services",
                 style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: 17,
@@ -163,6 +118,26 @@ class LowerCardServiceTotal extends StatelessWidget {
               )
             ],
           ),
+        if(isSlotPage&&showCheckBox)
+            Container(
+                  margin: EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        checkColor: Colors.white,
+                        activeColor: Color(0xff5D5FEF),
+                        value: isChecked,
+                        onChanged: (bool value) {
+                          setIsChecked(value);
+                        },
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text('Pay by cash after service is over.')
+                    ],
+                  ),
+                ),
         if (isSlotPage)
           Container(
             color: Color(0xFFFAFAFA),
@@ -183,30 +158,32 @@ class LowerCardServiceTotal extends StatelessWidget {
                       ],
                     ),
                   ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Color(0xff5D5FEF),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
+                   style: TextButton.styleFrom(
+                          backgroundColor: (isChecked == true)
+                              ? Color(0xff5D5FEF)
+                              : Colors.black45,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
                   onPressed: () async {
-                    // if (dateSelected == true && slotSelected == true) {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => PaymentScreen(
-                    //             total: double.parse(
-                    //                 paymentValue.toStringAsFixed(2)),
-                    //             cart: service,
-                    //             id: id.toString())),
-                    //   );
-                    // } else {
-                    //   Fluttertoast.showToast(
-                    //       msg:
-                    //           'Please select a date and slot for booking',
-                    //       backgroundColor: Color(0xff5D5FEF),
-                    //       textColor: Colors.white,
-                    //       toastLength: Toast.LENGTH_LONG);
-                    // }
+                     if (dateSelected == true &&
+                              slotSelected == true &&
+                              isChecked == true) {
+                           bookingConfirm(service[id], clinicId);
+                          } else if (isChecked == false) {
+                            Fluttertoast.showToast(
+                                msg: 'Please select the chckbox',
+                                backgroundColor: Color(0xff5D5FEF),
+                                textColor: Colors.white,
+                                toastLength: Toast.LENGTH_LONG);
+                          } else {
+                            Fluttertoast.showToast(
+                                msg:
+                                    'Please select a date and slot for booking',
+                                backgroundColor: Color(0xff5D5FEF),
+                                textColor: Colors.white,
+                                toastLength: Toast.LENGTH_LONG);
+                          }
                   },
                 )
               ],

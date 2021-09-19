@@ -172,7 +172,7 @@ class _SlotBookingState extends State<SlotBooking> {
     final time = service != null ? service.time : 0;
     final int minute = time % 60;
     final int hours = (time / 60).floor();
-    double paymentValue = service.subtotal.toDouble() + gst1 + gst2;
+    // double paymentValue = service.subtotal.toDouble() + gst1 + gst2;
     final startHr = int.tryParse(slots[0].fromHr);
     final startMin = int.tryParse(slots[0].fromMin);
     final endHr = int.tryParse(slots[0].toHr);
@@ -181,7 +181,7 @@ class _SlotBookingState extends State<SlotBooking> {
 
     setState(() {
       int totalDuration = slotDuration + intervalDuration;
-      int openTime = endMin + (endHr * 60) + ((startHr) * 60) - startMin;
+      int openTime = endMin + (endHr  - startHr) * 60 - startMin;
       count = (openTime / totalDuration).floor();
       int reminder = openTime % totalDuration;
       if (reminder >= slotDuration) count++;
@@ -328,7 +328,7 @@ class _SlotBookingState extends State<SlotBooking> {
                           itemBuilder: (ctx, i) {
                             if (i == 0) {
                               Min1 = startMin;
-                              Hr1 = startHr;
+                              Hr1= startHr>=12?startHr-12:startHr;
                               pm = false;
                               tempCount = 0;
                             } else {
@@ -735,57 +735,57 @@ class _SlotBookingState extends State<SlotBooking> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Subtotal Amount",
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 17,
-                                )),
-                            Text(service != null ? "${service.subtotal}" : "0",
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 17,
-                                ))
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("GST 1 ( 8% )",
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 17,
-                                )),
-                            Text(
-                                service != null
-                                    ? "${gst1.toStringAsFixed(1)}"
-                                    : "0",
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 17,
-                                ))
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("GST 2 ( 8% )",
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 17,
-                                )),
-                            Text(
-                                service != null && service.subtotal != null
-                                    ? "${gst2.toStringAsFixed(1)}"
-                                    : "0",
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 17,
-                                ))
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text("Subtotal Amount",
+                        //         style: TextStyle(
+                        //           color: Colors.grey[600],
+                        //           fontSize: 17,
+                        //         )),
+                        //     Text(service != null ? "${service.subtotal}" : "0",
+                        //         style: TextStyle(
+                        //           color: Colors.grey[600],
+                        //           fontSize: 17,
+                        //         ))
+                        //   ],
+                        // ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text("GST 1 ( 8% )",
+                        //         style: TextStyle(
+                        //           color: Colors.grey[600],
+                        //           fontSize: 17,
+                        //         )),
+                        //     Text(
+                        //         service != null
+                        //             ? "${gst1.toStringAsFixed(1)}"
+                        //             : "0",
+                        //         style: TextStyle(
+                        //           color: Colors.grey[600],
+                        //           fontSize: 17,
+                        //         ))
+                        //   ],
+                        // ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text("GST 2 ( 8% )",
+                        //         style: TextStyle(
+                        //           color: Colors.grey[600],
+                        //           fontSize: 17,
+                        //         )),
+                        //     Text(
+                        //         service != null && service.subtotal != null
+                        //             ? "${gst2.toStringAsFixed(1)}"
+                        //             : "0",
+                        //         style: TextStyle(
+                        //           color: Colors.grey[600],
+                        //           fontSize: 17,
+                        //         ))
+                        //   ],
+                        // ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -796,7 +796,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                     fontWeight: FontWeight.w500)),
                             Text(
                                 service != null && service.subtotal != null
-                                    ? "₹ ${(service.subtotal + gst1 + gst2).toStringAsFixed(2)}/-"
+                                    ? "₹ ${(service?.subtotal??0 + gst1 + gst2).toStringAsFixed(2)}/-"
                                     : "0",
                                 style: TextStyle(
                                     color: Color(0xff5D5FEF),
@@ -807,7 +807,7 @@ class _SlotBookingState extends State<SlotBooking> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("For 3 services",
+                            Text("For ${service?.serviceName?.length??"0"} services",
                                 style: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 17,

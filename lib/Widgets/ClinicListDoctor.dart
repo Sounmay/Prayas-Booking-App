@@ -16,7 +16,8 @@ class ClinicListDoctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return InkWell(
+    print(service);
+    return service==null? Container():InkWell(
       onTap: () {
         // print(service.id);
         // Navigator.of(context).pushNamed('/serviceDetailsParlour',
