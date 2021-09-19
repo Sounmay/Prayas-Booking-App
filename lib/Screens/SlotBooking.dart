@@ -181,7 +181,7 @@ class _SlotBookingState extends State<SlotBooking> {
 
     setState(() {
       int totalDuration = slotDuration + intervalDuration;
-      int openTime = endMin + (endHr * 60) + ((12 - startHr) * 60) - startMin;
+      int openTime = endMin + (endHr  - startHr) * 60 - startMin;
       count = (openTime / totalDuration).floor();
       int reminder = openTime % totalDuration;
       if (reminder >= slotDuration) count++;
@@ -328,7 +328,7 @@ class _SlotBookingState extends State<SlotBooking> {
                           itemBuilder: (ctx, i) {
                             if (i == 0) {
                               Min1 = startMin;
-                              Hr1 = startHr;
+                              Hr1= startHr>=12?startHr-12:startHr;
                               pm = false;
                               tempCount = 0;
                             } else {
