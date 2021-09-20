@@ -12,6 +12,14 @@ class ServiceListDoctor extends StatelessWidget {
   ServiceListDoctor({this.service, this.location, this.clinicDetails});
   @override
   Widget build(BuildContext context) {
+    int fromHr = int.parse(service.slots[0].fromHr) > 12
+        ? int.parse(service.slots[0].fromHr) - 12
+        : int.parse(service.slots[0].fromHr);
+    int toHr = int.parse(service.slots[0].toHr);
+    int finalFromHr = fromHr > 12 ? fromHr - 12 : fromHr;
+    int finalToHr = toHr > 12 ? toHr - 12 : toHr;
+    String startAmPm = fromHr < 12 ? " AM - " : " PM - ";
+    String endAmPm = toHr < 12 ? " AM" : " PM";
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
@@ -122,7 +130,15 @@ class ServiceListDoctor extends StatelessWidget {
                           ),
                           Text('Visiting hour', style: TextStyle(fontSize: 12)),
                         ]),
-                        Text(service.slots[0].fromHr,
+                        Text(
+                            finalFromHr.toString() +
+                                ':' +
+                                service.slots[0].fromMin +
+                                startAmPm +
+                                finalToHr.toString() +
+                                ':' +
+                                service.slots[0].toMin +
+                                endAmPm,
                             style: TextStyle(
                                 color: Color(0xff00A676), fontSize: 12))
                       ],
@@ -137,7 +153,7 @@ class ServiceListDoctor extends StatelessWidget {
                           ),
                           Text('Days', style: TextStyle(fontSize: 12))
                         ]),
-                        Text('MON-THU',
+                        Text(service.workingDays,
                             style: TextStyle(
                                 color: Color(0xff00A676), fontSize: 12))
                       ],

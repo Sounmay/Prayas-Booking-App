@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Models/Salon.dart';
 import 'package:marquee/marquee.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ServiceListSalon extends StatelessWidget {
-  final service;
+  final Salon service;
   ServiceListSalon({this.service});
   @override
   Widget build(BuildContext context) {

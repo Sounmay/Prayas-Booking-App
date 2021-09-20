@@ -184,7 +184,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
         widget.clinicLocationAndDoctor.serviceUid + widget.doctorDetail.name;
     final service = Provider.of<CartService>(context).services[id];
     final servic = Provider.of<CartService>(context);
-    List<ParlourSlotDetails> slots = [];
+    List<ParlourSlotDetails> slots = widget.doctorDetail.slots;
     final gst1 = service != null ? service.subtotal * 0.08 ?? 0.0 : 0.0;
     final gst2 = service != null ? service.subtotal * 0.08 ?? 0.0 : 0.0;
     final time = service != null ? service.time : 0;
@@ -198,7 +198,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
 
     setState(() {
       int totalDuration = slotDuration + intervalDuration;
-      int openTime = endMin + (endHr * 60) + ((12 - startHr) * 60) - startMin;
+      int openTime = endMin + (endHr - startHr) * 60 - startMin;
       count = (openTime / totalDuration).floor();
       int reminder = openTime % totalDuration;
       if (reminder >= slotDuration) count++;
