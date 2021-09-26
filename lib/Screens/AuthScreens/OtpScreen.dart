@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Screens/Wrapper.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 // import 'package:sms_autofill/sms_autofill.dart';
@@ -23,8 +24,11 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF0F2735),
+      ),
+      body: Container(
+        color: Color(0xff5D5FEF),
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Stack(
           children: [
@@ -62,10 +66,10 @@ class _OtpScreenState extends State<OtpScreen> {
                         fieldHeight: 50,
                         fieldWidth: 50,
                         borderWidth: 1,
-                        activeFillColor: Colors.grey,
-                        selectedFillColor: Colors.grey,
+                        activeFillColor: Colors.white,
+                        selectedFillColor: Colors.white,
                         activeColor: Colors.white30,
-                        inactiveFillColor: Colors.grey,
+                        inactiveFillColor: Colors.white,
                         selectedColor: Colors.white30,
                         inactiveColor: Colors.transparent),
                     cursorHeight: 28,
@@ -200,7 +204,7 @@ class _OtpScreenState extends State<OtpScreen> {
             height: 50,
             width: 50,
             child: Center(
-              child: CircularProgressIndicator(color: Colors.white),
+              child: CircularProgressIndicator(color: Colors.blue),
             ),
           ),
         ),
@@ -214,10 +218,10 @@ class _OtpScreenState extends State<OtpScreen> {
               .signInWithCredential(credential)
               .whenComplete(() {
             print(widget.user.phoneNumber);
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => Wrapper()),
-                (route) => false);
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => Wrapper()),
+            //     (route) => false);
           });
         },
         verificationFailed: (FirebaseAuthException e) {
@@ -290,12 +294,12 @@ class _OtpScreenState extends State<OtpScreen> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // Container(
-                            //     height: 50,
-                            //     width: 50,
-                            //     child: Lottie.asset(
-                            //       'assets/instrument/animation_tick.json',
-                            //     )),
+                            Container(
+                                height: 50,
+                                width: 50,
+                                child: Lottie.asset(
+                                  'assets/instrument/animation_tick.json',
+                                )),
                             SizedBox(
                               height: 16,
                             ),
@@ -348,7 +352,7 @@ class _OtpScreenState extends State<OtpScreen> {
           width: 50,
           child: Center(
             child: CircularProgressIndicator(
-              color: Colors.white,
+              color: Colors.blue,
             ),
           ),
         ),

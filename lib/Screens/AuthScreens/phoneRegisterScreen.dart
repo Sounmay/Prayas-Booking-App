@@ -86,7 +86,7 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                             labelStyle: TextStyle(color: Colors.black)),
                         keyboardType: TextInputType.number,
                         maxLength: 10,
-                        style: TextStyle(color: Colors.white30),
+                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                     SizedBox(height: 38),
@@ -104,7 +104,7 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                             borderRadius: BorderRadius.circular(6),
                             color: Color(0xFF0F2735)),
                         child: Center(
-                          child: Text("Register",
+                          child: Text("Login With Otp",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w400,
