@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
@@ -40,9 +41,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<AppUser>.value(
+    return StreamProvider<User>.value(
       initialData: null,
-      value: AuthProvider().user,
+      // value: AuthProvider().user,
+      value: AuthProvider().curreUser,
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (ctx) => CartService()),

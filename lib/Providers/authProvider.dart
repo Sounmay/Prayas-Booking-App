@@ -8,9 +8,19 @@ class AuthProvider {
   AppUser _userFromFirebaseUser(User user) {
     return user != null ? AppUser(uid: user.uid) : null;
   }
+  User _currentuserFromFirebaseUser(User user) {
+    return user;
+  }
+
+
+
+  
 
   Stream<AppUser> get user {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
+  }
+  Stream<User> get curreUser {
+    return _auth.authStateChanges().map(_currentuserFromFirebaseUser);
   }
 
   Future signInWithEmailAndPassword(String email, String password) async {
