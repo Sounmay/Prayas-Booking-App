@@ -16,7 +16,7 @@ class Wrapper extends StatelessWidget {
       // return Authenticate();
       return PhoneRegisterScreen(user: user);
     } else {
-      return BottomNavBar();
+      return BottomNavBar(user: user);
     }
   }
 }
