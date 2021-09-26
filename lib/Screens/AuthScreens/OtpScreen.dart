@@ -40,18 +40,14 @@ class _OtpScreenState extends State<OtpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _space(12),
-                  Text(
-                    "OTP Verification",
-                  ),
+                  Text("OTP Verification",
+                      style: TextStyle(color: Colors.white)),
                   _space(16),
-                  Text(
-                    "Enter the 6 digit code sent to ",
-                  ),
+                  Text("Enter the 6 digit code sent to ",
+                      style: TextStyle(color: Colors.white)),
                   _space(8),
-                  Text(
-                    "+91 " + widget.phoneNumber,
-                    // style: subtitle1White
-                  ),
+                  Text("+91 " + widget.phoneNumber,
+                      style: TextStyle(color: Colors.white)),
                   _space(102),
                   PinCodeTextField(
                     controller: pinController,
@@ -117,7 +113,9 @@ class _OtpScreenState extends State<OtpScreen> {
                           },
                           child: Text(
                             " Resend Code",
-                            // style: bodyText2.copyWith(color: blue),
+                            style: TextStyle(
+                                color: Color(0xFF0F2735),
+                                decoration: TextDecoration.underline),
                           ),
                         ),
                       ],
@@ -132,25 +130,26 @@ class _OtpScreenState extends State<OtpScreen> {
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
-                        // color: blue,
+                        color: Color(0xFF0F2735),
                       ),
                       child: Center(
-                        child: Text(
-                          "Verify Phone Number",
-                          // style: button
-                        ),
+                        child: Text("Verify Phone Number",
+                            style: TextStyle(color: Colors.white)),
                       ),
                     ),
                   ),
                   _space(30),
-                  Center(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        "Edit Phone Number?",
-                        // style: bodyText2.copyWith(color: blue),
+                  Container(
+                    height: 50,
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "Edit Phone Number?",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
@@ -210,8 +209,10 @@ class _OtpScreenState extends State<OtpScreen> {
         ),
       );
     }
+    FirebaseAuth.instance.setSettings(appVerificationDisabledForTesting: true);
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '+91${widget.phoneNumber}',
+
         // autoRetrievedSmsCodeForTesting: "+917908646141",
         verificationCompleted: (PhoneAuthCredential credential) async {
           await FirebaseAuth.instance
