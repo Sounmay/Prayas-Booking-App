@@ -158,7 +158,7 @@ class _SlotBookingState extends State<SlotBooking> {
     final height = MediaQuery.of(context).size.height;
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
-    final int employeeNumbers = args['employeeNumbers'];
+    //final int employeeNumbers = args['employeeNumbers'];
     /*print(employeeNumbers);*/
 
     final id = args['id'];
@@ -418,7 +418,7 @@ class _SlotBookingState extends State<SlotBooking> {
 
                             final indx1 = i * 2;
                             final indx2 = i * 2 + 1;
-                            final int newEmployeeNumber = employeeNumbers - 1;
+                            //final int newEmployeeNumber = employeeNumbers - 1;
 
                             return Row(
                               children: [

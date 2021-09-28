@@ -305,7 +305,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Row(
+                        /*Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Subtotal Amount",
@@ -359,7 +359,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                   fontSize: 17,
                                 ))
                           ],
-                        ),
+                        ),*/
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -371,7 +371,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                             Text(
                                 service[id] != null &&
                                         service[id].subtotal != null
-                                    ? "₹ ${(service[id].subtotal + gst1 + gst2).toStringAsFixed(2)}/-"
+                                    ? "₹ ${(service[id].subtotal).toStringAsFixed(2)}/-"
                                     : "0",
                                 style: TextStyle(
                                     color: Color(0xff5D5FEF),
