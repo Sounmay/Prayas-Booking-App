@@ -99,7 +99,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                               Text('Enter Your Name'),
                               SizedBox(height: 20),
                               TextFormField(
-                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       contentPadding: const EdgeInsets.all(10),
                                       hintText: 'Name',
