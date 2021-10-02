@@ -1,11 +1,16 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:freelance_booking_app/Providers/navigationProvider.dart';
+import 'package:freelance_booking_app/Screens/ProfileScreen.dart';
+import 'package:marquee_text/marquee_text.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:marquee/marquee.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Mydrawer extends StatefulWidget {
   Mydrawer({Key key}) : super(key: key);
@@ -16,7 +21,7 @@ class Mydrawer extends StatefulWidget {
 
 class _MydrawerState extends State<Mydrawer> {
   bool load = true;
-  String name;
+  String name, userImage;
   File _image;
 
   String userId = '${FirebaseAuth.instance.currentUser.uid}';
@@ -26,6 +31,7 @@ class _MydrawerState extends State<Mydrawer> {
           await FirebaseFirestore.instance.collection('Users').doc(uid).get();
       setState(() {
         name = data['name'];
+        userImage = data['image'];
         load = false;
       });
     } catch (e) {
@@ -50,6 +56,8 @@ class _MydrawerState extends State<Mydrawer> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Provider.of<NavigationProvider>(context);
+
     return SafeArea(
       child: Container(
         width: 200,
@@ -69,11 +77,47 @@ class _MydrawerState extends State<Mydrawer> {
                         onTap: () {
                           Navigator.pushNamed(context, '/uploadAvatar');
                         },
-                        child: CircleAvatar(
-                          radius: 32,
-//                              foregroundImage: NetworkImage(
-//                                  'https://firebasestorage.googleapis.com/v0/b/freelance-booking-app.appspot.com/o/userImage%2FIMG_20170128_065337.jpg?alt=media&token=41f944c7-bc56-4c4e-b360-def099555c80'),
-                          foregroundImage: AssetImage('assets/doctor.png'),
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          margin: EdgeInsets.only(top: 4, right: 5),
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: ClipOval(
+                            child: CachedNetworkImage(
+                              imageUrl: userImage,
+                              fit: BoxFit.fill,
+                              height: MediaQuery.of(context).size.height * 0.17,
+                              width: MediaQuery.of(context).size.width * 0.36,
+                              placeholder: (context, url) => new SizedBox(
+                                height: 200,
+                                child: Shimmer.fromColors(
+                                  baseColor: Colors.grey,
+                                  highlightColor: Colors.white,
+                                  child: Stack(
+                                    fit: StackFit.expand,
+                                    children: [
+                                      Icon(Icons.image, size: 40),
+                                      ClipRRect(
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 2, sigmaY: 2),
+                                          child: Container(
+                                            color: Colors.grey[200]
+                                                .withOpacity(0.1),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  new Image.asset('assets/parlourTile.png'),
+                            ),
+                          ),
+                          // AssetImage('assets/doctor.png'),
                         ),
                       ),
                       Padding(
@@ -87,9 +131,8 @@ class _MydrawerState extends State<Mydrawer> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.2,
                                   height: 20,
-                                  child: Marquee(
-                                    velocity: 20,
-                                    blankSpace: 10,
+                                  child: MarqueeText(
+                                    speed: 10,
                                     text: name ?? "...",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
@@ -98,41 +141,48 @@ class _MydrawerState extends State<Mydrawer> {
                   ),
                 ),
                 FlatButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditProfile()));
+                    },
                     child: Container(
-                  height: 40,
-                  child: Row(
-                    children: [
-                      Icon(Icons.person_outline_rounded,
-                          color: Color(0xFF5D5FEF)),
-                      Text(' Account',
-                          style: TextStyle(color: Color(0xFF5D5FEF)))
-                    ],
-                  ),
-                )),
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Icon(Icons.person_outline_rounded,
+                              color: Color(0xFF5D5FEF)),
+                          Text(' Profile',
+                              style: TextStyle(color: Color(0xFF5D5FEF)))
+                        ],
+                      ),
+                    )),
+                // FlatButton(
+                //     child: Container(
+                //   height: 40,
+                //   child: Row(
+                //     children: [
+                //       Icon(Icons.person, color: Color(0xFF5D5FEF)),
+                //       Text(' Services',
+                //           style: TextStyle(color: Color(0xFF5D5FEF)))
+                //     ],
+                //   ),
+                // )),
                 FlatButton(
+                    onPressed: () {
+                      navigator.changeWidgetIndex(1);
+                    },
                     child: Container(
-                  height: 40,
-                  child: Row(
-                    children: [
-                      Icon(Icons.person, color: Color(0xFF5D5FEF)),
-                      Text(' Services',
-                          style: TextStyle(color: Color(0xFF5D5FEF)))
-                    ],
-                  ),
-                )),
-                FlatButton(
-                    child: Container(
-                  height: 40,
-                  child: Row(
-                    children: [
-                      Text(' \u20B9',
-                          style: TextStyle(
-                              color: Color(0xFF5D5FEF), fontSize: 20)),
-                      Text(' Cashback',
-                          style: TextStyle(color: Color(0xFF5D5FEF)))
-                    ],
-                  ),
-                ))
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Icon(Icons.book_online, color: Color(0xFF5D5FEF)),
+                          Text(' My Bookings',
+                              style: TextStyle(color: Color(0xFF5D5FEF)))
+                        ],
+                      ),
+                    ))
               ],
             ),
             FlatButton(

@@ -11,23 +11,35 @@ class DatabaseService {
   Stream<List<Medical>> streamMedical() {
     var ref = _db.collection('MedicalServices');
 
-    return ref.snapshots().map(
-        (event) => event.docs.map((e)  {if(e.data()["location"]["status"]=="Accepted")return Medical.fromFirestore(e);}).toList());
+    return ref.snapshots().map((event) => event.docs.map((e) {
+          if (e.data()["location"]["status"] == "Accepted")
+            return Medical.fromFirestore(e);
+        }).toList());
   }
 
   Stream<List<Parlour>> streamParlour() {
     var ref = _db.collection('ParlourServices');
 
-    return ref.snapshots().map(
-        (event) => event.docs.map((e) {if(e.data()["location"]["status"]=="Accepted") return Parlour.fromFirestore(e);}).toList());
+    return ref.snapshots().map((event) => event.docs.map((e) {
+          if (e.data()["location"]["status"] == "Accepted")
+            return Parlour.fromFirestore(e);
+        }).toList());
   }
 
   Stream<List<Salon>> streamSalon() {
     var ref = _db.collection('SalonServices');
 
-    return ref
-        .snapshots()
-        .map((event) => event.docs.map((e) { if(e.data()["location"]["status"]=="Accepted")return Salon.fromFirestore(e);}).toList());
+    return ref.snapshots().map((event) => event.docs.map((e) {
+          if (e.data()["location"]["status"] == "Accepted")
+            return Salon.fromFirestore(e);
+        }).toList());
+  }
+
+  Future updateServiceProviderInfo(String name, String number) async {
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .update({"name": name, "number": number});
   }
 
   Future changeUserAvatar(String imgUrl) async {
