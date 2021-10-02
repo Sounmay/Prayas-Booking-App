@@ -137,18 +137,17 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
 
   final _db = DatabaseService();
 
-  confirmBooking(Cart _service, String id) async {
+  confirmBooking(Cart _service, String id, BuildContext context) async {
     String otp = randomAlphaNumeric(6);
     // final cart = Provider.of<CartService>(context);
     _service.addOtp(otp);
     _service.addGST(_service.subtotal.toInt());
     _db.addBookingofCustomer(_service, id.toString());
     _db.addCustomerBookingToServiceProvider(_service, id.toString());
-    Navigator.of(context).popUntil(ModalRoute.withName("/wrapper"));
     // showCupertinoDialog(
     //     context: context,
     //     builder: (context) {
-    //       final navigator = Provider.of<NavigationProvider>(context);
+    // final navigator = Provider.of<NavigationProvider>(context);
     //       return CupertinoAlertDialog(
     //         title: Text("Payment Successful!"),
     //         content: Container(
@@ -162,7 +161,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
     //           TextButton(
     //               onPressed: () {
     //                 // Navigator.pop(context);
-    //                 navigator.changeWidgetIndex(1);
+    // navigator.changeWidgetIndex(1);
     // Navigator.of(context)
     //     .popUntil(ModalRoute.withName("/wrapper"));
     //               },
@@ -218,24 +217,24 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
               clinic: widget?.clinicLocationAndDoctor,
               doctor: widget?.doctorDetail,
               context: context),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'This week',
-                  style: TextStyle(color: Colors.black, fontSize: 17.0),
-                  textAlign: TextAlign.right,
-                ),
-                Icon(
-                  Icons.calendar_today_outlined,
-                  color: Color(0xff5D5FEF),
-                )
-              ],
-            ),
-          ),
-          SizedBox(height: 10.0),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Text(
+          //         'This week',
+          //         style: TextStyle(color: Colors.black, fontSize: 17.0),
+          //         textAlign: TextAlign.right,
+          //       ),
+          //       Icon(
+          //         Icons.calendar_today_outlined,
+          //         color: Color(0xff5D5FEF),
+          //       )
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(height: 10.0),
           Container(
             padding: EdgeInsets.all(10.0),
             color: Color(0xFFFAFAFA),

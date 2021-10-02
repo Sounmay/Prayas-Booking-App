@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:freelance_booking_app/Models/Medical.dart';
+import 'package:freelance_booking_app/Models/Parlour.dart';
+import 'package:freelance_booking_app/Models/Salon.dart';
 import 'package:freelance_booking_app/Providers/assistantMethods.dart';
 import 'package:freelance_booking_app/Providers/locationProvider.dart';
 import 'package:geolocator/geolocator.dart';
@@ -47,6 +50,9 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final medicalFirebaseServiceList = Provider.of<List<Medical>>(context);
+    final parlourFirebaseServiceList = Provider.of<List<Parlour>>(context);
+    final salonFirebaseServiceList = Provider.of<List<Salon>>(context);
     bool expanded = false;
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -108,13 +114,13 @@ class _MapWidgetState extends State<MapWidget> {
                   child: Column(
                     children: [
                       Text(
-                        "0",
+                        "${medicalFirebaseServiceList.length ?? 0}",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Doctors",
+                        "Clinics",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
@@ -130,7 +136,7 @@ class _MapWidgetState extends State<MapWidget> {
                   child: Column(
                     children: [
                       Text(
-                        "0",
+                        "${parlourFirebaseServiceList.length ?? 0}",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
@@ -152,7 +158,7 @@ class _MapWidgetState extends State<MapWidget> {
                   child: Column(
                     children: [
                       Text(
-                        "0",
+                        "${salonFirebaseServiceList.length ?? 0}",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),

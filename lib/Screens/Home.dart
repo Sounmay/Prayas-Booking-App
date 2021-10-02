@@ -82,7 +82,9 @@ class Home extends StatelessWidget {
                     padding: EdgeInsets.only(left: 20),
                     child: Row(children: [
                       Text(
-                        'Services near you (5 km radius)',
+                        'Services near you'
+                        //  (5 km radius)
+                        ,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Color(0xFF5D5FEF),

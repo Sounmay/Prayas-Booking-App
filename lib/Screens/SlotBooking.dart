@@ -240,24 +240,24 @@ class _SlotBookingState extends State<SlotBooking> {
                   ],
                 ),
                 SizedBox(height: 20.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'This week',
-                        style: TextStyle(color: Colors.black, fontSize: 17.0),
-                        textAlign: TextAlign.right,
-                      ),
-                      Icon(
-                        Icons.calendar_today_outlined,
-                        color: Color(0xff5D5FEF),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: 10.0),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         'This week',
+                //         style: TextStyle(color: Colors.black, fontSize: 17.0),
+                //         textAlign: TextAlign.right,
+                //       ),
+                //       Icon(
+                //         Icons.calendar_today_outlined,
+                //         color: Color(0xff5D5FEF),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // SizedBox(height: 10.0),
                 Container(
                   padding: EdgeInsets.all(10.0),
                   color: Color(0xFFFAFAFA),
