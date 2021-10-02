@@ -130,7 +130,7 @@ class _DoctorBookingAppointmentPageState
                                     "₹ " +
                                         "${widget.doctorDetail.serviceList[i].price}" +
                                         " | " +
-                                        "${widget.doctorDetail.serviceList[i].hour} Hr ${widget.doctorDetail.serviceList[i].minute} Min",
+                                        "${hr*60 + min} Min",
                                     // "₹ 40",
                                     style: TextStyle(color: Color(0xFF606572)),
                                   )

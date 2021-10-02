@@ -103,32 +103,32 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: 5,
+                            height: 20.0,
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 0),
-                            height: 70,
-                            child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                    prefixIcon: new Icon(Icons.search),
-                                    contentPadding: EdgeInsets.all(10),
-                                    hintText: 'Personal Number',
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.grey, width: 1.0),
-                                        borderRadius: BorderRadius.circular(6)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.black, width: 2.0),
-                                        borderRadius:
-                                            BorderRadius.circular(6))),
-                                onChanged: (val) {}),
-                          ),
+//                          Container(
+//                            padding: const EdgeInsets.all(10),
+//                            margin: const EdgeInsets.symmetric(
+//                                horizontal: 10, vertical: 0),
+//                            height: 70,
+//                            child: TextFormField(
+//                                keyboardType: TextInputType.text,
+//                                decoration: InputDecoration(
+//                                    prefixIcon: new Icon(Icons.search),
+//                                    contentPadding: EdgeInsets.all(10),
+//                                    hintText: 'Personal Number',
+//                                    fillColor: Colors.white,
+//                                    filled: true,
+//                                    enabledBorder: OutlineInputBorder(
+//                                        borderSide: BorderSide(
+//                                            color: Colors.grey, width: 1.0),
+//                                        borderRadius: BorderRadius.circular(6)),
+//                                    focusedBorder: OutlineInputBorder(
+//                                        borderSide: BorderSide(
+//                                            color: Colors.black, width: 2.0),
+//                                        borderRadius:
+//                                            BorderRadius.circular(6))),
+//                                onChanged: (val) {}),
+//                          ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: CachedNetworkImage(

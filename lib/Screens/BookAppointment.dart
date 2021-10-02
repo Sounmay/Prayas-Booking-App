@@ -413,7 +413,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0),
                                 child: Text(
-                                  'Slot booking',
+                                  'Book an Appointment',
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
@@ -436,18 +436,18 @@ class _BookAppointmentState extends State<BookAppointment> {
                             SizedBox(
                               width: 10.0,
                             ),
-                            TextButton(
-                              child: Text(
-                                'Emergency booking',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: TextButton.styleFrom(
-                                backgroundColor: Color(0xff5D5FEF),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)),
-                              ),
-                              onPressed: () {},
-                            )
+//                            TextButton(
+//                              child: Text(
+//                                'Emergency booking',
+//                                style: TextStyle(color: Colors.white),
+//                              ),
+//                              style: TextButton.styleFrom(
+//                                backgroundColor: Color(0xff5D5FEF),
+//                                shape: RoundedRectangleBorder(
+//                                    borderRadius: BorderRadius.circular(5)),
+//                              ),
+//                              onPressed: () {},
+//                            )
                           ],
                         )
                       ]),
