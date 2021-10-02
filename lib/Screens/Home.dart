@@ -246,28 +246,28 @@ class Home extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'General Information',
-                        style: TextStyle(
-                          color: Color(0xFF5D5FEF),
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    color: Colors.white,
-                    child: NoticeCarousel(),
-                  )
+//                  Container(
+//                    margin: new EdgeInsets.symmetric(horizontal: 20.0),
+//                    child: Align(
+//                      alignment: Alignment.topLeft,
+//                      child: Text(
+//                        'General Information',
+//                        style: TextStyle(
+//                          color: Color(0xFF5D5FEF),
+//                          fontFamily: 'Montserrat',
+//                          fontWeight: FontWeight.bold,
+//                          fontSize: 20,
+//                        ),
+//                      ),
+//                    ),
+//                  ),
+//                  SizedBox(height: 20),
+//                  Container(
+//                    height: MediaQuery.of(context).size.height * 0.3,
+//                    width: MediaQuery.of(context).size.width * 0.9,
+//                    color: Colors.white,
+//                    child: NoticeCarousel(),
+//                  )
                 ],
               ),
             ),

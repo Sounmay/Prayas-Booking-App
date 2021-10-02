@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Salon.dart';
 import 'package:marquee/marquee.dart';
+import 'package:marquee_text/marquee_text.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ServiceListSalon extends StatelessWidget {
@@ -94,9 +95,9 @@ class ServiceListSalon extends StatelessWidget {
                                     width:
                                         MediaQuery.of(context).size.width * 0.5,
                                     height: 20,
-                                    child: Marquee(
-                                        blankSpace: 20,
-                                        velocity: 20,
+                                    child: MarqueeText(
+                                        speed: 10,
+                                        alwaysScroll: false,
                                         text: service.location,
                                         style: TextStyle(
                                             color: Colors.green,
@@ -117,9 +118,9 @@ class ServiceListSalon extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.width * 0.33,
                                   height: 20,
-                                  child: Marquee(
-                                    blankSpace: 10,
-                                    velocity: 20,
+                                  child: MarqueeText(
+                                    speed: 10,
+                                    alwaysScroll: false,
                                     text: service.salonName,
                                     style: TextStyle(
                                         color: Colors.white,

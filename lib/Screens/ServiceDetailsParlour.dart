@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Widgets/ServiceDetailsFacilityGrid.dart';
 import 'package:marquee/marquee.dart';
+import 'package:marquee_text/marquee_text.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ServiceDetailsParlour extends StatefulWidget {
@@ -103,32 +104,32 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: 5,
+                            height: 20.0,
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 0),
-                            height: 70,
-                            child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                    prefixIcon: new Icon(Icons.search),
-                                    contentPadding: EdgeInsets.all(10),
-                                    hintText: 'Personal Number',
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.grey, width: 1.0),
-                                        borderRadius: BorderRadius.circular(6)),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.black, width: 2.0),
-                                        borderRadius:
-                                            BorderRadius.circular(6))),
-                                onChanged: (val) {}),
-                          ),
+//                          Container(
+//                            padding: const EdgeInsets.all(10),
+//                            margin: const EdgeInsets.symmetric(
+//                                horizontal: 10, vertical: 0),
+//                            height: 70,
+//                            child: TextFormField(
+//                                keyboardType: TextInputType.text,
+//                                decoration: InputDecoration(
+//                                    prefixIcon: new Icon(Icons.search),
+//                                    contentPadding: EdgeInsets.all(10),
+//                                    hintText: 'Personal Number',
+//                                    fillColor: Colors.white,
+//                                    filled: true,
+//                                    enabledBorder: OutlineInputBorder(
+//                                        borderSide: BorderSide(
+//                                            color: Colors.grey, width: 1.0),
+//                                        borderRadius: BorderRadius.circular(6)),
+//                                    focusedBorder: OutlineInputBorder(
+//                                        borderSide: BorderSide(
+//                                            color: Colors.black, width: 2.0),
+//                                        borderRadius:
+//                                            BorderRadius.circular(6))),
+//                                onChanged: (val) {}),
+//                          ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: CachedNetworkImage(
@@ -185,8 +186,9 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width *
                                           0.3,
-                                      child: Marquee(
-                                          velocity: 20,
+                                      child: MarqueeText(
+                                          speed: 10,
+                                          alwaysScroll: false,
                                           text: location.address,
                                           style: TextStyle(
                                               color: Colors.green,

@@ -198,7 +198,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                       onTap: () {
                                         navigator.changeWidgetIndex(2);
                                       },
-                                      child: Icon(Icons.favorite_outline,
+                                      child: Icon(Icons.medical_services_outlined,
                                           size: 30, color: Colors.white))
                                 ],
                               ),

@@ -221,7 +221,7 @@ class _MyBookingState extends State<MyBooking> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'OTP : ${finalList[i].otp}',
+                                                          'Unique ID : ${finalList[i].otp}',
                                                           style: TextStyle(
                                                               color: Color(
                                                                   0xFF5D5FEF)),
