@@ -144,37 +144,38 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
     _service.addGST(_service.subtotal.toInt());
     _db.addBookingofCustomer(_service, id.toString());
     _db.addCustomerBookingToServiceProvider(_service, id.toString());
-    showCupertinoDialog(
-        context: context,
-        builder: (context) {
-          final navigator = Provider.of<NavigationProvider>(context);
-          return CupertinoAlertDialog(
-            title: Text("Payment Successful!"),
-            content: Container(
-              height: 50,
-              width: 50,
-              child: Center(
-                  child: Text(
-                      "Your payment was completed sucessfully and the order has been created.")),
-            ),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    // Navigator.pop(context);
-                    navigator.changeWidgetIndex(1);
-                    Navigator.of(context)
-                        .popUntil(ModalRoute.withName("/wrapper"));
-                  },
-                  style: TextButton.styleFrom(
-                    primary: Color(0xff5D5FEF),
-                  ),
-                  child: Text(
-                    'Ok',
-                    style: TextStyle(color: Colors.black),
-                  ))
-            ],
-          );
-        });
+    Navigator.of(context).popUntil(ModalRoute.withName("/wrapper"));
+    // showCupertinoDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       final navigator = Provider.of<NavigationProvider>(context);
+    //       return CupertinoAlertDialog(
+    //         title: Text("Payment Successful!"),
+    //         content: Container(
+    //           height: 50,
+    //           width: 50,
+    //           child: Center(
+    //               child: Text(
+    //                   "Your payment was completed sucessfully and the order has been created.")),
+    //         ),
+    //         actions: [
+    //           TextButton(
+    //               onPressed: () {
+    //                 // Navigator.pop(context);
+    //                 navigator.changeWidgetIndex(1);
+    // Navigator.of(context)
+    //     .popUntil(ModalRoute.withName("/wrapper"));
+    //               },
+    //               style: TextButton.styleFrom(
+    //                 primary: Color(0xff5D5FEF),
+    //               ),
+    //               child: Text(
+    //                 'Ok',
+    //                 style: TextStyle(color: Colors.black),
+    //               ))
+    //         ],
+    //       );
+    //     });
   }
 
   @override
