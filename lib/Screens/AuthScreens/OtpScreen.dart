@@ -281,52 +281,52 @@ class _OtpScreenState extends State<OtpScreen> {
         },
         codeSent: (String verficationID, int resendToken) {
           if (!isFirst) Navigator.pop(context);
-          showCupertinoDialog(
-            context: context,
-            builder: (context) => CupertinoAlertDialog(
-              content: Material(
-                color: Colors.transparent,
-                child: Container(
-                  height: 100,
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                child: Lottie.asset(
-                                  'assets/instrument/animation_tick.json',
-                                )),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Text(
-                              "OTP sent successfully",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
-                            )
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(Icons.close)),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
+          // showCupertinoDialog(
+          //   context: context,
+          //   builder: (context) => CupertinoAlertDialog(
+          //     content: Material(
+          //       color: Colors.transparent,
+          //       child: Container(
+          //         height: 100,
+          //         child: Stack(
+          //           children: [
+          //             Positioned.fill(
+          //               child: Column(
+          //                 mainAxisSize: MainAxisSize.min,
+          //                 crossAxisAlignment: CrossAxisAlignment.center,
+          //                 children: [
+          //                   Container(
+          //                       height: 50,
+          //                       width: 50,
+          //                       child: Lottie.asset(
+          //                         'assets/instrument/animation_tick.json',
+          //                       )),
+          //                   SizedBox(
+          //                     height: 16,
+          //                   ),
+          //                   Text(
+          //                     "OTP sent successfully",
+          //                     style: TextStyle(
+          //                         fontSize: 16, fontWeight: FontWeight.w400),
+          //                   )
+          //                 ],
+          //               ),
+          //             ),
+          //             Positioned(
+          //               top: 0,
+          //               right: 0,
+          //               child: InkWell(
+          //                   onTap: () {
+          //                     Navigator.pop(context);
+          //                   },
+          //                   child: Icon(Icons.close)),
+          //             )
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // );
           // BotToast.showText(
           //     contentColor: almostWhite,
           //     textStyle: TextStyle(color: black),
