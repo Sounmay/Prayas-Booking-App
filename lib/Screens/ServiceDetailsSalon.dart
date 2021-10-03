@@ -91,12 +91,14 @@ class _ServiceDetailsSalonState extends State<ServiceDetailsSalon> {
                     ],
                   )),
               body: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 20.0,
+                      ),
 //                    Container(
 //                      padding: const EdgeInsets.all(10),
 //                      margin: const EdgeInsets.symmetric(
@@ -120,281 +122,293 @@ class _ServiceDetailsSalonState extends State<ServiceDetailsSalon> {
 //                                  borderRadius: BorderRadius.circular(6))),
 //                          onChanged: (val) {}),
 //                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: CachedNetworkImage(
-                        imageUrl: details.parlourImage,
-                        fit: BoxFit.fill,
-                        height: MediaQuery.of(context).size.height * 0.28,
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        placeholder: (context, url) => new SizedBox(
-                          height: 200,
-                          child: Shimmer.fromColors(
-                            baseColor: Colors.grey,
-                            highlightColor: Colors.white,
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                Icon(Icons.image, size: 40),
-                                ClipRRect(
-                                  child: BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                                    child: Container(
-                                      color: Colors.grey[200].withOpacity(0.1),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            new Image.asset('assets/parlourTile.png'),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.64,
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Color(0xFF0F2735),
-                        ),
-                        margin: const EdgeInsets.fromLTRB(40, 20, 40, 10),
-                        padding: const EdgeInsets.all(4),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Icon(
-                                CupertinoIcons.location,
-                                color: Colors.green,
-                                size: 20,
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                child: MarqueeText(
-                                    speed: 10,
-                                    alwaysScroll: false,
-                                    text: location.address,
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.03,
-                                        fontWeight: FontWeight.w400)),
-                              )
-                            ]),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.64,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Flexible(
-                            flex: 1,
-                            child: Icon(
-                              CupertinoIcons.scissors,
-                              size: 24,
-                            ),
-                          ),
-                          Flexible(
-                            flex: 6,
-                            child: Text(service.salonName,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 20)),
-                          ),
-                          Flexible(
-                            flex: 2,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.15,
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Color(0xff5D5FEF)),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Text('\u{2B50} 4.4',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12)),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                        child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: employeeDetailList.length,
-                          itemBuilder: (BuildContext ctx, index) {
-                            return Container(
-                              padding: EdgeInsets.only(bottom: 10),
-                              margin: EdgeInsets.symmetric(horizontal: 1),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: CachedNetworkImage(
+                          imageUrl: details.parlourImage,
+                          fit: BoxFit.fill,
+                          height: MediaQuery.of(context).size.height * 0.28,
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          placeholder: (context, url) => new SizedBox(
+                            height: 200,
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey,
+                              highlightColor: Colors.white,
+                              child: Stack(
+                                fit: StackFit.expand,
                                 children: [
-                                  CircleAvatar(
-                                    foregroundImage: new NetworkImage(
-                                        employeeDetailList[index].imagefile),
-                                    backgroundColor: Colors.grey[200],
-                                    /*child: new Container(
-                                              margin:
-                                                  EdgeInsets.only(bottom: 0),
-                                              decoration: new BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: new DecorationImage(
-                                                      fit: BoxFit.fill,
-                                                      image: new NetworkImage(
-                                                          employeeDetailList[
-                                                                  index]
-                                                              .imagefile))))*/
-                                  ),
-                                  new Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      new Text(
-                                        employeeDetailList[index].name,
+                                  Icon(Icons.image, size: 40),
+                                  ClipRRect(
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                          sigmaX: 2, sigmaY: 2),
+                                      child: Container(
+                                        color:
+                                            Colors.grey[200].withOpacity(0.1),
                                       ),
-                                      new Text(
-                                        employeeDetailList[index].number,
-                                        style: TextStyle(
-                                            color: Color(0xff5D5FEF),
-                                            fontSize: 12),
-                                      )
-                                    ],
+                                    ),
                                   ),
                                 ],
                               ),
-                            );
-                          },
+                            ),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              new Image.asset('assets/parlourTile.png'),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.64,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        // height: MediaQuery.of(context).size.height * 0.05,
-                        child: Column(
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.64,
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Color(0xFF0F2735),
+                          ),
+                          margin: const EdgeInsets.fromLTRB(40, 20, 40, 10),
+                          padding: const EdgeInsets.all(4),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Icon(
+                                  CupertinoIcons.location,
+                                  color: Colors.green,
+                                  size: 20,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child: MarqueeText(
+                                      speed: 10,
+                                      alwaysScroll: false,
+                                      text: location.address,
+                                      style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.03,
+                                          fontWeight: FontWeight.w400)),
+                                )
+                              ]),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.64,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(children: [
-                                  Icon(
-                                    CupertinoIcons.time,
-                                    color: Color(0xff5D5FEF),
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    'Visiting hour',
-                                    style: TextStyle(fontSize: 12),
-                                  )
-                                ]),
-                                Text(service.time,
-                                    style: TextStyle(
-                                        color: Color(0xff00A676), fontSize: 12))
-                              ],
+                            Flexible(
+                              flex: 1,
+                              child: Icon(
+                                CupertinoIcons.scissors,
+                                size: 24,
+                              ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(children: [
-                                  Icon(
-                                    CupertinoIcons.sun_min,
-                                    color: Color(0xff5D5FEF),
-                                    size: 23,
-                                  ),
-                                  Text(
-                                    'Days',
-                                    style: TextStyle(fontSize: 12),
-                                  )
-                                ]),
-                                Text(slotList[0].weekRange,
-                                    style: TextStyle(
-                                        color: Color(0xff00A676), fontSize: 12))
-                              ],
+                            Flexible(
+                              flex: 6,
+                              child: Text(service.salonName,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20)),
                             ),
+                            Flexible(
+                              flex: 2,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.15,
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: Color(0xff5D5FEF)),
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Text('\u{2B50} 4.4',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12)),
+                              ),
+                            )
                           ],
                         ),
                       ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.37,
-                              child: TextButton(
-                                child: Text(
-                                  'Get Catalogue',
-                                  style: TextStyle(color: Colors.white),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: Container(
+                          margin:
+                              EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                          child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: employeeDetailList.length,
+                            itemBuilder: (BuildContext ctx, index) {
+                              return Container(
+                                padding: EdgeInsets.only(bottom: 10),
+                                margin: EdgeInsets.symmetric(horizontal: 1),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CircleAvatar(
+                                      foregroundImage: new NetworkImage(
+                                          employeeDetailList[index].imagefile),
+                                      backgroundColor: Colors.grey[200],
+                                      /*child: new Container(
+                                                margin:
+                                                    EdgeInsets.only(bottom: 0),
+                                                decoration: new BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: new DecorationImage(
+                                                        fit: BoxFit.fill,
+                                                        image: new NetworkImage(
+                                                            employeeDetailList[
+                                                                    index]
+                                                                .imagefile))))*/
+                                    ),
+                                    new Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        new Text(
+                                          employeeDetailList[index].name,
+                                        ),
+                                        new Text(
+                                          employeeDetailList[index].number,
+                                          style: TextStyle(
+                                              color: Color(0xff5D5FEF),
+                                              fontSize: 12),
+                                        )
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                style: TextButton.styleFrom(
-                                    backgroundColor: Color(0xff02CF96),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5))),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/cat',
-                                      arguments: {
-                                        'id': service.id,
-                                        'shopName': service.salonName,
-                                        'mostAvailed': salonServiceDetails,
-                                        'getCatalogue': getCatalogue
-                                      });
-                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.64,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          // height: MediaQuery.of(context).size.height * 0.05,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(children: [
+                                    Icon(
+                                      CupertinoIcons.time,
+                                      color: Color(0xff5D5FEF),
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      'Visiting hour',
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ]),
+                                  Text(service.time,
+                                      style: TextStyle(
+                                          color: Color(0xff00A676),
+                                          fontSize: 12))
+                                ],
                               ),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.43,
-                              child: TextButton(
-                                child: Text(
-                                  'Book an appointment',
-                                  style: TextStyle(color: Colors.white),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(children: [
+                                    Icon(
+                                      CupertinoIcons.sun_min,
+                                      color: Color(0xff5D5FEF),
+                                      size: 23,
+                                    ),
+                                    Text(
+                                      'Days',
+                                      style: TextStyle(fontSize: 12),
+                                    )
+                                  ]),
+                                  Text(slotList[0].weekRange,
+                                      style: TextStyle(
+                                          color: Color(0xff00A676),
+                                          fontSize: 12))
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.37,
+                                child: TextButton(
+                                  child: Text(
+                                    'Get Catalogue',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Color(0xff02CF96),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5))),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/cat',
+                                        arguments: {
+                                          'id': service.id,
+                                          'shopName': service.salonName,
+                                          'mostAvailed': salonServiceDetails,
+                                          'getCatalogue': getCatalogue
+                                        });
+                                  },
                                 ),
-                                style: TextButton.styleFrom(
-                                    backgroundColor: Color(0xff5D5FEF),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5))),
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, '/bookAppointment',
-                                      arguments: {
-                                        'id': service.id,
-                                        'shopName': service.salonName,
-                                        'mostAvailService': salonServiceDetails,
-                                        'slots': slotList,
-                                        'address': service.location,
-                                      });
-                                },
                               ),
-                            ),
-                          ]),
-                    ),
-                    ServiceDetailsFacilityGrid(),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Center(
-                      child: Text('See Gallery'),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                  ],
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.43,
+                                child: TextButton(
+                                  child: Text(
+                                    'Book an appointment',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Color(0xff5D5FEF),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5))),
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, '/bookAppointment',
+                                        arguments: {
+                                          'id': service.id,
+                                          'shopName': service.salonName,
+                                          'mostAvailService':
+                                              salonServiceDetails,
+                                          'slots': slotList,
+                                          'address': service.location,
+                                        });
+                                  },
+                                ),
+                              ),
+                            ]),
+                      ),
+                      /*ServiceDetailsFacilityGrid(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Center(
+                        child: Text('See Gallery'),
+                      ),*/
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                    ],
+                  ),
                 ),
               )),
     );

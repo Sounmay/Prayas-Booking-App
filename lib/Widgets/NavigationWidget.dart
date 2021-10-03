@@ -198,8 +198,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                       onTap: () {
                                         navigator.changeWidgetIndex(2);
                                       },
-                                      child: Icon(Icons.medical_services_outlined,
-                                          size: 30, color: Colors.white))
+                                      child: Icon(
+                                          Icons.medical_services_outlined,
+                                          size: 30,
+                                          color: Colors.white))
                                 ],
                               ),
                             ),
@@ -218,7 +220,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                     navigator.changeWidgetIndex(1);
                                   },
                                   child: Icon(Icons.calendar_today,
-                                      size: 30, color: Color(0xff5D5FEF)),
+                                      size: 30, color: Colors.white),
                                 ),
                               ),
                             ),

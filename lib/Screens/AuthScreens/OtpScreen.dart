@@ -42,10 +42,10 @@ class _OtpScreenState extends State<OtpScreen> {
                   _space(12),
                   Text("OTP Verification",
                       style: TextStyle(
-                          color: Color(0xFF0F2735),
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                  _space(16),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 30)),
+                  _space(30),
                   Text("Enter the 6 digit code sent to ",
                       style: TextStyle(
                           color: Color(0xFF0F2735),
