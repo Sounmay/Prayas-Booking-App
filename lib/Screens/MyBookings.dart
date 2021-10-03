@@ -44,7 +44,7 @@ class _MyBookingState extends State<MyBooking> {
           .get();
       setState(() {
         final ds = data.data()['bookings'];
-        print(ds); 
+        print(ds);
 
         bookingDetails = List.from(
             data.data()['bookings'].map((e) => BookingsDetails.fromJson(e)));
@@ -126,7 +126,7 @@ class _MyBookingState extends State<MyBooking> {
                           style:
                               TextStyle(fontSize: 18, color: Color(0xFF0F2735)),
                         ),
-                        FlatButton(
+                        /*FlatButton(
                           padding: EdgeInsets.all(0),
                           child: Container(
                               decoration: BoxDecoration(
@@ -144,12 +144,12 @@ class _MyBookingState extends State<MyBooking> {
                               filterButton = !filterButton;
                             });
                           },
-                        )
+                        )*/
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: 10.0,
+                    height: 20.0,
                   ),
                   filterButton
                       ? isLoading == true

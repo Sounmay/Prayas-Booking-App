@@ -30,6 +30,7 @@ class _SlotBookingState extends State<SlotBooking> {
   String sl;
   bool dateSelected = false;
   bool slotSelected = false;
+  bool changeDate = false;
 
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.utc(1989);
@@ -156,6 +157,7 @@ class _SlotBookingState extends State<SlotBooking> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     //final int employeeNumbers = args['employeeNumbers'];
@@ -271,6 +273,8 @@ class _SlotBookingState extends State<SlotBooking> {
                     onDaySelected: (selectedDay, focusedDay) {
                       dateSelected = true;
                       setState(() {
+                        if (_selectedDay == DateTime.utc(1989) ||
+                            _selectedDay != selectedDay) changeDate = true;
                         _selectedDay = selectedDay;
                         _focusedDay =
                             focusedDay; // update `_focusedDay` here as well
@@ -419,8 +423,13 @@ class _SlotBookingState extends State<SlotBooking> {
                             final indx1 = i * 2;
                             final indx2 = i * 2 + 1;
                             //final int newEmployeeNumber = employeeNumbers - 1;
-
+                            if (changeDate == true) {
+                              for (int x = 0; x < count; x++) {
+                                if (x != indx1) slotButtons[x] = false;
+                              }
+                            }
                             return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
@@ -446,6 +455,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                             if (x != indx1)
                                               slotButtons[x] = false;
                                           }
+                                          changeDate = false;
                                           sl = _timeslot;
                                         }
                                       });
@@ -453,8 +463,8 @@ class _SlotBookingState extends State<SlotBooking> {
                                     },
                                     child: slotButtons[indx1] == false
                                         ? Container(
-                                            height: 50,
-                                            width: 160,
+                                            height: height * 0.07,
+                                            width: width * 0.4,
                                             decoration: BoxDecoration(
                                                 border: Border.all(
                                                     color: Colors.blue),
@@ -487,8 +497,8 @@ class _SlotBookingState extends State<SlotBooking> {
                                             )),
                                           )
                                         : Container(
-                                            height: 50,
-                                            width: 160,
+                                            height: height * 0.07,
+                                            width: width * 0.4,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(6),
@@ -552,7 +562,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                                   if (x != indx2)
                                                     slotButtons[x] = false;
                                                 }
-
+                                                changeDate = false;
                                                 sl = _timeslot1;
                                               }
                                             });
@@ -561,8 +571,8 @@ class _SlotBookingState extends State<SlotBooking> {
                                           },
                                           child: slotButtons[indx2] == false
                                               ? Container(
-                                                  height: 50,
-                                                  width: 160,
+                                                  height: height * 0.07,
+                                                  width: width * 0.4,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: Colors.blue),
@@ -599,8 +609,8 @@ class _SlotBookingState extends State<SlotBooking> {
                                                   )),
                                                 )
                                               : Container(
-                                                  height: 50,
-                                                  width: 160,
+                                                  height: height * 0.07,
+                                                  width: width * 0.4,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
