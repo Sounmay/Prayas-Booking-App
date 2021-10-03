@@ -99,9 +99,6 @@ class Home extends StatelessWidget {
                     height: 20.0,
                   ),
                   MapWidget(),
-                  // SizedBox(
-                  //   height: 5.0,
-                  // ),
                   Container(
                     padding: EdgeInsets.only(left: 20),
                     child: Row(children: [

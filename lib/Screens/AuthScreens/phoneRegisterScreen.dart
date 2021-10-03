@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Screens/AuthScreens/OtpScreen.dart';
@@ -92,11 +93,21 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                     SizedBox(height: 38),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => OtpScreen(
-                                  phoneNumber: textEditingController.text,
-                                  user: widget.user,
-                                )));
+                        Pattern pattern = r'^[6-9]{1}[0-9]{9}$';
+                        RegExp regex = new RegExp(pattern);
+                        if (regex.hasMatch(textEditingController.text)) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => OtpScreen(
+                                    phoneNumber: textEditingController.text,
+                                    user: widget.user,
+                                  )));
+                        } else {
+                          BotToast.showText(
+                              contentColor: Color(0xFF0F2735),
+                              textStyle: TextStyle(color: Colors.black),
+                              text: "Invalid number",
+                              duration: Duration(seconds: 2));
+                        }
                       },
                       child: Container(
                         height: 50,

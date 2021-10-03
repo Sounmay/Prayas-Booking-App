@@ -263,15 +263,15 @@ class _OtpScreenState extends State<OtpScreen> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                                height: 50,
-                                width: 50,
-                                child: Text(
-                                  "assets/icons/failed.svg",
-                                )),
-                            SizedBox(
-                              height: 16,
-                            ),
+                            // Container(
+                            //     height: 50,
+                            //     width: 50,
+                            //     child: Text(
+                            //       "assets/icons/failed.svg",
+                            //     )),
+                            // SizedBox(
+                            //   height: 16,
+                            // ),
                             Text(
                               e.message.toString(),
                               style: TextStyle(

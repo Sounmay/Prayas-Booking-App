@@ -154,9 +154,12 @@ class _MyBookingState extends State<MyBooking> {
                   filterButton
                       ? isLoading == true
                           ? Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [CircularProgressIndicator()],
+                              child: Container(
+                                height: 300,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [CircularProgressIndicator()],
+                                ),
                               ),
                             )
                           : Container(
@@ -291,17 +294,14 @@ class _MyBookingState extends State<MyBooking> {
                                                                 children: [
                                                                   finalList[i]
                                                                           .isApproved
-                                                                      ? [
-                                                                          Icon(
-                                                                              Icons.check,
-                                                                              color: Colors.white,
-                                                                              size: 20),
-                                                                          Text(
-                                                                              '  Booked',
-                                                                              style: TextStyle(
-                                                                                color: Colors.white,
-                                                                              ))
-                                                                        ]
+                                                                      ? Row(
+                                                                          children: [
+                                                                              Icon(Icons.check, color: Colors.white, size: 20),
+                                                                              Text('  Booked',
+                                                                                  style: TextStyle(
+                                                                                    color: Colors.white,
+                                                                                  ))
+                                                                            ])
                                                                       : Padding(
                                                                           padding:
                                                                               const EdgeInsets.symmetric(horizontal: 8.0),
