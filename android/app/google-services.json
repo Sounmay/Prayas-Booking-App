@@ -1,33 +1,62 @@
 {
   "project_info": {
-    "project_number": "294107082451",
-    "project_id": "freelance-booking-app",
-    "storage_bucket": "freelance-booking-app.appspot.com"
+    "project_number": "650640910388",
+    "project_id": "prayas-app-f6416",
+    "storage_bucket": "prayas-app-f6416.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:294107082451:android:249184931237b9a0432e26",
+        "mobilesdk_app_id": "1:650640910388:android:04ce6ec397665b10404261",
         "android_client_info": {
           "package_name": "com.sounmaymishra.freelance_booking_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "294107082451-5a0dfv6pvqnkhlihqg98adm7c905i9lb.apps.googleusercontent.com",
+          "client_id": "650640910388-si470ciacghiognc2qg3nd1tienolptn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAlnqnzSpDyzddQeHwJ5cQ56rji_09W2Wc"
+          "current_key": "AIzaSyDKdqVW2E3bjvKjfuIuvgPVJwzAqMYhPCE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "294107082451-5a0dfv6pvqnkhlihqg98adm7c905i9lb.apps.googleusercontent.com",
+              "client_id": "650640910388-si470ciacghiognc2qg3nd1tienolptn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650640910388:android:3bfbfc586eaee99e404261",
+        "android_client_info": {
+          "package_name": "com.sounmaymishra.freelance_booking_appService"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650640910388-si470ciacghiognc2qg3nd1tienolptn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKdqVW2E3bjvKjfuIuvgPVJwzAqMYhPCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650640910388-si470ciacghiognc2qg3nd1tienolptn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
