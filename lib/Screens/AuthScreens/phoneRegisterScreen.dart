@@ -104,7 +104,7 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                             borderRadius: BorderRadius.circular(6),
                             color: Color(0xFF0F2735)),
                         child: Center(
-                          child: Text("Login With Otp",
+                          child: Text("Login With OTP",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w400,

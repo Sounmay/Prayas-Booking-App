@@ -41,13 +41,36 @@ class _OtpScreenState extends State<OtpScreen> {
                 children: [
                   _space(12),
                   Text("OTP Verification",
-                      style: TextStyle(color: Colors.white)),
+                      style: TextStyle(
+                          color: Color(0xFF0F2735),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
                   _space(16),
                   Text("Enter the 6 digit code sent to ",
-                      style: TextStyle(color: Colors.white)),
+                      style: TextStyle(
+                          color: Color(0xFF0F2735),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500)),
                   _space(8),
                   Text("+91 " + widget.phoneNumber,
-                      style: TextStyle(color: Colors.white)),
+                      style: TextStyle(
+                          color: Color(0xFF0F2735),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500)),
+                  _space(8),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Edit Phone Number?",
+                      style: TextStyle(
+                          color: Color(0xFF0F2735),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.underline),
+                    ),
+                  ),
                   _space(102),
                   PinCodeTextField(
                     controller: pinController,
@@ -133,26 +156,26 @@ class _OtpScreenState extends State<OtpScreen> {
                         color: Color(0xFF0F2735),
                       ),
                       child: Center(
-                        child: Text("Verify Phone Number",
+                        child: Text("Verify",
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
                   ),
                   _space(30),
-                  Container(
-                    height: 50,
-                    child: Center(
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          "Edit Phone Number?",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   height: 50,
+                  //   child: Center(
+                  //     child: InkWell(
+                  //       onTap: () {
+                  //         Navigator.pop(context);
+                  //       },
+                  //       child: Text(
+                  //         "Edit Phone Number?",
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
