@@ -106,7 +106,7 @@ class _MapWidgetState extends State<MapWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.27,
                   decoration: BoxDecoration(
                       color: Color(0xff80FFAA),
@@ -128,7 +128,7 @@ class _MapWidgetState extends State<MapWidget> {
                     ],
                   )),
               Container(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.27,
                   decoration: BoxDecoration(
                       color: Color(0xff87D3FF),
@@ -150,7 +150,7 @@ class _MapWidgetState extends State<MapWidget> {
                     ],
                   )),
               Container(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.27,
                   decoration: BoxDecoration(
                       color: Color(0xffB3C8FF),

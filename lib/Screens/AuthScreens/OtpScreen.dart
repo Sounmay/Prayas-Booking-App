@@ -235,8 +235,7 @@ class _OtpScreenState extends State<OtpScreen> {
     FirebaseAuth.instance.setSettings(appVerificationDisabledForTesting: true);
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '+91${widget.phoneNumber}',
-
-        // autoRetrievedSmsCodeForTesting: "+917908646141",
+        // autoRetrievedSmsCodeForTesting: "+916268322273",
         verificationCompleted: (PhoneAuthCredential credential) async {
           await FirebaseAuth.instance
               .signInWithCredential(credential)
