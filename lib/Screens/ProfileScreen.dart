@@ -10,15 +10,16 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  String name = "", phoneNumber = "", imageUrl = "";
+  String name = "", secondName = "", phoneNumber = "", imageUrl = "";
   bool isLoaded = false;
 
   _fetchData() async {
     String uid = FirebaseAuth.instance.currentUser.uid;
     FirebaseFirestore.instance.collection("Users").doc(uid).get().then((value) {
       setState(() {
-        name = value.data()["name"];
-        phoneNumber = value.data()["number"] ?? "";
+        String temp = value.data()["name"];
+        name = temp.contains(" ") ? temp.split(" ")[0] : temp;
+        secondName = temp.contains(" ") ? temp.split(" ")[1] : "" ?? "";
         imageUrl = value.data()["image"];
         isLoaded = true;
       });
@@ -36,7 +37,14 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return !isLoaded
         ? Scaffold(
-            body: CircularProgressIndicator(),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
           )
         : Scaffold(
             appBar: AppBar(
@@ -49,8 +57,12 @@ class _EditProfileState extends State<EditProfile> {
               actions: [
                 FlatButton(
                     onPressed: () {
-                      DatabaseService()
-                          .updateServiceProviderInfo(name, phoneNumber);
+                      if (secondName != "")
+                        DatabaseService().updateServiceProviderInfo(
+                            name + " " + secondName, phoneNumber);
+                      else
+                        DatabaseService()
+                            .updateServiceProviderInfo(name, phoneNumber);
                     },
                     child: Container(
                       padding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 5.0),
@@ -129,12 +141,13 @@ class _EditProfileState extends State<EditProfile> {
                   child: TextFormField(
                     initialValue: name,
                     decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.only(bottom: -20),
+                        labelText: "First Name",
+                        contentPadding: EdgeInsets.only(bottom: -10),
                         // hintText: 'Name',
                         hintStyle: TextStyle(fontSize: 12)),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter your name';
+                        return 'Please enter your first name';
                       }
                       return null;
                     },
@@ -148,17 +161,18 @@ class _EditProfileState extends State<EditProfile> {
                   child: TextFormField(
                       initialValue: phoneNumber,
                       decoration: const InputDecoration(
+                          labelText: "Last Name",
                           contentPadding: EdgeInsets.only(bottom: -20),
                           // hintText: 'Phone Number',
                           hintStyle: TextStyle(fontSize: 12)),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter your number';
-                        }
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value.isEmpty) {
+                      //     return 'Please enter your second number';
+                      //   }
+                      //   return null;
+                      // },
                       onChanged: (value) {
-                        phoneNumber = value;
+                        secondName = value;
                       }),
                 ),
               ],
