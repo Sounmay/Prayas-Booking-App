@@ -21,7 +21,7 @@ class Mydrawer extends StatefulWidget {
 
 class _MydrawerState extends State<Mydrawer> {
   bool load = true;
-  String name, userImage;
+  String name = "", userImage;
   File _image;
 
   String userId = '${FirebaseAuth.instance.currentUser.uid}';
@@ -133,7 +133,9 @@ class _MydrawerState extends State<Mydrawer> {
                                   height: 20,
                                   child: MarqueeText(
                                     speed: 10,
-                                    text: name ?? "...",
+                                    text: name.contains(" ")
+                                        ? name?.split(" ")[0]
+                                        : name ?? "...",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
                                   )))

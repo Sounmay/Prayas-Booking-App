@@ -18,7 +18,7 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   bool isLoading = true;
   bool showUserForm = false;
-  String name = "";
+  String firstName = "", lastName = "";
 
   _fetchUserData() async {
     try {
@@ -71,6 +71,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       MyBooking(),
       AllSerives()
     ];
+    final deviceHeight = MediaQuery.of(context).size.height;
 
     return isLoading
         ? Scaffold(
@@ -83,80 +84,205 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
           ))
         : showUserForm
+            // ? Scaffold(
+            //     body: SafeArea(
+            //         child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: [
+            //         SizedBox(
+            //           height: MediaQuery.of(context).size.height * 0.42,
+            //           child: AlertDialog(
+            //             content: Form(
+            //               key: _formKey,
+            //               child: Column(
+            //                 mainAxisAlignment: MainAxisAlignment.center,
+            //                 children: [
+            //                   Text('Enter Your Name'),
+            //                   SizedBox(height: 20),
+            //                   TextFormField(
+            //                       decoration: InputDecoration(
+            //                           contentPadding: const EdgeInsets.all(10),
+            //                           hintText: 'Name',
+            //                           fillColor: Colors.white,
+            //                           filled: true,
+            //                           focusedBorder: OutlineInputBorder(
+            //                               borderSide: BorderSide(
+            //                                   color: Color(0xFF0F2735))),
+            //                           enabledBorder: OutlineInputBorder(
+            //                               borderSide: BorderSide(
+            //                                   color: Color(0xFF0F2735)))),
+            //                       validator: (val) =>
+            //                           val.isEmpty ? 'Enter Your Name' : null,
+            //                       onChanged: (val) {
+            //                         setState(() => name = val);
+            //                       }),
+            //                   SizedBox(height: 25),
+            //                   SizedBox(
+            //                     width: MediaQuery.of(context).size.width * 0.3,
+            //                     child: TextButton(
+            //                       style: TextButton.styleFrom(
+            //                         shape: RoundedRectangleBorder(
+            //                           borderRadius: BorderRadius.circular(5),
+            //                         ),
+            //                         backgroundColor: Color(0xFF0F2735),
+            //                       ),
+            //                       child: Text(
+            //                         'Continue',
+            //                         style: TextStyle(
+            //                             color: Colors.white,
+            //                             fontWeight: FontWeight.w400,
+            //                             fontSize: 20),
+            //                       ),
+            //                       onPressed: () async {
+            // if (_formKey.currentState.validate()) {
+            //   await FirebaseFirestore.instance
+            //       .collection("Users")
+            //       .doc(widget.user.uid)
+            //       .set({
+            //     "name": name,
+            //     "image": ""
+            //   }).whenComplete(() {
+            //     setState(() {
+            //       isLoading = false;
+            //       showUserForm = false;
+            //     });
+            //   });
+            // }
+            //                       },
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       ],
+            //     )),
+            //   )
             ? Scaffold(
                 body: SafeArea(
+                  child: Container(
+                    color: Color(0xff5D5FEF),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.42,
-                      child: AlertDialog(
-                        content: Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Enter Your Name'),
-                              SizedBox(height: 20),
-                              TextFormField(
-                                  decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.all(10),
-                                      hintText: 'Name',
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Color(0xFF0F2735))),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Color(0xFF0F2735)))),
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter Your Name' : null,
-                                  onChanged: (val) {
-                                    setState(() => name = val);
-                                  }),
-                              SizedBox(height: 25),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Form(
+                            key: _formKey,
+                            child: Column(children: [
+                              Image.asset(
+                                'assets/ps logo 300x300.png',
+                                height: 120,
+                                width: 120,
+                              ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    backgroundColor: Color(0xFF0F2735),
-                                  ),
-                                  child: Text(
-                                    'Continue',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 20),
-                                  ),
-                                  onPressed: () async {
-                                    if (_formKey.currentState.validate()) {
-                                      await FirebaseFirestore.instance
-                                          .collection("Users")
-                                          .doc(widget.user.uid)
-                                          .set({
-                                        "name": name,
-                                        "image": ""
-                                      }).whenComplete(() {
-                                        setState(() {
-                                          isLoading = false;
-                                          showUserForm = false;
-                                        });
+                                height: deviceHeight * 0.015,
+                              ),
+                              Text(
+                                "Enter Your Details",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF0F2735)),
+                              ),
+                              SizedBox(height: 10),
+                              TextFormField(
+                                onChanged: (val) {
+                                  setState(() {
+                                    firstName = val;
+                                  });
+                                },
+                                validator: (val) {
+                                  if (val == "") {
+                                    return "Enter first name";
+                                  } else
+                                    return null;
+                                },
+                                decoration: InputDecoration(
+                                    // hintText: "Phone Number",
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    focusColor: Colors.transparent,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xFF0F2735))),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xFF0F2735))),
+                                    labelText: "First Name",
+                                    labelStyle: TextStyle(color: Colors.black)),
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              SizedBox(height: 25),
+                              TextFormField(
+                                onChanged: (val) {
+                                  setState(() {
+                                    lastName = val;
+                                  });
+                                },
+                                validator: (val) {
+                                  if (val == "") {
+                                    return "Enter last name";
+                                  } else
+                                    return null;
+                                },
+                                decoration: InputDecoration(
+                                    // hintText: "Phone Number",
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    focusColor: Colors.transparent,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xFF0F2735))),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xFF0F2735))),
+                                    labelText: "Last Name",
+                                    labelStyle: TextStyle(color: Colors.black)),
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              SizedBox(height: 38),
+                              InkWell(
+                                onTap: () async {
+                                  if (_formKey.currentState.validate()) {
+                                    await FirebaseFirestore.instance
+                                        .collection("Users")
+                                        .doc(widget.user.uid)
+                                        .set({
+                                      "name": firstName[0].toUpperCase() +
+                                          firstName.substring(1).toLowerCase() +
+                                          " " +
+                                          lastName[0].toUpperCase() +
+                                          lastName.substring(1).toLowerCase(),
+                                      "image": ""
+                                    }).whenComplete(() {
+                                      setState(() {
+                                        isLoading = false;
+                                        showUserForm = false;
                                       });
-                                    }
-                                  },
+                                    });
+                                  }
+                                },
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: Color(0xFF0F2735)),
+                                  child: Center(
+                                    child: Text("Continue",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 25)),
+                                  ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
+                            ]))
+                      ],
                     ),
-                  ],
-                )),
+                  ),
+                ),
               )
             : MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1),

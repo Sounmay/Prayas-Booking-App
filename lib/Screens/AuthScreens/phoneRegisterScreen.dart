@@ -48,7 +48,7 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                       height: deviceHeight * 0.025,
                     ),
                     Container(
-                      height: 70,
+                      height: 55,
                       child: TextField(
                         onTap: () {
                           setState(() {
@@ -57,6 +57,7 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                         },
                         controller: textEditingController,
                         decoration: InputDecoration(
+                            counterText: "",
                             prefixIcon: Icon(Icons.call),
                             // hintText: "Phone Number",
                             filled: true,
