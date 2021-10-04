@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
@@ -423,14 +424,19 @@ class _BookAppointmentState extends State<BookAppointment> {
                                     borderRadius: BorderRadius.circular(5)),
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, '/slotBooking',
-                                    arguments: {
-                                      'employeeNumbers': employeeNumbers,
-                                      'id': id,
-                                      'slots': slots,
-                                      'shopName': shopName,
-                                      'address': address
-                                    });
+                                if(service[id] == null){
+                                  Fluttertoast.showToast(msg: "Please add atleast one service", backgroundColor: Color(0xff5D5FEF), textColor: Colors.white);
+                                }
+                                else{
+                                  Navigator.pushNamed(context, '/slotBooking',
+                                      arguments: {
+                                        'employeeNumbers': employeeNumbers,
+                                        'id': id,
+                                        'slots': slots,
+                                        'shopName': shopName,
+                                        'address': address
+                                      });
+                                }
                               },
                             ),
                             /*SizedBox(

@@ -105,7 +105,13 @@ class LowerCardServiceTotal extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5)),
                 ),
                 onPressed: () {
-                  onSlotBooking();
+                  if(service[id] == null){
+                    Fluttertoast.showToast(msg: "Please add atleast one service", backgroundColor: Color(0xff5D5FEF), textColor: Colors.white);
+                  }
+                  else {
+                    onSlotBooking();
+                  }
+                  //onSlotBooking();
                   // Navigator.pushNamed(context, '/slotBooking', arguments: {
                   //   'employeeNumbers': employeeNumbers,
                   //   'id': id,
