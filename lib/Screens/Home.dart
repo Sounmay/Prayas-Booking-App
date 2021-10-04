@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
                   Container(
                     width: deviceWidth * 0.9,
                     height: deviceHeight * 0.1,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                     margin:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     child: Row(children: [
@@ -118,8 +118,7 @@ class Home extends StatelessWidget {
                     height: 20.0,
                   ),
                   Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 20.0),
-                    width: MediaQuery.of(context).size.width * 0.9,
+                    width: MediaQuery.of(context).size.width * 1,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[

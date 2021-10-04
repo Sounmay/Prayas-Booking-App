@@ -295,7 +295,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
           ),
           SizedBox(height: 15.0),
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 0),
               child: Container(
                   child: ListView.builder(
                       shrinkWrap: true,
