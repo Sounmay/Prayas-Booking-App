@@ -164,7 +164,7 @@ class LowerCardServiceTotal extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          'Proceed    ',
+                          'Confirm Booking    ',
                           style: TextStyle(color: Colors.white),
                         ),
                         Icon(Icons.arrow_forward_ios_rounded,
@@ -188,6 +188,29 @@ class LowerCardServiceTotal extends StatelessWidget {
 
                       Navigator.of(context)
                           .popUntil(ModalRoute.withName("/wrapper"));
+//                      AlertDialog(
+//                        title: const Text('Order Placed'),
+//                        content: SingleChildScrollView(
+//                          child: ListBody(
+//                            children: const <Widget>[
+//                              Text('Your order has been placed and will need to be confirmed by the service provider.'),
+//                            ],
+//                          ),
+//                        ),
+//                        actions: <Widget>[
+//                          TextButton(
+//                            child: const Text('Ok'),
+//                            onPressed: () {
+//                              Navigator.of(context).pop();
+//                              bookingConfirm(service[id], clinicId);
+//                              navigator.changeWidgetIndex(1);
+//
+//                              Navigator.of(context)
+//                                  .popUntil(ModalRoute.withName("/wrapper"));
+//                            },
+//                          ),
+//                        ],
+//                      );
                     } else if (isChecked == false) {
                       Fluttertoast.showToast(
                           msg: 'Please select the checkbox',
