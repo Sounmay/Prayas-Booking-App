@@ -875,7 +875,7 @@ class _SlotBookingState extends State<SlotBooking> {
                           child: Row(
                             children: [
                               Text(
-                                'Proceed    ',
+                                'Confirm your booking    ',
                                 style: TextStyle(
                                     color: (isChecked == true)
                                         ? Colors.white
