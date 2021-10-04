@@ -137,7 +137,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
 
   final _db = DatabaseService();
 
-  confirmBooking(Cart _service, String id, BuildContext context) async {
+  confirmBooking(Cart _service, String id) async {
     String otp = randomAlphaNumeric(6);
     // final cart = Provider.of<CartService>(context);
     _service.addOtp(otp);
