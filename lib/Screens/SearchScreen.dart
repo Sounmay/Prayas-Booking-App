@@ -31,7 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
       List<Parlour> parlourFirebaseServiceList,
       List<Salon> salonFirebaseServiceList) {
     final medicalservice = medicalFirebaseServiceList.where((element) {
-      final clinicNameLower = element.clinicName.toLowerCase();
+      final clinicNameLower = element?.clinicName?.toLowerCase() ?? "";
       final searchLower = _textController.text.toLowerCase();
 
       if (searchLower == "") {
@@ -41,7 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
       return clinicNameLower.contains(searchLower);
     }).toList();
     final salonservice = salonFirebaseServiceList.where((element) {
-      final clinicNameLower = element.salonName.toLowerCase();
+      final clinicNameLower = element?.salonName?.toLowerCase() ?? "";
       final searchLower = _textController.text.toLowerCase();
 
       if (searchLower == "") {
@@ -51,7 +51,7 @@ class _SearchScreenState extends State<SearchScreen> {
       return clinicNameLower.contains(searchLower);
     }).toList();
     final parlourservice = parlourFirebaseServiceList.where((element) {
-      final clinicNameLower = element.parlourName.toLowerCase();
+      final clinicNameLower = element?.parlourName?.toLowerCase() ?? "";
       final searchLower = _textController.text.toLowerCase();
 
       if (searchLower == "") {
