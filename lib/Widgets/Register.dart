@@ -112,7 +112,7 @@ class _RegisterState extends State<Register> {
                                             color: Color(0xFF0F2735))),
                                   ),
                                   validator: (val) => val.isEmpty
-                                      ? 'Enter your RSP Personal No.'
+                                      ? 'Enter your phone no.'
                                       : null,
                                   onChanged: (val) {
                                     setState(() => number = val);
