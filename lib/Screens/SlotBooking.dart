@@ -191,6 +191,8 @@ class _SlotBookingState extends State<SlotBooking> {
       rim = count % 2;
     });
 
+    final navigator = Provider.of<NavigationProvider>(context);
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
       child: Scaffold(
@@ -915,11 +917,12 @@ class _SlotBookingState extends State<SlotBooking> {
                             _db.addBookingofCustomer(service, id.toString());
                             _db.addCustomerBookingToServiceProvider(
                                 service, id.toString());
+
                             // showCupertinoDialog(
                             //     context: context,
                             //     builder: (context) {
-                            //       final navigator =
-                            //           Provider.of<NavigationProvider>(context);
+                            // final navigator =
+                            //     Provider.of<NavigationProvider>(context);
                             //       return CupertinoAlertDialog(
                             //         title: Text("Payment Successful!"),
                             //         content: Container(
@@ -949,6 +952,8 @@ class _SlotBookingState extends State<SlotBooking> {
                             //         ],
                             //       );
                             //     });
+                            navigator.changeWidgetIndex(1);
+
                             Navigator.of(context)
                                 .popUntil(ModalRoute.withName("/wrapper"));
                           } else if (isChecked == false) {
