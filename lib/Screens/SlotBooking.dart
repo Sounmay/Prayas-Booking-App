@@ -953,7 +953,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                 .popUntil(ModalRoute.withName("/wrapper"));
                           } else if (isChecked == false) {
                             Fluttertoast.showToast(
-                                msg: 'Please select the chckbox',
+                                msg: 'Please select the checkbox',
                                 backgroundColor: Color(0xff5D5FEF),
                                 textColor: Colors.white,
                                 toastLength: Toast.LENGTH_LONG);
