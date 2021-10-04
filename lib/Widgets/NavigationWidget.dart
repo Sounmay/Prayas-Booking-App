@@ -325,7 +325,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                         navigator.changeWidgetIndex(2);
                                       },
                                       child: Icon(
-                                          Icons.medical_services_outlined,
+                                          Icons.storefront_outlined,
                                           size: 30,
                                           color: Colors.white))
                                 ],
