@@ -18,6 +18,14 @@ class IndividualDoctorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int fromHr = int.parse(doctorDetail.slots[0].fromHr) > 12
+        ? int.parse(doctorDetail.slots[0].fromHr) - 12
+        : int.parse(doctorDetail.slots[0].fromHr);
+    int toHr = int.parse(doctorDetail.slots[0].toHr);
+    int finalFromHr = fromHr > 12 ? fromHr - 12 : fromHr;
+    int finalToHr = toHr > 12 ? toHr - 12 : toHr;
+    String startAmPm = fromHr < 12 ? " AM - " : " PM - ";
+    String endAmPm = toHr < 12 ? " AM" : " PM";
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
@@ -221,7 +229,15 @@ class IndividualDoctorPage extends StatelessWidget {
                         style: TextStyle(fontSize: 12),
                       )
                     ]),
-                    Text("10:00 AM - 05:00 PM",
+                    Text(
+                        finalFromHr.toString() +
+                            ':' +
+                            doctorDetail.slots[0].fromMin +
+                            startAmPm +
+                            finalToHr.toString() +
+                            ':' +
+                            doctorDetail.slots[0].toMin +
+                            endAmPm,
                         style:
                             TextStyle(color: Color(0xff00A676), fontSize: 12))
                   ],
