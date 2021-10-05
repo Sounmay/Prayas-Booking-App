@@ -129,37 +129,38 @@ class ClinicListDoctor extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          CupertinoIcons.location,
-                                          color: Colors.green,
-                                        ),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.2,
-                                          height: 20,
-                                          child: MarqueeText(
-                                              speed: 10,
-                                              alwaysScroll: false,
-                                              text: service.location,
-                                              style: TextStyle(
-                                                  color: Colors.green,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w400)),
-                                        )
-                                      ]),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Flexible(
+                                            flex: 1,
+                                            child: Icon(
+                                              CupertinoIcons.location,
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                          Flexible(
+                                            flex: 9,
+                                            child: MarqueeText(
+                                                speed: 10,
+                                                alwaysScroll: false,
+                                                text: service.location,
+                                                style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.w400)),
+                                          )
+                                        ]),
+                                  ),
                                 ),
                               ],
                             ),
