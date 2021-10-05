@@ -28,6 +28,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
   String sl;
   bool dateSelected = false;
   bool slotSelected = false;
+  bool changeDate = false;
 
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.utc(1989);
@@ -139,42 +140,10 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
 
   confirmBooking(Cart _service, String id) async {
     String otp = randomAlphaNumeric(6);
-    // final cart = Provider.of<CartService>(context);
     _service.addOtp(otp);
     _service.addGST(_service.subtotal.toInt());
     _db.addBookingofCustomer(_service, id.toString());
     _db.addCustomerBookingToServiceProvider(_service, id.toString());
-    // showCupertinoDialog(
-    //     context: context,
-    //     builder: (context) {
-    // final navigator = Provider.of<NavigationProvider>(context);
-    //       return CupertinoAlertDialog(
-    //         title: Text("Payment Successful!"),
-    //         content: Container(
-    //           height: 50,
-    //           width: 50,
-    //           child: Center(
-    //               child: Text(
-    //                   "Your payment was completed sucessfully and the order has been created.")),
-    //         ),
-    //         actions: [
-    //           TextButton(
-    //               onPressed: () {
-    //                 // Navigator.pop(context);
-    // navigator.changeWidgetIndex(1);
-    // Navigator.of(context)
-    //     .popUntil(ModalRoute.withName("/wrapper"));
-    //               },
-    //               style: TextButton.styleFrom(
-    //                 primary: Color(0xff5D5FEF),
-    //               ),
-    //               child: Text(
-    //                 'Ok',
-    //                 style: TextStyle(color: Colors.black),
-    //               ))
-    //         ],
-    //       );
-    //     });
   }
 
   @override
@@ -248,6 +217,8 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
               onDaySelected: (selectedDay, focusedDay) {
                 dateSelected = true;
                 setState(() {
+                  if (_selectedDay == DateTime.utc(1989) ||
+                      _selectedDay != selectedDay) changeDate = true;
                   _selectedDay = selectedDay;
                   _focusedDay = focusedDay; // update `_focusedDay` here as well
                 });
@@ -394,7 +365,14 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
 
                         final indx1 = i * 2;
                         final indx2 = i * 2 + 1;
-                        final int newEmployeeNumber = employeeNumbers - 1;
+                        // final int newEmployeeNumber = employeeNumbers - 1;
+
+                        if (changeDate == true) {
+                          for (int x = 0; x < count; x++) {
+                            // if (x != indx1)
+                            slotButtons[x] = false;
+                          }
+                        }
 
                         return Row(
                           children: [
@@ -420,6 +398,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
                                       for (int x = 0; x < count; x++) {
                                         if (x != indx1) slotButtons[x] = false;
                                       }
+                                      changeDate = false;
                                       sl = _timeslot;
                                     }
                                   });
@@ -493,7 +472,7 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
                                               if (x != indx2)
                                                 slotButtons[x] = false;
                                             }
-
+                                            changeDate = false;
                                             sl = _timeslot1;
                                           }
                                         });

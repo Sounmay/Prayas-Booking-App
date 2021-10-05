@@ -427,7 +427,8 @@ class _SlotBookingState extends State<SlotBooking> {
                             //final int newEmployeeNumber = employeeNumbers - 1;
                             if (changeDate == true) {
                               for (int x = 0; x < count; x++) {
-                                if (x != indx1) slotButtons[x] = false;
+                                // if (x != indx1)
+                                slotButtons[x] = false;
                               }
                             }
                             return Row(
