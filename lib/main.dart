@@ -29,6 +29,8 @@ import 'Screens/ServiceDetailsMedical.dart';
 import 'package:provider/provider.dart';
 import 'package:freelance_booking_app/Widgets/ExpandedMap.dart';
 
+import 'Screens/aboutUs.dart';
+
 // check push comment
 
 void main() async {
@@ -85,7 +87,8 @@ class MyApp extends StatelessWidget {
             '/uploadAvatar': (context) => UploadAvatar(),
             '/expandedmap': (context) => ExpandedMap(),
             '/invi': (context) => Invoice(),
-            '/cat': (context) => Catalogue()
+            '/cat': (context) => Catalogue(),
+            '/aboutus': (context) => AboutUs()
           },
         ),
       ),

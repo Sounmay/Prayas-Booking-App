@@ -184,7 +184,23 @@ class _MydrawerState extends State<Mydrawer> {
                               style: TextStyle(color: Color(0xFF5D5FEF)))
                         ],
                       ),
-                    ))
+                    )
+                ),
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/aboutus');
+                    },
+                    child: Container(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Icon(Icons.info_outline, color: Color(0xFF5D5FEF)),
+                          Text(' About Us',
+                              style: TextStyle(color: Color(0xFF5D5FEF)))
+                        ],
+                      ),
+                    )
+                )
               ],
             ),
             FlatButton(
