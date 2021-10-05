@@ -32,7 +32,7 @@ class _DoctorBookingAppointmentPageState
             )));
   }
 
-  bool serviceAdded = false;
+  bool serviceAdded = false; // service added or not
 
   String userName = '';
 
