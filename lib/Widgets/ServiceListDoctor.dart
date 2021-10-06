@@ -12,9 +12,7 @@ class ServiceListDoctor extends StatelessWidget {
   ServiceListDoctor({this.service, this.location, this.clinicDetails});
   @override
   Widget build(BuildContext context) {
-    int fromHr = int.parse(service.slots[0].fromHr) > 12
-        ? int.parse(service.slots[0].fromHr) - 12
-        : int.parse(service.slots[0].fromHr);
+    int fromHr = int.parse(service.slots[0].fromHr);
     int toHr = int.parse(service.slots[0].toHr);
     int finalFromHr = fromHr > 12 ? fromHr - 12 : fromHr;
     int finalToHr = toHr > 12 ? toHr - 12 : toHr;
