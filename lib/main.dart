@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Models/Salon.dart';
-import 'package:freelance_booking_app/Models/User.dart';
 import 'package:freelance_booking_app/Providers/authProvider.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/database.dart';
@@ -12,7 +11,6 @@ import 'package:freelance_booking_app/Providers/locationProvider.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Screens/AllServices.dart';
 import 'package:freelance_booking_app/Screens/Catalogue.dart';
-import 'package:freelance_booking_app/Screens/Invoice.dart';
 import 'package:freelance_booking_app/Screens/SearchScreen.dart';
 import 'package:freelance_booking_app/Screens/MyBookings.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsParlour.dart';
@@ -86,7 +84,6 @@ class MyApp extends StatelessWidget {
             '/login': (context) => Login(),
             '/uploadAvatar': (context) => UploadAvatar(),
             '/expandedmap': (context) => ExpandedMap(),
-            '/invi': (context) => Invoice(),
             '/cat': (context) => Catalogue(),
             '/aboutus': (context) => AboutUs()
           },

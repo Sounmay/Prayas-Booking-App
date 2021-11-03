@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'dart:ui';
 
+import 'package:freelance_booking_app/Models/Bookings.dart';
+
 class Invoice extends StatefulWidget {
-  Invoice({Key key}) : super(key: key);
+  final BookingsDetails bookingsDetails;
+  Invoice({this.bookingsDetails, Key key}) : super(key: key);
 
   @override
   _InvoiceState createState() => _InvoiceState();
@@ -209,85 +212,102 @@ class _InvoiceState extends State<Invoice> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Icon(Icons.crop_3_2,
-                                          color: Colors.black, size: 10),
-                                      SizedBox(width: 5),
-                                      Text('Haircut')
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.crop_3_2,
-                                          color: Colors.black, size: 10),
-                                      SizedBox(width: 5),
-                                      Text('Shaving')
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.crop_3_2,
-                                          color: Colors.black, size: 10),
-                                      SizedBox(width: 5),
-                                      Text('Massage')
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.crop_3_2,
-                                          color: Colors.black, size: 10),
-                                      SizedBox(width: 5),
-                                      Text('Haircut')
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.crop_3_2,
-                                          color: Colors.black, size: 10),
-                                      SizedBox(width: 5),
-                                      Text('GST1')
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.crop_3_2,
-                                          color: Colors.black, size: 10),
-                                      SizedBox(width: 5),
-                                      Text('GST2')
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.crop_3_2,
-                                          color: Colors.black, size: 10),
-                                      SizedBox(width: 5),
-                                      Text('Refund')
-                                    ],
-                                  )
+                                  ...List.generate(
+                                      widget.bookingsDetails.serviceList.length,
+                                      (index) => Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.crop_3_2,
+                                                      color: Colors.black,
+                                                      size: 10),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                      '${widget.bookingsDetails.serviceList[index]}')
+                                                ],
+                                              ),
+                                              SizedBox(height: 10),
+                                            ],
+                                          ))
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(Icons.crop_3_2,
+                                  //         color: Colors.black, size: 10),
+                                  //     SizedBox(width: 5),
+                                  //     Text('Shaving')
+                                  //   ],
+                                  // ),
+                                  // SizedBox(height: 10),
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(Icons.crop_3_2,
+                                  //         color: Colors.black, size: 10),
+                                  //     SizedBox(width: 5),
+                                  //     Text('Massage')
+                                  //   ],
+                                  // ),
+                                  // SizedBox(height: 10),
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(Icons.crop_3_2,
+                                  //         color: Colors.black, size: 10),
+                                  //     SizedBox(width: 5),
+                                  //     Text('Haircut')
+                                  //   ],
+                                  // ),
+                                  // SizedBox(height: 10),
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(Icons.crop_3_2,
+                                  //         color: Colors.black, size: 10),
+                                  //     SizedBox(width: 5),
+                                  //     Text('GST1')
+                                  //   ],
+                                  // ),
+                                  // SizedBox(height: 10),
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(Icons.crop_3_2,
+                                  //         color: Colors.black, size: 10),
+                                  //     SizedBox(width: 5),
+                                  //     Text('GST2')
+                                  //   ],
+                                  // ),
+                                  // SizedBox(height: 10),
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(Icons.crop_3_2,
+                                  //         color: Colors.black, size: 10),
+                                  //     SizedBox(width: 5),
+                                  //     Text('Refund')
+                                  //   ],
+                                  // )
                                 ],
                               ),
                               Column(
                                 children: [
-                                  Text('\u20B9 100'),
-                                  SizedBox(height: 10),
-                                  Text('\u20B9 100'),
-                                  SizedBox(height: 10),
-                                  Text('\u20B9 100'),
-                                  SizedBox(height: 10),
-                                  Text('\u20B9 100'),
-                                  SizedBox(height: 10),
-                                  Text('\u20B9 100'),
-                                  SizedBox(height: 10),
-                                  Text('\u20B9 100'),
-                                  SizedBox(height: 10),
-                                  Text('- \u20B9 100')
+                                  ...List.generate(
+                                      widget.bookingsDetails.priceList.length,
+                                      (index) => Column(
+                                            children: [
+                                              Text(
+                                                  '\u20B9 ${widget.bookingsDetails.priceList[index]}'),
+                                              SizedBox(height: 10)
+                                            ],
+                                          ))
+                                  // Text('\u20B9 100'),
+                                  // SizedBox(height: 10),
+                                  // Text('\u20B9 100'),
+                                  // SizedBox(height: 10),
+                                  // Text('\u20B9 100'),
+                                  // SizedBox(height: 10),
+                                  // Text('\u20B9 100'),
+                                  // SizedBox(height: 10),
+                                  // Text('\u20B9 100'),
+                                  // SizedBox(height: 10),
+                                  // Text('\u20B9 100'),
+                                  // SizedBox(height: 10),
+                                  // Text('- \u20B9 100')
                                 ],
                               )
                             ],
@@ -309,7 +329,8 @@ class _InvoiceState extends State<Invoice> {
                           children: [
                             Text('Net Amount :',
                                 style: TextStyle(fontSize: 24)),
-                            Text('\u20B9 400/-',
+                            Text(
+                                '\u20B9 ${widget.bookingsDetails.totalAmount}/-',
                                 style: TextStyle(
                                     fontSize: 24, color: Color(0xff5D5FEF)))
                           ],

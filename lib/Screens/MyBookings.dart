@@ -1,3 +1,4 @@
+import 'package:freelance_booking_app/Screens/Invoice.dart';
 import 'package:freelance_booking_app/Widgets/LocationNameWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -205,8 +206,14 @@ class _MyBookingState extends State<MyBooking> {
                                           children: [
                                             FlatButton(
                                               onPressed: () {
-                                                //                                              Navigator.pushNamed(
-                                                //                                                  context, '/invi');
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Invoice(
+                                                                bookingsDetails:
+                                                                    finalList[
+                                                                        i])));
                                               },
                                               child: Container(
                                                   child: Row(
