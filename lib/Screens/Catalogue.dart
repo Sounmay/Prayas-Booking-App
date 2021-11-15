@@ -22,6 +22,7 @@ class _CatalogueState extends State<Catalogue> {
     final id = args['id'];
     final getCatalogue = args['getCatalogue'];
     final shopName = args['shopName'];
+    final address = args['address'];
     final userName = args['userName'];
     List<ParlourServiceDetails> mostAvailed = args['mostAvailed'];
     final cart = Provider.of<CartService>(context);
@@ -131,7 +132,7 @@ class _CatalogueState extends State<Catalogue> {
                                                             .price),
                                                         hr * 60 + min,
                                                         shopName,
-                                                        userName);
+                                                        userName,address);
                                                   },
                                                   child: Text(
                                                     "Add",

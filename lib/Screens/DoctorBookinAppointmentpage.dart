@@ -130,7 +130,7 @@ class _DoctorBookingAppointmentPageState
                                     "₹ " +
                                         "${widget.doctorDetail.serviceList[i].price}" +
                                         " | " +
-                                        "${hr*60 + min} Min",
+                                        "${hr * 60 + min} Min",
                                     // "₹ 40",
                                     style: TextStyle(color: Color(0xFF606572)),
                                   )
@@ -171,7 +171,9 @@ class _DoctorBookingAppointmentPageState
                                               hr * 60 + min,
                                               widget.clinicLocationAndDoctor
                                                   .clinicName,
-                                              userName);
+                                              userName,
+                                              widget.clinicLocationAndDoctor
+                                                  .address);
                                           serviceAdded = true;
                                           // print(widget.clinicLocationAndDoctor
                                           //     .serviceUid);

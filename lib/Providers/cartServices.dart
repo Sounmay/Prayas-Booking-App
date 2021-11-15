@@ -11,7 +11,7 @@ class CartService with ChangeNotifier {
   }
 
   void addServices(String serviceId, String serviceName, int price, int min,
-      String shopName, String customerName) {
+      String shopName, String customerName, String address) {
     if (_services.containsKey(serviceId)) {
       _services.update(serviceId,
           (existing) => existing.addService(serviceName, price, min));
@@ -26,6 +26,7 @@ class CartService with ChangeNotifier {
             subtotal: price,
             name: customerName,
             shopName: shopName,
+            address: address,
             time: min),
       );
     }

@@ -212,7 +212,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                                           mostAvailed[i].price),
                                                       hr * 60 + min,
                                                       shopName,
-                                                      userName);
+                                                      userName,address);
                                                   serviceAdded = true;
                                                 },
                                                 child: Text(

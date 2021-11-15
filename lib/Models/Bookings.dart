@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookingsDetails {
-  String otp, timeslot, shopName, uid;
+  String otp, timeslot, custName, shopName, uid, address;
   int totalAmount;
   Timestamp date;
   bool isApproved;
@@ -13,6 +13,7 @@ class BookingsDetails {
       this.shopName,
       this.priceList,
       this.serviceList,
+      this.address,
       this.serviceTimeList,
       this.date,
       this.totalAmount,
@@ -23,9 +24,11 @@ class BookingsDetails {
     priceList = json['price'];
     totalAmount = json['amount'];
     serviceList = json['serviceName'];
+    custName = json['name'];
     serviceTimeList = json['serviceTimeList'];
     timeslot = json['timeslot'];
     date = json['date'];
+    address = json['address'];
     isApproved = json['isApproved'];
     shopName = json['shopName'];
   }
@@ -41,6 +44,7 @@ class BookingsDetails {
     data['date'] = this.date;
     data['isApproved'] = this.isApproved;
     data['shopName'] = this.shopName;
+    data['address'] = this.address;
     return data;
   }
 }

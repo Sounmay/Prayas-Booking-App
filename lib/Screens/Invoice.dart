@@ -15,6 +15,7 @@ class Invoice extends StatefulWidget {
 class _InvoiceState extends State<Invoice> {
   @override
   Widget build(BuildContext context) {
+    final date = widget.bookingsDetails.date.toDate();
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Color(0xFF5D5FEF),
@@ -64,12 +65,12 @@ class _InvoiceState extends State<Invoice> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('#23456',
+                              Text('#${widget.bookingsDetails.otp}',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold)),
                               SizedBox(height: 10),
-                              Text('20/05/2021',
+                              Text('${date.day}/${date.month}/${date.year}',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold))
@@ -165,27 +166,27 @@ class _InvoiceState extends State<Invoice> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Ankur Patel',
+                          Text('${widget.bookingsDetails.custName}',
                               style: TextStyle(
                                   color: Color(0xff5D5FEF),
                                   fontWeight: FontWeight.bold)),
                           SizedBox(height: 10),
-                          Text('Perfect Salon,',
+                          Text('${widget.bookingsDetails?.address ?? "..."}',
                               style: TextStyle(
                                   color: Color(0xff5D5FEF),
                                   fontWeight: FontWeight.bold)),
-                          Text('Address line 1,',
-                              style: TextStyle(
-                                  color: Color(0xff5D5FEF),
-                                  fontWeight: FontWeight.bold)),
-                          Text('Address line 2,',
-                              style: TextStyle(
-                                  color: Color(0xff5D5FEF),
-                                  fontWeight: FontWeight.bold)),
-                          Text('24675889, psalon99@yahoo.com',
-                              style: TextStyle(
-                                  color: Color(0xff5D5FEF),
-                                  fontWeight: FontWeight.bold))
+                          // Text('Address line 1,',
+                          //     style: TextStyle(
+                          //         color: Color(0xff5D5FEF),
+                          //         fontWeight: FontWeight.bold)),
+                          // Text('Address line 2,',
+                          //     style: TextStyle(
+                          //         color: Color(0xff5D5FEF),
+                          //         fontWeight: FontWeight.bold)),
+                          // Text('24675889, psalon99@yahoo.com',
+                          //     style: TextStyle(
+                          //         color: Color(0xff5D5FEF),
+                          //         fontWeight: FontWeight.bold))
                         ],
                       )
                     ],

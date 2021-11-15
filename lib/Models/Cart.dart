@@ -11,6 +11,7 @@ class Cart {
   int subtotal;
   String otp;
   int time;
+  String address;
 
   Cart(
       {@required this.id,
@@ -18,6 +19,7 @@ class Cart {
       @required this.price,
       @required this.timeList,
       this.name,
+      this.address,
       this.shopName,
       this.day,
       this.subtotal = 0,
@@ -30,6 +32,7 @@ class Cart {
         "isApproved": false,
         "id": id,
         "name": name,
+        "address": address,
         "shopName": shopName,
         "serviceName": serviceName,
         "price": price,
@@ -38,7 +41,7 @@ class Cart {
         "timeslot": timeSlot,
         "amount": subtotal,
         "serviceTime": time,
-        "otp":otp,
+        "otp": otp,
       };
 
   Cart addSlot(String slot) {
@@ -51,13 +54,13 @@ class Cart {
     return this;
   }
 
-  Cart addOtp(String otp){
-    this.otp=otp;
+  Cart addOtp(String otp) {
+    this.otp = otp;
     return this;
   }
 
-  Cart addGST(int total){
-    this.subtotal=total;
+  Cart addGST(int total) {
+    this.subtotal = total;
     return this;
   }
 
