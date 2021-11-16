@@ -137,6 +137,8 @@ class _SlotBookingState extends State<SlotBooking> {
   ];
   String lessMins1 = '', lessMins2 = '', lessMins3 = '', lessMins4 = '';
 
+  int slotIndexSelected = -1;
+
   bool pm = false, stop1 = false, stop2 = false;
   int rim = 0;
 
@@ -153,6 +155,7 @@ class _SlotBookingState extends State<SlotBooking> {
   }
 
   bool isChecked = false;
+  String _selectedDateForKey = "";
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +168,15 @@ class _SlotBookingState extends State<SlotBooking> {
 
     final id = args['id'];
     final shopName = args['shopName'];
+    final List<dynamic> slotsArray = args['slotsArray'];
     final address = args['address'];
+    final parlours = Provider.of<List<Parlour>>(context);
+    // final selectedParlour = parlours.firstWhere((element) =>
+    //     element == null ? element?.parlourName ?? "" == shopName : false);
+    Parlour selectedParlour =
+        parlours.firstWhere((element) => element.id == id);
+    // final bookedSlotsPerDay = args['bookedSlotsPerDay'];
+    final bookedSlotsPerDay = selectedParlour.bookedSlotsPerDay;
     List<ParlourSlotDetails> slots = args['slots'];
     final service = Provider.of<CartService>(context).services[id];
     final servic = Provider.of<CartService>(context); //.services[id];
@@ -244,24 +255,6 @@ class _SlotBookingState extends State<SlotBooking> {
                   ],
                 ),
                 SizedBox(height: 20.0),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(
-                //         'This week',
-                //         style: TextStyle(color: Colors.black, fontSize: 17.0),
-                //         textAlign: TextAlign.right,
-                //       ),
-                //       Icon(
-                //         Icons.calendar_today_outlined,
-                //         color: Color(0xff5D5FEF),
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // SizedBox(height: 10.0),
                 Container(
                   padding: EdgeInsets.all(10.0),
                   color: Color(0xFFFAFAFA),
@@ -273,11 +266,13 @@ class _SlotBookingState extends State<SlotBooking> {
                       return isSameDay(_selectedDay, day);
                     },
                     onDaySelected: (selectedDay, focusedDay) {
-                      dateSelected = true;
                       setState(() {
+                        dateSelected = true;
                         if (_selectedDay == DateTime.utc(1989) ||
                             _selectedDay != selectedDay) changeDate = true;
                         _selectedDay = selectedDay;
+                        _selectedDateForKey =
+                            "${_selectedDay.day}/${_selectedDay.month}/${_selectedDay.year - 2000}";
                         _focusedDay =
                             focusedDay; // update `_focusedDay` here as well
                       });
@@ -314,7 +309,7 @@ class _SlotBookingState extends State<SlotBooking> {
                     ),
                   ),
                 ),
-                SizedBox(height: 40.0),
+                SizedBox(height: 30.0),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Text(
@@ -323,424 +318,589 @@ class _SlotBookingState extends State<SlotBooking> {
                     textAlign: TextAlign.right,
                   ),
                 ),
-                SizedBox(height: 15.0),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: (count ~/ 2) + rim,
-                          itemBuilder: (ctx, i) {
-                            if (i == 0) {
-                              Min1 = startMin;
-                              Hr1 = startHr > 12 ? startHr - 12 : startHr;
-                              pm = startHr > 12 ? true : false;
-                              tempCount = 0;
-                              am_pm1[i] = startHr > 12 ? 'PM' : 'AM';
-                            } else {
-                              Min1 = Min4 + intervalDuration;
-                              Hr1 = Hr4 + (Min1 / 60).floor();
-                              Min1 = Min1 % 60;
-                              if (Hr1 == 12 || Hr1 > 12 || pm == true) {
-                                am_pm1[i] = 'PM';
-                                am_pm2[i] = 'PM';
-                                am_pm3[i] = 'PM';
-                                am_pm4[i] = 'PM';
-                              }
-                              if (Hr1 > 12) {
-                                Hr1 = Hr1 - 12;
-                              }
-                            }
-
-                            Min2 = Min1 + slotDuration;
-                            Hr2 = Hr1 + (Min2 / 60).floor();
-                            Min2 = Min2 % 60;
-                            if (Hr2 == 12 || Hr2 > 12 || pm == true) {
-                              pm = true;
-                              am_pm2[i] = 'PM';
-                              am_pm3[i] = 'PM';
-                              am_pm4[i] = 'PM';
-                            }
-                            if (Hr2 > 12) {
-                              Hr2 = Hr2 - 12;
-                            }
-                            if (Min1 < 10)
-                              lessMins1 = '0';
-                            else
-                              lessMins1 = '';
-                            if (Min2 < 10)
-                              lessMins2 = '0';
-                            else
-                              lessMins2 = '';
-                            final _timeslot =
-                                "$Hr1:$lessMins1$Min1 ${am_pm1[i]} - $Hr2:$lessMins2$Min2 ${am_pm2[i]}";
-                            tempCount++;
-                            print(tempCount);
-                            if (tempCount > count) {
-                              stop1 = true;
-                              stop2 = true;
-                            }
-
-                            Min3 = Min2 + intervalDuration;
-                            Hr3 = Hr2 + (Min3 / 60).floor();
-                            Min3 = Min3 % 60;
-                            if (Hr3 == 12 || Hr3 > 12 || pm == true) {
-                              pm = true;
-
-                              am_pm3[i] = 'PM';
-                              am_pm4[i] = 'PM';
-                            }
-                            if (Hr3 > 12) {
-                              Hr3 = Hr3 - 12;
-                            }
-
-                            Min4 = Min3 + slotDuration;
-                            Hr4 = Hr3 + (Min4 / 60).floor();
-                            Min4 = Min4 % 60;
-                            if (Hr4 == 12 || Hr4 > 12 || pm == true) {
-                              pm = true;
-
-                              am_pm4[i] = 'PM';
-                            }
-                            if (Hr4 > 12) {
-                              Hr4 = Hr4 - 12;
-                            }
-                            if (Min3 < 10)
-                              lessMins3 = '0';
-                            else
-                              lessMins3 = '';
-                            if (Min4 < 10)
-                              lessMins4 = '0';
-                            else
-                              lessMins4 = '';
-
-                            final _timeslot1 =
-                                "$Hr3:$lessMins3$Min3 ${am_pm3[i]} - $Hr4:$lessMins4$Min4 ${am_pm4[i]}";
-
-                            tempCount++;
-                            print(tempCount);
-                            if (tempCount > count) stop2 = true;
-
-                            final indx1 = i * 2;
-                            final indx2 = i * 2 + 1;
-                            //final int newEmployeeNumber = employeeNumbers - 1;
-                            if (changeDate == true) {
-                              for (int x = 0; x < count; x++) {
-                                // if (x != indx1)
-                                slotButtons[x] = false;
-                              }
-                            }
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: FlatButton(
-                                    padding: EdgeInsets.all(0.0),
-                                    onPressed: () {
-                                      if (dateSelected == false)
-                                        Fluttertoast.showToast(
-                                            msg: 'Please select a date',
-                                            backgroundColor: Color(0xff5D5FEF),
-                                            textColor: Colors.white,
-                                            toastLength: Toast.LENGTH_LONG);
-                                      setState(() {
-                                        slotSelected = !slotSelected;
-                                        if (_selectedDay == DateTime.utc(1989))
-                                          slotButtons[indx1] = false;
-                                        else {
-                                          slotButtons[indx1] =
-                                              !slotButtons[indx1];
-                                        }
-                                        if (slotButtons[indx1] == true) {
-                                          for (int x = 0; x < count; x++) {
-                                            if (x != indx1)
-                                              slotButtons[x] = false;
-                                          }
-                                          changeDate = false;
-                                          sl = _timeslot;
-                                        }
-                                      });
-                                      servic.updateTimeSlot(id, _timeslot);
-                                    },
-                                    child: slotButtons[indx1] == false
-                                        ? Container(
-                                            height: height * 0.07,
-                                            width: width * 0.4,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.blue),
-                                                borderRadius:
-                                                    BorderRadius.circular(6.0)),
-                                            child: (Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(_timeslot,
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xff5D5FEF),
-                                                        fontSize: 12.0)),
-                                                // Card(
-                                                //   child: Padding(
-                                                //     padding:
-                                                //         const EdgeInsets.all(
-                                                //             8.0),
-                                                //     child: Text(
-                                                //       '$employeeNumbers',
-                                                //       style: TextStyle(
-                                                //           color: Colors.white,
-                                                //           fontSize: 12.0),
-                                                //     ),
-                                                //   ),
-                                                //   color: Color(0xff00A676),
-                                                // )
-                                              ],
-                                            )),
-                                          )
-                                        : Container(
-                                            height: height * 0.07,
-                                            width: width * 0.4,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                                color: Color(0xff00A676)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                (Text(_timeslot,
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12.0))),
-                                                // Card(
-                                                //   child: Padding(
-                                                //     padding:
-                                                //         const EdgeInsets.all(
-                                                //             8.0),
-                                                //     child: Text(
-                                                //       '$newEmployeeNumber',
-                                                //       style: TextStyle(
-                                                //           color:
-                                                //               Color(0xff00A676),
-                                                //           fontSize: 12.0),
-                                                //     ),
-                                                //   ),
-                                                //   color: Colors.white,
-                                                // )
-                                              ],
-                                            ),
-                                          ),
-                                  ),
-                                ),
-                                stop2 == true && tempCount > count
-                                    ? SizedBox(width: 10)
-                                    : Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: FlatButton(
-                                          padding: EdgeInsets.all(0.0),
-                                          onPressed: () {
-                                            if (dateSelected == false)
-                                              Fluttertoast.showToast(
-                                                  msg: 'Please select a date',
-                                                  backgroundColor:
-                                                      Color(0xff5D5FEF),
-                                                  textColor: Colors.white,
-                                                  toastLength:
-                                                      Toast.LENGTH_LONG);
-                                            setState(() {
-                                              slotSelected = !slotSelected;
-                                              if (_selectedDay ==
-                                                  DateTime.utc(1989))
-                                                slotButtons[indx2] = false;
-                                              else {
-                                                slotButtons[indx2] =
-                                                    !slotButtons[indx2];
-                                              }
-                                              if (slotButtons[indx2] == true) {
-                                                for (int x = 0;
-                                                    x < count;
-                                                    x++) {
-                                                  if (x != indx2)
-                                                    slotButtons[x] = false;
-                                                }
-                                                changeDate = false;
-                                                sl = _timeslot1;
-                                              }
-                                            });
-                                            servic.updateTimeSlot(
-                                                id, _timeslot1);
-                                          },
-                                          child: slotButtons[indx2] == false
-                                              ? Container(
-                                                  height: height * 0.07,
-                                                  width: width * 0.4,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.blue),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6.0)),
-                                                  child: (Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(_timeslot1,
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xff5D5FEF),
-                                                              fontSize: 12.0)),
-                                                      // Card(
-                                                      //   child: Padding(
-                                                      //     padding:
-                                                      //         const EdgeInsets
-                                                      //             .all(8.0),
-                                                      //     child: Text(
-                                                      //       '$employeeNumbers',
-                                                      //       style: TextStyle(
-                                                      //           color: Colors
-                                                      //               .white,
-                                                      //           fontSize: 12.0),
-                                                      //     ),
-                                                      //   ),
-                                                      //   color:
-                                                      //       Color(0xff00A676),
-                                                      // )
-                                                    ],
-                                                  )),
-                                                )
-                                              : Container(
-                                                  height: height * 0.07,
-                                                  width: width * 0.4,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
-                                                      color: Color(0xff00A676)),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      (Text(_timeslot1,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 12.0))),
-                                                      // Card(
-                                                      //   child: Padding(
-                                                      //     padding:
-                                                      //         const EdgeInsets
-                                                      //             .all(8.0),
-                                                      //     child: Text(
-                                                      //       '$newEmployeeNumber',
-                                                      //       style: TextStyle(
-                                                      //           color: Color(
-                                                      //               0xff00A676),
-                                                      //           fontSize: 12.0),
-                                                      //     ),
-                                                      //   ),
-                                                      //   color: Colors.white,
-                                                      // )
-                                                    ],
-                                                  ),
-                                                ),
-                                        ),
-                                      )
-                              ],
-                            );
-                          })
-                      /*...List.generate(slots.length, (index) {
-                        final firstIndex = slots[0];
-                        final _timeslot =
-                            "${firstIndex.fromHr}:${firstIndex.fromMin}AM - ${firstIndex.toHr}:${firstIndex.toMin} PM";
-                        return FlatButton(
-                          padding: EdgeInsets.all(0.0),
-                          onPressed: () {
-                            if (dateSelected == false)
-                              Fluttertoast.showToast(
-                                  msg: 'Please select a date',
-                                  backgroundColor: Color(0xff5D5FEF),
-                                  textColor: Colors.white,
-                                  toastLength: Toast.LENGTH_LONG);
-                            setState(() {
-                              slotSelected = !slotSelected;
-                              if (_selectedDay == DateTime.utc(1989))
-                                a7 = true;
-                              else {
-                                a7 = !a7;
-                              }
-                              if (a7 == false) {
-                                a1 = a2 = a3 = a4 = a5 = a6 = a8 = true;
-                                sl = _timeslot;
-                              }
-                            });
-                            servic.updateTimeSlot(id, _timeslot);
-                          },
-                          child: a7
-                              ? Container(
-                                  height: 50,
-                                  width: 160,
+                if (dateSelected)
+                  bookedSlotsPerDay[_selectedDateForKey] == null
+                      ? Container(
+                          padding:
+                              EdgeInsets.only(left: 15, right: 15, top: 10),
+                          height: slotsArray.length % 2 == 0
+                              ? slotsArray.length.toDouble() * 28.0
+                              : slotsArray.length.toDouble() * 28.0 + 28.0,
+                          child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: slotsArray?.length ?? 0,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: width * 0.4 / 40,
+                                    mainAxisSpacing: 12,
+                                    crossAxisSpacing: 12),
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    if (slotsArray[index]['emp'] > 0) {
+                                      slotIndexSelected = index;
+                                      servic.updateTimeSlot(
+                                          id, slotsArray[index]['time'] ?? "");
+                                      slotSelected = true;
+                                    }
+                                  });
+                                },
+                                child: Container(
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.blue),
-                                      borderRadius: BorderRadius.circular(6.0)),
-                                  child: (Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(_timeslot,
-                                          style: TextStyle(
-                                              color: Color(0xff5D5FEF),
-                                              fontSize: 12.0)),
-                                      Card(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            '2',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12.0),
-                                          ),
-                                        ),
-                                        color: Color(0xff00A676),
-                                      )
-                                    ],
-                                  )),
-                                )
-                              : Container(
-                                  height: 50,
-                                  width: 160,
-                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: slotIndexSelected != index
+                                              ? Colors.blue
+                                              : Colors.white),
                                       borderRadius: BorderRadius.circular(6),
-                                      color: Color(0xff00A676)),
+                                      color: slotIndexSelected == index
+                                          ? Color(0xff00A676)
+                                          : Colors.white),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      (Text(_timeslot,
+                                      (Text(slotsArray[index]['time'] ?? "",
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: slotIndexSelected == index
+                                                  ? Colors.white
+                                                  : Color(0xff5D5FEF),
                                               fontSize: 12.0))),
                                       Card(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            '1',
+                                            '${slotsArray[index]['emp']}',
                                             style: TextStyle(
-                                                color: Color(0xff00A676),
+                                                color:
+                                                    slotIndexSelected == index
+                                                        ? Color(0xff00A676)
+                                                        : Colors.white,
                                                 fontSize: 12.0),
                                           ),
                                         ),
-                                        color: Colors.white,
+                                        color: slotIndexSelected == index
+                                            ? Colors.white
+                                            : Color(0xff00A676),
                                       )
                                     ],
                                   ),
                                 ),
-                        );
-                      })*/
+                              );
+                            },
+                          ),
+                        )
+                      : Container(
+                          padding:
+                              EdgeInsets.only(left: 15, right: 15, top: 10),
+                          height:
+                              bookedSlotsPerDay[_selectedDateForKey].length %
+                                          2 ==
+                                      0
+                                  ? bookedSlotsPerDay[_selectedDateForKey]
+                                          .length
+                                          .toDouble() *
+                                      28.0
+                                  : bookedSlotsPerDay[_selectedDateForKey]
+                                              .length
+                                              .toDouble() *
+                                          28.0 +
+                                      28.0,
+                          child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: bookedSlotsPerDay[_selectedDateForKey]
+                                    ?.length ??
+                                0,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: width * 0.4 / 40,
+                                    mainAxisSpacing: 12,
+                                    crossAxisSpacing: 12),
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    if (bookedSlotsPerDay[_selectedDateForKey]
+                                            [index]['emp'] >
+                                        0) {
+                                      slotIndexSelected = index;
+                                      servic.updateTimeSlot(
+                                          id,
+                                          bookedSlotsPerDay[_selectedDateForKey]
+                                                  [index]['time'] ??
+                                              "");
+                                      slotSelected = true;
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: slotIndexSelected != index
+                                              ? Colors.blue
+                                              : Colors.white),
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: slotIndexSelected == index
+                                          ? Color(0xff00A676)
+                                          : Colors.white),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      (Text(
+                                          bookedSlotsPerDay[_selectedDateForKey]
+                                                  [index]['time'] ??
+                                              "",
+                                          style: TextStyle(
+                                              color: slotIndexSelected == index
+                                                  ? Colors.white
+                                                  : Color(0xff5D5FEF),
+                                              fontSize: 12.0))),
+                                      Card(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            '${bookedSlotsPerDay[_selectedDateForKey][index]['emp']}',
+                                            style: TextStyle(
+                                                color:
+                                                    slotIndexSelected == index
+                                                        ? Color(0xff00A676)
+                                                        : Colors.white,
+                                                fontSize: 12.0),
+                                          ),
+                                        ),
+                                        color: slotIndexSelected == index
+                                            ? Colors.white
+                                            : Color(0xff00A676),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                // SizedBox(height: 15.0),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 10),
+                //   child: Container(
+                //       child: ListView.builder(
+                //           shrinkWrap: true,
+                //           physics: NeverScrollableScrollPhysics(),
+                //           itemCount: (count ~/ 2) + rim,
+                //           itemBuilder: (ctx, i) {
+                //             if (i == 0) {
+                //               Min1 = startMin;
+                //               Hr1 = startHr > 12 ? startHr - 12 : startHr;
+                //               pm = startHr > 12 ? true : false;
+                //               tempCount = 0;
+                //               am_pm1[i] = startHr > 12 ? 'PM' : 'AM';
+                //             } else {
+                //               Min1 = Min4 + intervalDuration;
+                //               Hr1 = Hr4 + (Min1 / 60).floor();
+                //               Min1 = Min1 % 60;
+                //               if (Hr1 == 12 || Hr1 > 12 || pm == true) {
+                //                 am_pm1[i] = 'PM';
+                //                 am_pm2[i] = 'PM';
+                //                 am_pm3[i] = 'PM';
+                //                 am_pm4[i] = 'PM';
+                //               }
+                //               if (Hr1 > 12) {
+                //                 Hr1 = Hr1 - 12;
+                //               }
+                //             }
 
-                      ),
-                ),
+                //             Min2 = Min1 + slotDuration;
+                //             Hr2 = Hr1 + (Min2 / 60).floor();
+                //             Min2 = Min2 % 60;
+                //             if (Hr2 == 12 || Hr2 > 12 || pm == true) {
+                //               pm = true;
+                //               am_pm2[i] = 'PM';
+                //               am_pm3[i] = 'PM';
+                //               am_pm4[i] = 'PM';
+                //             }
+                //             if (Hr2 > 12) {
+                //               Hr2 = Hr2 - 12;
+                //             }
+                //             if (Min1 < 10)
+                //               lessMins1 = '0';
+                //             else
+                //               lessMins1 = '';
+                //             if (Min2 < 10)
+                //               lessMins2 = '0';
+                //             else
+                //               lessMins2 = '';
+                //             final _timeslot =
+                //                 "$Hr1:$lessMins1$Min1 ${am_pm1[i]} - $Hr2:$lessMins2$Min2 ${am_pm2[i]}";
+                //             tempCount++;
+                //             print(tempCount);
+                //             if (tempCount > count) {
+                //               stop1 = true;
+                //               stop2 = true;
+                //             }
+
+                //             Min3 = Min2 + intervalDuration;
+                //             Hr3 = Hr2 + (Min3 / 60).floor();
+                //             Min3 = Min3 % 60;
+                //             if (Hr3 == 12 || Hr3 > 12 || pm == true) {
+                //               pm = true;
+
+                //               am_pm3[i] = 'PM';
+                //               am_pm4[i] = 'PM';
+                //             }
+                //             if (Hr3 > 12) {
+                //               Hr3 = Hr3 - 12;
+                //             }
+
+                //             Min4 = Min3 + slotDuration;
+                //             Hr4 = Hr3 + (Min4 / 60).floor();
+                //             Min4 = Min4 % 60;
+                //             if (Hr4 == 12 || Hr4 > 12 || pm == true) {
+                //               pm = true;
+
+                //               am_pm4[i] = 'PM';
+                //             }
+                //             if (Hr4 > 12) {
+                //               Hr4 = Hr4 - 12;
+                //             }
+                //             if (Min3 < 10)
+                //               lessMins3 = '0';
+                //             else
+                //               lessMins3 = '';
+                //             if (Min4 < 10)
+                //               lessMins4 = '0';
+                //             else
+                //               lessMins4 = '';
+
+                //             final _timeslot1 =
+                //                 "$Hr3:$lessMins3$Min3 ${am_pm3[i]} - $Hr4:$lessMins4$Min4 ${am_pm4[i]}";
+
+                //             tempCount++;
+                //             print(tempCount);
+                //             if (tempCount > count) stop2 = true;
+
+                //             final indx1 = i * 2;
+                //             final indx2 = i * 2 + 1;
+                //             //final int newEmployeeNumber = employeeNumbers - 1;
+                //             if (changeDate == true) {
+                //               for (int x = 0; x < count; x++) {
+                //                 // if (x != indx1)
+                //                 slotButtons[x] = false;
+                //               }
+                //             }
+                //             return Row(
+                //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //               children: [
+                //                 Padding(
+                //                   padding: const EdgeInsets.all(10.0),
+                //                   child: FlatButton(
+                //                     padding: EdgeInsets.all(0.0),
+                //                     onPressed: () {
+                //                       if (dateSelected == false)
+                //                         Fluttertoast.showToast(
+                //                             msg: 'Please select a date',
+                //                             backgroundColor: Color(0xff5D5FEF),
+                //                             textColor: Colors.white,
+                //                             toastLength: Toast.LENGTH_LONG);
+                //                       setState(() {
+                //                         slotSelected = !slotSelected;
+                //                         if (_selectedDay == DateTime.utc(1989))
+                //                           slotButtons[indx1] = false;
+                //                         else {
+                //                           slotButtons[indx1] =
+                //                               !slotButtons[indx1];
+                //                         }
+                //                         if (slotButtons[indx1] == true) {
+                //                           for (int x = 0; x < count; x++) {
+                //                             if (x != indx1)
+                //                               slotButtons[x] = false;
+                //                           }
+                //                           changeDate = false;
+                //                           sl = _timeslot;
+                //                         }
+                //                       });
+                // servic.updateTimeSlot(id, _timeslot);
+                //                     },
+                //                     child: slotButtons[indx1] == false
+                //                         ? Container(
+                //                             height: height * 0.07,
+                //                             width: width * 0.4,
+                //                             decoration: BoxDecoration(
+                //                                 border: Border.all(
+                //                                     color: Colors.blue),
+                //                                 borderRadius:
+                //                                     BorderRadius.circular(6.0)),
+                //                             child: (Row(
+                //                               mainAxisAlignment:
+                //                                   MainAxisAlignment.center,
+                //                               children: [
+                //                                 Text(_timeslot,
+                //                                     style: TextStyle(
+                //                                         color:
+                //                                             Color(0xff5D5FEF),
+                //                                         fontSize: 12.0)),
+                //                                 // Card(
+                //                                 //   child: Padding(
+                //                                 //     padding:
+                //                                 //         const EdgeInsets.all(
+                //                                 //             8.0),
+                //                                 //     child: Text(
+                //                                 //       '$employeeNumbers',
+                //                                 //       style: TextStyle(
+                //                                 //           color: Colors.white,
+                //                                 //           fontSize: 12.0),
+                //                                 //     ),
+                //                                 //   ),
+                //                                 //   color: Color(0xff00A676),
+                //                                 // )
+                //                               ],
+                //                             )),
+                //                           )
+                //                         :
+                // Container(
+                //                             height: height * 0.07,
+                //                             width: width * 0.4,
+                //                             decoration: BoxDecoration(
+                //                                 borderRadius:
+                //                                     BorderRadius.circular(6),
+                //                                 color: Color(0xff00A676)),
+                //                             child: Row(
+                //                               mainAxisAlignment:
+                //                                   MainAxisAlignment.center,
+                //                               children: [
+                //                                 (Text(_timeslot,
+                //                                     style: TextStyle(
+                //                                         color: Colors.white,
+                //                                         fontSize: 12.0))),
+                //                                 // Card(
+                //                                 //   child: Padding(
+                //                                 //     padding:
+                //                                 //         const EdgeInsets.all(
+                //                                 //             8.0),
+                //                                 //     child: Text(
+                //                                 //       '$newEmployeeNumber',
+                //                                 //       style: TextStyle(
+                //                                 //           color:
+                //                                 //               Color(0xff00A676),
+                //                                 //           fontSize: 12.0),
+                //                                 //     ),
+                //                                 //   ),
+                //                                 //   color: Colors.white,
+                //                                 // )
+                //                               ],
+                //                             ),
+                //                           ),
+                // ),
+                //                 ),
+                //                 stop2 == true && tempCount > count
+                //                     ? SizedBox(width: 10)
+                //                     : Padding(
+                //                         padding: const EdgeInsets.all(10.0),
+                //                         child: FlatButton(
+                //                           padding: EdgeInsets.all(0.0),
+                //                           onPressed: () {
+                //                             if (dateSelected == false)
+                //                               Fluttertoast.showToast(
+                //                                   msg: 'Please select a date',
+                //                                   backgroundColor:
+                //                                       Color(0xff5D5FEF),
+                //                                   textColor: Colors.white,
+                //                                   toastLength:
+                //                                       Toast.LENGTH_LONG);
+                //                             setState(() {
+                //                               slotSelected = !slotSelected;
+                //                               if (_selectedDay ==
+                //                                   DateTime.utc(1989))
+                //                                 slotButtons[indx2] = false;
+                //                               else {
+                //                                 slotButtons[indx2] =
+                //                                     !slotButtons[indx2];
+                //                               }
+                //                               if (slotButtons[indx2] == true) {
+                //                                 for (int x = 0;
+                //                                     x < count;
+                //                                     x++) {
+                //                                   if (x != indx2)
+                //                                     slotButtons[x] = false;
+                //                                 }
+                //                                 changeDate = false;
+                //                                 sl = _timeslot1;
+                //                               }
+                //                             });
+                //                             servic.updateTimeSlot(
+                //                                 id, _timeslot1);
+                //                           },
+                //                           child: slotButtons[indx2] == false
+                //                               ? Container(
+                //                                   height: height * 0.07,
+                //                                   width: width * 0.4,
+                //                                   decoration: BoxDecoration(
+                //                                       border: Border.all(
+                //                                           color: Colors.blue),
+                //                                       borderRadius:
+                //                                           BorderRadius.circular(
+                //                                               6.0)),
+                //                                   child: (Row(
+                //                                     mainAxisAlignment:
+                //                                         MainAxisAlignment
+                //                                             .center,
+                //                                     children: [
+                //                                       Text(_timeslot1,
+                //                                           style: TextStyle(
+                //                                               color: Color(
+                //                                                   0xff5D5FEF),
+                //                                               fontSize: 12.0)),
+                //                                       // Card(
+                //                                       //   child: Padding(
+                //                                       //     padding:
+                //                                       //         const EdgeInsets
+                //                                       //             .all(8.0),
+                //                                       //     child: Text(
+                //                                       //       '$employeeNumbers',
+                //                                       //       style: TextStyle(
+                //                                       //           color: Colors
+                //                                       //               .white,
+                //                                       //           fontSize: 12.0),
+                //                                       //     ),
+                //                                       //   ),
+                //                                       //   color:
+                //                                       //       Color(0xff00A676),
+                //                                       // )
+                //                                     ],
+                //                                   )),
+                //                                 )
+                //                               : Container(
+                //                                   height: height * 0.07,
+                //                                   width: width * 0.4,
+                //                                   decoration: BoxDecoration(
+                //                                       borderRadius:
+                //                                           BorderRadius.circular(
+                //                                               6),
+                //                                       color: Color(0xff00A676)),
+                //                                   child: Row(
+                //                                     mainAxisAlignment:
+                //                                         MainAxisAlignment
+                //                                             .center,
+                //                                     children: [
+                //                                       (Text(_timeslot1,
+                //                                           style: TextStyle(
+                //                                               color:
+                //                                                   Colors.white,
+                //                                               fontSize: 12.0))),
+                //                                       // Card(
+                //                                       //   child: Padding(
+                //                                       //     padding:
+                //                                       //         const EdgeInsets
+                //                                       //             .all(8.0),
+                //                                       //     child: Text(
+                //                                       //       '$newEmployeeNumber',
+                //                                       //       style: TextStyle(
+                //                                       //           color: Color(
+                //                                       //               0xff00A676),
+                //                                       //           fontSize: 12.0),
+                //                                       //     ),
+                //                                       //   ),
+                //                                       //   color: Colors.white,
+                //                                       // )
+                //                                     ],
+                //                                   ),
+                //                                 ),
+                //                         ),
+                //                       )
+                //               ],
+                //             );
+                //           })
+                //       /*...List.generate(slots.length, (index) {
+                //         final firstIndex = slots[0];
+                //         final _timeslot =
+                //             "${firstIndex.fromHr}:${firstIndex.fromMin}AM - ${firstIndex.toHr}:${firstIndex.toMin} PM";
+                //         return FlatButton(
+                //           padding: EdgeInsets.all(0.0),
+                //           onPressed: () {
+                //             if (dateSelected == false)
+                //               Fluttertoast.showToast(
+                //                   msg: 'Please select a date',
+                //                   backgroundColor: Color(0xff5D5FEF),
+                //                   textColor: Colors.white,
+                //                   toastLength: Toast.LENGTH_LONG);
+                //             setState(() {
+                //               slotSelected = !slotSelected;
+                //               if (_selectedDay == DateTime.utc(1989))
+                //                 a7 = true;
+                //               else {
+                //                 a7 = !a7;
+                //               }
+                //               if (a7 == false) {
+                //                 a1 = a2 = a3 = a4 = a5 = a6 = a8 = true;
+                //                 sl = _timeslot;
+                //               }
+                //             });
+                // servic.updateTimeSlot(id, _timeslot);
+                //           },
+                //           child: a7
+                //               ? Container(
+                //                   height: 50,
+                //                   width: 160,
+                //                   decoration: BoxDecoration(
+                //                       border: Border.all(color: Colors.blue),
+                //                       borderRadius: BorderRadius.circular(6.0)),
+                //                   child: (Row(
+                //                     mainAxisAlignment: MainAxisAlignment.center,
+                //                     children: [
+                //                       Text(_timeslot,
+                //                           style: TextStyle(
+                //                               color: Color(0xff5D5FEF),
+                //                               fontSize: 12.0)),
+                //                       Card(
+                //                         child: Padding(
+                //                           padding: const EdgeInsets.all(8.0),
+                //                           child: Text(
+                //                             '2',
+                //                             style: TextStyle(
+                //                                 color: Colors.white,
+                //                                 fontSize: 12.0),
+                //                           ),
+                //                         ),
+                //                         color: Color(0xff00A676),
+                //                       )
+                //                     ],
+                //                   )),
+                //                 )
+                //               : Container(
+                //                   height: 50,
+                //                   width: 160,
+                //                   decoration: BoxDecoration(
+                //                       borderRadius: BorderRadius.circular(6),
+                //                       color: Color(0xff00A676)),
+                //                   child: Row(
+                //                     mainAxisAlignment: MainAxisAlignment.center,
+                //                     children: [
+                //                       (Text(_timeslot,
+                //                           style: TextStyle(
+                //                               color: Colors.white,
+                //                               fontSize: 12.0))),
+                //                       Card(
+                //                         child: Padding(
+                //                           padding: const EdgeInsets.all(8.0),
+                //                           child: Text(
+                //                             '1',
+                //                             style: TextStyle(
+                //                                 color: Color(0xff00A676),
+                //                                 fontSize: 12.0),
+                //                           ),
+                //                         ),
+                //                         color: Colors.white,
+                //                       )
+                //                     ],
+                //                   ),
+                //                 ),
+                //         );
+                //       })*/
+
+                //       ),
+                // ),
                 SizedBox(height: 30),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.25,
@@ -918,6 +1078,23 @@ class _SlotBookingState extends State<SlotBooking> {
                             _db.addBookingofCustomer(service, id.toString());
                             _db.addCustomerBookingToServiceProvider(
                                 service, id.toString());
+
+                            if (bookedSlotsPerDay == null) {
+                              DatabaseService()
+                                  .upgradeParlourBookedSlotsDatabaseFirst(
+                                      id,
+                                      slotIndexSelected,
+                                      slotsArray,
+                                      _selectedDateForKey);
+                            } else {
+                              DatabaseService()
+                                  .upgradeParlourBookedSlotsDatabaseExisting(
+                                      id,
+                                      slotIndexSelected,
+                                      bookedSlotsPerDay,
+                                      slotsArray,
+                                      _selectedDateForKey);
+                            }
 
                             // showCupertinoDialog(
                             //     context: context,

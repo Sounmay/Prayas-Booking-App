@@ -60,6 +60,11 @@ class MyApp extends StatelessWidget {
             value: DatabaseService().streamParlour(),
             child: AllSerives(),
           ),
+          StreamProvider<List<Parlour>>.value(
+            initialData: [],
+            value: DatabaseService().streamParlourForSlots(),
+            child: SlotBooking(),
+          ),
           StreamProvider<List<Salon>>.value(
             value: DatabaseService().streamSalon(),
             initialData: [],

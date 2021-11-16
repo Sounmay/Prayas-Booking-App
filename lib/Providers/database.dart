@@ -5,8 +5,91 @@ import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Models/Salon.dart';
 
+class DividedSlots {
+  final int emp;
+  final String time;
+
+  DividedSlots({this.emp, this.time});
+
+  Map<String, dynamic> toJson() => {
+        "time": time,
+        "emp": emp,
+      };
+}
+
 class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  Future upgradeParlourSlotsDatabase(var id) async {
+    var ref = _db.collection('ParlourServices');
+
+    List<DividedSlots> dividedSlots = [];
+
+    var temp, temp2;
+    try {
+      await ref.doc('$id').get().then((value) {
+        temp = value['slotList'][0];
+        temp2 = value['details']['numOfEmployees'];
+      });
+      print(temp);
+      for (int i = int.parse(temp['fromHr']);
+          i < int.parse(temp['toHr']);
+          i++) {
+        var startingTime, startingSuffix, endingTime, endingSuffix;
+        if (i > 12) {
+          startingSuffix = 'PM';
+          endingSuffix = 'PM';
+          startingTime = '${i - 12}:${temp['fromMin']} $startingSuffix';
+          endingTime = (i - 12 + 1) > 12
+              ? '${i - 12 + 1 - 12}:${temp['fromMin']} $endingSuffix'
+              : '${i - 12 + 1}:${temp['fromMin']} $endingSuffix';
+        } else {
+          startingSuffix = i == 12 ? 'PM' : 'AM';
+          endingSuffix = (i + 1) >= 12 ? 'PM' : 'AM';
+          startingTime = '$i:${temp['fromMin']} $startingSuffix';
+          endingTime = (i + 1) > 12
+              ? '${i + 1 - 12}:${temp['fromMin']} $endingSuffix'
+              : '${i + 1}:${temp['fromMin']} $endingSuffix';
+        }
+        DividedSlots tempSlot = DividedSlots(
+            time: '$startingTime - $endingTime', emp: int.parse(temp2));
+        dividedSlots.add(tempSlot);
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+
+    ref.doc('$id').update({
+      "slots":
+          FieldValue.arrayUnion(dividedSlots.map((e) => e.toJson()).toList())
+    });
+  }
+
+  Future upgradeParlourBookedSlotsDatabaseExisting(
+      var id,
+      int index,
+      Map<dynamic, dynamic> bookedSlots,
+      List<dynamic> slotArray,
+      String mapKey) async {
+    var ref = _db.collection('ParlourServices');
+
+    bookedSlots.putIfAbsent(mapKey, () => slotArray);
+
+    bookedSlots[mapKey][index]['emp'] = bookedSlots[mapKey][index]['emp'] - 1;
+
+    ref.doc('$id').update({"bookedSlotsPerDay": bookedSlots});
+  }
+
+  Future upgradeParlourBookedSlotsDatabaseFirst(
+      var id, int index, List<dynamic> bookedSlots, String mapKey) async {
+    var ref = _db.collection('ParlourServices');
+
+    bookedSlots[index]['emp'] = bookedSlots[index]['emp'] - 1;
+
+    Map<String, dynamic> bookedSlotMap = {mapKey: bookedSlots};
+
+    ref.doc('$id').update({"bookedSlotsPerDay": bookedSlotMap});
+  }
 
   Stream<List<Medical>> streamMedical() {
     var ref = _db.collection('MedicalServices');
@@ -23,6 +106,15 @@ class DatabaseService {
     return ref.snapshots().map((event) => event.docs.map((e) {
           if (e.data()["location"]["status"] == "Accepted")
             return Parlour.fromFirestore(e);
+        }).toList());
+  }
+
+  Stream<List<Parlour>> streamParlourForSlots() {
+    var ref = _db.collection('ParlourServices');
+
+    return ref.snapshots().map((event) => event.docs.map((e) {
+          // if (e.data()["location"]["status"] == "Accepted")
+          return Parlour.fromFirestore(e);
         }).toList());
   }
 

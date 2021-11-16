@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
+import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:marquee/marquee.dart';
@@ -18,7 +19,7 @@ class ServiceListParlour extends StatelessWidget {
         ? Container()
         : InkWell(
             onTap: () {
-              // print(service.id);
+              // DatabaseService().upgradeParlourSlotsDatabase(service.id);
               Navigator.of(context).pushNamed('/serviceDetailsParlour',
                   arguments: {'details': service});
             },

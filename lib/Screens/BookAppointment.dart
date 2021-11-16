@@ -43,6 +43,8 @@ class _BookAppointmentState extends State<BookAppointment> {
     print(employeeNumbers);
     final id = args['id'];
     final slots = args['slots'];
+    final slotsArray = args['slotsArray'];
+    final bookedSlotsPerDay = args['bookedSlotsPerDay'];
     final shopName = args['shopName'];
     final address = args['address'];
     List<ParlourServiceDetails> mostAvailed = args['mostAvailService'];
@@ -212,7 +214,8 @@ class _BookAppointmentState extends State<BookAppointment> {
                                                           mostAvailed[i].price),
                                                       hr * 60 + min,
                                                       shopName,
-                                                      userName,address);
+                                                      userName,
+                                                      address);
                                                   serviceAdded = true;
                                                 },
                                                 child: Text(
@@ -424,16 +427,20 @@ class _BookAppointmentState extends State<BookAppointment> {
                                     borderRadius: BorderRadius.circular(5)),
                               ),
                               onPressed: () {
-                                if(service[id] == null){
-                                  Fluttertoast.showToast(msg: "Please add atleast one service", backgroundColor: Color(0xff5D5FEF), textColor: Colors.white);
-                                }
-                                else{
+                                if (service[id] == null) {
+                                  Fluttertoast.showToast(
+                                      msg: "Please add atleast one service",
+                                      backgroundColor: Color(0xff5D5FEF),
+                                      textColor: Colors.white);
+                                } else {
                                   Navigator.pushNamed(context, '/slotBooking',
                                       arguments: {
                                         'employeeNumbers': employeeNumbers,
                                         'id': id,
                                         'slots': slots,
                                         'shopName': shopName,
+                                        'slotsArray': slotsArray,
+                                        'bookedSlotsPerDay': bookedSlotsPerDay,
                                         'address': address
                                       });
                                 }

@@ -9,12 +9,16 @@ class Parlour {
   final String week;
   final String time;
   List<dynamic> mostAvailservices;
+  List<dynamic> slotArray;
+  Map bookedSlotsPerDay;
 
   Parlour(
       {this.id,
+      this.bookedSlotsPerDay,
       this.parlourName,
       this.location,
       this.image,
+      this.slotArray,
       this.type,
       this.week,
       this.time,
@@ -36,7 +40,9 @@ class Parlour {
       location: data['location']['address'] ?? '',
       image: data['details']['parlourImage'] ?? '',
       mostAvailservices: data['mostAvailServices'] ?? [],
+      slotArray: data['slots'] ?? [],
       week: data['slotList'][0]['weekRange'] ?? '',
+      bookedSlotsPerDay: data['bookedSlotsPerDay'] ?? {},
       time: finalFromHr.toString() +
           ':' +
           data['slotList'][0]['fromMin'] +
