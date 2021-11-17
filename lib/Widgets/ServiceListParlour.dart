@@ -19,7 +19,7 @@ class ServiceListParlour extends StatelessWidget {
         ? Container()
         : InkWell(
             onTap: () {
-              // DatabaseService().upgradeParlourSlotsDatabase(service.id);
+              // DatabaseService().upgradeParlourSlotsDatabase(service.id, true);
               Navigator.of(context).pushNamed('/serviceDetailsParlour',
                   arguments: {'details': service});
             },

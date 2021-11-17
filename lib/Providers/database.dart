@@ -20,8 +20,10 @@ class DividedSlots {
 class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Future upgradeParlourSlotsDatabase(var id) async {
-    var ref = _db.collection('ParlourServices');
+  Future upgradeParlourSlotsDatabase(var id, bool isParlour) async {
+    var ref = isParlour
+        ? _db.collection('ParlourServices')
+        : _db.collection('SalonServices');
 
     List<DividedSlots> dividedSlots = [];
 
@@ -65,13 +67,13 @@ class DatabaseService {
     });
   }
 
-  Future upgradeParlourBookedSlotsDatabaseExisting(
+  Future upgradeParlourAndSalonBookedSlotsDatabaseExisting(
       var id,
       int index,
       Map<dynamic, dynamic> bookedSlots,
       List<dynamic> slotArray,
-      String mapKey) async {
-    var ref = _db.collection('ParlourServices');
+      String mapKey, bool isParlour) async {
+    var ref = isParlour==true?_db.collection('ParlourServices'):_db.collection('SalonServices');
 
     bookedSlots.putIfAbsent(mapKey, () => slotArray);
 
@@ -80,9 +82,9 @@ class DatabaseService {
     ref.doc('$id').update({"bookedSlotsPerDay": bookedSlots});
   }
 
-  Future upgradeParlourBookedSlotsDatabaseFirst(
-      var id, int index, List<dynamic> bookedSlots, String mapKey) async {
-    var ref = _db.collection('ParlourServices');
+  Future upgradeParlourAndSalonBookedSlotsDatabaseFirst(
+      var id, int index, List<dynamic> bookedSlots, String mapKey, bool isParlour) async {
+    var ref = isParlour==true?_db.collection('ParlourServices'):_db.collection('SalonServices');
 
     bookedSlots[index]['emp'] = bookedSlots[index]['emp'] - 1;
 
@@ -115,6 +117,14 @@ class DatabaseService {
     return ref.snapshots().map((event) => event.docs.map((e) {
           // if (e.data()["location"]["status"] == "Accepted")
           return Parlour.fromFirestore(e);
+        }).toList());
+  }
+  Stream<List<Salon>> streamSalonForSlots() {
+    var ref = _db.collection('ParlourServices');
+
+    return ref.snapshots().map((event) => event.docs.map((e) {
+          // if (e.data()["location"]["status"] == "Accepted")
+          return Salon.fromFirestore(e);
         }).toList());
   }
 

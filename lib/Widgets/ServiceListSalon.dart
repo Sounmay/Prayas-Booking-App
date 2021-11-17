@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Salon.dart';
+import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:marquee/marquee.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:shimmer/shimmer.dart';
@@ -17,6 +18,8 @@ class ServiceListSalon extends StatelessWidget {
         ? Container()
         : InkWell(
             onTap: () {
+              // DatabaseService().upgradeParlourSlotsDatabase(service.id, false);
+
               Navigator.of(context).pushNamed('/serviceDetailsSalon',
                   arguments: {'details': service});
             },

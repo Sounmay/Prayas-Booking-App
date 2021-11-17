@@ -56,6 +56,7 @@ class _ServiceDetailsSalonState extends State<ServiceDetailsSalon> {
 
   @override
   Widget build(BuildContext context) {
+    final int employeeNumbers = employeeDetailList?.length ?? 0;
     final args =
         ModalRoute.of(context).settings.arguments as Map<dynamic, dynamic>;
     Salon service = args['details'];
@@ -385,8 +386,13 @@ class _ServiceDetailsSalonState extends State<ServiceDetailsSalon> {
                                     Navigator.pushNamed(
                                         context, '/bookAppointment',
                                         arguments: {
+                                          "employeeNumbers": employeeNumbers,
                                           'id': service.id,
+                                          'type': "salon",
                                           'shopName': service.salonName,
+                                          'slotsArray': service.slotArray,
+                                          'bookedSlotsPerDay':
+                                              service.bookedSlotsPerDay,
                                           'mostAvailService':
                                               salonServiceDetails,
                                           'slots': slotList,

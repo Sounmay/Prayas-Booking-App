@@ -395,6 +395,7 @@ class _ServiceDetailsParlourState extends State<ServiceDetailsParlour> {
                                         arguments: {
                                           'employeeNumbers': employeeNumbers,
                                           'id': service.id,
+                                          'type': "parlour",
                                           'shopName': service.parlourName,
                                           'slotsArray': service.slotArray,
                                           'bookedSlotsPerDay': service.bookedSlotsPerDay,

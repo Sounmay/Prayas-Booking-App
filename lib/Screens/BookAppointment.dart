@@ -42,6 +42,7 @@ class _BookAppointmentState extends State<BookAppointment> {
     final int employeeNumbers = args['employeeNumbers'];
     print(employeeNumbers);
     final id = args['id'];
+    final type = args['type'];
     final slots = args['slots'];
     final slotsArray = args['slotsArray'];
     final bookedSlotsPerDay = args['bookedSlotsPerDay'];
@@ -437,6 +438,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                                       arguments: {
                                         'employeeNumbers': employeeNumbers,
                                         'id': id,
+                                        'type': type,
                                         'slots': slots,
                                         'shopName': shopName,
                                         'slotsArray': slotsArray,

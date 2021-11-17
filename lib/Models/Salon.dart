@@ -11,11 +11,15 @@ class Salon {
   final String week;
   final String time;
   List<dynamic> mostAvailservices;
+  List<dynamic> slotArray;
+  Map bookedSlotsPerDay;
 
   Salon(
       {this.id,
       this.salonName,
       this.location,
+      this.slotArray,
+      this.bookedSlotsPerDay,
       this.image,
       this.type,
       this.week,
@@ -38,7 +42,9 @@ class Salon {
       location: data['location']['address'] ?? '',
       image: data['details']['parlourImage'] ?? '',
       mostAvailservices: data['mostAvailServices'] ?? [],
+      slotArray: data['slots'] ?? [],
       week: data['slotList'][0]['weekRange'] ?? '',
+      bookedSlotsPerDay: data['bookedSlotsPerDay'] ?? {},
       time: finalFromHr.toString() +
           ':' +
           data['slotList'][0]['fromMin'] +

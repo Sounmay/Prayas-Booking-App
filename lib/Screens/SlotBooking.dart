@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance_booking_app/Models/Cart.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
+import 'package:freelance_booking_app/Models/Salon.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
@@ -38,21 +39,20 @@ class _SlotBookingState extends State<SlotBooking> {
   int intervalDuration = 0;
   int slotDuration = 60;
   int count = 0, tempCount = 0;
- 
+
   int slotIndexSelected = -1;
 
-
-  Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.blue;
-    }
-    return Colors.red;
-  }
+  // Color getColor(Set<MaterialState> states) {
+  //   const Set<MaterialState> interactiveStates = <MaterialState>{
+  //     MaterialState.pressed,
+  //     MaterialState.hovered,
+  //     MaterialState.focused,
+  //   };
+  //   if (states.any(interactiveStates.contains)) {
+  //     return Colors.blue;
+  //   }
+  //   return Colors.red;
+  // }
 
   bool isChecked = false;
   String _selectedDateForKey = "";
@@ -67,16 +67,25 @@ class _SlotBookingState extends State<SlotBooking> {
     /*print(employeeNumbers);*/
 
     final id = args['id'];
+    final type = args['type'];
     final shopName = args['shopName'];
     final List<dynamic> slotsArray = args['slotsArray'];
     final address = args['address'];
-    final parlours = Provider.of<List<Parlour>>(context);
-    // final selectedParlour = parlours.firstWhere((element) =>
-    //     element == null ? element?.parlourName ?? "" == shopName : false);
-    Parlour selectedParlour =
-        parlours.firstWhere((element) => element.id == id);
+    List<Parlour> parlours;
+    List<Salon> salons;
+    Parlour selectedParlour;
+    Salon selectedSalon;
+    if (type == "parlour") {
+      parlours = Provider.of<List<Parlour>>(context);
+      selectedParlour = parlours.firstWhere((element) => element.id == id);
+    } else {
+      salons = Provider.of<List<Salon>>(context);
+      selectedSalon = salons.firstWhere((element) => element.id == id);
+    }
     // final bookedSlotsPerDay = args['bookedSlotsPerDay'];
-    final bookedSlotsPerDay = selectedParlour.bookedSlotsPerDay;
+    final bookedSlotsPerDay = type == "parlour"
+        ? selectedParlour?.bookedSlotsPerDay ?? null
+        : selectedSalon?.bookedSlotsPerDay ?? null;
     List<ParlourSlotDetails> slots = args['slots'];
     final service = Provider.of<CartService>(context).services[id];
     final servic = Provider.of<CartService>(context); //.services[id];
@@ -176,6 +185,8 @@ class _SlotBookingState extends State<SlotBooking> {
                     calendarStyle: CalendarStyle(
                       defaultDecoration: BoxDecoration(
                           shape: BoxShape.rectangle,
+                          color: Colors.transparent,
+                          border: Border.all(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(6.0)),
                       todayDecoration: BoxDecoration(
                           shape: BoxShape.rectangle,
@@ -209,8 +220,8 @@ class _SlotBookingState extends State<SlotBooking> {
                           padding:
                               EdgeInsets.only(left: 15, right: 15, top: 10),
                           height: slotsArray.length % 2 == 0
-                              ? slotsArray.length.toDouble() * 28.0
-                              : slotsArray.length.toDouble() * 28.0 + 28.0,
+                              ? slotsArray.length.toDouble() * 29.0
+                              : slotsArray.length.toDouble() * 29.0 + 29.0,
                           child: GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: slotsArray?.length ?? 0,
@@ -286,12 +297,12 @@ class _SlotBookingState extends State<SlotBooking> {
                                   ? bookedSlotsPerDay[_selectedDateForKey]
                                           .length
                                           .toDouble() *
-                                      28.0
+                                      29.0
                                   : bookedSlotsPerDay[_selectedDateForKey]
                                               .length
                                               .toDouble() *
-                                          28.0 +
-                                      28.0,
+                                          29.0 +
+                                      29.0,
                           child: GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: bookedSlotsPerDay[_selectedDateForKey]
@@ -367,7 +378,6 @@ class _SlotBookingState extends State<SlotBooking> {
                             },
                           ),
                         ),
-                
                 SizedBox(height: 30),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.25,
@@ -376,7 +386,6 @@ class _SlotBookingState extends State<SlotBooking> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                      
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -498,19 +507,21 @@ class _SlotBookingState extends State<SlotBooking> {
 
                             if (bookedSlotsPerDay == null) {
                               DatabaseService()
-                                  .upgradeParlourBookedSlotsDatabaseFirst(
+                                  .upgradeParlourAndSalonBookedSlotsDatabaseFirst(
                                       id,
                                       slotIndexSelected,
                                       slotsArray,
-                                      _selectedDateForKey);
+                                      _selectedDateForKey,
+                                      type == "parlour" ? true : false);
                             } else {
                               DatabaseService()
-                                  .upgradeParlourBookedSlotsDatabaseExisting(
+                                  .upgradeParlourAndSalonBookedSlotsDatabaseExisting(
                                       id,
                                       slotIndexSelected,
                                       bookedSlotsPerDay,
                                       slotsArray,
-                                      _selectedDateForKey);
+                                      _selectedDateForKey,
+                                      type == "parlour" ? true : false);
                             }
                             navigator.changeWidgetIndex(1);
 
