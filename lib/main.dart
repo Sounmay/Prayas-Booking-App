@@ -11,6 +11,7 @@ import 'package:freelance_booking_app/Providers/locationProvider.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Screens/AllServices.dart';
 import 'package:freelance_booking_app/Screens/Catalogue.dart';
+import 'package:freelance_booking_app/Screens/DoctorSlotBooking.dart';
 import 'package:freelance_booking_app/Screens/SearchScreen.dart';
 import 'package:freelance_booking_app/Screens/MyBookings.dart';
 import 'package:freelance_booking_app/Screens/ServiceDetailsParlour.dart';
@@ -64,6 +65,11 @@ class MyApp extends StatelessWidget {
             initialData: [],
             value: DatabaseService().streamParlourForSlots(),
             child: SlotBooking(),
+          ),
+          StreamProvider<List<Medical>>.value(
+            initialData: [],
+            value: DatabaseService().streamMedicalForSlots(),
+            child: DoctorSlotBooking(),
           ),
           StreamProvider<List<Salon>>.value(
             initialData: [],

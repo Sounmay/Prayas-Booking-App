@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freelance_booking_app/Models/Medical.dart';
+import 'package:freelance_booking_app/Providers/database.dart';
 import 'package:freelance_booking_app/Screens/IndividualDoctorPage.dart';
 import 'package:marquee/marquee.dart';
 import 'package:marquee_text/marquee_text.dart';
@@ -20,6 +21,7 @@ class ServiceListDoctor extends StatelessWidget {
     String endAmPm = toHr < 12 ? " AM" : " PM";
     return InkWell(
       onTap: () {
+        // DatabaseService().upgradeMedicalSlotsDatabase(clinicDetails.serviceUid);
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => IndividualDoctorPage(
                 doctorDetail: service,

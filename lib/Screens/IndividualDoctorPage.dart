@@ -272,7 +272,9 @@ class IndividualDoctorPage extends StatelessWidget {
             height: 10,
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+            padding: EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: MediaQuery.of(context).size.width * 0.08),
             width: MediaQuery.of(context).size.width * 0.65,
             decoration: BoxDecoration(
                 color: Color(0xFFF6FCFF),

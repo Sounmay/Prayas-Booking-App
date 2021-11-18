@@ -67,13 +67,61 @@ class DatabaseService {
     });
   }
 
+  Future upgradeMedicalSlotsDatabase(var id) async {
+    var ref = _db.collection('MedicalServices');
+
+    List<DividedSlots> dividedSlots = [];
+
+    var temp, temp2;
+    try {
+      await ref.doc('$id').get().then((value) {
+        temp = value['slotList'][0];
+        temp2 = value['details']['numOfEmployees'];
+      });
+      print(temp);
+      for (int i = int.parse(temp['fromHr']);
+          i < int.parse(temp['toHr']);
+          i++) {
+        var startingTime, startingSuffix, endingTime, endingSuffix;
+        if (i > 12) {
+          startingSuffix = 'PM';
+          endingSuffix = 'PM';
+          startingTime = '${i - 12}:${temp['fromMin']} $startingSuffix';
+          endingTime = (i - 12 + 1) > 12
+              ? '${i - 12 + 1 - 12}:${temp['fromMin']} $endingSuffix'
+              : '${i - 12 + 1}:${temp['fromMin']} $endingSuffix';
+        } else {
+          startingSuffix = i == 12 ? 'PM' : 'AM';
+          endingSuffix = (i + 1) >= 12 ? 'PM' : 'AM';
+          startingTime = '$i:${temp['fromMin']} $startingSuffix';
+          endingTime = (i + 1) > 12
+              ? '${i + 1 - 12}:${temp['fromMin']} $endingSuffix'
+              : '${i + 1}:${temp['fromMin']} $endingSuffix';
+        }
+        DividedSlots tempSlot = DividedSlots(
+            time: '$startingTime - $endingTime', emp: int.parse(temp2));
+        dividedSlots.add(tempSlot);
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+
+    ref.doc('$id').update({
+      "slots":
+          FieldValue.arrayUnion(dividedSlots.map((e) => e.toJson()).toList())
+    });
+  }
+
   Future upgradeParlourAndSalonBookedSlotsDatabaseExisting(
       var id,
       int index,
       Map<dynamic, dynamic> bookedSlots,
       List<dynamic> slotArray,
-      String mapKey, bool isParlour) async {
-    var ref = isParlour==true?_db.collection('ParlourServices'):_db.collection('SalonServices');
+      String mapKey,
+      bool isParlour) async {
+    var ref = isParlour == true
+        ? _db.collection('ParlourServices')
+        : _db.collection('SalonServices');
 
     bookedSlots.putIfAbsent(mapKey, () => slotArray);
 
@@ -82,9 +130,11 @@ class DatabaseService {
     ref.doc('$id').update({"bookedSlotsPerDay": bookedSlots});
   }
 
-  Future upgradeParlourAndSalonBookedSlotsDatabaseFirst(
-      var id, int index, List<dynamic> bookedSlots, String mapKey, bool isParlour) async {
-    var ref = isParlour==true?_db.collection('ParlourServices'):_db.collection('SalonServices');
+  Future upgradeParlourAndSalonBookedSlotsDatabaseFirst(var id, int index,
+      List<dynamic> bookedSlots, String mapKey, bool isParlour) async {
+    var ref = isParlour == true
+        ? _db.collection('ParlourServices')
+        : _db.collection('SalonServices');
 
     bookedSlots[index]['emp'] = bookedSlots[index]['emp'] - 1;
 
@@ -119,12 +169,22 @@ class DatabaseService {
           return Parlour.fromFirestore(e);
         }).toList());
   }
+
   Stream<List<Salon>> streamSalonForSlots() {
     var ref = _db.collection('ParlourServices');
 
     return ref.snapshots().map((event) => event.docs.map((e) {
           // if (e.data()["location"]["status"] == "Accepted")
           return Salon.fromFirestore(e);
+        }).toList());
+  }
+
+  Stream<List<Medical>> streamMedicalForSlots() {
+    var ref = _db.collection('MedicalServices');
+
+    return ref.snapshots().map((event) => event.docs.map((e) {
+          // if (e.data()["location"]["status"] == "Accepted")
+          return Medical.fromFirestore(e);
         }).toList());
   }
 
