@@ -27,53 +27,53 @@ class _SearchScreenState extends State<SearchScreen> {
   List<Parlour> filteredParlourService = [];
   List<Salon> filteredSalonService = [];
   void searchMedical(
-      List<Medical> medicalFirebaseServiceList,
-      List<Parlour> parlourFirebaseServiceList,
-      List<Salon> salonFirebaseServiceList) {
-    final medicalservice = medicalFirebaseServiceList.where((element) {
-      final clinicNameLower = element?.clinicName?.toLowerCase() ?? "";
-      final searchLower = _textController.text.toLowerCase();
+        List<Medical> medicalFirebaseServiceList,
+        List<Parlour> parlourFirebaseServiceList,
+        List<Salon> salonFirebaseServiceList
+      ) {
+        final medicalservice = medicalFirebaseServiceList.where((element) {
+        final clinicNameLower = element?.clinicName?.toLowerCase() ?? "";
+        final searchLower = _textController.text.toLowerCase();
 
-      if (searchLower == "") {
-        return false;
+        if (searchLower == "") {
+          return false;
+        }
+
+        return clinicNameLower.contains(searchLower);
+        }).toList();
+        final salonservice = salonFirebaseServiceList.where((element) {
+          final clinicNameLower = element?.salonName?.toLowerCase() ?? "";
+          final searchLower = _textController.text.toLowerCase();
+
+          if (searchLower == "") {
+            return false;
+          }
+
+          return clinicNameLower.contains(searchLower);
+        }).toList();
+        final parlourservice = parlourFirebaseServiceList.where((element) {
+          final clinicNameLower = element?.parlourName?.toLowerCase() ?? "";
+          final searchLower = _textController.text.toLowerCase();
+
+          if (searchLower == "") {
+            return false;
+          }
+
+          return clinicNameLower.contains(searchLower);
+        }).toList();
+        filtereList = [];
+        if (medicalservice.length != 0) {
+          filtereList.addAll(medicalservice);
+        }
+        if (parlourservice.length != 0) {
+          filtereList.addAll(parlourservice);
+        }
+
+        if (salonservice.length != 0) {
+          filtereList.addAll(salonservice);
+        }
+        setState(() {});
       }
-
-      return clinicNameLower.contains(searchLower);
-    }).toList();
-    final salonservice = salonFirebaseServiceList.where((element) {
-      final clinicNameLower = element?.salonName?.toLowerCase() ?? "";
-      final searchLower = _textController.text.toLowerCase();
-
-      if (searchLower == "") {
-        return false;
-      }
-
-      return clinicNameLower.contains(searchLower);
-    }).toList();
-    final parlourservice = parlourFirebaseServiceList.where((element) {
-      final clinicNameLower = element?.parlourName?.toLowerCase() ?? "";
-      final searchLower = _textController.text.toLowerCase();
-
-      if (searchLower == "") {
-        return false;
-      }
-
-      return clinicNameLower.contains(searchLower);
-    }).toList();
-    filtereList = [];
-    if (medicalservice.length != 0) {
-      filtereList.addAll(medicalservice);
-    }
-    if (parlourservice.length != 0) {
-      filtereList.addAll(parlourservice);
-    }
-
-    if (salonservice.length != 0) {
-      filtereList.addAll(salonservice);
-    }
-    setState(() {});
-  }
-
   bool isStart;
 
   @override
@@ -137,35 +137,36 @@ class _SearchScreenState extends State<SearchScreen> {
                             })),
                     Expanded(
                         child: Container(
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 0),
-                      height: 70,
-                      child: TextFormField(
-                        focusNode: thisFocusnode,
-                        key: _formKey,
-                        controller: _textController,
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                            prefixIcon: new Icon(Icons.search),
-                            contentPadding: EdgeInsets.all(10),
-                            hintText: 'Search for a service',
-                            fillColor: Colors.white,
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.grey, width: 1.0),
-                                borderRadius: BorderRadius.circular(6)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.black, width: 2.0),
-                                borderRadius: BorderRadius.circular(6))),
-                        onChanged: (val) => searchMedical(
-                            medicalFirebaseServiceList,
-                            parlourFirebaseServiceList,
-                            salonFirebaseServiceList),
-                      ),
-                    )),
+                            padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 0),
+                            height: 70,
+                            child: TextFormField(
+                              focusNode: thisFocusnode,
+                              key: _formKey,
+                              controller: _textController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                  prefixIcon: new Icon(Icons.search),
+                                  contentPadding: EdgeInsets.all(10),
+                                  hintText: 'Search for a service',
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.grey, width: 1.0),
+                                      borderRadius: BorderRadius.circular(6)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.black, width: 2.0),
+                                      borderRadius: BorderRadius.circular(6))),
+                              onChanged: (val) => searchMedical(
+                                  medicalFirebaseServiceList,
+                                  parlourFirebaseServiceList,
+                                  salonFirebaseServiceList),
+                            ),
+                        )
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -191,7 +192,8 @@ class _SearchScreenState extends State<SearchScreen> {
                             service: filtereList[index],
                           );
                         },
-                      )),
+                      )
+                  ),
                 )
               ],
             ),

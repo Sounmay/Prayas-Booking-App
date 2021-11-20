@@ -36,7 +36,7 @@ class Salon {
     String endAmPm = toHr < 12 ? " AM" : " PM";
 
     return Salon(
-      type: 'parlour',
+      type: 'salon',
       id: data['location']['serviceUid'],
       salonName: data['location']['name'] ?? '',
       location: data['location']['address'] ?? '',
