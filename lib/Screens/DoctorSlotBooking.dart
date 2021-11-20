@@ -165,16 +165,14 @@ class _DoctorSlotBookingState extends State<DoctorSlotBooking> {
     final endHr = slots.length != 0 ? int.tryParse(slots[0].toHr) : 0;
     final endMin = slots.length != 0 ? int.tryParse(slots[0].toMin) : 0; //
 
-    final medicals = Provider.of<List<Medical>>(context);
+    // final medicals = Provider.of<List<Medical>>(context);
 
-    final selectedMedical = medicals.firstWhere(
-        (element) => element.id == widget.clinicLocationAndDoctor.serviceUid);
+    // final selectedMedical = medicals.firstWhere(
+    //     (element) => element.id == widget.clinicLocationAndDoctor.serviceUid);
 
-    final selctedDoctor = selectedMedical.doctorDetails.firstWhere((element) =>
-        element.name == widget.doctorDetail.name &&
-        element.number == widget.doctorDetail.number);
-
-    
+    // final selctedDoctor = selectedMedical.doctorDetails.firstWhere((element) =>
+    //     element.name == widget.doctorDetail.name &&
+    //     element.number == widget.doctorDetail.number);
 
     setState(() {
       int totalDuration = slotDuration + intervalDuration;
