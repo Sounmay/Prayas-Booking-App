@@ -165,7 +165,7 @@ class DatabaseService {
     var ref = _db.collection('ParlourServices');
 
     return ref.snapshots().map((event) => event.docs.map((e) {
-          // if (e.data()["location"]["status"] == "Accepted")
+          if (e.data()["location"]["status"] == "Accepted")
           return Parlour.fromFirestore(e);
         }).toList());
   }
@@ -174,7 +174,7 @@ class DatabaseService {
     var ref = _db.collection('ParlourServices');
 
     return ref.snapshots().map((event) => event.docs.map((e) {
-          // if (e.data()["location"]["status"] == "Accepted")
+          if (e.data()["location"]["status"] == "Accepted")
           return Salon.fromFirestore(e);
         }).toList());
   }
@@ -183,7 +183,7 @@ class DatabaseService {
     var ref = _db.collection('MedicalServices');
 
     return ref.snapshots().map((event) => event.docs.map((e) {
-          // if (e.data()["location"]["status"] == "Accepted")
+          if (e.data()["location"]["status"] == "Accepted")
           return Medical.fromFirestore(e);
         }).toList());
   }

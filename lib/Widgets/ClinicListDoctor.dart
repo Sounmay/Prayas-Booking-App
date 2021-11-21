@@ -29,7 +29,9 @@ class ClinicListDoctor extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => ClinicDoctorListPage(
                             clinicDetails: service,
-                          )));
+                          )
+                  )
+              );
             },
             child: Container(
               decoration: BoxDecoration(

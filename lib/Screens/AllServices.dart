@@ -52,7 +52,8 @@ class _AllSerivesState extends State<AllSerives> {
             // ServiceListDoctor(
             //   service: medicalFirebaseServiceList[j],
             // ),
-            ));
+            )
+    );
     Widget parlourListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(
@@ -61,7 +62,8 @@ class _AllSerivesState extends State<AllSerives> {
           itemBuilder: (ctx, j) => ServiceListParlour(
             service: parlourFirebaseServiceList[j],
           ),
-        ));
+        )
+    );
     Widget salonListBuilder = Container(
         height: deviceHeight * 0.58,
         child: ListView.builder(
@@ -70,7 +72,8 @@ class _AllSerivesState extends State<AllSerives> {
           itemBuilder: (ctx, j) => ServiceListSalon(
             service: salonFirebaseServiceList[j],
           ),
-        ));
+        )
+    );
     List<Widget> serviceWidget = [
       medicalListBuilder,
       parlourListBuilder,
