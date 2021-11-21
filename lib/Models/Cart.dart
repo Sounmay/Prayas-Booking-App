@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +32,7 @@ class Cart {
         "serviceId": uid,
         "isApproved": false,
         "id": id,
+        "number": FirebaseAuth.instance.currentUser.phoneNumber,
         "name": name,
         "address": address,
         "shopName": shopName,
