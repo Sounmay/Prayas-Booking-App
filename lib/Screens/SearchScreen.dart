@@ -35,7 +35,8 @@ class _SearchScreenState extends State<SearchScreen> {
         final clinicNameLower = element?.clinicName?.toLowerCase() ?? "";
         final searchLower = _textController.text.toLowerCase();
 
-        if (searchLower == "") {
+        // ignore: unrelated_type_equality_checks
+        if (searchLower == "" || element.status!="Accepted") {
           return false;
         }
 
@@ -45,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
           final clinicNameLower = element?.salonName?.toLowerCase() ?? "";
           final searchLower = _textController.text.toLowerCase();
 
-          if (searchLower == "") {
+          if (searchLower == "" || element.status!="Accepted") {
             return false;
           }
 
@@ -55,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
           final clinicNameLower = element?.parlourName?.toLowerCase() ?? "";
           final searchLower = _textController.text.toLowerCase();
 
-          if (searchLower == "") {
+          if (searchLower == "" || element.status!="Accepted") {
             return false;
           }
 
