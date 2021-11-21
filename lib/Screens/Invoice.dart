@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 import 'package:freelance_booking_app/Models/Bookings.dart';
+import 'package:marquee_text/marquee_text.dart';
 
 class Invoice extends StatefulWidget {
   final BookingsDetails bookingsDetails;
@@ -177,10 +178,20 @@ class _InvoiceState extends State<Invoice> {
                                         color: Color(0xff5D5FEF),
                                         fontWeight: FontWeight.bold)),
                                 SizedBox(height: 10),
-                                Text('${widget.bookingsDetails?.address ?? "..."}',
-                                    style: TextStyle(
-                                        color: Color(0xff5D5FEF),
-                                        fontWeight: FontWeight.bold)),
+                                //${widget.bookingsDetails?.shopName ?? "..."}, ${widget.bookingsDetails?.address ?? "..."}.
+                                SizedBox(
+                                  width:
+                                  MediaQuery.of(context).size.width * 0.7,
+                                  height: 20,
+                                  child: MarqueeText(
+                                      speed: 10,
+                                      alwaysScroll: false,
+                                      text: '${widget.bookingsDetails?.shopName ?? "..."}, ${widget.bookingsDetails?.address ?? "..."}.',
+                                      style: TextStyle(
+                                          color: Color(0xff5D5FEF),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold)),
+                                )
                                 // Text('Address line 1,',
                                 //     style: TextStyle(
                                 //         color: Color(0xff5D5FEF),
