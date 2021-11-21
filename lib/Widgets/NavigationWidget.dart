@@ -255,7 +255,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                           " " +
                                           lastName[0].toUpperCase() +
                                           lastName.substring(1).toLowerCase(),
-                                      "image": ""
+                                      "image": "",
+                                      "number": FirebaseAuth
+                                          .instance.currentUser.phoneNumber,
                                     }).whenComplete(() {
                                       setState(() {
                                         isLoading = false;
@@ -324,10 +326,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                       onTap: () {
                                         navigator.changeWidgetIndex(2);
                                       },
-                                      child: Icon(
-                                          Icons.storefront_outlined,
-                                          size: 30,
-                                          color: Colors.white))
+                                      child: Icon(Icons.storefront_outlined,
+                                          size: 30, color: Colors.white))
                                 ],
                               ),
                             ),

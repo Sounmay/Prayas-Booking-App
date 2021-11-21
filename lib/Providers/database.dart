@@ -161,6 +161,15 @@ class DatabaseService {
         }).toList());
   }
 
+  Stream<List<Salon>> streamSalon() {
+    var ref = _db.collection('SalonServices');
+
+    return ref.snapshots().map((event) => event.docs.map((e) {
+          if (e.data()["location"]["status"] == "Accepted")
+            return Salon.fromFirestore(e);
+        }).toList());
+  }
+
   Stream<List<Parlour>> streamParlourForSlots() {
     var ref = _db.collection('ParlourServices');
 
@@ -171,7 +180,7 @@ class DatabaseService {
   }
 
   Stream<List<Salon>> streamSalonForSlots() {
-    var ref = _db.collection('ParlourServices');
+    var ref = _db.collection('SalonServices');
 
     return ref.snapshots().map((event) => event.docs.map((e) {
           if (e.data()["location"]["status"] == "Accepted")
@@ -185,15 +194,6 @@ class DatabaseService {
     return ref.snapshots().map((event) => event.docs.map((e) {
           if (e.data()["location"]["status"] == "Accepted")
           return Medical.fromFirestore(e);
-        }).toList());
-  }
-
-  Stream<List<Salon>> streamSalon() {
-    var ref = _db.collection('SalonServices');
-
-    return ref.snapshots().map((event) => event.docs.map((e) {
-          if (e.data()["location"]["status"] == "Accepted")
-            return Salon.fromFirestore(e);
         }).toList());
   }
 
