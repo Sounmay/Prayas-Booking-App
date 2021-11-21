@@ -61,6 +61,26 @@ class MyApp extends StatelessWidget {
             value: DatabaseService().streamParlour(),
             child: AllSerives(),
           ),
+          StreamProvider<List<Salon>>.value(
+            value: DatabaseService().streamSalon(),
+            initialData: [],
+            child: AllSerives(),
+          ),
+          StreamProvider<List<Medical>>.value(
+            initialData: [],
+            value: DatabaseService().streamMedical(),
+            child: SearchScreen(),
+          ),
+          StreamProvider<List<Parlour>>.value(
+            initialData: [],
+            value: DatabaseService().streamParlour(),
+            child: SearchScreen(),
+          ),
+          StreamProvider<List<Salon>>.value(
+            value: DatabaseService().streamSalon(),
+            initialData: [],
+            child: SearchScreen(),
+          ),
           StreamProvider<List<Parlour>>.value(
             initialData: [],
             value: DatabaseService().streamParlourForSlots(),
@@ -76,11 +96,6 @@ class MyApp extends StatelessWidget {
             value: DatabaseService().streamSalonForSlots(),
             child: SlotBooking(),
           ),
-          StreamProvider<List<Salon>>.value(
-            value: DatabaseService().streamSalon(),
-            initialData: [],
-            child: AllSerives(),
-          )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
