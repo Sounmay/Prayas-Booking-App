@@ -161,21 +161,30 @@ class DatabaseService {
         }).toList());
   }
 
+  Stream<List<Salon>> streamSalon() {
+    var ref = _db.collection('SalonServices');
+
+    return ref.snapshots().map((event) => event.docs.map((e) {
+          if (e.data()["location"]["status"] == "Accepted")
+            return Salon.fromFirestore(e);
+        }).toList());
+  }
+
   Stream<List<Parlour>> streamParlourForSlots() {
     var ref = _db.collection('ParlourServices');
 
     return ref.snapshots().map((event) => event.docs.map((e) {
-          // if (e.data()["location"]["status"] == "Accepted")
-          return Parlour.fromFirestore(e);
+          if (e.data()["location"]["status"] == "Accepted")
+            return Parlour.fromFirestore(e);
         }).toList());
   }
 
   Stream<List<Salon>> streamSalonForSlots() {
-    var ref = _db.collection('ParlourServices');
+    var ref = _db.collection('SalonServices');
 
     return ref.snapshots().map((event) => event.docs.map((e) {
-          // if (e.data()["location"]["status"] == "Accepted")
-          return Salon.fromFirestore(e);
+          if (e.data()["location"]["status"] == "Accepted")
+            return Salon.fromFirestore(e);
         }).toList());
   }
 
@@ -183,17 +192,8 @@ class DatabaseService {
     var ref = _db.collection('MedicalServices');
 
     return ref.snapshots().map((event) => event.docs.map((e) {
-          // if (e.data()["location"]["status"] == "Accepted")
-          return Medical.fromFirestore(e);
-        }).toList());
-  }
-
-  Stream<List<Salon>> streamSalon() {
-    var ref = _db.collection('SalonServices');
-
-    return ref.snapshots().map((event) => event.docs.map((e) {
           if (e.data()["location"]["status"] == "Accepted")
-            return Salon.fromFirestore(e);
+            return Medical.fromFirestore(e);
         }).toList());
   }
 

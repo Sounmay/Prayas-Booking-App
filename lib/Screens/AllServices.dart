@@ -17,7 +17,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 
 class AllSerives extends StatefulWidget {
-  int serviceIndex;
+  final int serviceIndex;
   AllSerives({this.serviceIndex});
   @override
   _AllSerivesState createState() => _AllSerivesState();
