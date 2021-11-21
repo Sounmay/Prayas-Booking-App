@@ -66,21 +66,21 @@ class MyApp extends StatelessWidget {
             initialData: [],
             child: AllSerives(),
           ),
-          // StreamProvider<List<Medical>>.value(
-          //   initialData: [],
-          //   value: DatabaseService().streamMedical(),
-          //   child: new SearchScreen(),
-          // ),
-          // StreamProvider<List<Parlour>>.value(
-          //   initialData: [],
-          //   value: DatabaseService().streamParlour(),
-          //   child: new SearchScreen(),
-          // ),
-          // StreamProvider<List<Salon>>.value(
-          //   value: DatabaseService().streamSalon(),
-          //   initialData: [],
-          //   child: new SearchScreen(),
-          // ),
+          StreamProvider<List<Medical>>.value(
+            initialData: [],
+            value: DatabaseService().streamMedical(),
+            child: SearchScreen(),
+          ),
+          StreamProvider<List<Parlour>>.value(
+            initialData: [],
+            value: DatabaseService().streamParlour(),
+            child: SearchScreen(),
+          ),
+          StreamProvider<List<Salon>>.value(
+            value: DatabaseService().streamSalon(),
+            initialData: [],
+            child: SearchScreen(),
+          ),
           StreamProvider<List<Parlour>>.value(
             initialData: [],
             value: DatabaseService().streamParlourForSlots(),
