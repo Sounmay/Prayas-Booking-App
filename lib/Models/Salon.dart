@@ -10,6 +10,7 @@ class Salon {
   final String type;
   final String week;
   final String time;
+  final String status;
   List<dynamic> mostAvailservices;
   List<dynamic> slotArray;
   Map bookedSlotsPerDay;
@@ -24,6 +25,7 @@ class Salon {
       this.type,
       this.week,
       this.time,
+        this.status,
       this.mostAvailservices = const []});
 
   factory Salon.fromFirestore(DocumentSnapshot doc) {
@@ -40,6 +42,7 @@ class Salon {
       id: data['location']['serviceUid'],
       salonName: data['location']['name'] ?? '',
       location: data['location']['address'] ?? '',
+      status: data['location']['status'] ?? '',
       image: data['details']['parlourImage'] ?? '',
       mostAvailservices: data['mostAvailServices'] ?? [],
       slotArray: data['slots'] ?? [],
