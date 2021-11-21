@@ -12,6 +12,7 @@ class Medical {
   final ClinicLocationAndDoctor clinicLocationAndDoctor;
   final List<DoctorDetails> doctorDetails;
   final AdminDetails adminDetails;
+  final String status;
 
   Medical(
       {this.clinicLocationAndDoctor,
@@ -23,7 +24,8 @@ class Medical {
       this.location,
       this.image,
       this.speciality,
-      this.type});
+      this.type,
+      this.status});
 
   factory Medical.fromFirestore(DocumentSnapshot doc) {
     Map data = doc.data();
@@ -36,6 +38,7 @@ class Medical {
         location: data["location"]["address"] ?? "",
         image: data["location"]["clinicImage"] ?? "",
         speciality: data["doctorList"][0]["specialization"] ?? "",
+        status: data["location"]["status"],
         clinicLocationAndDoctor:
             ClinicLocationAndDoctor.fromJson(data["location"]),
         doctorDetails: List<DoctorDetails>.from(

@@ -35,6 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
         final clinicNameLower = element?.clinicName?.toLowerCase() ?? "";
         final searchLower = _textController.text.toLowerCase();
 
+        // ignore: unrelated_type_equality_checks
         if (searchLower == "") {
           return false;
         }
