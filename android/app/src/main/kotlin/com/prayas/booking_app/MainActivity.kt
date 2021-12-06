@@ -1,4 +1,4 @@
-package com.sounmaymishra.freelance_booking_app
+package com.prayas.booking_app
 
 import io.flutter.embedding.android.FlutterActivity
 

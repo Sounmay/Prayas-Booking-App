@@ -7,12 +7,81 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:650640910388:android:6dcbd7b778c3c885404261",
+        "android_client_info": {
+          "package_name": "com.prayas.booking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650640910388-si470ciacghiognc2qg3nd1tienolptn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKdqVW2E3bjvKjfuIuvgPVJwzAqMYhPCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650640910388-si470ciacghiognc2qg3nd1tienolptn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:650640910388:android:04ce6ec397665b10404261",
         "android_client_info": {
           "package_name": "com.sounmaymishra.freelance_booking_app"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "650640910388-54bidujr08eigq4c2n7puns8fk45ji2o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sounmaymishra.freelance_booking_app",
+            "certificate_hash": "e2699babd7e1eeb033432d9388ab6ca7e1634d6e"
+          }
+        },
+        {
+          "client_id": "650640910388-5jrkmmd2dasr1fk27de83vqm8q63lo3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sounmaymishra.freelance_booking_app",
+            "certificate_hash": "516f52902f617d6ef4b9be0795c03b429a7f6c24"
+          }
+        },
+        {
+          "client_id": "650640910388-buuv0gmnh4rm5n9secn2fjla9bibqtju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sounmaymishra.freelance_booking_app",
+            "certificate_hash": "e512a1030c62528a5485d00f6623c052c7dc6a15"
+          }
+        },
+        {
+          "client_id": "650640910388-iv7tcgj1efu0bdsdmaj93haaogkl6oem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sounmaymishra.freelance_booking_app",
+            "certificate_hash": "50e2f714bd6f38d7cacbfe73ea710d3df3172b12"
+          }
+        },
+        {
+          "client_id": "650640910388-l83q798ujbgvrjth1ep7g50c7rutfor7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sounmaymishra.freelance_booking_app",
+            "certificate_hash": "a356c944cbefb992e6406350d4f06dd917aa3ae5"
+          }
+        },
         {
           "client_id": "650640910388-si470ciacghiognc2qg3nd1tienolptn.apps.googleusercontent.com",
           "client_type": 3
@@ -42,6 +111,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "650640910388-a0ijiaat8m9noi2e5si5jsn3kco58jbt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sounmaymishra.freelance_booking_appService",
+            "certificate_hash": "e512a1030c62528a5485d00f6623c052c7dc6a15"
+          }
+        },
         {
           "client_id": "650640910388-si470ciacghiognc2qg3nd1tienolptn.apps.googleusercontent.com",
           "client_type": 3
