@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freelance_booking_app/Models/Cart.dart';
+import 'package:freelance_booking_app/Models/Medical.dart';
 import 'package:freelance_booking_app/Providers/cartServices.dart';
 import 'package:freelance_booking_app/Providers/navigationProvider.dart';
 import 'package:freelance_booking_app/Screens/PaymentScreen.dart';
@@ -10,11 +11,19 @@ class LowerCardServiceTotal extends StatelessWidget {
   final id;
   final String clinicId;
   final Cart service;
+  final DoctorDetails selectedDoctor;
+  final String selectedDateForKey;
+  final int slotIndexSelected;
+  final Map bookedSlotsPerDay;
   final bool isSlotPage, showCheckBox, isChecked, dateSelected, slotSelected;
   final Function onSlotBooking, setIsChecked, bookingConfirm;
   const LowerCardServiceTotal(
       {Key key,
       this.service,
+      this.selectedDoctor,
+      this.selectedDateForKey,
+      this.bookedSlotsPerDay,
+      this.slotIndexSelected,
       this.clinicId,
       this.isSlotPage = false,
       this.bookingConfirm,
@@ -105,10 +114,12 @@ class LowerCardServiceTotal extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5)),
                 ),
                 onPressed: () {
-                  if(service[id] == null){
-                    Fluttertoast.showToast(msg: "Please add atleast one service", backgroundColor: Color(0xff5D5FEF), textColor: Colors.white);
-                  }
-                  else {
+                  if (service[id] == null) {
+                    Fluttertoast.showToast(
+                        msg: "Please add atleast one service",
+                        backgroundColor: Color(0xff5D5FEF),
+                        textColor: Colors.white);
+                  } else {
                     onSlotBooking();
                   }
                   //onSlotBooking();
@@ -189,7 +200,13 @@ class LowerCardServiceTotal extends StatelessWidget {
                     if (dateSelected == true &&
                         slotSelected == true &&
                         isChecked == true) {
-                      bookingConfirm(service[id], clinicId);
+                      bookingConfirm(
+                          service[id],
+                          clinicId,
+                          bookedSlotsPerDay,
+                          slotIndexSelected,
+                          selectedDateForKey,
+                          selectedDoctor);
                       navigator.changeWidgetIndex(1);
 
                       Navigator.of(context)

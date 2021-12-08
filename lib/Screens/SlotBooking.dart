@@ -42,18 +42,6 @@ class _SlotBookingState extends State<SlotBooking> {
 
   int slotIndexSelected = -1;
 
-  // Color getColor(Set<MaterialState> states) {
-  //   const Set<MaterialState> interactiveStates = <MaterialState>{
-  //     MaterialState.pressed,
-  //     MaterialState.hovered,
-  //     MaterialState.focused,
-  //   };
-  //   if (states.any(interactiveStates.contains)) {
-  //     return Colors.blue;
-  //   }
-  //   return Colors.red;
-  // }
-
   bool isChecked = false;
   String _selectedDateForKey = "";
 
@@ -77,7 +65,12 @@ class _SlotBookingState extends State<SlotBooking> {
     Salon selectedSalon;
     if (type == "parlour") {
       parlours = Provider.of<List<Parlour>>(context);
-      selectedParlour = parlours.firstWhere((element) => element.id == id);
+      selectedParlour = parlours?.firstWhere((element) {
+        if (element == null)
+          return false;
+        else
+          return element?.id == id;
+      });
     } else {
       salons = Provider.of<List<Salon>>(context);
       selectedSalon = salons.firstWhere((element) => element.id == id);

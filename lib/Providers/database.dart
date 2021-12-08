@@ -6,15 +6,26 @@ import 'package:freelance_booking_app/Models/Parlour.dart';
 import 'package:freelance_booking_app/Models/Salon.dart';
 
 class DividedSlots {
-  final int emp;
-  final String time;
+  int emp;
+  String time;
 
   DividedSlots({this.emp, this.time});
+
+  DividedSlots.fromJson(Map<String, dynamic> json) {
+    time = json['time'];
+    emp = json['emp'];
+  }
 
   Map<String, dynamic> toJson() => {
         "time": time,
         "emp": emp,
       };
+  Map<String, dynamic> toJsonClinic() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['time'] = this.time;
+    data['emp'] = this.emp;
+    return data;
+  }
 }
 
 class DatabaseService {
@@ -130,6 +141,49 @@ class DatabaseService {
     ref.doc('$id').update({"bookedSlotsPerDay": bookedSlots});
   }
 
+  Future upgradeClinicBookedSlotsDatabaseExisting(
+      var id,
+      int index,
+      Map<dynamic, dynamic> bookedSlots,
+      List<DividedSlots> slotArray,
+      String mapKey,
+      DoctorDetails doctorDetails) async {
+    var ref = _db.collection('MedicalServices');
+    bool contains = bookedSlots.containsKey(mapKey);
+    bookedSlots.putIfAbsent(
+        mapKey, () => slotArray.map((x) => x.toJson()).toList());
+
+    bookedSlots[mapKey][index]['emp'] = bookedSlots[mapKey][index]['emp'] - 1;
+    print(bookedSlots);
+    DoctorDetails temp = DoctorDetails(
+        name: doctorDetails.name,
+        specialization: doctorDetails.name,
+        bookedSlotsPerDay: bookedSlots,
+        workingDays: doctorDetails.workingDays,
+        aboutDoctor: doctorDetails.aboutDoctor,
+        dividedSlots: doctorDetails.dividedSlots,
+        serviceList: doctorDetails.serviceList,
+        slots: doctorDetails.slots,
+        yearsOfExperience: doctorDetails.yearsOfExperience,
+        number: doctorDetails.number,
+        imagefile: doctorDetails.imagefile);
+
+    print(temp.toJson());
+    print('dont');
+
+    ref.doc('$id').update({
+      "doctorList": FieldValue.arrayUnion([temp.toJson()])
+    });
+    bookedSlots[mapKey][index]['emp'] = bookedSlots[mapKey][index]['emp'] + 1;
+    if (!contains) bookedSlots.remove(mapKey);
+    ref.doc('$id').update({
+      "doctorList": FieldValue.arrayRemove([doctorDetails.toJsonToRemove()])
+    });
+    ref.doc('$id').update({
+      "doctorList": FieldValue.arrayRemove([doctorDetails.toJson()])
+    });
+  }
+
   Future upgradeParlourAndSalonBookedSlotsDatabaseFirst(var id, int index,
       List<dynamic> bookedSlots, String mapKey, bool isParlour) async {
     var ref = isParlour == true
@@ -141,6 +195,39 @@ class DatabaseService {
     Map<String, dynamic> bookedSlotMap = {mapKey: bookedSlots};
 
     ref.doc('$id').update({"bookedSlotsPerDay": bookedSlotMap});
+  }
+
+  Future upgradeClinicBookedSlotsDatabaseFirst(
+      var id,
+      int index,
+      List<DividedSlots> bookedSlots,
+      String mapKey,
+      DoctorDetails doctorDetails) async {
+    var ref = _db.collection('MedicalServices');
+
+    bookedSlots[index].emp = bookedSlots[index].emp - 1;
+
+    Map<String, dynamic> bookedSlotMap = {mapKey: bookedSlots};
+
+    DoctorDetails temp = DoctorDetails(
+        name: doctorDetails.name,
+        specialization: doctorDetails.name,
+        bookedSlotsPerDay: bookedSlotMap,
+        workingDays: doctorDetails.workingDays,
+        aboutDoctor: doctorDetails.aboutDoctor,
+        dividedSlots: doctorDetails.dividedSlots,
+        serviceList: doctorDetails.serviceList,
+        slots: doctorDetails.slots,
+        yearsOfExperience: doctorDetails.yearsOfExperience,
+        number: doctorDetails.number,
+        imagefile: doctorDetails.imagefile);
+
+    ref.doc('$id').update({
+      "doctorList": FieldValue.arrayUnion([temp.toJson()])
+    });
+    ref.doc('$id').update({
+      "doctorList": FieldValue.arrayRemove([doctorDetails.toJson()])
+    });
   }
 
   Stream<List<Medical>> streamMedical() {
@@ -175,7 +262,7 @@ class DatabaseService {
 
     return ref.snapshots().map((event) => event.docs.map((e) {
           if (e.data()["location"]["status"] == "Accepted")
-          return Parlour.fromFirestore(e);
+            return Parlour.fromFirestore(e);
         }).toList());
   }
 
@@ -184,7 +271,7 @@ class DatabaseService {
 
     return ref.snapshots().map((event) => event.docs.map((e) {
           if (e.data()["location"]["status"] == "Accepted")
-          return Salon.fromFirestore(e);
+            return Salon.fromFirestore(e);
         }).toList());
   }
 
@@ -193,7 +280,7 @@ class DatabaseService {
 
     return ref.snapshots().map((event) => event.docs.map((e) {
           if (e.data()["location"]["status"] == "Accepted")
-          return Medical.fromFirestore(e);
+            return Medical.fromFirestore(e);
         }).toList());
   }
 

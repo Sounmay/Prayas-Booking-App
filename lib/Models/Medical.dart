@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freelance_booking_app/Models/Parlour.dart';
+import 'package:freelance_booking_app/Providers/database.dart';
 
 class Medical {
   final String id;
@@ -124,6 +125,7 @@ class DoctorDetails {
   String name;
   String number;
   String imagefile;
+  List<DividedSlots> dividedSlots;
   String specialization;
   String yearsOfExperience;
   String aboutDoctor;
@@ -131,12 +133,15 @@ class DoctorDetails {
   String time;
   List<ParlourServiceDetails> serviceList;
   List<ParlourSlotDetails> slots;
+  Map bookedSlotsPerDay;
 
   DoctorDetails(
       {this.name,
       this.specialization,
+      this.bookedSlotsPerDay,
       this.workingDays = "",
       this.aboutDoctor,
+      this.dividedSlots,
       this.serviceList,
       this.slots,
       this.yearsOfExperience,
@@ -151,11 +156,14 @@ class DoctorDetails {
     aboutDoctor = json['aboutDoctor'];
     yearsOfExperience = json['yearsOfExperience'];
     workingDays = json['workingDays'];
+    dividedSlots = List<DividedSlots>.from(
+        json['slots']?.map((x) => DividedSlots.fromJson(x)) ?? []);
+    bookedSlotsPerDay = json['bookedSlotsPerDay'] ?? {};
+
     serviceList = List<ParlourServiceDetails>.from(
         json["serviceList"].map((x) => ParlourServiceDetails.fromJson(x)));
     slots = List<ParlourSlotDetails>.from(
         json['slot'].map((x) => ParlourSlotDetails.fromJson(x)));
-        
   }
 
   Map<String, dynamic> toJson() {
@@ -167,8 +175,25 @@ class DoctorDetails {
     data['aboutDoctor'] = this.aboutDoctor;
     data['yearsOfExperience'] = this.yearsOfExperience;
     data['workingDays'] = this.workingDays;
-    data['slot'] = this.slots;
-    data['serviceList'] = this.serviceList;
+    data['slot'] = this.slots.map((x) => x.toJson()).toList();
+    data['bookedSlotsPerDay'] = this.bookedSlotsPerDay;
+    data['serviceList'] = this.serviceList.map((x) => x.toJson()).toList();
+    data['slots'] = this.dividedSlots.map((e) => e.toJsonClinic()).toList();
+    return data;
+  }
+
+  Map<String, dynamic> toJsonToRemove() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['number'] = this.number;
+    data['imagefile'] = this.imagefile;
+    data['specialization'] = this.specialization;
+    data['aboutDoctor'] = this.aboutDoctor;
+    data['yearsOfExperience'] = this.yearsOfExperience;
+    data['workingDays'] = this.workingDays;
+    data['slot'] = this.slots.map((x) => x.toJson()).toList();
+    data['serviceList'] = this.serviceList.map((x) => x.toJson()).toList();
+    data['slots'] = this.dividedSlots.map((e) => e.toJsonClinic()).toList();
     return data;
   }
 }
